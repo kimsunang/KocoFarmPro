@@ -8,25 +8,30 @@
 		<div class="sub_title">
 			<div class="sub_title_top">
 				<div class="sub_title_inner">
-					<h2>Rent <span>대여 관련 내용을 확인할 수 있습니다.</span></h2>
+					<h2>MeetingRoom <span>회의실을 등록할 수 있습니다.</span></h2>
 					<ul class="sub_nav">
 						<li>홈 > </li>
-						<li class="on">대여 관리</li>
+						<li class="on">회의실 등록</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		
-		
-		<!-- 대여 목록 -->
 		<div class="contents_wrap">
-			<ul>
-				<li><a href="mroomlist.do">회의실 목록</a></li>
-			</ul>
+			<!-- 회의실 수정 -->
+			<form action="mroomInsert.do" method="post">
+			<div class="sch_wrap">
+				<input type="hidden" name="m_id" >
+				회의실 이름 : <input type="text" name="m_name"><br>
+				인원 : <input type="text" name="p_num"><br>
+				<input type="hidden" name="reg_dt">			
+			</div>
+			<input type="submit" value="등록">
+			</form>
 		</div>
-		
+	
 		<!-- Contents Area -->
-		
+		<div class="contents_wrap">
 			<!-- sch_top -->
 			<div class="sch_wrap">
 				<p class="tit">검색</p>
@@ -74,6 +79,6 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
 <script type="text/javascript" src="/Kocofarm/js/module/rent.js"></script>
 <jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

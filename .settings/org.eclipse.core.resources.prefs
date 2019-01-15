@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//src/kosta/action/comm=UTF-8
+encoding//src/kosta/action/comm/FileDownloadHelper.java=UTF-8
+encoding//src/kosta/action/module/notice=UTF-8
+encoding//src/kosta/controller/comm=UTF-8
+encoding//src/kosta/controller/module/NoticeController.java=UTF-8
+encoding//src/kosta/filter=UTF-8
+encoding//src/kosta/mapper/comm=UTF-8
+encoding//src/kosta/mapper/comm/CommMapper.java=UTF-8
+encoding//src/kosta/model/comm/dao=UTF-8
+encoding//src/kosta/model/comm/service=UTF-8
+encoding//src/kosta/model/comm/vo=UTF-8
+encoding//src/kosta/model/module/service=UTF-8
+encoding//src/kosta/model/module/service/NoticeService.java=UTF-8

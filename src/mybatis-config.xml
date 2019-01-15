@@ -13,7 +13,12 @@
 		<typeAlias type="kosta.model.module.vo.Notice" alias="Notice" />
 		<typeAlias type="kosta.model.module.vo.NoticeSearch" alias="NoticeSearch" />
 		<!-- 공지사항 E -->
-
+		
+		<!-- 회의실 -->
+		<typeAlias alias="MeetingRoom" type="kosta.model.module.vo.MeetingRoom"/>
+		<typeAlias alias="MeetingRoomSearch" type="kosta.model.module.vo.MeetingRoomSearch"/>
+		<typeAlias alias="Reservation" type="kosta.model.module.vo.Reservation"/>
+		<typeAlias alias="ReservationSearch" type="kosta.model.module.vo.ReservationSearch"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -35,6 +40,9 @@
 		<!-- 공지사항 -->
 		<mapper resource="kosta/mapper/module/Notice.xml" />
 		
+		<!-- 회의실 -->
+		<mapper resource="kosta/mapper/module/MeetingRoom.xml"/>
+		<mapper resource="kosta/mapper/module/Reservation.xml"/>
 	</mappers>
 	
 </configuration>

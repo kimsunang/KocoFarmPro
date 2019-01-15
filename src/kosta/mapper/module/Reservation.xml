@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.ReservationMapper">
+	<cache />
+	
+	<insert id="setReserv" parameterType="Reservation">
+		insert into reservation (rv_id, m_title, start_dt, end_dt, dept, rv_user, rv_writer) 
+		values(reserv_seq.nextval, #{m_title},
+		TO_DATE(#{start_dt} || '2019-01-15,'YYYY-MM-DD'),
+		TO_DATE(#{end_dt} || '2019-01-15,'YYYY-MM-DD'), 
+		#{dept}, #{rv_user}, #{rv_writer,jdbcType=VARCHAR})
+	</insert>
+
+</mapper>

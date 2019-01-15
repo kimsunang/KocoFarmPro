@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.MeetingRoomMapper">
+	<cache />
+	<insert id="setMroom" parameterType="MeetingRoom">
+		insert into meetingroom values(mroom_seq.nextval,
+			#{m_name},#{p_num}, sysdate, null)
+	</insert>
+	
+	<select id="getMroomList" resultType="MeetingRoom" parameterType="MeetingRoomSearch">
+		select * from meetingroom 
+			<if test="area">
+				<where>
+					<!-- title LIKE %aa% OR writer LIKE %aa% -->
+					<foreach collection="area" item="item" separator="OR" open="(" close=")">
+					${item} LIKE #{searchKey}
+					</foreach>
+				</where>
+			</if>	
+		order by m_id desc
+	</select>
+	
+	<select id="getMroom" parameterType="int" resultType="MeetingRoom">
+		select * from meetingroom where m_id = #{m_id}
+	</select>
+	
+	<update id="setUpMroom" parameterType="MeetingRoom">
+		update meetingroom set m_name = #{m_name}, p_num = #{p_num}, up_dt = sysdate where m_id = #{m_id}
+	</update>
+	
+	<delete id="delMroom" parameterType="int">
+		delete from meetingroom where m_id = #{m_id}
+	</delete>
+
+</mapper>

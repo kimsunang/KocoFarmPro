@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <jsp:include page="/jsp/comm/top.jsp" flush="false" ></jsp:include>
-<link rel="stylesheet" type="text/css" href="/KocoFarmPro/css/module/rent.css" />
+<link rel="stylesheet" type="text/css" href="/Kocofarm/css/module/rent.css" />
 
 	<div class="cont_wrap">
 		<!-- SubTitle Area -->
 		<div class="sub_title">
 			<div class="sub_title_top">
 				<div class="sub_title_inner">
-					<h2>Rent <span>대여 관련 내용을 확인할 수 있습니다.</span></h2>
-					
-					
+					<h2>RentCarDetail <span>등록된 차량 정보를 확인할 수 있습니다.</span></h2>
 					<ul class="sub_nav">
 						<li>홈 > </li>
-						<li class="on">대여 관리</li>
+						<li class="on">차량관리</li>
 					</ul>
 				</div>
 			</div>
@@ -21,20 +19,16 @@
 	
 		<!-- Contents Area -->
 		<div class="contents_wrap">
-					<!-- 차량관련 목록 삽입 -->
-					<ul>
-					<li><a href="rentCarDetailList.do">차량목록(관리자)</a>
-					<li><a href="">차량정비일지</a>
-					<li><a href="">차량예약</a>
-					<li><a href="">차량운행일지</a>
-					</ul>
-					<br>
-		
+			<ul>
+				<li><a href="rentCarDetailWriteForm.do">차량등록</a> <!-- ///////////////////////////////////나중에 바꾸기 -->
+				
+			</ul>
 			<!-- sch_top -->
-			<div class="sch_wrap">
-				<p class="tit">검색</p>
+			<div class="sch_wrap">		
+				<p class="tit">차량목록</p>
+				<!-- 
 				<div class="sch_slide_btn">
-					<img id="slideBtnImg" class="upBtn" src="/KocoFarmPro/img/comm/list_up_btn.png" alt="메뉴 접기" />
+					<img id="slideBtnImg" class="upBtn" src="/Kocofarm/img/comm/list_up_btn.png" alt="메뉴 접기" />
 				</div>
 				<div class="sch_toggle_wrap">
 					<div class="sch_box_wrap">
@@ -49,15 +43,57 @@
 						</div>
 					</div>
 				</div>
+				 -->
+				 
+				 <table width="700" border="1" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>차량번호</td>			
+			<td>차량모델명</td>
+			<td>차종</td>
+			<td>구입조건</td>
+			<td>가격</td>
+			<td>연식</td>
+			<td>유종</td>
+			<td>등록일자</td>
+			<td>수정일자</td>
+			
+		</tr>
+		<%-- 
+		<c:forEach var="rentCar_Detail" items="${list }"> <!-- 원래 list만 있었엉 -->
+			<tr>
+				<td>${board.seq }</td>
+							
+				<td><a href="setCardetail.do?seq=${rentCar_Detail.car_id }">${rentCar_Detail.carModel }</a></td>
+				<td>${board.writer }</td>
+				<td>
+					<fmt:parseDate var="dateString" value="${rentCar_Detail.regdate }" pattern="yyyy-MM-dd" />
+					<fmt:formatDate value="${dateString }" pattern="yyyy-MM-dd"/>
+				</td>
+				<td>${board.hitcount }</td>
+			</tr>
+		</c:forEach> 
+		  --%>
+	</table>	
+	<br><br>
+	
+	<form action="list.jsp" method="post">
+		<input type="checkbox" name="area" value="car_id">차량번호
+		<input type="checkbox" name="area" value="carModel">차량모델명
+		<input type="text" name="searchKey" size="10"></input>
+		<input type="submit" value="검색">
+	</form>
+				 
 			</div>
 			
 			<!-- Tab -->
+			<!-- 
 			<div class="tab_wrap">
 				<ul class="tab_ul">
 					<li class="tab_li on" id="rvTab">목록 보기</li>
 					<li class="tab_li" id="photoTab">달력 보기</li>
 				</ul>
 			</div>
+			 -->
 		
 			<!-- list -->
 			<div class="contents">
@@ -78,5 +114,5 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript" src="/KocoFarmPro/js/module/rent.js"></script>
+<script type="text/javascript" src="/Kocofarm/js/module/rent.js"></script>
 <jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

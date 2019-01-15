@@ -13,6 +13,11 @@
 		<typeAlias type="kosta.model.module.vo.Notice" alias="Notice" />
 		<typeAlias type="kosta.model.module.vo.NoticeSearch" alias="NoticeSearch" />
 		<!-- 공지사항 E -->
+		
+		<!-- 차량등록 -->
+		<typeAlias type="kosta.model.module.vo.RentCarDetail" alias="RentCarDetail"/>
+		<typeAlias type="kosta.model.module.vo.RentCarDetailSearch" alias="RentCarDetailSearch"/>
+
 
 	</typeAliases>
 	
@@ -34,6 +39,9 @@
 		
 		<!-- 공지사항 -->
 		<mapper resource="kosta/mapper/module/Notice.xml" />
+		
+		<!-- 차량등록 -->
+		<mapper resource="kosta/mapper/module/RentCarDetail.xml"/>
 		
 	</mappers>
 	

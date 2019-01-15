@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.RentCarDetailMapper">
+	
+	<!-- 등록 -->
+	<insert id="setRentCarDetail" parameterType="RentCarDetail">
+		insert into RENTCAR_DETAIL
+				(CAR_ID,MODELNAME, CARMODEL, CONDITION, PRICE, YEAR, OIL_TYPE, REG_DT)
+		values
+				(#{car_id}, #{modelName}, #{carModel},#{condition},
+				 #{price}, #{year}, #{oil_Type},sysdate)	
+	</insert>
+	
+	<!-- 목록보기 -->
+	<select id="getRentCarDetailList" resultType="RentCarDetail" parameterType="RentCarDetailSearch">
+		select * from RENTCAR_DETAIL
+			<if test="area">
+				<foreach collection="area" item="item" separator="OR"
+							open="()" close=")">
+							${item} LIKE #{searchKey}				
+				</foreach>
+			</if>	
+			order by car_id desc
+	</select>
+	
+	<!-- 상세보기 -->
+	<select id="getRentCarDetail" parameterType="int" resultType="RentCarDetail">
+		select *
+		from RENTCAR_DETAIL
+		where car_id = #{car_id}
+	</select>
+	
+
+	<!--  목록 총개수 --> 
+	<select id="getRentCarDetailListCnt" parameterType="RentCarDetailSearch" resultType="java.lang.Integer">
+	 select * from RENTCAR_DETAIL
+	<if test="area">
+		<where>
+			<foreach collection="area" item = "item" separator="OR" 
+				open="(" close=")">			
+			</foreach>	
+		</where>	
+	</if>
+	order by car_id desc	
+	</select>
+
+
+</mapper>

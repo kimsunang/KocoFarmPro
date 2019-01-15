@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.NoticeMapper">
+	<!-- 목록 총 개 수 -->
+	<select id="getNoticeListCnt" parameterType="NoticeSearch" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM NOTICE
+		<if test="null != schType and '' != schType and null != schWord and '' != schWord">
+			<where>
+				<if test="'title' == schType">
+					TITLE LIKE '%'||#{schWord}||'%'
+				</if>
+				<if test="'contents' == schType">
+					CONTENTS LIKE '%'||#{schWord}||'%'
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<!-- 목록 -->
+	<select id="getNoticeList" parameterType="NoticeSearch" resultType="Notice">
+		SELECT
+				NOTICE_ID	AS noticeId
+			,	TITLE		AS title
+			,	CONTENTS	AS contents
+			,	HIT_CNT		AS hitCnt
+			,	FILE_NM		AS fileNm
+			,	TO_CHAR(REG_DT, 'yyyy-MM-dd')	AS regDt
+			,	TO_CHAR(UP_DT, 'yyyy-MM-dd')	AS upDt
+		FROM NOTICE
+		<if test="null != schType and '' != schType and null != schWord and '' != schWord">
+			<where>
+				<if test="'title' == schType">
+					TITLE LIKE '%'||#{schWord}||'%'
+				</if>
+				<if test="'contents' == schType">
+					CONTENTS LIKE '%'||#{schWord}||'%'
+				</if>
+			</where>
+		</if>
+		ORDER BY REG_DT DESC
+	</select>
+	
+	<!-- 상세정보 -->
+	<select id="getNotice" resultType="Notice">
+		SELECT
+				NOTICE_ID	AS noticeId
+			,	TITLE		AS title
+			,	CONTENTS	AS contents
+			,	HIT_CNT		AS hitCnt
+			,	FILE_NM		AS fileNm
+			,	TO_CHAR(REG_DT, 'yyyy-MM-dd')	AS regDt
+			,	TO_CHAR(UP_DT, 'yyyy-MM-dd')	AS upDt
+		FROM NOTICE
+		WHERE NOTICE_ID = #{noticeId}
+	</select>
+	
+	<!-- 조회 수 증가 -->
+	<update id="setUpHitCnt" parameterType="Notice">
+		UPDATE NOTICE
+		SET
+			HIT_CNT = #{hitCnt}
+		WHERE NOTICE_ID = #{noticeId}
+	</update>
+	
+	<!-- 등록 -->
+	<insert id="setNotice" parameterType="Notice">
+		INSERT INTO NOTICE
+			(NOTICE_ID, TITLE, CONTENTS, FILE_NM, REG_DT)
+		VALUES
+			('NT_00'||NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, #{fileNm}, SYSDATE)
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="setUpNotice" parameterType="Notice">
+		UPDATE NOTICE
+		SET
+				TITLE		= #{title}
+			,	CONTENTS	= #{contents}
+			,	FILE_NM		= #{fileNm}
+			,	UP_DT		= SYSDATE
+		WHERE NOTICE_ID = #{noticeId}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="delNotice" parameterType="java.lang.String">
+		DELETE FROM NOTICE
+		WHERE NOTICE_ID = #{noticeId}
+	</delete>
+	
+</mapper>

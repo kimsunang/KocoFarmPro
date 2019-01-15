@@ -1,0 +1,5 @@
+div.sign_in_inner{width:1100px;margin:0 auto}
+.sign_in_inner .sign_in_div{text-align:center;padding:10px 0}
+.sign_in_inner form{margin:0!important}
+.sign_in_inner input{width:50%;height:10%;line-height:10%;margin-bottom:15px;border:1px solid #ddd;border-radius:3px;text-indent:10px;color:#666;font-size:15px}
+.sign_in_btn{font-size:18px!important;font-weight:600;color:#fff!important;background-color:#666;cursor:pointer}

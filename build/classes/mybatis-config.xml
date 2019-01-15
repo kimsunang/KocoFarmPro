@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<!-- 줄여서 지칭 -->
+		<!-- 로그인 S -->
+		<typeAlias type="kosta.model.comm.vo.LoginVO" alias="LoginVO" />
+		
+		<!-- 공지사항 S -->
+		<typeAlias type="kosta.model.module.vo.Notice" alias="Notice" />
+		<typeAlias type="kosta.model.module.vo.NoticeSearch" alias="NoticeSearch" />
+		<!-- 공지사항 E -->
+
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			
+			<!-- 커넥션 풀 방식 -->
+			<dataSource type="JNDI">
+				<property name="data_source" value="java:comp/env/jdbc/oracle" />
+			</dataSource>
+		</environment>		
+	</environments>
+	
+	<mappers>
+		<!-- 매퍼 매핑 -->
+		<!-- 공통 -->
+		<mapper resource="kosta/mapper/comm/Comm.xml" />
+		
+		<!-- 공지사항 -->
+		<mapper resource="kosta/mapper/module/Notice.xml" />
+		
+	</mappers>
+	
+</configuration>

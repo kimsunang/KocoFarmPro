@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletResponse;
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.dao.MeetingRoomDao;
+import kosta.model.module.dao.ReservationDao;
 import kosta.model.module.vo.MeetingRoom;
+import kosta.model.module.vo.Reservation;
 
 public class ReservInsertActionForm implements IAction {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {		
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/jsp/module/rent/reservation/reservInsertForm.jsp");

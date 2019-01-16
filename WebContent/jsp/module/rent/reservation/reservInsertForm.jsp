@@ -7,24 +7,53 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
-    var dateFormat = "yyyy-mm-dd",
-      from = $( "#from" )
-        .datepicker({
-          defaultDate: "+1w",
-          changeMonth: true,
-          numberOfMonths: 3
+    var 
+      from = $( "#start_dt" ).datepicker({
+	    	  dateFormat: 'yy/mm/dd' //Input Display Format 변경
+	          ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+	          ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+	          ,changeYear: true //콤보박스에서 년 선택 가능
+              ,changeMonth: true //콤보박스에서 월 선택 가능                
+              ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+              ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+              ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+              ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+              ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+              ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+              ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+              ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+              ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+              ,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+              ,maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)       
         })
         .on( "change", function() {
           to.datepicker( "option", "minDate", getDate( this ) );
         }),
-      to = $( "#to" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 3
+      to = $( "#end_dt" ).datepicker({
+    	  dateFormat: 'yy/mm/dd' //Input Display Format 변경
+	          ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+	          ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+	          ,changeYear: true //콤보박스에서 년 선택 가능
+              ,changeMonth: true //콤보박스에서 월 선택 가능                
+              ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+              ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+              ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+              ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+              ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+              ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+              ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+              ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+              ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+              ,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+              ,maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)     
       })
       .on( "change", function() {
         from.datepicker( "option", "maxDate", getDate( this ) );
       });
+    
+    $('#start_dt').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+    //To의 초기값을 내일로 설정
+    $('#end_dt').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
  
     function getDate( element ) {
       var date;
@@ -37,7 +66,14 @@
       return date;
     }
   } );
-  </script>
+
+</script>
+</body>
+</html>
+<!-- Colored by Color Scripter
+cs
+
+  </script> -->
 
 
 	<div class="cont_wrap">
@@ -58,13 +94,13 @@
 			<!-- 회의실 수정 -->
 			<form action="reservInsert.do" method="post" >
 			<div class="sch_wrap">
+				회의실 이름: ${reserv.m_name} <br>
 				회의 제목 : <input type="text" name="m_title"><br>
-				부서 : <input type="text" name="dept"><br>
-				<label for="from">예약날짜</label><input type="text" id="from" name="start_dt"><br>
-				<label for="to">종료날짜</label><input type="text" id="to" name="end_dt"><br>
+			<!-- 	부서 : <input type="text" name="dept"><br> -->
+				<label for="from">예약날짜</label><input type="text" id="start_dt" name="start_dt"><br>
+				<label for="to">종료날짜</label><input type="text" id="end_dt" name="end_dt"><br>
 				사용자 : <input type="text" name="rv_user"><br>
 				예약자 : <input type="text" name="rv_writer"><br>
-				<input type="hidden" name="reg_dt" /> 
 			</div>
 			<input type="submit" value="예약">
 			</form>

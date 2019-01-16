@@ -7,6 +7,7 @@ encoding//src/kosta/controller/module/NoticeController.java=UTF-8
 encoding//src/kosta/filter=UTF-8
 encoding//src/kosta/mapper/comm=UTF-8
 encoding//src/kosta/mapper/comm/CommMapper.java=UTF-8
+encoding//src/kosta/mapper/module/NoticeMapper.java=UTF-8
 encoding//src/kosta/model/comm/dao=UTF-8
 encoding//src/kosta/model/comm/service=UTF-8
 encoding//src/kosta/model/comm/vo=UTF-8

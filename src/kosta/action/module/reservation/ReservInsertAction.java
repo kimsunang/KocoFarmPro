@@ -22,7 +22,7 @@ public class ReservInsertAction implements IAction {
 		reserv.setM_title(request.getParameter("m_title"));
 		reserv.setStart_dt(request.getParameter("start_dt"));
 		reserv.setEnd_dt(request.getParameter("end_dt"));
-		reserv.setDept(request.getParameter("dept"));
+		/*reserv.setDept(request.getParameter("dept"));*/
 		reserv.setRv_user(request.getParameter("rv_user"));
 		reserv.setRv_writer(request.getParameter("rv_writer"));
 		

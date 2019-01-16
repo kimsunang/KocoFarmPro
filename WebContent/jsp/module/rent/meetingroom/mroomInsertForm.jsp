@@ -21,7 +21,7 @@
 			<!-- 회의실 수정 -->
 			<form action="mroomInsert.do" method="post">
 			<div class="sch_wrap">
-				<input type="hidden" name="m_id" >
+				회의실 번호:<input type="text" name="m_id" >
 				회의실 이름 : <input type="text" name="m_name"><br>
 				인원 : <input type="text" name="p_num"><br>
 				<input type="hidden" name="reg_dt">			

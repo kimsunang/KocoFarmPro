@@ -4,7 +4,7 @@
 <mapper namespace="kosta.mapper.module.MeetingRoomMapper">
 	<cache />
 	<insert id="setMroom" parameterType="MeetingRoom">
-		insert into meetingroom values(mroom_seq.nextval,
+		insert into meetingroom values(#{m_id},
 			#{m_name},#{p_num}, sysdate, null)
 	</insert>
 	

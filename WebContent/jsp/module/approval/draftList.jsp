@@ -45,33 +45,21 @@
 				<!-- 목록 보기 -->
 				<table class="contents_tb" id="contTb">
 					<tr>
-						<th>양식 번호 </th>
-						<th>양식 이름 </th>
-						<th>구분  </th>
+						<th>기안서 번호 </th>
+						<th>기안서 제목</th>
+						<th>등록 날짜</th>
 					</tr>
 					
-					<c:forEach var="ApprovalForm" items="${list }">
+					<c:forEach var="ApprovalDraft" items="${list }">
 						<tr>
-							<td>${ApprovalForm.formId }</td>
-							<td>${ApprovalForm.modeName }</td>
-							<td>${ApprovalForm.sortName }</td>
+							<td>${ApprovalDraft.draftId }</td>
+							<td>${ApprovalDraft.draftName}</td>
+							<td>${ApprovalDraft.draftDt }</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
-						
-			<!-- btn -->
-			<div class="btn_wrap">
-				<div class="flt_r">
-					<input type="button" class="list_btn" value="목록" />
-					<input type="button" class="view_btn" value="상세보기" />
-					<input type="button" class="write_btn" value="등록" />
-					<input type="button" class="edit_btn" value="수정" />
-					<input type="button" class="del_btn" value="삭제" />
-					
-					<a href = "listDraft.do">기안서 목록 보기</a>
-				</div>
-			</div>
+		
 		</div>
 	</div>
 <script type="text/javascript" src="/KocoFarmPro/js/module/approval.js"></script>

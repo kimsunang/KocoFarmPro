@@ -64,11 +64,18 @@
 			<form action="rentCarDetailWrite.do" method="post"> 
 			차량번호 : <input type="text" name="car_id"><br>
 			차량모델명 : <input type="text" name="modelName"><br>
-			차종 : <input type="text" name="carModel"><br>
-			구입조건 : <input type="text" name="condition"><br>
+			차종 : <input type="checkbox" name="carModel" value = "싼타페">싼타페
+				 <input type="checkbox" name="carModel" value = "레이">레이
+				 <input type="checkbox" name="carModel" value = "SM3">SM3
+				 <input type="checkbox" name="carModel" value = "k3">k3				 			
+			<br>
+			구입조건 : <input type="checkbox" name="condition" value="신차" >신차
+					<input type="checkbox" name="condition" value="중고차">중고차			
+			<br>
 			가격 : <input type="text" name="price"><br>
 			연식 : <input type="text" name="year"><br>
-			유종 : <input type="text" name="oil_Type"><br>
+			유종 : <input type="checkbox" name="oil_Type" value="휘발유">휘발유
+				 <input type="checkbox" name="oil_Type" value="경유">경유
 			<br>
 			<input type="submit" value="등록">
 		</form>
@@ -92,5 +99,5 @@
 		
 		
 	</div>
-<script type="text/javascript" src="/Kocofarm/js/module/notice.js"></script>
+<script type="text/javascript" src="/Kocofarm/js/module/rent.js"></script>
 <jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

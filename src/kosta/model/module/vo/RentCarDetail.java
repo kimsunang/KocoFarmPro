@@ -2,7 +2,8 @@ package kosta.model.module.vo;
 
 public class RentCarDetail {
 	
-	private int car_id;
+	//private int seq;
+	private String car_id; //int->String으로 수정
 	private String modelName;
 	private String carModel;
 	private String condition;
@@ -16,7 +17,7 @@ public class RentCarDetail {
 	public RentCarDetail() {}
 
 
-	public RentCarDetail(int car_id, String modelName, String carModel, String condition, int price, int year,
+	public RentCarDetail(String car_id, String modelName, String carModel, String condition, int price, int year,
 			String oil_Type, String rEG_DT, String uP_DT) {
 		super();
 		this.car_id = car_id;
@@ -31,12 +32,12 @@ public class RentCarDetail {
 	}
 
 
-	public int getCar_id() {
+	public String getCar_id() {
 		return car_id;
 	}
 
 
-	public void setCar_id(int car_id) {
+	public void setCar_id(String car_id) {
 		this.car_id = car_id;
 	}
 
@@ -127,6 +128,9 @@ public class RentCarDetail {
 				+ ", condition=" + condition + ", price=" + price + ", year=" + year + ", oil_Type=" + oil_Type
 				+ ", REG_DT=" + REG_DT + ", UP_DT=" + UP_DT + "]";
 	}
+
+
+
 	
 	
 	

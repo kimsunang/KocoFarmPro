@@ -11,15 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
+import kosta.action.module.rentCarDetail.DelAction;
+import kosta.action.module.rentCarDetail.EditAction;
+import kosta.action.module.rentCarDetail.EditActionForm;
 import kosta.action.module.rentCarDetail.ListAction;
 import kosta.action.module.rentCarDetail.RentCarAction;
+import kosta.action.module.rentCarDetail.ViewAction;
 import kosta.action.module.rentCarDetail.WriteAction;
 import kosta.action.module.rentCarDetail.WriteActionForm;
 
 
 @WebServlet({"/rentCarList.do", "/rentCarDetailWriteForm.do","/rentCarDetailWrite.do",
-				"/rentCarDetailList.do",
-				"/rent.do" })
+				"/rentCarDetailList.do", "/rentCarDetailView.do" 
+				, "/rentCarDetailEditForm.do","/rentCarDetailEdit.do", "/rentCarDetailDelAction.do"
+				,"/rent.do" })
 public class RentCarDetailController extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -85,9 +90,30 @@ public class RentCarDetailController extends HttpServlet {
 			
 		
 		}
+		//상세페이지 - DetailAction 넣어주기
+		else if(command.equals("rentCarDetailView.do")){
+			action = new ViewAction();			
+    		try {
+    			forward = action.execute(request, response);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
-		/*
-		 수정 페이지 
+		
+		 //수정 페이지 
+		else if(command.equals("rentCarDetailEditForm.do")){
+			action = new EditActionForm();			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		  
+		}
+		//수정
 		else if(command.equals("rentCarDetailEdit.do")){
 			action = new EditAction();
 			
@@ -97,20 +123,12 @@ public class RentCarDetailController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		 수정 
-		}else if(command.equals("rentCarDetailEditProC.do")){
-			action = new EditProCAction();
-			
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		 삭제 
-		}else if(command.equals("rentCarDetailDelProC.do")){
-			action = new DelProCAction();
-			
+		 
+		}	
+		// 삭제
+		else if(command.equals("rentCarDetailDelAction.do")){
+			System.out.println("renCarDetailDelAction.do에 들어왔습니다.");
+			action = new DelAction();			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -118,7 +136,7 @@ public class RentCarDetailController extends HttpServlet {
 			}
 		}
 		
-		*/
+		
 		
 		
 		

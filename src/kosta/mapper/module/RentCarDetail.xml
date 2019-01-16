@@ -8,8 +8,8 @@
 		insert into RENTCAR_DETAIL
 				(CAR_ID,MODELNAME, CARMODEL, CONDITION, PRICE, YEAR, OIL_TYPE, REG_DT)
 		values
-				(#{car_id}, #{modelName}, #{carModel},#{condition},
-				 #{price}, #{year}, #{oil_Type},sysdate)	
+				(#{car_id}, #{modelName}, #{carModel},#{condition, jdbcType=VARCHAR},
+				 #{price}, #{year}, #{oil_Type, jdbcType=VARCHAR},sysdate)	
 	</insert>
 	
 	<!-- 목록보기 -->
@@ -21,20 +21,21 @@
 							${item} LIKE #{searchKey}				
 				</foreach>
 			</if>	
-			order by car_id desc
+			ORDER BY car_id ASC 	
+			
 	</select>
 	
 	<!-- 상세보기 -->
-	<select id="getRentCarDetail" parameterType="int" resultType="RentCarDetail">
+	<select id="getRentCarDetail" parameterType="java.lang.String" resultType="RentCarDetail">
 		select *
 		from RENTCAR_DETAIL
 		where car_id = #{car_id}
 	</select>
 	
 
-	<!--  목록 총개수 --> 
+	<!--  목록 총개수 --> <!-- resultType="java.lang.Integer" -->
 	<select id="getRentCarDetailListCnt" parameterType="RentCarDetailSearch" resultType="java.lang.Integer">
-	 select * from RENTCAR_DETAIL
+	 select count(*) from RENTCAR_DETAIL
 	<if test="area">
 		<where>
 			<foreach collection="area" item = "item" separator="OR" 
@@ -42,8 +43,27 @@
 			</foreach>	
 		</where>	
 	</if>
-	order by car_id desc	
 	</select>
-
-
+	
+	<!-- 수정 -->
+	<update id="setUpRentCarDetail" parameterType="RentCarDetail">
+		update RENTCAR_DETAIL
+		set 
+			modelName = #{modelName},
+			carModel = #{carModel},
+			condition = #{condition},
+			price = #{price},
+			year = #{year},
+			oil_Type = #{oil_Type, jdbcType=VARCHAR},
+			UP_DT = sysdate
+		where car_id = #{car_id, jdbcType=VARCHAR}
+		
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="delRentCarDetail" parameterType="java.lang.String">
+	DELETE FROM RENTCAR_DETAIL
+	WHERE car_id = #{car_id, jdbcType=VARCHAR}	
+	</delete>
+	
 </mapper>

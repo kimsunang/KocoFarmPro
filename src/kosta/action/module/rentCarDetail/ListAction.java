@@ -14,12 +14,10 @@ public class ListAction implements IAction {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		System.out.println("rentCarDetail - ListAction입니다.");
+		String URI = request.getRequestURI();
+		System.out.println("현재경로 : " +URI );
 		
-		RentCarDetailService service = RentCarDetailService.getInstance();
-		
-		System.out.println("rentCarDetail - ListAction입니다.2");
-		
+		RentCarDetailService service = RentCarDetailService.getInstance();	
 		//현재페이지
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null){
@@ -27,24 +25,17 @@ public class ListAction implements IAction {
 		}
 		
 		int requestPage = Integer.parseInt(pageNum);
-		
-		
-		System.out.println("rentCarDetail - ListAction입니다.3");
-		
+
 		//여기서 안들어가ㅠ
 		RentCarDetailListModel rentCarDetailListModel = service.getRentCarDetailList(requestPage, request);
 		
-		System.out.println("rentCarDetail - ListAction입니다.4-1");
 		
 		request.setAttribute("rentCarDetailListModel", rentCarDetailListModel);
-
-		System.out.println("rentCarDetail - ListAction입니다.4-2");
-		
+	
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/jsp/module/rent/car/rentCarDetailList.jsp");
-		
-		System.out.println("rentCarDetail - ListAction입니다.5");
+		//forward.setPath("rentCarDetailList.do");
 		
 		
 		return forward;

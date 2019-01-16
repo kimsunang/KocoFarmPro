@@ -44,5 +44,5 @@
 		<mapper resource="kosta/mapper/module/RentCarDetail.xml"/>
 		
 	</mappers>
-	
+	 
 </configuration>

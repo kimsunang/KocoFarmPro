@@ -34,8 +34,6 @@ public class WriteAction implements IAction {
 		service.setRentCarDetail(request);
 		ActionForward forward = new ActionForward();
 		
-		System.out.println("writeAction 성공");
-		
 		forward.setRedirect(true);
 		forward.setPath("rentCarDetailList.do");
 		

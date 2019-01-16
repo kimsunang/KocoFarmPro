@@ -11,6 +11,8 @@ public class WriteActionForm implements IAction {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		System.out.println("WriteActionForm입니다.");
+		
 		ActionForward forward = new ActionForward();
 		
 		forward.setRedirect(false);

@@ -48,8 +48,6 @@ public class RentCarDetailService {
 		
 		HttpSession session = request.getSession();
 		
-		System.out.println("RentCarDetailService-1");
-		
 		if(request.getParameter("area") != null){
 			session.removeAttribute("search");
 			search.setArea(request.getParameterValues("area"));
@@ -58,10 +56,7 @@ public class RentCarDetailService {
 		}else if ((RentCarDetailSearch)session.getAttribute("search") != null) {
 			search = (RentCarDetailSearch)session.getAttribute("search");
 		}
-		
-		System.out.println("RentCarDetailService-2");
-		
-		
+				
 		//페이지
 		//총글개수
 		int totalCount = dao.getRentCarDetailListCnt(search);
@@ -85,14 +80,9 @@ public class RentCarDetailService {
 		//시작행 구하기 :(현재페이지-1) * 페이지 당 글 개수
 		int startRow = (requestPage-1) * PAGE_SIZE;
 		
-		
-		System.out.println("RentCarDetailService-3");
-		
 		List<RentCarDetail> list = dao.getRentCarDetailList(search, startRow);
 		RentCarDetailListModel listModel = new RentCarDetailListModel(list, requestPage, totalPageCount, startPage, endPage);
-		
-		System.out.println("RentCarDetailService-4");
-		
+				
 		return listModel;
 	}
 	
@@ -115,18 +105,15 @@ public class RentCarDetailService {
 		
 		RentCarDetail rentCarDetail = new RentCarDetail();
 		
-		System.out.println("setRentCarDetail- 1");
+		/*
 		System.out.println("Car_id :" + Integer.parseInt(request.getParameter("car_id")));
-		
 		System.out.println(request.getParameter("car_id").getClass());
-		
-		int carId = Integer.parseInt(request.getParameter("car_id"));
-		
+		int carId = Integer.parseInt(request.getParameter("car_id"));		
 		rentCarDetail.setCar_id(carId);		
-
 		System.out.println("#통과 ?");
+		*/
 		
-		
+		rentCarDetail.setCar_id(request.getParameter("car_id"));
 		rentCarDetail.setModelName(request.getParameter("modelName"));
 		rentCarDetail.setCarModel(request.getParameter("carModel"));
 		rentCarDetail.setCondition(request.getParameter("condition"));
@@ -134,14 +121,8 @@ public class RentCarDetailService {
 		rentCarDetail.setYear(Integer.parseInt(request.getParameter("year")));
 		rentCarDetail.setOil_Type(request.getParameter("oil_Type"));
 		
-		System.out.println("setRentCarDetail- 2");
 		
-		int re = dao.setRentCarDetail(rentCarDetail);
-		
-		System.out.println("setRentCarDetail- 3");
-		
-		
-		return re;
+		return dao.setRentCarDetail(rentCarDetail);
 		
 		
 	}

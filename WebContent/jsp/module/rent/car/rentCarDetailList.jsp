@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/jsp/comm/top.jsp" flush="false" ></jsp:include>
 <link rel="stylesheet" type="text/css" href="/Kocofarm/css/module/rent.css" />
@@ -46,7 +48,7 @@
 				 -->
 				 
 				 <table width="700" border="1" cellpadding="0" cellspacing="0">
-		<tr>
+		<tr>			
 			<td>차량번호</td>			
 			<td>차량모델명</td>
 			<td>차종</td>
@@ -58,23 +60,50 @@
 			<td>수정일자</td>
 			
 		</tr>
-		<%-- 
-		<c:forEach var="rentCar_Detail" items="${list }"> <!-- 원래 list만 있었엉 -->
+		<!-- 새로 수정한 곳  --> <%-- items="${listModel.list } --%> <!-- rentCar_Detail 이름 더 줄이기 -->
+		<c:forEach var="RCdetail" items="${rentCarDetailListModel.list}"> 
+		<!-- RentCarDetailService에서 RentCarDetailListModel 중에서 list만 불러오는 것이다. -->
 			<tr>
-				<td>${board.seq }</td>
-							
-				<td><a href="setCardetail.do?seq=${rentCar_Detail.car_id }">${rentCar_Detail.carModel }</a></td>
-				<td>${board.writer }</td>
+				<td>${RCdetail.car_id }</td> 
+				<td><a href="rentCarDetailView.do?car_id=${RCdetail.car_id}">${RCdetail.modelName }</a></td>
+				<td>${RCdetail.carModel }</td>
+				<td>${RCdetail.condition }</td>
+				<td>${RCdetail.price }</td>
+				<td>${RCdetail.year}</td>
+				<td>${RCdetail.oil_Type }</td>
 				<td>
-					<fmt:parseDate var="dateString" value="${rentCar_Detail.regdate }" pattern="yyyy-MM-dd" />
+					<fmt:parseDate var ="dateString" value="${RCdetail.REG_DT }"
+						pattern="yyyy-MM-dd"/>
 					<fmt:formatDate value="${dateString }" pattern="yyyy-MM-dd"/>
 				</td>
-				<td>${board.hitcount }</td>
+				<!-- 수정일을 어떻게 넣어주는걸까? -->
+				<td>
+					<fmt:parseDate var ="dateString" value="${RCdetail.UP_DT }"
+						pattern="yyyy-MM-dd"/>
+					<fmt:formatDate value="${dateString }" pattern="yyyy-MM-dd"/>
+				</td> 
 			</tr>
 		</c:forEach> 
-		  --%>
+		
 	</table>	
 	<br><br>
+	
+	<!-- 페이지 처리 영역 ///////////////////////////새로 넣어준 부분입니다.-->
+		<!-- 이전 -->
+		<c:if test="${ listModel.startPage>5}">
+			<a href = "list.do?pageNum =${listModel.startPage-5 }">[이전]</a>	
+		</c:if>
+		<!-- 페이지 목록 -->
+		<c:forEach var= "pageNo" begin="${listModel.startPage }" end ="${listModel.endPage }">
+			<c:if test="${listModel.requestPage == pageNo }"><b></c:if>
+				<a href="list.do?pageNum=${pageNo }">[${pageNo }]</a>	
+			<c:if test="${listModel.requestPage == pageNo }"></b></c:if>
+		</c:forEach>
+		<!-- 이후 -->
+		<c:if test="${ listModel.endPage < listModel.totalPageCount}">
+			<a href = "list.do?pageNum =${listModel.startPage+5 }">[이후]</a>	
+		</c:if>
+
 	
 	<form action="list.jsp" method="post">
 		<input type="checkbox" name="area" value="car_id">차량번호

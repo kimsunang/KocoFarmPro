@@ -12,7 +12,9 @@ public class RentCarAction implements IAction {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
-	      
+	   
+		System.out.println("RentCarAction입니다. - list.jsp로 이동");  
+		
 	      forward.setRedirect(false);
 	      forward.setPath("/jsp/module/rent/list.jsp");
 	      

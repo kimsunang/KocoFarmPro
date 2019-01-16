@@ -16,7 +16,7 @@ public interface RentCarDetailMapper extends IAction {
 	List<RentCarDetail> getRentCarDetailList(RowBounds row, RentCarDetailSearch search);
 
 	//상세정보
-	RentCarDetail getRentCarDetail(int car_id);
+	RentCarDetail getRentCarDetail(String car_id);
 	
 	
 	//등록하기
@@ -24,8 +24,10 @@ public interface RentCarDetailMapper extends IAction {
 	
 	
 	//수정
+	int setUpRentCarDetail(RentCarDetail rentCarDetail);
 	
 	//삭제
+	int delRentCarDetail(String car_id);
 		
 	
 }

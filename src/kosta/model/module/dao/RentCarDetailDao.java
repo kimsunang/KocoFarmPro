@@ -69,7 +69,7 @@ public class RentCarDetailDao {
 	
 	
 	//상세정보
-	public RentCarDetail getRentCarDetail(int car_id){
+	public RentCarDetail getRentCarDetail(String car_id){
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		RentCarDetail rentCarDetail = null;
 		try {
@@ -87,6 +87,7 @@ public class RentCarDetailDao {
 	
 	//등록
 	public int setRentCarDetail(RentCarDetail rentCarDetail){
+		
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		
@@ -108,6 +109,51 @@ public class RentCarDetailDao {
 		
 	}//setRentCarDetail
 	
+	//수정
+	public int setUpRentCarDetail(RentCarDetail rentCarDetail){
+		
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		
+		try {
+			re = sqlSession.getMapper(RentCarDetailMapper.class).setUpRentCarDetail(rentCarDetail);
+			if(re>0){
+				sqlSession.commit();
+			}else {
+				sqlSession.rollback();
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return re;
+		
+	}
+	
+	
+	//삭제
+	public int delRentCarDetail(String car_id){
+		System.out.println("delRentCarDetail에 들어왔습니다.");
+		
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		
+		try {
+			re = sqlSession.getMapper(RentCarDetailMapper.class).delRentCarDetail(car_id);
+			if(re>0){
+				sqlSession.commit();
+			}else{
+				sqlSession.rollback();
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return re;		
+	}
 	
 	
 	

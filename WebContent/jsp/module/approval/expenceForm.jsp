@@ -25,7 +25,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="insertExpenceAction.do" method="post">
+	<form action="insertDraft.do" method="post">
 		<div class="expence_wrap">
 			<div class="title" align="center">
 				<h1>지 출 결 의 서</h1>

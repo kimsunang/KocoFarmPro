@@ -13,10 +13,7 @@ public class InsertExpenceAction implements IAction {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
 		
-		request.setCharacterEncoding("utf-8");
-		
-			
-		forward.setPath("/jsp/module/approval/listForm.jsp");
+		forward.setPath("/jsp/module/approval/expenceForm.jsp");
 		forward.setRedirect(false);
 		
 		return forward;

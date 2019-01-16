@@ -18,7 +18,7 @@ import kosta.action.module.approval.ListDraftAction;
 import kosta.action.module.approval.ListDraftFormAction;
 
 
-@WebServlet({"/insertDraft.do","/listDraft.do","/insertDraftForm.do","/listForm.do"})
+@WebServlet({"/insertDraft.do","/listDraft.do","/insertDraftForm.do","/listForm.do","/insertExpence.do"})
 public class ApprovalController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

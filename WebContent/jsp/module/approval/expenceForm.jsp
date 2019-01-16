@@ -11,16 +11,24 @@
 <script>
 	$(function() {
 		$("#datepicker").datepicker({
-			dateFormat : 'yy-mm-dd'
-		});
-	});
+			onSelect : function(dateText, inst) {
+	            $("input[name='vacationStartDt']").val(dateText);
+	         },
+	         dateFormat :'yy-m-dd'
+	         
+	      })
+	   });
 </script>
 <script>
 	$(function() {
 		$("#datepicker1").datepicker({
-			dateFormat : 'yy-mm-dd'
-		});
-	});
+			onSelect : function(dateText, inst) {
+	            $("input[name='vacationStartDt']").val(dateText);
+	         },
+	         dateFormat :'yy-m-dd'
+	         
+	      })
+	   });
 </script>
 <title>Insert title here</title>
 </head>
@@ -36,22 +44,22 @@
 					align="center">
 					<tr>
 						<td colspan="3">기안서 번호</td>
-						<td><input type="text" style="text-align: center" name="draftId"></td>
+						<td><input type="text" style="text-align: center"></td>
 						<td colspan="3" >기안서 이름</td>
-						<td><input type="text" style="text-align: center" name="draftName"></td>
+						<td><input type="text" style="text-align: center"></td>
 					</tr>
 
 					<tr>
 						<td colspan="3">기안서 제목</td>
 						<td><input type="text" style="text-align: center" name="draftTitle"></td>
 						<td colspan="3">등록 날짜</td>
-						<td><input type="text" value="sysdate"
-							style="text-align: center" name="draftDt"></td>
+						<td><input type="text" 
+							style="text-align: center" ></td>
 					</tr>
 
 					<tr>
 						<td colspan="3">기안서 양식</td>
-						<td style="text-align: center"><select name="formId" value="formId" style="text-align: center">
+						<td style="text-align: center"><select name="expenceType" value="formId" style="text-align: center">
 								<option selected>-- 양식 --</option>
 								<option value="1">지출명세서</option>
 								<option value="2">히잇</option>

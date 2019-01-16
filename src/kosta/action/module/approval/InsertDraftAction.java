@@ -15,13 +15,15 @@ public class InsertDraftAction implements IAction {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ActionForward forward = new ActionForward();
-
+		
 		ApprovalService service = ApprovalService.getInstnace();
 		service.insertDraftService(request);
 		service.insertExpenceService(request);
 		
 		//service.insertVacationService(request);
 		
+		
+		System.out.println("What?");
 		forward.setRedirect(false);
 		forward.setPath("/listDraft.do");
 		

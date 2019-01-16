@@ -14,6 +14,13 @@
 		insert into Vacation_Form values(80,1,#{vacationStartDt},#{vacationEndDt},1,#{vacationDays},
 		#{vacationReason},#{replacementId})
 	</insert> 
+	
+	<!-- 지출 명령서 입력  -->
+ 	<insert id = "insertExpence" parameterType = "ApprovalExpence">
+		insert into Expence_foam values(1,1,sysdate,#{expence_type},#{customer_name},#{expence_price},
+			#{commisstion_option},#{commission_price},#{sum_prise})
+	</insert> 
+	 
 
 	<!-- 기안서 양식 list -->
 	 <select id = "listForm" resultType = "ApprovalForm" parameterType = "ApprovalFormSearch">

@@ -23,6 +23,7 @@
 		<typeAlias type="kosta.model.module.vo.ApprovalFormSearch" alias="ApprovalFormSearch" />
 		<typeAlias type="kosta.model.module.vo.ApprovalVacation" alias="ApprovalVacation" />
 		<typeAlias type="kosta.model.module.vo.ApprovalForm" alias="ApprovalForm" />
+		<typeAlias type="kosta.model.module.vo.ApprovalExpence" alias="ApprovalExpence" />
 		
 		<!-- 전자 결재 E-->
 	</typeAliases>

@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kosta.mapper.module.ApprovalMapper;
 import kosta.model.module.vo.ApprovalDraft;
+import kosta.model.module.vo.ApprovalExpence;
 import kosta.model.module.vo.ApprovalForm;
 import kosta.model.module.vo.ApprovalFormSearch;
 import kosta.model.module.vo.ApprovalVacation;
@@ -73,6 +74,27 @@ public class ApprovalDao {
 			sqlSession.close();
 		}
 
+		return re;
+	}
+	
+	public int insertExpence(ApprovalExpence expence) {
+		
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		
+		try {
+			re = sqlSession.getMapper(ApprovalMapper.class).insertExpence(expence);
+			if (re > 0) {
+				sqlSession.commit();
+			} else {
+				sqlSession.rollback();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
 		return re;
 	}
 	

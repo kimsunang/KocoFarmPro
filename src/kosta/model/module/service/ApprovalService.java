@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.model.module.dao.ApprovalDao;
 import kosta.model.module.vo.ApprovalDraft;
+import kosta.model.module.vo.ApprovalExpence;
 import kosta.model.module.vo.ApprovalVacation;
 
 public class ApprovalService {
@@ -43,6 +44,24 @@ public class ApprovalService {
 		
 		
 		return dao.insertVacation(vacation);
+		
+	}
+	
+	public int insertExpenceService(HttpServletRequest request) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		
+		ApprovalExpence expence = new ApprovalExpence();
+
+
+		expence.setExpenceDt(request.getParameter("expenceDt"));
+		expence.setExpenceType(request.getParameter("expenceType"));
+		expence.setCustomerName(request.getParameter("customerName"));
+		expence.setExpencePrice(request.getParameter("expencePrice"));
+		expence.setCommissionOption(request.getParameter("commissionOption"));
+		expence.setCommissionPrice(request.getParameter("commissionPrice"));
+		expence.setSumPrice(request.getParameter("sumPrice"));
+		
+		return dao.insertExpence(expence);
 		
 	}
 	

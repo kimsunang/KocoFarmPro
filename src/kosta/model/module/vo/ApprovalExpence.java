@@ -3,104 +3,105 @@ package kosta.model.module.vo;
 import java.io.Serializable;
 
 public class ApprovalExpence implements Serializable {
-	private int draft_id;
-	private int form_id;
-	private String expence_dt;
-	private String expence_type;
-	private String customer_name;
-	private String expence_price;
-	private String commission_option;
-	private String commission_price;
-	private String sum_price;
-
+	private int draftId;
+	private int formId;
+	private String expenceDt;
+	private String expenceType;
+	private String customerName;
+	private String expencePrice;
+	private String commissionOption;
+	private String commissionPrice;
+	private String sumPrice;
+	
 	public ApprovalExpence() {
 		super();
 	}
-
-	public ApprovalExpence(int draft_id, int form_id, String expence_dt, String expence_type, String customer_name,
-			String expence_price, String commission_option, String commission_price, String sum_price) {
+	
+	public ApprovalExpence(int draftId, int formId, String expenceDt, String expenceType, String customerName,
+			String expencePrice, String commissionOption, String commissionPrice, String sumPrice) {
 		super();
-		this.draft_id = draft_id;
-		this.form_id = form_id;
-		this.expence_dt = expence_dt;
-		this.expence_type = expence_type;
-		this.customer_name = customer_name;
-		this.expence_price = expence_price;
-		this.commission_option = commission_option;
-		this.commission_price = commission_price;
-		this.sum_price = sum_price;
+		this.draftId = draftId;
+		this.formId = formId;
+		this.expenceDt = expenceDt;
+		this.expenceType = expenceType;
+		this.customerName = customerName;
+		this.expencePrice = expencePrice;
+		this.commissionOption = commissionOption;
+		this.commissionPrice = commissionPrice;
+		this.sumPrice = sumPrice;
 	}
 
-	public int getDraft_id() {
-		return draft_id;
+	public int getDraftId() {
+		return draftId;
 	}
 
-	public void setDraft_id(int draft_id) {
-		this.draft_id = draft_id;
+	public void setDraftId(int draftId) {
+		this.draftId = draftId;
 	}
 
-	public int getForm_id() {
-		return form_id;
+	public int getFormId() {
+		return formId;
 	}
 
-	public void setForm_id(int form_id) {
-		this.form_id = form_id;
+	public void setFormId(int formId) {
+		this.formId = formId;
 	}
 
-	public String getExpence_dt() {
-		return expence_dt;
+	public String getExpenceDt() {
+		return expenceDt;
 	}
 
-	public void setExpence_dt(String expence_dt) {
-		this.expence_dt = expence_dt;
+	public void setExpenceDt(String expenceDt) {
+		this.expenceDt = expenceDt;
 	}
 
-	public String getExpence_type() {
-		return expence_type;
+	public String getExpenceType() {
+		return expenceType;
 	}
 
-	public void setExpence_type(String expence_type) {
-		this.expence_type = expence_type;
+	public void setExpenceType(String expenceType) {
+		this.expenceType = expenceType;
 	}
 
-	public String getCustomer_name() {
-		return customer_name;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setCustomer_name(String customer_name) {
-		this.customer_name = customer_name;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
-	public String getExpence_price() {
-		return expence_price;
+	public String getExpencePrice() {
+		return expencePrice;
 	}
 
-	public void setExpence_price(String expence_price) {
-		this.expence_price = expence_price;
+	public void setExpencePrice(String expencePrice) {
+		this.expencePrice = expencePrice;
 	}
 
-	public String getCommission_option() {
-		return commission_option;
+	public String getCommissionOption() {
+		return commissionOption;
 	}
 
-	public void setCommission_option(String commission_option) {
-		this.commission_option = commission_option;
+	public void setCommissionOption(String commissionOption) {
+		this.commissionOption = commissionOption;
 	}
 
-	public String getCommission_price() {
-		return commission_price;
+	public String getCommissionPrice() {
+		return commissionPrice;
 	}
 
-	public void setCommission_price(String commission_price) {
-		this.commission_price = commission_price;
+	public void setCommissionPrice(String commissionPrice) {
+		this.commissionPrice = commissionPrice;
 	}
 
-	public String getSum_price() {
-		return sum_price;
+	public String getSumPrice() {
+		return sumPrice;
 	}
 
-	public void setSum_price(String sum_price) {
-		this.sum_price = sum_price;
+	public void setSumPrice(String sumPrice) {
+		this.sumPrice = sumPrice;
 	}
-
+	
+	
 }

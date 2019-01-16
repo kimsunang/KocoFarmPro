@@ -50,7 +50,7 @@
 						<th>등록 날짜</th>
 					</tr>
 					
-					<c:forEach var="ApprovalDraft" items="${list }">
+					<c:forEach var="ApprovalDraft" items="${list}">
 						<tr>
 							<td>${ApprovalDraft.draftId }</td>
 							<td>${ApprovalDraft.draftName}</td>

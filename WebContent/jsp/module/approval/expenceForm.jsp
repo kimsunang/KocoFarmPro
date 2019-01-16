@@ -127,7 +127,6 @@
 						</select></td>
 						<td>
 						<input type="text" style="text-align: right" name="commissionPrice"> 
-						
 							</td>
 					</tr>
 

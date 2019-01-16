@@ -13,6 +13,7 @@ import kosta.action.comm.IAction;
 import kosta.action.comm.ActionForward;
 import kosta.action.module.approval.InsertDraftAction;
 import kosta.action.module.approval.InsertDraftFormAction;
+import kosta.action.module.approval.InsertExpenceAction;
 import kosta.action.module.approval.ListDraftAction;
 import kosta.action.module.approval.ListDraftFormAction;
 
@@ -58,6 +59,21 @@ public class ApprovalController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+//    	}else if(command.equals("insertExpenceFormAction.do")){
+//    		action = new InsertExpenceFormAction();
+//    		try {
+//    			forward = action.execute(request, response); 
+//    		} catch (Exception e) {
+//    			e.printStackTrace();
+//    		}
+
+    	}else if(command.equals("insertExpence.do")){
+    		action = new InsertExpenceAction();
+    		try {
+    			forward = action.execute(request, response); 
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
     	}else if(command.equals("listDraft.do")){
     		action = new ListDraftAction();
     		try {

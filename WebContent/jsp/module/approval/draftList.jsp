@@ -21,21 +21,12 @@
 		<div class="contents_wrap">
 			<!-- sch_top -->
 			<div class="sch_wrap">
-				<p class="tit">검색</p>
-				<div class="sch_slide_btn">
-					<img id="slideBtnImg" class="upBtn" src="/KocoFarmPro/img/comm/list_up_btn.png" alt="메뉴 접기" />
-				</div>
+				<p class="tit">등록된 리스트</p>
 				<div class="sch_toggle_wrap">
-					<div class="sch_box_wrap">
-						<div class="right">
-							<select name="schType" id="schType">
-								<option value="">전체</option>
-								<option value="title">제목</option>
-								<option value="contents">내용</option>
-							</select>
-							<input type="text" name="schWord" id="schWord" placeholder="검색어를 입력 해 주세요" />
-							<input type="button" class="schBtn" id="schBtn" value="검색" />
-						</div>
+					<div class="">
+						<a href="insertExpence.do">지출결의서</a>
+						<p></p>
+						<a href="휴가서">휴가서</a>
 					</div>
 				</div>
 			</div>

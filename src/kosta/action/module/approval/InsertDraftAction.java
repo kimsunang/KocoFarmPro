@@ -18,7 +18,9 @@ public class InsertDraftAction implements IAction {
 
 		ApprovalService service = ApprovalService.getInstnace();
 		service.insertDraftService(request);
-		service.insertVacationService(request);
+		service.insertExpenceService(request);
+		
+		//service.insertVacationService(request);
 		
 		forward.setRedirect(false);
 		forward.setPath("/listDraft.do");

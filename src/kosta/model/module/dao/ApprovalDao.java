@@ -98,6 +98,27 @@ public class ApprovalDao {
 		return re;
 	}
 	
+//	public int insertExpenceFormAction(ApprovalExpence expence) {
+//		
+//		int re = -1;
+//		SqlSession sqlSession = getSqlSessionFactory().openSession();
+//		
+//		try {
+//			re = sqlSession.getMapper(ApprovalMapper.class).insertExpence(expence);
+//			if (re > 0) {
+//				sqlSession.commit();
+//			} else {
+//				sqlSession.rollback();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			sqlSession.close();
+//		}
+//		
+//		return re;
+//	}
+	
 	public List<ApprovalForm> listForm(ApprovalFormSearch search){
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		List<ApprovalForm> list = null;

@@ -25,7 +25,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="" method="post">
+	<form action="insertExpenceAction.do" method="post">
 		<div class="expence_wrap">
 			<div class="title" align="center">
 				<h1>지 출 결 의 서</h1>
@@ -118,16 +118,8 @@
 
 					<tr height="300" valign="top">
 						<td colspan="3"><input type="text" size="20"
-							style="text-align: center" name="customerName" > <input type="text" size="20"
-							style="text-align: center" name="customerName"> <input type="text" size="20"
-							style="text-align: center" name="customerName"> <input type="text" size="20"
-							style="text-align: center" name="customerName"> <input type="text" size="20"
-							style="text-align: center" name="customerName"></td>
-						<td><input type="text" size="20" style="text-align: right" name="expencePrice">
-							<input type="text" size="20" style="text-align: right" name="expencePrice"> <input
-							type="text" size="20" style="text-align: right" name="expencePrice"> <input
-							type="text" size="20" style="text-align: right" name="expencePrice"> <input
-							type="text" size="20" style="text-align: right" name="expencePrice"></td>
+							style="text-align: center" name="customerName" > </td>
+						<td><input type="text" size="20" style="text-align: right" name="expencePrice"></td>
 						<td colspan="3"><select name="commissionOption">
 								<option value='' selected>-- Y or N --</option>
 								<option value="Y">Y
@@ -135,14 +127,7 @@
 						</select></td>
 						<td>
 						<input type="text" style="text-align: right" name="commissionPrice"> 
-						<input
-							type="text" style="text-align: right" name="commissionPrice"> 
-							<input type="text"
-							style="text-align: right" name="commissionPrice"> 
-							<input type="text"
-							style="text-align: right" name="commissionPrice"> 
-							<input type="text"
-							style="text-align: right" name="commissionPrice">
+						
 							</td>
 					</tr>
 
@@ -173,7 +158,7 @@
 		<div class= flt_r align="center">
 						<br><br>
 							<!-- <input type = "submit" value = "저장하기" > -->
-							<input type="submit" value="제출" style=>
+							<input type="submit" value="제출">
 							<br><br>
 						</div>
 		

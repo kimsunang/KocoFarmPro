@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.ApprovalMapper">
+	<cache/>
+	
+	<!-- 기안서 입력  -->
+	<insert id = "insertDraft" parameterType = "ApprovalDraft">
+		insert into Draft values(seq_draft.nextval,'예시',SYSDATE,#{draftTitle},1,#{draftYear},4,'기안중')
+	</insert>
+	
+	<!-- 휴가 명령서 입력  -->
+ 	<insert id = "insertVacation" parameterType = "ApprovalVacation">
+		insert into Vacation_Form values(80,1,#{vacationStartDt},#{vacationEndDt},1,#{vacationDays},
+		#{vacationReason},#{replacementId})
+	</insert> 
+
+	<!-- 기안서 양식 list -->
+	 <select id = "listForm" resultType = "ApprovalForm" parameterType = "ApprovalFormSearch">
+	 	select * from form
+			<if test="null != schType and '' != schType and null != schWord and '' != schWord">
+			<where>
+				<if test="'title' == schType">
+					TITLE LIKE '%'||#{schWord}||'%'
+				</if>
+				<if test="'contents' == schType">
+					CONTENTS LIKE '%'||#{schWord}||'%'
+				</if>
+			</where>
+		</if>
+	 </select>
+	 
+	 <!-- 등록된 기안서 불러오기 -->
+	 <select id = "listDraft" resultType = "ApprovalDraft">
+	 <!-- 	select * from draft
+	 	 -->
+	 select * from draft
+	 </select>
+	<!-- 결재 폼 입력 -->
+	<!-- <insert id = "insertExpence" parameterType = "ApprovalExpence">
+		insert into Expence_foam values(seq_expence_foar.nextval,#{foam_id},sysdate,#{expence_type},#{customer_name},#{expence_price},
+			#{commisstion_option},#{commission_price},#{sum_prise})
+	</insert> -->
+ 
+
+	
+</mapper>

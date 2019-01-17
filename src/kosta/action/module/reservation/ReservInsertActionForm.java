@@ -14,6 +14,7 @@ public class ReservInsertActionForm implements IAction {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/jsp/module/rent/reservation/reservInsertForm.jsp");

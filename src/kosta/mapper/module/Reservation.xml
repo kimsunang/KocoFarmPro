@@ -10,21 +10,6 @@
 		(reserv_seq.nextval, #{m_title, jdbcType=VARCHAR}, TO_DATE(#{start_dt}),
 		TO_DATE(#{end_dt}), #{rv_user}, #{rv_writer,jdbcType=VARCHAR}, sysdate)
 	</insert>
-	
-	<resultMap type="MeetingRoom" id="mroomResultMap">
-		<id property="m_id" column="m_id"/>
-		<association property="reservation" resultMap="reservResultMap" />
-	</resultMap>
-	
-	<resultMap type="Reservation" id="reservResultMap">
-		<id property="m_id" column="m_id"/>
-	</resultMap>
-	
-	<select id="getMname" resultMap="mroomResultMap" parameterType="int" resultType="Reservation">
-	 select m.m_id, m.m_name, r.m_id
-	 	from meetingroom m left join reservation r
-	 	on r.m_id = m.m_id
-	 	where m.m_id = #{m_id}
-	</select>
+
 	
 </mapper>

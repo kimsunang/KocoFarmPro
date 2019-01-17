@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.dao.MeetingRoomDao;
+import kosta.model.module.dao.ReservationDao;
 import kosta.model.module.vo.MeetingRoom;
+import kosta.model.module.vo.Reservation;
 
 public class DetailAction implements IAction {
 

@@ -40,7 +40,20 @@
 		</c:forEach>
 	</table>
 	
-	<a href="mroomInsertForm.do">회의실 등록</a>
+	
+	
+	<div class="btn_wrap">
+				<div class="flt_r">
+					<c:choose>
+						<c:when test="${loginVO.authority == 99}">
+						<a href="mroomInsertForm.do">회의실 등록</a>
+							<input type="button" class="write_btn" id="writeBtn" value="등록" />
+						</c:when>
+					</c:choose>
+				</div>
+			</div>
+		</div>
+	</div>
 	<br><br>
 	</div>
 	

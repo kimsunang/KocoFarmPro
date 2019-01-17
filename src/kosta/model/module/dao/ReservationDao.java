@@ -53,21 +53,8 @@ public class ReservationDao {
 		}
 		return re;
 	}//insertReserv
-	
-	public Reservation getMname(int m_id){
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		Reservation reserv = null;
-		
-		try {
-			reserv = sqlSession.getMapper(ReservationMapper.class).getMname(m_id);
-			System.out.println(reserv);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return reserv;
-	}//getMname
-	
+
+
+
 	
 }//MeetingRoomDao

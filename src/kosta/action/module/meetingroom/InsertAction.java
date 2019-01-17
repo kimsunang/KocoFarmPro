@@ -16,6 +16,7 @@ public class InsertAction implements IAction {
 		request.setCharacterEncoding("utf-8");
 		
 		MeetingRoom mroom = new MeetingRoom();
+		mroom.setM_id(Integer.parseInt(request.getParameter("m_id")));
 		mroom.setM_name(request.getParameter("m_name"));
 		mroom.setP_num(Integer.parseInt(request.getParameter("p_num")));
 		mroom.setReg_dt(request.getParameter("reg_dt"));

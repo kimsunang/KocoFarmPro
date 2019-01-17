@@ -25,7 +25,6 @@
 		<typeAlias type="kosta.model.module.vo.ApprovalForm" alias="ApprovalForm" />
 		<typeAlias type="kosta.model.module.vo.Employee" alias="Employee" />
 		<typeAlias type="kosta.model.module.vo.ApprovalExpence" alias="ApprovalExpence" />
-
 		
 		<!-- 전자 결재 E-->
 	</typeAliases>

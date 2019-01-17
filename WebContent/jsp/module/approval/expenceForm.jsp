@@ -11,29 +11,21 @@
 <script>
 	$(function() {
 		$("#datepicker").datepicker({
-			onSelect : function(dateText, inst) {
-	            $("input[name='vacationStartDt']").val(dateText);
-	         },
-	         dateFormat :'yy-m-dd'
-	         
-	      })
-	   });
+			dateFormat : 'yy-mm-dd'
+		});
+	});
 </script>
 <script>
 	$(function() {
 		$("#datepicker1").datepicker({
-			onSelect : function(dateText, inst) {
-	            $("input[name='vacationStartDt']").val(dateText);
-	         },
-	         dateFormat :'yy-m-dd'
-	         
-	      })
-	   });
+			dateFormat : 'yy-mm-dd'
+		});
+	});
 </script>
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="insertDraft.do" method="post">
+	<form action="" method="post">
 		<div class="expence_wrap">
 			<div class="title" align="center">
 				<h1>지 출 결 의 서</h1>
@@ -45,23 +37,24 @@
 					<tr>
 						<td colspan="3">기안서 번호</td>
 						<td><input type="text" style="text-align: center"></td>
-						<td colspan="3" >기안서 이름</td>
+						<td colspan="3">기안서 이름</td>
 						<td><input type="text" style="text-align: center"></td>
 					</tr>
 
 					<tr>
 						<td colspan="3">기안서 제목</td>
-						<td><input type="text" style="text-align: center" name="draftTitle"></td>
+						<td><input type="text" style="text-align: center"></td>
 						<td colspan="3">등록 날짜</td>
-						<td><input type="text" 
-							style="text-align: center" ></td>
+						<td><input type="text" value="sysdate"
+							style="text-align: center"></td>
 					</tr>
 
 					<tr>
 						<td colspan="3">기안서 양식</td>
-						<td style="text-align: center"><select name="expenceType" value="formId" style="text-align: center">
-								<option selected>-- 양식 --</option>
-								<option value="1">지출명세서</option>
+						<td style="text-align: center"><select name="schType"
+							value="schType">
+								<option value='' selected>-- 양식 --</option>
+								<option value="all">지출명세서</option>
 								<option value="2">히잇</option>
 								<option value="3">헤엣</option>
 								<option value="4">휴가신청서</option>
@@ -69,7 +62,7 @@
 
 						</select></td>
 						<td colspan="3">보존년한</td>
-						<td><input type="text" name="draftYear"></td>
+						<td><input type="text"></td>
 					</tr>
 
 					<tr>
@@ -106,7 +99,7 @@
 						<td><input type="text" style="text-align: center"></td>
 						<td colspan="3">결제날짜</td>
 						<td><input type="text" id="datepicker"
-							style="text-align: center" name="expenceDt"></td>
+							style="text-align: center"></td>
 					</tr>
 
 					<tr>
@@ -126,21 +119,31 @@
 
 					<tr height="300" valign="top">
 						<td colspan="3"><input type="text" size="20"
-							style="text-align: center" name="customerName" > </td>
-						<td><input type="text" size="20" style="text-align: right" name="expencePrice"></td>
-						<td colspan="3"><select name="commissionOption">
+							style="text-align: center"> <input type="text" size="20"
+							style="text-align: center"> <input type="text" size="20"
+							style="text-align: center"> <input type="text" size="20"
+							style="text-align: center"> <input type="text" size="20"
+							style="text-align: center"></td>
+						<td><input type="text" size="20" style="text-align: right">
+							<input type="text" size="20" style="text-align: right"> <input
+							type="text" size="20" style="text-align: right"> <input
+							type="text" size="20" style="text-align: right"> <input
+							type="text" size="20" style="text-align: right"></td>
+						<td colspan="3"><select>
 								<option value='' selected>-- Y or N --</option>
-								<option value="Y">Y
-								<option value="N">N
+								<option value="1111">Y
+								<option value="2222">N
 						</select></td>
-						<td>
-						<input type="text" style="text-align: right" name="commissionPrice"> 
-							</td>
+						<td><input type="text" style="text-align: right"> <input
+							type="text" style="text-align: right"> <input type="text"
+							style="text-align: right"> <input type="text"
+							style="text-align: right"> <input type="text"
+							style="text-align: right"></td>
 					</tr>
 
 					<tr style="text-align: center">
-						<td colspan="6">합계</td>
-						<td colspan="2"><input type="text" name="sumPrice"></td>
+						<td colspan="4">합계</td>
+						<td colspan="4"><input type="text"></td>
 
 					</tr>
 					<tr>
@@ -159,21 +162,10 @@
 					</tr>
 
 				</table>
-					
-			</div>
-			</div>
-		<div class= flt_r align="center">
-						<br><br>
-							<!-- <input type = "submit" value = "저장하기" > -->
-							<input type="submit" value="제출">
-							<br><br>
-						</div>
-		
-		</form>		
-	
-		
 
-	
+			</div>
+		</div>
+	</form>
 
 </body>
 </html>

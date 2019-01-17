@@ -10,10 +10,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kosta.mapper.module.ApprovalMapper;
 import kosta.model.module.vo.ApprovalDraft;
-import kosta.model.module.vo.ApprovalExpence;
 import kosta.model.module.vo.ApprovalForm;
 import kosta.model.module.vo.ApprovalFormSearch;
 import kosta.model.module.vo.ApprovalVacation;
+import kosta.model.module.vo.Employee;
 
 public class ApprovalDao {
 

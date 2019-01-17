@@ -14,14 +14,6 @@
 		insert into Vacation_Form values(${draftId},1,#{vacationStartDt},#{vacationEndDt},1,#{vacationDays},
 		#{vacationReason},#{replacementId})
 	</insert> 
-	
-	<!-- 지출 명령서 입력  -->
- 	<insert id = "insertExpence" parameterType = "ApprovalExpence">
-
-		insert into EXPENCE_FORM values(4,1,SYSDATE,#{expenceType},#{customerName},#{expencePrice},
-			#{commissionOption},#{commissionPrice},#{sumPrice})
-	</insert> 
-	 
 
 	<!-- 기안서 양식 list -->
 	 <select id = "listForm" resultType = "ApprovalForm" parameterType = "ApprovalFormSearch">

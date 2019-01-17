@@ -25,7 +25,7 @@ public class ListCalenderAction implements IAction{
 
 		ScheduleService service = ScheduleService.getInstance();
 		if(null != service) {
-			service.listCategoryAndCalenderInfo(request);
+			service.listProjectCalender(request);
 		}
 		
 		ActionForward forward = new ActionForward();

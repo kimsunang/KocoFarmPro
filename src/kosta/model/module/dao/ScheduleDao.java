@@ -78,12 +78,12 @@ public class ScheduleDao {
 		return list;
 	}
 	
-	public List<ScheduleCalenderList> listCategoryAndCalender(int projectId){
+	public List<ScheduleCalenderList> listProjectCalender(int projectId){
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		if(null == sqlSession)
 			return null;
 		
-		List<ScheduleCalenderList> list = sqlSession.getMapper(ScheduleMapper.class).listCategoryAndCalender(projectId);
+		List<ScheduleCalenderList> list = sqlSession.getMapper(ScheduleMapper.class).listProjectCalender(projectId);
 		sqlSession.close();
 		return list;
 	}

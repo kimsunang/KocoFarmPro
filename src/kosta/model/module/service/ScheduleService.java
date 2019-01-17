@@ -37,7 +37,7 @@ public class ScheduleService {
 		String completion_per = request.getParameter("completionPer");
 		String y = request.getParameter("y");
 		
-		System.out.println("y:"+y+"projectid:"+project_id+"categoryId:"+category_id+"write:"+completion_per);
+		System.out.println("y:"+y+"projectid:"+project_id+"categoryId:"+category_id+"completion_per:"+completion_per);
 		
 		int projectId = Integer.parseInt(project_id);
 		int categoryId = Integer.parseInt(category_id);
@@ -65,12 +65,12 @@ public class ScheduleService {
 		return re;
 	}
 	
-	public List<ScheduleCalenderList> listCategoryAndCalenderInfo(HttpServletRequest request) throws Exception {
+	public List<ScheduleCalenderList> listProjectCalender(HttpServletRequest request) throws Exception {
 		String strProjectId = request.getParameter("projectId");
 		int projectId = Integer.parseInt(strProjectId);
 		
 		ScheduleDao dao = ScheduleDao.getInstance();
-		List<ScheduleCalenderList> calenderList = dao.listCategoryAndCalender(projectId);
+		List<ScheduleCalenderList> calenderList = dao.listProjectCalender(projectId);
 		request.setAttribute("calenderList", calenderList);
 
 		return calenderList;

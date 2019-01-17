@@ -1,26 +1,28 @@
 package kosta.model.module.service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import kosta.model.module.dao.ApprovalDao;
 import kosta.model.module.vo.ApprovalDraft;
-import kosta.model.module.vo.ApprovalForm;
+import kosta.model.module.vo.ApprovalExpence;
 import kosta.model.module.vo.ApprovalVacation;
 
 public class ApprovalService {
 	private static ApprovalDao dao;
 	private static ApprovalService service = new ApprovalService();
-	int draftId;
+
 	public static ApprovalService getInstnace(){
 		dao = ApprovalDao.getInstance();
 		return service;
 	}
-	ApprovalDraft draft = new ApprovalDraft();
 	
 	public int insertDraftService(HttpServletRequest request) throws Exception{
 		request.setCharacterEncoding("utf-8");
-
+		
+		
+//		ApprovalDraft draft = new ApprovalDraft();
+		ApprovalDraft draft = new ApprovalDraft();
+		
 		draft.setDraftTitle(request.getParameter("draftTitle"));
 		draft.setDraftName(request.getParameter("draftName"));
 		draft.setDraftYear(Integer.parseInt(request.getParameter("draftYear")));
@@ -29,42 +31,39 @@ public class ApprovalService {
 	}
 	
 	public int insertVacationService(HttpServletRequest request) throws Exception{
-		request.setCharacterEncoding("utf-8");		
+		request.setCharacterEncoding("utf-8");
+		
 		ApprovalVacation vacation = new ApprovalVacation();
-		
-		draftId = dao.getDraftId();
-		
-		vacation.setDraftId(draftId);
+
+
 		vacation.setVacationEndDt(request.getParameter("vacationStartDt"));
 		vacation.setVacationStartDt(request.getParameter("vacationEndDt"));
 		vacation.setVacationDays(Integer.parseInt(request.getParameter("vacationDays")));
 		vacation.setVacationReason(request.getParameter("vacationReason"));
 		vacation.setVacationType(request.getParameter("vacationType"));
-
+		
+		
+		
 		return dao.insertVacation(vacation);
+		
 	}
 	
-	public ApprovalForm getDetailForm(HttpServletRequest request) throws Exception{
-		request.setCharacterEncoding("utf-8");		
+	public int insertExpenceService(HttpServletRequest request) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		
+		ApprovalExpence expence = new ApprovalExpence();
 
-		int formId = Integer.parseInt(request.getParameter("formId"));
-		
-		return dao.getDetailForm(formId);
-	}
-	
-	public ApprovalDraft getDraft(HttpServletRequest request) throws Exception{
-		request.setCharacterEncoding("UTF-8");
-		draftId = Integer.parseInt(request.getParameter("draftId"));
-		return dao.getDraft(draftId);
-		
-	}
-	
-	public ApprovalVacation getVacation(HttpServletRequest request) throws Exception{
-		request.setCharacterEncoding("UTF-8");
-		draftId = Integer.parseInt(request.getParameter("draftId"));
-		
-		return dao.getVacation(draftId);
-		
-	}
 
+		expence.setExpenceDt(request.getParameter("expenceDt"));
+		expence.setExpenceType(request.getParameter("expenceType"));
+		expence.setCustomerName(request.getParameter("customerName"));
+		expence.setExpencePrice(request.getParameter("expencePrice"));
+		expence.setCommissionOption(request.getParameter("commissionOption"));
+		expence.setCommissionPrice(request.getParameter("commissionPrice"));
+		expence.setSumPrice(request.getParameter("sumPrice"));
+		
+		return dao.insertExpence(expence);
+		
+	}
+	
 }

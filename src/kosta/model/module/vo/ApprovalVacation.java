@@ -13,9 +13,7 @@ public class ApprovalVacation implements Serializable {
 	private int replacementId;
 	
 	
-	public ApprovalVacation() {
-		super();
-	}
+	public ApprovalVacation() {}
 	public ApprovalVacation(int draftId, int formId, String vacationStartDt, String vacationEndDt, String vacationType,
 			int vacationDays, String vacationReason, int replacementId) {
 		super();

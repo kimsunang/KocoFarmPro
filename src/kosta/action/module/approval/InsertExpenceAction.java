@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
+import kosta.model.module.vo.ApprovalExpence;
 
 public class InsertExpenceAction implements IAction {
 

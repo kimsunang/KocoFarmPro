@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
+import kosta.model.module.service.ApprovalService;
 
 public class InsertDraftFormAction implements IAction {
 

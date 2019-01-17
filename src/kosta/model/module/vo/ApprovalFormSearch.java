@@ -6,6 +6,9 @@ public class ApprovalFormSearch implements Serializable {
 	private String schType;
 	private String schWord;
 
+	public ApprovalFormSearch(){}
+	
+	
 	public String getSchType() {
 		return schType;
 	}

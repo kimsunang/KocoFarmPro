@@ -14,10 +14,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-
-
 	$(function() {
-
 		$('#Startdatepicker').datepicker({
 			onSelect : function(dateText, inst) {
 				$("input[name='vacationStartDt']").val(dateText);
@@ -26,7 +23,6 @@
 			
 		})
 	});
-
 	$(function() {
 		$("#Enddatepicker").datepicker({
 			onSelect : function(dateText, inst) {
@@ -50,7 +46,6 @@
 td {
 	text-align: center;
 }
-
 h1 {
 	text-align: center;
 }

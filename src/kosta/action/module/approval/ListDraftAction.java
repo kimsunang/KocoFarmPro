@@ -22,7 +22,6 @@ public class ListDraftAction implements IAction {
 		request.setCharacterEncoding("utf-8");
 		
 		List<ApprovalDraft> list = dao.listDraft();
-		System.out.println(list);
 		request.setAttribute("list", list);
 		
 		ActionForward forward = new ActionForward();

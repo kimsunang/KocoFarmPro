@@ -11,7 +11,7 @@
 	
 	<!-- 휴가 명령서 입력  -->
  	<insert id = "insertVacation" parameterType = "ApprovalVacation">
-		insert into Vacation_Form values(80,1,#{vacationStartDt},#{vacationEndDt},1,#{vacationDays},
+		insert into Vacation_Form values(${draftId},1,#{vacationStartDt},#{vacationEndDt},1,#{vacationDays},
 		#{vacationReason},#{replacementId})
 	</insert> 
 
@@ -32,10 +32,37 @@
 	 
 	 <!-- 등록된 기안서 불러오기 -->
 	 <select id = "listDraft" resultType = "ApprovalDraft">
-	 <!-- 	select * from draft
-	 	 -->
-	 select * from draft
+		 select * from draft
 	 </select>
+	 
+	 
+	 <!-- 양식 폼 id 불러오기 -->
+	 <select id="getDetailForm" resultType = "ApprovalForm" parameterType = "int">	
+	 	select * from form where form_id =  #{formId}
+	 </select>
+	
+	<!-- 기안서 번호 불러오기 -->
+	<select id="getDraftId" resultType="java.lang.Integer">     
+		SELECT draft_id as draftId from draft
+		where ROWNUM = 1
+		order by draft_id DESC
+		
+	</select>
+	
+	 <!-- 기본 draft 불러오기 -->
+	 <select id="getDraft" parameterType="int" resultType = "ApprovalDraft">
+	 	SELECT * FROM DRAFT WHERE draft_id = #{draftId}
+	 </select>
+	 
+	 <!-- Vacation 정보 불러오기  -->
+	 <select id="getVacation" parameterType="int" resultType = "ApprovalVacation">
+	 	Select * From Vacation_form WHERE draft_id = #{draftId}
+	 </select>
+	 <!-- 회원 정보 불러오기  -->
+	 <select id = "" resultType = "Employee" parameterType = "int">
+	 	select * from employee where emp_id = #{empId}
+	 </select>
+	 
 	<!-- 결재 폼 입력 -->
 	<!-- <insert id = "insertExpence" parameterType = "ApprovalExpence">
 		insert into Expence_foam values(seq_expence_foar.nextval,#{foam_id},sysdate,#{expence_type},#{customer_name},#{expence_price},

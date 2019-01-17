@@ -81,31 +81,32 @@
 						
 						<!-- vacation table 시작 -->
 						<div class="vac_table">
-							<table width = 54% height = 70% border=1 cellpadding=0 cellspacing=0
+							<table width = 54% height = 80% border=1 cellpadding=0 cellspacing=0
 								align="center">
-			
 								<tr>
-									<td rowspan="2" width = 15%>기안서 정보</td>
+									<td rowspan="3" width = 15%>기안서 정보</td>
+									<td width = 15%>기안서 번호</td>
+									<td colspan="3">${draft.draftId}</td>
+									<td>기안서 양식</td>
+									<td colspan="3" >${draft.formId }</td>
+			
+			
+								</tr>
+								<tr>
+									
 									<td width = 15%>기안서 제목</td>
-									<td colspan="3"=><input type="text" name="draftTitle" size=65></td>
+									<td colspan="3">${draft.draftTitle }</td>
 									<td>등록 날짜</td>
-									<td colspan="3" >draft_date</td>
+									<td colspan="3" >${draft.draftDt }</td>
 			
 			
 								</tr>
 								<tr>
 									<!-- 기안서 정보 -->
 									<td>기안서 양식</td>
-									<td colspan="3"><select name="formId" value="formId">
-											<option value="1">지출명세서</option>
-											<option value="2">히잇</option>
-											<option value="3">헤엣</option>
-											<option value="4">휴가신청서</option>
-											<option value="5">유급휴가신청서</option>
-			
-									</select></td>
+									<td colspan="3">양식 이라능</td>
 									<td>보존년한</td>
-									<td colspan="3"><input type="text" name="draftYear"></td>
+									<td colspan="3">${draft.draftYear }</td>
 								</tr>
 			
 								<tr>
@@ -127,12 +128,7 @@
 									<td rowspan="4">신청내용</td>
 									<td rowspan="3">휴가신청</td>
 									<td width = 7%>휴가종류</td>
-									<td colspan="6">
-									<input type="radio" name = "vacationType" checked value="sick">병가
-									<input type="radio" name = "vacationType" value="beforenoon"> 오전 반차
-									<input type="radio" name = "vacationType" value="afternoon"> 오후 반차
-									<input type="radio"	name = "vacationType" value="allday"> 연차
-									</td>
+									<td colspan="6">휴가종류라능</td>
 								</tr>
 								
 								<tr>
@@ -140,37 +136,40 @@
 									<!-- 휴가신청   -->
 									<td>휴가 일정</td>
 									<td width = 5%>시작 날짜</td>
-									<td><input type="text" id="Startdatepicker" name = "vacationStartDt">
+									<td>${vacation.vacationStartDt}</td>
 			
 									<td width = 5%>끝 날짜</td>
-									<td><input type="text" id="Enddatepicker" name = "vacationEndDt">
+									<td>${vacation.vacationStartDt}</td>
 									<td width = 5%>총 일 수</td>
-									<td><input type="text" name="vacationDays"></td>
+									<td>총 일수</td>
 								</tr>
 			
 								<tr>
 									<!-- 신청내용   -->
 									<!-- 휴가신청   -->
 									<td>대체근무자</td>
-									<td>id</td>
-									<td><input type="text" name="replaceId">
+									<td>${vacation.replacementId }</td>
+									<td>대체근무자 id</td>
 									<td>이름</td>
-									<td><input type="text" name="replaceName">
+									<td>대체근무자 이름</td>
 									<td>직위</td>
-									<td><input type="text" name="replacedeg">
+									<td>직위라능</td>
 								</tr>
 								<tr>
 									<!-- 신청내용   -->
 									<td>신 청 사 유 <Br>(세부 내용)
 									</td>
 									<!-- 세부내용기재   -->
-									<td colspan="7"><textarea rows="6" cols="120"
-											name="vacationReason">
-										세부 내용 기재
-										</textarea></td>
+									<td colspan="7">${vacation.vacationReason}</td>
 			
 								</tr>
-			
+								<tr height = "400px" > 
+									<td colspan = 9>
+									<p class="last_msg">위와 같이 휴가를 신청하오니 허가하여 주시기 바랍니다 .</p><br><br><br>
+									<p class="sysdate">	년	월	일</p>
+									<p class="sign">	(인)</p>
+								</tr>
+
 			
 							</table>
 						</div>

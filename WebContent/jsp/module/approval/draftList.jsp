@@ -47,13 +47,15 @@
 					<tr>
 						<th>기안서 번호 </th>
 						<th>기안서 제목</th>
+						<th>기안서 양식 번호</th>
 						<th>등록 날짜</th>
 					</tr>
 					
 					<c:forEach var="ApprovalDraft" items="${list }">
 						<tr>
 							<td>${ApprovalDraft.draftId }</td>
-							<td>${ApprovalDraft.draftName}</td>
+							<td><a href = "DetailDraft.do?draftId=${ApprovalDraft.draftId }" >${ApprovalDraft.draftName}</a></td>
+							<td>${ApprovalDraft.formId}</td>
 							<td>${ApprovalDraft.draftDt }</td>
 						</tr>
 					</c:forEach>

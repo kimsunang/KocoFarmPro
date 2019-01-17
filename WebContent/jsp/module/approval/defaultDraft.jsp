@@ -1,5 +1,30 @@
-S<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+
+
+	$(function() {
+
+		$('#Startdatepicker').datepicker({
+			onSelect : function(dateText, inst) {
+				$("input[name='vacationStartDt']").val(dateText);
+			},
+			dateFormat :'yy-m-dd'
+			
+		})
+	});
+
+	$(function() {
+		$("#Enddatepicker").datepicker({
+			onSelect : function(dateText, inst) {
+				$("input[name='vacationEndDt']").val(dateText);
+			},
+			dateFormat :'yy-m-dd'
+		})
+	});
+</script> 
 <jsp:include page="/jsp/comm/top.jsp" flush="false" ></jsp:include>
 <link rel="stylesheet" type="text/css" href="/KocoFarmPro/css/module/approval.css" />
 
@@ -41,37 +66,18 @@ S<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="U
 			</div>
 		
 			<!-- list -->
+			<style>
+			
+				h1 {
+					text-align: center;
+				}
+			</style>
 			<div class="contents">
-				<!-- 목록 보기 -->
-				<table class="contents_tb" id="contTb">
-					<tr>
-						<th>양식 번호 </th>
-						<th>양식 이름 </th>
-						<th>구분  </th>
-					</tr>
-					
-					<c:forEach var="ApprovalForm" items="${list }">
-						<tr>
-							<td>${ApprovalForm.formId }</td>
-							<td><a href = "detailDraft.do?formId=${ApprovalForm.formId }">${ApprovalForm.modeName }</a></td>
-							<td>${ApprovalForm.sortName }</td>
-						</tr>
-					</c:forEach>
-				</table>
+					<h1> 기안서 양식 없음</h1>
+					</div>
+				</form>
 			</div>
-						
-			<!-- btn -->
-			<div class="btn_wrap">
-				<div class="flt_r">
-					<input type="button" class="list_btn" value="목록" />
-					<input type="button" class="view_btn" value="상세보기" />
-					<input type="button" class="write_btn" value="등록" />
-					<input type="button" class="edit_btn" value="수정" />
-					<input type="button" class="del_btn" value="삭제" />
-					
-					<a href = "listDraft.do">기안서 목록 보기</a>
-				</div>
-			</div>
+		
 		</div>
 	</div>
 <script type="text/javascript" src="/KocoFarmPro/js/module/approval.js"></script>

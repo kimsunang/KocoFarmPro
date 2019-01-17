@@ -44,6 +44,22 @@ public class ApprovalService {
 		return dao.insertVacation(vacation);
 	}
 	
+	public int insertExpenceService(HttpServletRequest request) throws Exception{
+		request.setCharacterEncoding("utf-8");		
+		ApprovalVacation vacation = new ApprovalVacation();
+		
+		draftId = dao.getDraftId();
+		
+		vacation.setDraftId(draftId);
+		vacation.setVacationEndDt(request.getParameter("vacationStartDt"));
+		vacation.setVacationStartDt(request.getParameter("vacationEndDt"));
+		vacation.setVacationDays(Integer.parseInt(request.getParameter("vacationDays")));
+		vacation.setVacationReason(request.getParameter("vacationReason"));
+		vacation.setVacationType(request.getParameter("vacationType"));
+		
+		return dao.insertVacation(vacation);
+	}
+	
 	public ApprovalForm getDetailForm(HttpServletRequest request) throws Exception{
 		request.setCharacterEncoding("utf-8");		
 

@@ -15,9 +15,8 @@ public class ApprovalDraft implements Serializable {
 	
 	
 	
-	public ApprovalDraft() {
-		super();
-	}
+	public ApprovalDraft() {}
+	
 	public ApprovalDraft(int draftId, String draftName, String draftDt, String draftTitle, int empId, int draftYear,
 			int formId, String approveState) {
 		super();

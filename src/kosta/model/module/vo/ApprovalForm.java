@@ -17,7 +17,6 @@ public class ApprovalForm  implements Serializable {
 		this.modeName = modeName;
 	}
 	public ApprovalForm() {
-		super();
 	}
 	public int getFormId() {
 		return formId;

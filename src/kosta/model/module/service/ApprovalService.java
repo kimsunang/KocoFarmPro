@@ -1,7 +1,6 @@
 package kosta.model.module.service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import kosta.model.module.dao.ApprovalDao;
 import kosta.model.module.vo.ApprovalDraft;
@@ -21,7 +20,9 @@ public class ApprovalService {
 		request.setCharacterEncoding("utf-8");
 		
 		
+//		ApprovalDraft draft = new ApprovalDraft();
 		ApprovalDraft draft = new ApprovalDraft();
+		
 		draft.setDraftTitle(request.getParameter("draftTitle"));
 		draft.setDraftName(request.getParameter("draftName"));
 		draft.setDraftYear(Integer.parseInt(request.getParameter("draftYear")));

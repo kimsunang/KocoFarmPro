@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.FileMapper">
+
+
+	<!-- 등록 -->
+	<insert id="setFile" parameterType="Files">
+		INSERT INTO FILES
+		(FILE_ID, FILE_NAME, FILE_PATH, FILE_SIZE, FILE_DATE)
+		VALUES
+		('FILE_00'||FILE_ID.NEXTVAL, #{file_name}, #{file_path}, #{file_size},
+		SYSDATE)
+	</insert>
+
+	<!-- 수정 -->
+
+
+	<!-- 삭제 -->
+	<delete id="delfile" parameterType="java.lang.String">
+		DELETE FROM FILES
+		WHERE
+		FILE_ID = #{file_Id}
+	</delete>
+
+	<!-- 파일목록 -->
+	<select id="getFileList" parameterType="Files" resultType="Files">
+		SELECT
+		FILE_ID AS file_id,
+		FILE_SIZE AS file_size,
+		FILE_NAME AS file_name,
+		FILE_PATH AS file_path,
+		TO CHAR (FILE_DATE , 'YYYY-mm-DD') AS file_date,
+		FILE_EXTENTION AS file_extention
+		FROM FILES
+		<where>
+			<if test="null != file_name">
+				AND file_name like #{file_name}
+			</if>
+			<if test="null != file_extention">
+				AND file_extention like #{file_extention}
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -19,7 +19,7 @@
 	order by cat.category_id
 </select>
 <insert id="insertCelender" parameterType="ScheduleCalender">
-	insert into Calender values(calender_seq.nextval, #{title}, #{startDt}, #{endDt}, #{backgroundColor}, #{completionPer}, #{yPos}, #{categoryId})
+	insert into Calender values(calender_id_seq.nextval, #{title}, #{startDt}, #{endDt}, #{backgroundColor}, #{completionPer}, #{yPos}, #{categoryId})
 </insert>
 
 <select id="listCategoryAndCalender" resultType="ScheduleCalenderList">

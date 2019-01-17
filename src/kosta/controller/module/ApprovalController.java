@@ -11,13 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.action.comm.IAction;
 import kosta.action.comm.ActionForward;
+import kosta.action.module.approval.DetailDraftAction;
+import kosta.action.module.approval.DetailDraftFormAction;
 import kosta.action.module.approval.InsertDraftAction;
 import kosta.action.module.approval.InsertDraftFormAction;
 import kosta.action.module.approval.ListDraftAction;
 import kosta.action.module.approval.ListDraftFormAction;
 
 
-@WebServlet({"/insertDraft.do","/listDraft.do","/insertDraftForm.do","/listForm.do"})
+@WebServlet({"/insertDraft.do","/listDraft.do","/insertDraftForm.do","/listForm.do","/detailDraft.do","/DetailDraft.do"})
 public class ApprovalController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +32,6 @@ public class ApprovalController extends HttpServlet {
     	String requestURI = request.getRequestURI();
     	String contextPath = request.getContextPath();
     	String command = requestURI.substring(contextPath.length()+1);
-    	System.out.println(command);
     	
     	IAction action = null;
     	ActionForward forward = null;
@@ -43,7 +44,7 @@ public class ApprovalController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-    		
+    	/* 기안서 양식 리스트 */
     	}else if(command.equals("listForm.do")){
     		action = new ListDraftFormAction();
     		try {
@@ -65,6 +66,21 @@ public class ApprovalController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+    	}else if(command.equals("detailDraft.do")){
+    		action = new DetailDraftFormAction();
+    		try {
+				forward = action.execute(request, response); 
+			} catch (Exception e) {
+				e.printStackTrace();
+    		}
+    		
+    	}else if(command.equals("DetailDraft.do")){
+    		action = new DetailDraftAction();
+    		try {
+				forward = action.execute(request, response); 
+			} catch (Exception e) {
+				e.printStackTrace();
+    		}
     	}
     
     	

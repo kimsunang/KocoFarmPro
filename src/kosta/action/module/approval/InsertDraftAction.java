@@ -20,6 +20,7 @@ public class InsertDraftAction implements IAction {
 		service.insertDraftService(request);
 		service.insertVacationService(request);
 		
+	
 		forward.setRedirect(false);
 		forward.setPath("/listDraft.do");
 		

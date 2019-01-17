@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" type="text/css" href="/KocofarmPro/css/common.css" />
+<link rel="stylesheet" type="text/css" href="/KocofarmPro/css/approval.css" />
+<link rel="stylesheet" href="/code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-
-
 	$(function() {
-
 		$('#Startdatepicker').datepicker({
 			onSelect : function(dateText, inst) {
 				$("input[name='vacationStartDt']").val(dateText);
@@ -15,7 +17,6 @@
 			
 		})
 	});
-
 	$(function() {
 		$("#Enddatepicker").datepicker({
 			onSelect : function(dateText, inst) {
@@ -24,7 +25,8 @@
 			dateFormat :'yy-m-dd'
 		})
 	});
-</script> 
+</script>
+
 <jsp:include page="/jsp/comm/top.jsp" flush="false" ></jsp:include>
 <link rel="stylesheet" type="text/css" href="/KocoFarmPro/css/module/approval.css" />
 
@@ -44,26 +46,19 @@
 	
 		<!-- Contents Area -->
 		<div class="contents_wrap">
-			<!-- sch_top -->
-			<div class="sch_wrap">
-				<p class="tit">검색</p>
-				<div class="sch_slide_btn">
-					<img id="slideBtnImg" class="upBtn" src="/KocoFarmPro/img/comm/list_up_btn.png" alt="메뉴 접기" />
+			<!-- basic draft input  -->
+			<div class="draft_wrap">
+				<p class="basic_info">기본 정보</p>
+				<div class ="inf_wrap_box">
+					<p class="name"> <b>이름 </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;김선행
+					<p class="position"> <b>직위 </b>&nbsp;&nbsp;&nbsp;사원
+					<p class="dep"> <b> 부서 </b> &nbsp;&nbsp;&nbsp;&nbsp;개발1
+					<p class="form"> <b> 양식 </b>&nbsp;&nbsp;&nbsp;&nbsp; 뭐겡		 
 				</div>
-				<div class="sch_toggle_wrap">
-					<div class="sch_box_wrap">
-						<div class="right">
-							<select name="schType" id="schType">
-								<option value="">전체</option>
-								<option value="title">제목</option>
-								<option value="contents">내용</option>
-							</select>
-							<input type="text" name="schWord" id="schWord" placeholder="검색어를 입력 해 주세요" />
-							<input type="button" class="schBtn" id="schBtn" value="검색" />
-						</div>
-					</div>
-				</div>
+					<p></p>
+					<p></p>
 			</div>
+		</div>
 		
 			<!-- list -->
 			<style>
@@ -76,6 +71,7 @@
 				}
 			</style>
 			<div class="contents">
+				
 				<!-- 기안서 보기 -->
 				<form action="insertDraft.do" method="post">
 					<div class="vacation_wrap">
@@ -85,7 +81,7 @@
 						
 						<!-- vacation table 시작 -->
 						<div class="vac_table">
-							<table width = 100% height = 70% border=1 cellpadding=0 cellspacing=0
+							<table width = 54% height = 70% border=1 cellpadding=0 cellspacing=0
 								align="center">
 			
 								<tr>
@@ -132,10 +128,10 @@
 									<td rowspan="3">휴가신청</td>
 									<td width = 7%>휴가종류</td>
 									<td colspan="6">
-									<input type="radio" name = "vacation" checked value="sick">병가
-									<input type="radio" name = "vacation" value="beforenoon"> 오전 반차
-									<input type="radio" name = "vacation" value="afternoon"> 오후 반차
-									<input type="radio"	name = "vacation" value="allday"> 연차
+									<input type="radio" name = "vacationType" checked value="sick">병가
+									<input type="radio" name = "vacationType" value="beforenoon"> 오전 반차
+									<input type="radio" name = "vacationType" value="afternoon"> 오후 반차
+									<input type="radio"	name = "vacationType" value="allday"> 연차
 									</td>
 								</tr>
 								
@@ -144,10 +140,10 @@
 									<!-- 휴가신청   -->
 									<td>휴가 일정</td>
 									<td width = 5%>시작 날짜</td>
-									<td><input type="text" id="Startdatepicker" name = "vacationStartDt" data-date-format='yy-mm-dd' >
+									<td><input type="text" id="Startdatepicker" name = "vacationStartDt">
 			
 									<td width = 5%>끝 날짜</td>
-									<td><input type="text" id="Enddatepicker" name = "vacationEndDt" data-date-format='yy-mm-dd' 	>
+									<td><input type="text" id="Enddatepicker" name = "vacationEndDt">
 									<td width = 5%>총 일 수</td>
 									<td><input type="text" name="vacationDays"></td>
 								</tr>
@@ -192,5 +188,4 @@
 		
 		</div>
 	</div>
-<script type="text/javascript" src="/KocoFarmPro/js/module/approval.js"></script>
 <jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

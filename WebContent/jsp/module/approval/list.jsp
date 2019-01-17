@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+S<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <jsp:include page="/jsp/comm/top.jsp" flush="false" ></jsp:include>
 <link rel="stylesheet" type="text/css" href="/KocoFarmPro/css/module/approval.css" />
@@ -53,7 +53,7 @@
 					<c:forEach var="ApprovalForm" items="${list }">
 						<tr>
 							<td>${ApprovalForm.formId }</td>
-							<td>${ApprovalForm.modeName }</td>
+							<td><a href = "detailDraft.do?formId=${ApprovalForm.formId }">${ApprovalForm.modeName }</a></td>
 							<td>${ApprovalForm.sortName }</td>
 						</tr>
 					</c:forEach>

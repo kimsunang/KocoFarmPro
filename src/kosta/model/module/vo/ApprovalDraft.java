@@ -13,8 +13,6 @@ public class ApprovalDraft implements Serializable {
 	private int formId;
 	private String approveState;
 	
-	
-	
 	public ApprovalDraft() {
 		super();
 	}

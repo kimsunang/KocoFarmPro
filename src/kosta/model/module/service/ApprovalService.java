@@ -32,7 +32,7 @@ public class ApprovalService {
 		request.setCharacterEncoding("utf-8");		
 		ApprovalVacation vacation = new ApprovalVacation();
 		
-		draftId = dao.getDraftId();
+		draftId = dao.get
 		
 		vacation.setDraftId(draftId);
 		vacation.setVacationEndDt(request.getParameter("vacationStartDt"));

@@ -148,27 +148,18 @@ span.onclick = function() {
 $(function(event){
   if (event.target == modal) {
     modal.style.display = "none";
-  }
-  
-  
-  
+  }  
 });
+
 // 일정 추가 버튼 '+' 눌렀을 때
 function calenderAddButtonClick(projectId, categoryId){
 
 	// 모달 창 띄우기
     var modal = document.getElementById("myModal");
-	modal.style.display = "block";
-		   
+	modal.style.display = "block";   
 	add_project_id = projectId;				
  	add_category_id = categoryId;
 }
-
-function jsFriendlyJSONStringify (s) {
-	return JSON.stringify(s).
-	    replace(/\\r/g, '\r').
-	    replace(/\\n/g, '\n')
-	}
 
 //일정 추가 버튼 눌렀을 때
 $('#calender_add').click(function() {
@@ -266,3 +257,23 @@ $('#calender_add').click(function() {
 	  });
 	  
 	});
+
+//일정 옵션 창
+/*var calender_modify_modal = $("#calenderModifyModal");
+var calender_modify_close = document.getElementsByClassName("form-modify-close")[0];
+
+calender_modify_close.onclick = function() {
+	calender_modify_modal.style.display = "none";
+}
+
+function calenderModifyButtonClick(projectId, categoryId){
+
+	// 모달 창 띄우기
+    var modifyModal = document.getElementById("calenderModifyModal");
+    console.log(modifyModal);
+    //modifyModal.style.display = "block";
+		   
+	add_project_id = projectId;				
+ 	add_category_id = categoryId;
+}
+*/

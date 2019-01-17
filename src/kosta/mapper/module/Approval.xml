@@ -17,8 +17,9 @@
 	
 	<!-- 지출 명령서 입력  -->
  	<insert id = "insertExpence" parameterType = "ApprovalExpence">
-		insert into Expence_Foam values(1,1,SYSDATE,#{expenceType},#{customerName},#{expencePrice},
-			#{commisstionOption},#{commissionPrice},#{sumPrise})
+
+		insert into EXPENCE_FORM values(4,1,SYSDATE,#{expenceType},#{customerName},#{expencePrice},
+			#{commissionOption},#{commissionPrice},#{sumPrice})
 	</insert> 
 	 
 

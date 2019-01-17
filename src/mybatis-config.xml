@@ -14,11 +14,19 @@
 		<typeAlias type="kosta.model.module.vo.NoticeSearch" alias="NoticeSearch" />
 		<!-- 공지사항 E -->
 		
+<<<<<<< HEAD
+		<!-- 회의실 -->
+		<typeAlias alias="MeetingRoom" type="kosta.model.module.vo.MeetingRoom"/>
+		<typeAlias alias="MeetingRoomSearch" type="kosta.model.module.vo.MeetingRoomSearch"/>
+		<typeAlias alias="Reservation" type="kosta.model.module.vo.Reservation"/>
+		<typeAlias alias="ReservationSearch" type="kosta.model.module.vo.ReservationSearch"/>
+=======
 		<!-- 차량등록 -->
 		<typeAlias type="kosta.model.module.vo.RentCarDetail" alias="RentCarDetail"/>
 		<typeAlias type="kosta.model.module.vo.RentCarDetailSearch" alias="RentCarDetailSearch"/>
 
 
+>>>>>>> branch 'rentCar' of https://github.com/kimsunang/KocoFarmPro.git
 	</typeAliases>
 	
 	<environments default="development">
@@ -40,9 +48,15 @@
 		<!-- 공지사항 -->
 		<mapper resource="kosta/mapper/module/Notice.xml" />
 		
+<<<<<<< HEAD
+		<!-- 회의실 -->
+		<mapper resource="kosta/mapper/module/MeetingRoom.xml"/>
+		<mapper resource="kosta/mapper/module/Reservation.xml"/>
+=======
 		<!-- 차량등록 -->
 		<mapper resource="kosta/mapper/module/RentCarDetail.xml"/>
 		
+>>>>>>> branch 'rentCar' of https://github.com/kimsunang/KocoFarmPro.git
 	</mappers>
 	 
 </configuration>

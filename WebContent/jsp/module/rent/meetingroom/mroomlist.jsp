@@ -1,45 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:include page="/jsp/comm/top.jsp" flush="false" ></jsp:include>
 <link rel="stylesheet" type="text/css" href="/Kocofarm/css/module/rent.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> 
 
 	<div class="cont_wrap">
 		<!-- SubTitle Area -->
 		<div class="sub_title">
 			<div class="sub_title_top">
 				<div class="sub_title_inner">
-					<h2>Rent <span>대여 관련 내용을 확인할 수 있습니다.</span></h2>
-					
-					
+					<h2>MeetingRoom <span>회의실 목록</span></h2>
 					<ul class="sub_nav">
 						<li>홈 > </li>
-						<li class="on">대여 관리</li>
+						<li class="on">회의실 목록</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		
-		
-		<!-- 대여 목록 -->
-		<div class="contents_wrap">
-<<<<<<< HEAD
-			<ul>
-				<li><a href="mroomlist.do">회의실 목록</a></li>
-			</ul>
+	<!--회의실 예약 목록 -->
+	<div class="contents_wrap">
+	<table class="table table-hover" border="1">
+		<thead>
+			<tr>
+				<td scope="col">회의실 번호</td>
+				<td>회의실 이름</td>
+				<td>총 인원</td>
+			</tr>
+		</thead>
+		<c:forEach var="mroom" items="${list}">
+			<tr>
+				<td>${mroom.m_id}</td>
+				<td><a href="mroomdetail.do?m_id=${mroom.m_id}">${mroom.m_name}</a></td>
+				<td>${mroom.p_num}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	
+	
+	<div class="btn_wrap">
+				<div class="flt_r">
+					<c:choose>
+						<c:when test="${loginVO.authority == 99}">
+						<a href="mroomInsertForm.do">회의실 등록</a>
+							<input type="button" class="write_btn" id="writeBtn" value="등록" />
+						</c:when>
+					</c:choose>
+				</div>
+			</div>
 		</div>
-		
+	</div>
+	<br><br>
+	</div>
+	
 		<!-- Contents Area -->
-=======
-					<!-- 차량관련 목록 삽입 -->
-					<ul>
-					<li><a href="rentCarDetailList.do">차량목록(관리자)</a>
-					<li><a href="">차량정비일지</a>
-					<li><a href="">차량예약</a>
-					<li><a href="">차량운행일지</a>
-					</ul>
-					<br>
->>>>>>> branch 'rentCar' of https://github.com/kimsunang/KocoFarmPro.git
-		
+		<div class="contents_wrap">
 			<!-- sch_top -->
 			<div class="sch_wrap">
 				<p class="tit">검색</p>
@@ -87,6 +106,6 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
 <script type="text/javascript" src="/Kocofarm/js/module/rent.js"></script>
 <jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

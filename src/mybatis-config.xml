@@ -27,6 +27,15 @@
 		<typeAlias type="kosta.model.module.vo.ApprovalExpence" alias="ApprovalExpence" />
 		
 		<!-- 전자 결재 E-->
+		
+		<!-- 스케쥴 -->
+		<typeAlias type="kosta.model.module.vo.ScheduleProject" alias="ScheduleProject" />
+		<typeAlias type="kosta.model.module.vo.ScheduleCategory" alias="ScheduleCategory" />	
+		<typeAlias type="kosta.model.module.vo.ScheduleCalender" alias="ScheduleCalender" />
+		<typeAlias type="kosta.model.module.vo.ScheduleEmployee" alias="ScheduleEmployee" />
+		<typeAlias type="kosta.model.module.vo.ScheduleCalenderList" alias="ScheduleCalenderList" />
+	
+	
 	</typeAliases>
 	
 	<environments default="development">
@@ -49,6 +58,8 @@
 		<mapper resource="kosta/mapper/module/Notice.xml" />
 		<!-- 전자 결재 -->
 		<mapper resource="kosta/mapper/module/Approval.xml"/>
+		<!-- 일정 -->
+		<mapper resource="kosta/mapper/module/Schedule.xml" />
 	</mappers>
 	
 </configuration>

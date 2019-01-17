@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.ScheduleMapper">
+<select id="listEmployee" resultType="ScheduleEmployee">
+	select * from Emp
+</select>
+<select id="listProject" resultType="ScheduleProject">
+	select * from Project
+</select>
+<select id="listCategory" resultType="ScheduleCategory" parameterType="int">
+	select * from Category where projectId = #{projectId}
+</select>
+<select id="listCalender" resultType="ScheduleCalender" parameterType="int">
+	select cat.category_id, cat.category_name, cal.calender_id, cal.title, cal.start_dt, cal.end_dt,
+	 cal.background_color, cal.completion_per, cal.yPos from Calender cal
+	RIGHT join (select * from Category where project_id=#{projectId}) cat
+	ON cal.category_id = cat.category_id
+	order by cat.category_id
+</select>
+<insert id="insertCelender" parameterType="ScheduleCalender">
+	insert into Calender values(calender_seq.nextval, #{title}, #{startDt}, #{endDt}, #{backgroundColor}, #{completionPer}, #{yPos}, #{categoryId})
+</insert>
+
+<select id="listCategoryAndCalender" resultType="ScheduleCalenderList">
+	select cat.x_pos, cat.category_id, cat.category_name, cat.project_id, cal.calender_id, cal.title, cal.start_dt, cal.end_dt,
+	cal.background_color, cal.completion_per, cal.y_pos
+	from calender cal
+	right outer join category cat
+	on cal.category_id = cat.category_id
+</select>
+
+</mapper>

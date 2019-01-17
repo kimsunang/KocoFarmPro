@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/jsp/comm/top.jsp" flush="false" ></jsp:include>
 <link rel="stylesheet" type="text/css" href="/KocoFarmPro/css/module/schedule.css" />
 
@@ -52,6 +52,38 @@
 			<div class="contents">
 				<!-- 목록 보기 -->
 				<table class="contents_tb" id="contTb">
+						<tr>
+							<td>project_id</td>
+							<td>title</td>
+							<td>project_leader</td>
+							<td>emp_id</td>
+							<td>project_start_dt</td>
+							<td>project_end_dt</td>
+							<td>project_reg_dt</td>
+							<td>project_completion</td>
+							<td>public_project</td>							
+						</tr>
+						
+					<c:forEach var="project" items="${projectList}">
+						<!-- 링크를 post방식으로 전달하기 위해 사용 -->
+				
+						<tr>
+							<td>${project.projectId}</td>
+							<td>
+								<form id="responeProjectId" action="sendProjectId.do" method="POST">
+							 	<button type="submit" form="responeProjectId" value="Submit"> ${project.title}</button>
+								<input type="hidden" name="projectId" value="${project.projectId}" />
+							</form>
+							</td>
+							<td>${project.projectLeader}</td>
+							<td>${project.empId}</td>
+							<td>${project.projectStartDt}</td>
+							<td>${project.projectEndDt}</td>
+							<td>${project.projectRegDt}</td>
+							<td>${project.projectCompletion}</td>
+							<td>${project.publicProject}</td>
+						</tr>
+					</c:forEach>
 				
 				</table>
 			</div>

@@ -66,8 +66,9 @@ public class ScheduleService {
 		String color = request.getParameter("color");
 		String completion_per = request.getParameter("completionPer");
 		String y = request.getParameter("y");
+		String calender_id = request.getParameter("calenderId");
 		
-		System.out.println("y:"+y+"projectid:"+project_id+"categoryId:"+category_id+"completion_per:"+completion_per);
+		System.out.println("y:"+y+"projectid:"+project_id+"categoryId:"+category_id+"completion_per:"+completion_per+"write:"+write);
 		
 		int categoryId = Integer.parseInt(category_id);
 		int completionPer = Integer.parseInt(completion_per);
@@ -77,9 +78,15 @@ public class ScheduleService {
 		scheduleCalender.setTitle(write);
 		scheduleCalender.setBackgroundColor(color);
 		scheduleCalender.setCompletionPer(completionPer);
-		scheduleCalender.setStartDt("");
-		scheduleCalender.setEndDt("");
+		 
+		//scheduleCalender.setStartDt("");
+		//scheduleCalender.setEndDt("");
 		scheduleCalender.setyPos(yPos);
+		
+		if(null != calender_id){
+			int calenderId = Integer.parseInt(calender_id);
+			scheduleCalender.setCalenderId(calenderId);
+		}
 		
 		return scheduleCalender;
 	}

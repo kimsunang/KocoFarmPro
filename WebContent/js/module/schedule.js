@@ -126,10 +126,11 @@ $('.exclude').dropme({
   })();
 
 // 일정 추가 버튼 '+', 수정, 삭제 눌렀을 때
-function calenderButtonClick(projectId, categoryId){
+function calenderButtonClick(projectId, categoryId, calenderId){
 
 	add_project_id = projectId;				
  	add_category_id = categoryId;
+ 	add_calender_id = calenderId;
 }
 
 function addDynamicHtml(data){	
@@ -145,9 +146,9 @@ function addDynamicHtml(data){
       		html += '<ul class="li_common_style li1">';
       		html += '<li class="calender_info">';
       		html += data[i].categoryName+'<button type="button" class="btn  btn-primary calenderWriteBtn" data-toggle="modal" data-target="#calenderAddModal">+</button>';
-      		console.log(data[i].projectId);
-      		console.log(data[i].categoryId);
-      		console.log(data[i].calenderId);
+      		//console.log(data[i].projectId);
+      		//console.log(data[i].categoryId);
+      		//console.log(data[i].calenderId);
     		html += '<input type="hidden" class="this_project_id" value='+data[i].projectId+' />';
       		html += '<input type="hidden" class="this_category_id" value='+data[i].categoryId+' />';
       		html += '</li>';
@@ -157,7 +158,7 @@ function addDynamicHtml(data){
       	
       	// 캘린더 id가 0이 아니라면
       	if(0 != data[i].calenderId){
-            html += '<li class="calender_text">'+data[i].title+"<br>";
+            html += '<li class="calender_detail">'+data[i].title+"<br>";
             html += '<input type="hidden" class="this_calender_id" value='+data[i].calenderId+' />';
             html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';
             html += '시작일 :'+ data[i].startDt+"<br>";
@@ -180,28 +181,34 @@ function addDynamicHtml(data){
 
 	    // 일정 추가 버튼 클릭
 	   $(document).on("click", ".calenderWriteBtn", function(){	
-			var par = $(this).parent();	// ul태그 선택
-			var project_id = $(par).children().eq(1).val();
-			var category_id = $(par).children().eq(2).val();
-
+		   // eq로 찾는거 자꾸 위치가 바뀌므로 좋지 않다
+			var par = $(this).parent();	// calender_info
+	
+			var project_id = par.children(".this_project_id").val();
+			var category_id = par.children(".this_category_id").val();
 			console.log('project_id:' + project_id);
 			console.log('category_id:' + category_id);
-			
-		   calenderButtonClick(project_id, category_id, 0);
+
+			 calenderButtonClick(project_id, category_id, 0);
 		});
 	   
 	    // 세팅 버튼에 이벤트 추가
 	   $(document).on("click", ".calenderModifyBtn", function(){
-		   console.log('캘린더 세팅');		   
-		   var par = $(this).parent().parent();
-		   var first_children = $(par).children().eq(0);
-		    
+		   console.log('수정 버튼 클릭');		   
+		   var par = $(this).parent(); //calender_detail
+		   var parpar = par.parent().children('.calender_info'); 
+		   
+		   var project_id = parpar.children(".this_project_id").val();
+		   var category_id = parpar.children(".this_category_id").val();
+		   var calender_id = par.children('.this_calender_id').val();
+		   
+		   /*var first_children = $(par).children().eq(0);
 			var project_id = first_children.children().eq(1).val();
 			var category_id = first_children.children().eq(2).val();
 			
 			var two_children = $(par).children().eq(1);
 			console.log(two_children);
-			var calender_id = two_children.children().eq(1).val();
+			var calender_id = two_children.children().eq(1).val();*/
 			
 			console.log('project_id:'+project_id);
 			console.log('category_id:'+category_id);
@@ -228,26 +235,19 @@ $('#calender_add').click(function() {
 	 
 	 $.ajax({
 	    type:"POST",
-	    data : { projectId:add_project_id, categoryId:add_category_id,write:write,color:color, completionPer:completion_per,tag:tag,y:y  },
+	    data : { projectId:add_project_id, categoryId:add_category_id, write:write,color:color, completionPer:completion_per,tag:tag,y:y  },
 	    dataType:"text",
 	    url:"insertCalender.do",
-	    success: function(project_id) {
-	     console.log("ajax 성공 다시 전달");
-	 	
+	    success: function(project_id) { 	
 	 	
 	 	$.ajax({
 			url:'listCalender.do',
 			data: {"projectId":add_project_id},
 			dataType:'json',
-			success:function(data){
-			console.log("성공");
-			
-
+			success:function(data){	
 			 $(".con").empty();
 			 addDynamicHtml(data);
-			
 			}// success function
-
 		});// ajax
 	    },
 	    error : function(error) {
@@ -261,34 +261,32 @@ $('#calender_add').click(function() {
 $('#calender_edit').click(function(){
 	console.log('일정 수정');
 	
-	 var par =  $(this).parent();
-	 console.log("par 정보");
+	 var par =  $(this).parent();	// modal-body
 	 console.log(par);
 	 var write = par.children("input[name=write]").val();	 
 	 var color = par.children("input[name=color]").val();
 	 var completion_per = par.children("input[name=completion_per]").val();
 	 var tag = par.children("input[name=tag]").val();
-	 var category = par.children("input[value="+add_category_id+"]").parent();		// 선택한 카테고리 클릭
-	 var y = category.parent().children().last().index()+1;				// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함 
+	 //var category = par.children("input[value="+add_category_id+"]").parent();	// 선택한 카테고리 클릭
+
+	 var y = 0;					// 위치 바꾸는게 아니므로 0 넣어준다
 	 
 	 $('#calenderModify').modal('toggle');
-	
+	 console.log(write+",color:"+color+",completion_per:"+completion_per+",y:"+y);
 	 $.ajax({
 		    type:"POST",
-		    data : { projectId:add_project_id, categoryId:add_category_id,write:write,color:color, completionPer:completion_per,tag:tag,y:y  },
+		    data : { projectId:add_project_id, categoryId:add_category_id,calenderId:add_calender_id ,write:write,color:color, completionPer:completion_per,tag:tag,y:y  },
 		    dataType:"text",
 		    url:"editCalender.do",
 		    success: function(project_id) {
-		     console.log("ajax 수정 성공");
+		     console.log("ajax 수정 성공!!!!!!!!");
 		 	
 		 	
 		 	$.ajax({
 				url:'listCalender.do',
 				data: {"projectId":add_project_id},
 				dataType:'json',
-				success:function(data){
-				console.log("성공");
-				
+				success:function(data){			
 
 				 $(".con").empty();
 				 addDynamicHtml(data);
@@ -301,9 +299,6 @@ $('#calender_edit').click(function(){
 		    	console.log("state:"+error.state()+"ajax 실패:"+error.responseText+"html:"+error.result_html);
 		    },	// error
 		  });// ajax
-		  
-	 
-	 //console.log(write+","+color+","+completion_per+","+y);
 });
 
 $('#calender_del').click(function(){

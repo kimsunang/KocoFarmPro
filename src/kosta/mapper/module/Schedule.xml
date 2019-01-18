@@ -32,7 +32,7 @@
 
 
 <update id = "editCalender" parameterType="ScheduleCalender">
-	update calender
+	 update calender
      <trim prefix="SET" suffixOverrides=",">
        <if test="title != null">
         title = #{title},
@@ -50,7 +50,7 @@
         completion_per= #{completionPer},
         </if>
       </trim>
-	where calender_id = #{calenderId}
+       where calender_id = #{calenderId}
 </update>
 
 

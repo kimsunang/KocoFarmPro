@@ -38,7 +38,6 @@ public class ScheduleService {
 		String y = request.getParameter("y");
 		
 		System.out.println("y:"+y+"projectid:"+project_id+"categoryId:"+category_id+"completion_per:"+completion_per);
-		
 		int projectId = Integer.parseInt(project_id);
 		int categoryId = Integer.parseInt(category_id);
 		int completionPer = Integer.parseInt(completion_per);
@@ -51,17 +50,8 @@ public class ScheduleService {
 		scheduleCalender.setStartDt("");
 		scheduleCalender.setEndDt("");
 		scheduleCalender.setyPos(yPos);
-			
+	
 		int re = dao.insertCelender(scheduleCalender);
-		if(-1 == re)
-			return re;
-		
-		List<ScheduleCategory> listCategory = dao.listCategory(projectId);
-		List<ScheduleCalender> listCalender = dao.listCalender(projectId);
-		
-		request.setAttribute("categoryList", listCategory);		
-		request.setAttribute("calenderList", listCalender);		
-		
 		return re;
 	}
 	

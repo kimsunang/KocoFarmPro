@@ -88,11 +88,11 @@ public class ScheduleDao {
 		return list;
 	}
 	
-	public int insertCelender(ScheduleCalender cheduleCalender){
+	public int insertCelender(ScheduleCalender scheduleCalender){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
-			re = sqlSession.getMapper(ScheduleMapper.class).insertCelender(cheduleCalender);
+			re = sqlSession.getMapper(ScheduleMapper.class).insertCelender(scheduleCalender);
 			if(re > 0){
 				sqlSession.commit();
 			}else{

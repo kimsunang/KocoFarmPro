@@ -13,7 +13,7 @@ public interface ScheduleMapper {
 	public List<ScheduleProject> listProject();
 	public List<ScheduleCategory> listCategory(int projectId);
 	public List<ScheduleCalender> listCalender(int projectId);
-	public int insertCelender(ScheduleCalender cheduleCalender);
+	public int insertCelender(ScheduleCalender scheduleCalender);
 	public List<ScheduleCalenderList> listProjectCalender(int projectId);
 
 }

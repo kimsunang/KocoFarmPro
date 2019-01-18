@@ -3,6 +3,8 @@ var add_project_id = 0;			// 프로젝트 아이디
 var add_category_id = 0;		// 카테고리 아이디
 
 (function($) {
+	
+	
     var elmDrag, replacerSet = $();
     var eventStack = ['dragstart', 'dragend', 'selectstart', 'dragover', 'dragenter', 'drop'];
     
@@ -123,40 +125,12 @@ $('.exclude').dropme({
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-/* 모달 창 */
-//Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-// 엘레먼트가 동적 생성되어서 이벤트를 나중에 넣어준다
-//var btn = document.getElementById("calenderWriteBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-/*btn.onclick = function() {
-  modal.style.display = "block";
-}*/
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-	modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-$(function(event){
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }  
-});
-
 // 일정 추가 버튼 '+' 눌렀을 때
 function calenderAddButtonClick(projectId, categoryId){
 
 	// 모달 창 띄우기
-    var modal = document.getElementById("myModal");
-	modal.style.display = "block";   
+    //var modal = document.getElementById("myModal");
+	//modal.style.display = "block";   
 	add_project_id = projectId;				
  	add_category_id = categoryId;
 }
@@ -170,7 +144,8 @@ $('#calender_add').click(function() {
 	 var tag = $("input[name=tag]").val();
 	 var category = $("input[value="+add_category_id+"]").parent();		// 선택한 카테고리 클릭
 	 var y = category.parent().children().last().index()+1;				// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함 
-	 modal.style.display = "none";
+	 
+	 $('#calenderAddModal').modal('toggle');
 	 
 	 $.ajax({
 	    type:"POST",
@@ -202,8 +177,7 @@ $('#calender_add').click(function() {
 		
 		      		html += '<ul class="li_common_style li1">';
 		      		html += '<li class="calender_info">';
-		      		html += '<button type="button" class="calenderWriteBtn">버튼 </button>';
-		      		html += data[i].categoryName+'<button type="button" class="btn  btn-primary calenderWriteBtn">+</button>';
+		      		html += data[i].categoryName+'<button type="button" class="btn  btn-primary calenderWriteBtn" data-toggle="modal" data-target="#calenderAddModal">+</button>';
 		      		console.log(data[i].projectId);
 		      		console.log(data[i].categoryId);
 		      		console.log(data[i].calenderId);
@@ -217,6 +191,7 @@ $('#calender_add').click(function() {
 		      	// 캘린더 id가 0이 아니라면
 		      	if(0 != data[i].calenderId){
 		            html += '<li class="calender_text">'+data[i].title+"<br>";
+		            html += '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#calenderModify">설정</button>';
 		            html += '시작일 :'+ data[i].startDt+"<br>";
 		            html += '종료일 :'+ data[i].endDt+"<br>";
 					html += '</li>';	      		
@@ -226,6 +201,7 @@ $('#calender_add').click(function() {
 				// 동적으로 생성된 element 이벤트 붙이기
 				html += '</ul>';
 			    $(".con").append(html); 
+			    console.log(html);
 			    
 			    $('.dropme').dropme('enable');
 			    $('.exclude').dropme({
@@ -246,6 +222,22 @@ $('#calender_add').click(function() {
 					
 				   calenderAddButtonClick(add_project_id,add_category_id);
 				});
+			   
+			    // 세팅 버튼에 이벤트 추가
+			   $(document).on("click", ".calenderModify", function(){
+				   console.log('캘린더 세팅');		   
+				   var par = $(this).parent().parent();
+				   var first_children = $(par).children().eq(0);
+				    
+					add_project_id = first_children.children().eq(2).val();
+					add_category_id = first_children.children().eq(3).val();
+
+					console.log('project_id:'+add_project_id);
+					console.log('category_id:'+add_category_id);
+					
+					calenderModifyButtonClick(add_project_id,add_category_id);
+				   
+			   });
 		    
 			}// success function
 
@@ -257,23 +249,3 @@ $('#calender_add').click(function() {
 	  });
 	  
 	});
-
-//일정 옵션 창
-/*var calender_modify_modal = $("#calenderModifyModal");
-var calender_modify_close = document.getElementsByClassName("form-modify-close")[0];
-
-calender_modify_close.onclick = function() {
-	calender_modify_modal.style.display = "none";
-}
-
-function calenderModifyButtonClick(projectId, categoryId){
-
-	// 모달 창 띄우기
-    var modifyModal = document.getElementById("calenderModifyModal");
-    console.log(modifyModal);
-    //modifyModal.style.display = "block";
-		   
-	add_project_id = projectId;				
- 	add_category_id = categoryId;
-}
-*/

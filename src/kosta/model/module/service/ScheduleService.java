@@ -30,14 +30,26 @@ public class ScheduleService {
 		
 		ScheduleCalender scheduleCalender = createCalender(request);
 		if(null == scheduleCalender)
-			throw new Exception("null == scheduleCalender");
-	
+			return -1;
+		
+		String y = request.getParameter("y");
+		int yPos = Integer.parseInt(y);		
+		
+		if(null == scheduleCalender.getStartDt())
+			scheduleCalender.setStartDt("");
+
+		if(null == scheduleCalender.getEndDt())
+			scheduleCalender.setEndDt("");
+
+		scheduleCalender.setyPos(yPos);
+		System.out.println(scheduleCalender.toString());
 		int re = dao.insertCelender(scheduleCalender);
 		return re;
 	}
 	
 	public List<ScheduleCalenderList> listProjectCalender(HttpServletRequest request) throws Exception {
 		String strProjectId = request.getParameter("projectId");
+		System.out.println("strProjectId:"+strProjectId);
 		int projectId = Integer.parseInt(strProjectId);
 		
 		ScheduleDao dao = ScheduleDao.getInstance();
@@ -55,6 +67,15 @@ public class ScheduleService {
 		if(null == scheduleCalender)
 			return -1;
 	
+		
+		String calender_id = request.getParameter("calenderId");
+		if(null != calender_id){
+			int calenderId = Integer.parseInt(calender_id);
+			scheduleCalender.setCalenderId(calenderId);
+		}else {
+			return -1;
+		}
+		
 		int re = dao.editCalender(scheduleCalender);
 		return re;
 	}
@@ -71,35 +92,40 @@ public class ScheduleService {
 	}
 	
 	public ScheduleCalender createCalender(HttpServletRequest request) throws Exception{
-		ScheduleCalender scheduleCalender = new ScheduleCalender();
+		ScheduleCalender scheduleCalender = null;
 		
-		String project_id = request.getParameter("projectId");
-		String category_id = request.getParameter("categoryId");
-		String write =  request.getParameter("write");
-		String color = request.getParameter("color");
+		String project_id 	= request.getParameter("projectId");
+		String category_id 	= request.getParameter("categoryId");
+		String write 		= request.getParameter("write");
+		String color 		= request.getParameter("color");
+		String startDt 		= request.getParameter("startDt");
+		String endDt 		= request.getParameter("endDt");
 		String completion_per = request.getParameter("completionPer");
-		String y = request.getParameter("y");
-		String calender_id = request.getParameter("calenderId");
+		String tag			= request.getParameter("tag");			// tag는 list로 뽑을 것
 		
-		System.out.println("y:"+y+"projectid:"+project_id+"categoryId:"+category_id+"completion_per:"+completion_per+"write:"+write);
+		System.out.println("category_id:"+category_id+"write:"+write);
+		//System.out.println("y:"+y+"projectid:"+project_id+"categoryId:"+category_id+"completion_per:"+completion_per+"write:"+write);		
+		if("" == category_id || "" == write) {			
+			return null;
+		}
+		
+		if("" == completion_per)
+			completion_per = "0";
 		
 		int categoryId = Integer.parseInt(category_id);
 		int completionPer = Integer.parseInt(completion_per);
-		int yPos = Integer.parseInt(y);
+		if(0 >= categoryId) {
+			return null;
+		}
 		
+		scheduleCalender = new ScheduleCalender();
+	
 		scheduleCalender.setCategoryId(categoryId);
 		scheduleCalender.setTitle(write);
 		scheduleCalender.setBackgroundColor(color);
+		scheduleCalender.setStartDt(startDt);
+		scheduleCalender.setEndDt(endDt);
 		scheduleCalender.setCompletionPer(completionPer);
-		 
-		scheduleCalender.setStartDt("");
-		scheduleCalender.setEndDt("");
-		scheduleCalender.setyPos(yPos);
-		
-		if(null != calender_id){
-			int calenderId = Integer.parseInt(calender_id);
-			scheduleCalender.setCalenderId(calenderId);
-		}
 		
 		return scheduleCalender;
 	}

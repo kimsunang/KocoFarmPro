@@ -128,5 +128,26 @@ public class ScheduleDao {
 		
 		return re;
 	}
+	
+	public int delCalender(int calenderId){
+		System.out.println("delCalender");
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFaction().openSession();
+		try{
+			re = sqlSession.getMapper(ScheduleMapper.class).delCalender(calenderId);
+			if(re > 0){
+				sqlSession.commit();
+			}else{
+				sqlSession.rollback();				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+	
+		}finally{
+			sqlSession.close();
+		}
+		
+		return re;
+	}
 
 }

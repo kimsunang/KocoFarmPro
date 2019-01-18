@@ -5,11 +5,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
+import kosta.model.module.service.ScheduleService;
 
 public class DelCalender implements IAction{
 	public DelCalender(){}
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("DelCalender");
+		System.out.println("DelCalender 12312312");
+		
+		ScheduleService service =  ScheduleService.getInstance();			
+		if(null != service){
+			service.delCalender(request);
+		}
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

@@ -11,15 +11,18 @@ public class EditCalender  implements IAction{
 	public EditCalender(){}
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("EditCalender");
-		ScheduleService service =  ScheduleService.getInstance();			
+		ScheduleService service =  ScheduleService.getInstance();
+		int re = -1;
 		if(null != service){
-			service.editCalender(request);
+			re = service.editCalender(request);
 		}
 		
-		ActionForward forward = new ActionForward();
-		forward.setRedirect(false);
-		forward.setPath("/jsp/module/schedule/project.jsp");
-		return null;
-		
+		ActionForward forward = null;
+		if(-1 != re) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/jsp/module/schedule/project.jsp");
+		}
+		return forward;	
 	}
 }

@@ -48,13 +48,26 @@ public class ScheduleService {
 	}
 	
 	public int editCalender(HttpServletRequest request) throws Exception {
-		ScheduleCalender scheduleCalender = createCalender(request);
+		if(null == request)
+			return -1;
 		
+		ScheduleCalender scheduleCalender = createCalender(request);
 		if(null == scheduleCalender)
-			throw new Exception("null == scheduleCalender");
+			return -1;
 	
 		int re = dao.editCalender(scheduleCalender);
 		return re;
+	}
+	
+	public int delCalender(HttpServletRequest request) throws Exception {
+		if(null == request)
+			return -1;
+		
+		String strCalenderId = request.getParameter("calenderId");
+		int calenderId = Integer.parseInt(strCalenderId);
+	
+		int re = dao.delCalender(calenderId);
+		return re;		
 	}
 	
 	public ScheduleCalender createCalender(HttpServletRequest request) throws Exception{
@@ -90,4 +103,5 @@ public class ScheduleService {
 		
 		return scheduleCalender;
 	}
+
 }

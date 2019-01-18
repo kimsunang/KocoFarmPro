@@ -54,6 +54,6 @@
 </update>
 
 <delete id="delCalender" parameterType="int">
-	delete from calender where calender_id #{calenderId};
+	delete from calender where calender_id = #{calenderId}
 </delete>
 </mapper>

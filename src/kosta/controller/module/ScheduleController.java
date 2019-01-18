@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
-import kosta.action.module.schedule.DelCalender;
-import kosta.action.module.schedule.EditCalender;
+import kosta.action.module.schedule.DelCalenderAction;
+import kosta.action.module.schedule.EditCalenderAction;
 import kosta.action.module.schedule.InsertCalenderAction;
 import kosta.action.module.schedule.ListProjectAction;
 import kosta.action.module.schedule.ListCalenderAction;
@@ -32,8 +32,8 @@ public class ScheduleController extends HttpServlet {
 		scheduleActionList.put("listCalender.do", new ListCalenderAction());
 		scheduleActionList.put("insertCalender.do", new InsertCalenderAction());
 		scheduleActionList.put("sendProjectId.do", new SendProjectIdAction());
-		scheduleActionList.put("editCalender.do", new EditCalender());
-		scheduleActionList.put("delCalender.do", new DelCalender());
+		scheduleActionList.put("editCalender.do", new EditCalenderAction());
+		scheduleActionList.put("delCalender.do", new DelCalenderAction());
 
 	}
     

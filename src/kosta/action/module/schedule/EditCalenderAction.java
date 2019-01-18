@@ -7,8 +7,8 @@ import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.service.ScheduleService;
 
-public class EditCalender  implements IAction{
-	public EditCalender(){}
+public class EditCalenderAction  implements IAction{
+	public EditCalenderAction(){}
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("EditCalender");
 		ScheduleService service =  ScheduleService.getInstance();

@@ -33,15 +33,24 @@ public class ScheduleService {
 			return -1;
 		
 		String y = request.getParameter("y");
-		int yPos = Integer.parseInt(y);		
+		int yPos = Integer.parseInt(y);	
+		
+		String completion_per = request.getParameter("completionPer");
+		if("" == completion_per)
+			completion_per = "0";
+	
+		int completionPer = Integer.parseInt(completion_per);
 		
 		if(null == scheduleCalender.getStartDt())
 			scheduleCalender.setStartDt("");
 
 		if(null == scheduleCalender.getEndDt())
 			scheduleCalender.setEndDt("");
-
+		
 		scheduleCalender.setyPos(yPos);
+		scheduleCalender.setCompletionPer(completionPer);
+
+		
 		System.out.println(scheduleCalender.toString());
 		int re = dao.insertCelender(scheduleCalender);
 		return re;
@@ -66,14 +75,19 @@ public class ScheduleService {
 		ScheduleCalender scheduleCalender = createCalender(request);
 		if(null == scheduleCalender)
 			return -1;
-	
 		
 		String calender_id = request.getParameter("calenderId");
+		String completion_per = request.getParameter("completionPer");
 		if(null != calender_id){
 			int calenderId = Integer.parseInt(calender_id);
 			scheduleCalender.setCalenderId(calenderId);
 		}else {
 			return -1;
+		}
+		
+		if("" != completion_per) {
+			int completionPer = Integer.parseInt(completion_per);
+			scheduleCalender.setCompletionPer(completionPer);
 		}
 		
 		int re = dao.editCalender(scheduleCalender);
@@ -100,7 +114,6 @@ public class ScheduleService {
 		String color 		= request.getParameter("color");
 		String startDt 		= request.getParameter("startDt");
 		String endDt 		= request.getParameter("endDt");
-		String completion_per = request.getParameter("completionPer");
 		String tag			= request.getParameter("tag");			// tag는 list로 뽑을 것
 		
 		System.out.println("category_id:"+category_id+"write:"+write);
@@ -109,14 +122,7 @@ public class ScheduleService {
 			return null;
 		}
 		
-		if("" == completion_per)
-			completion_per = "0";
-		
 		int categoryId = Integer.parseInt(category_id);
-		int completionPer = Integer.parseInt(completion_per);
-		if(0 >= categoryId) {
-			return null;
-		}
 		
 		scheduleCalender = new ScheduleCalender();
 	
@@ -125,8 +131,7 @@ public class ScheduleService {
 		scheduleCalender.setBackgroundColor(color);
 		scheduleCalender.setStartDt(startDt);
 		scheduleCalender.setEndDt(endDt);
-		scheduleCalender.setCompletionPer(completionPer);
-		
+				
 		return scheduleCalender;
 	}
 

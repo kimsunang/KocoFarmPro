@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
+import kosta.action.module.schedule.EditCalender;
 import kosta.action.module.schedule.InsertCalenderAction;
 import kosta.action.module.schedule.ListProjectAction;
 import kosta.action.module.schedule.ListCalenderAction;
 import kosta.action.module.schedule.SendProjectIdAction;
 
-@WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do" })
+@WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do", "/editCalender.do" })
 public class ScheduleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	       
@@ -30,10 +31,10 @@ public class ScheduleController extends HttpServlet {
 		scheduleActionList.put("listCalender.do", new ListCalenderAction());
 		scheduleActionList.put("insertCalender.do", new InsertCalenderAction());
 		scheduleActionList.put("sendProjectId.do", new SendProjectIdAction());
+		scheduleActionList.put("editCalender.do", new EditCalender());
 	}
     
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();

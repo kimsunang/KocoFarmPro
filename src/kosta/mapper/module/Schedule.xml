@@ -30,4 +30,15 @@
 	on cal.category_id = cat.category_id
 </select>
 
+
+<update id = "editCalender" parameterType="ScheduleCalender">
+	update calender
+	<!-- <if test="title != null"> -->
+	 set title = #{title}
+	<!-- </if> -->
+	where calender_id = #{calenderId}
+</update>
+
+
+
 </mapper>

@@ -62,7 +62,6 @@ $(function(){
         <div class="modal-body">
             <label>새 일정 추가</label>
     <input type="text" name="write"></input>
-  </div>
 	<div><button type="button" class="btn btn-success">시작 날짜 선택</button></div>
 	<div><button type="button" class="btn btn-success">종료 날짜 선택</button></div>
 	<div><label>칼라 입력</label></div>
@@ -77,7 +76,7 @@ $(function(){
         </div>
         </div>
       </div>
-      
+        </div>
     </div>
     
 
@@ -85,38 +84,47 @@ $(function(){
 <!-- 일정 수정 -->
 <div class="modal fade" id="calenderModify" role="dialog">
     <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">일정수정</h4>
-        </div>
-        <div class="modal-body">
-            <label>새 일정 추가</label>
-    <input type="text" name="write"></input>
-  </div>
-	<div><button type="button" class="btn btn-success">시작 날짜 선택</button></div>
-	<div><button type="button" class="btn btn-success">종료 날짜 선택</button></div>
-	<div><label>칼라 입력</label></div>
-	<input type="text" name="color"></input>
-	<div><label>완료도 설정</label></div>
-	<input type="text" name="completion_per"></input>
-	<div><button class="btn btn-warning" name="tag">태그 선택</button></div>
-	<div><button class="btn btn-secondary" name="worker_list">작업자 선택</button></div>
-	 <button class="btn btn-primary" id="calender_add">일정 수정</Button>
-	 <button type="button" class="btn btn-danger">일정 삭제</button>
-	 <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-        </div>
-      </div>
-      
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">일정수정</h4>
+				</div>
+				<div class="modal-body">
+					<label>일정 내용</label> <input type="text" name="write"></input>
+
+				<div>
+					<button type="button" class="btn btn-success">시작 날짜 선택</button>
+				</div>
+				<div>
+					<button type="button" class="btn btn-success">종료 날짜 선택</button>
+				</div>
+				<div>
+					<label>칼라 입력</label>
+				</div>
+				<input type="text" name="color"></input>
+				<div>
+					<label>완료도 설정</label>
+				</div>
+				<input type="text" name="completion_per"></input>
+				<div>
+					<button class="btn btn-warning" name="tag">태그 선택</button>
+				</div>
+				<div>
+					<button class="btn btn-secondary" name="worker_list">작업자
+						선택</button>
+				</div>
+				<button class="btn btn-primary" id="calender_edit">일정 수정</Button>
+				<button type="button" class="btn btn-danger" id="calender_del">일정
+					삭제</button>
+				</div> <!-- body -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div> <!-- modal-content --> 
+		</div><!-- modal-dialog --> 
     </div>
-
-  
-
-<!-- <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>  -->
 <script src="/KocoFarmPro/js/module/schedule.js"></script>
 </body>
 </html>

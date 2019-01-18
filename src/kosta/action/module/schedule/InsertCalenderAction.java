@@ -32,6 +32,7 @@ public class InsertCalenderAction implements IAction{
 		
 		forward.setRedirect(false);
 		forward.setPath("/jsp/module/schedule/project.jsp");
+
 		return forward;
 	}	
 }

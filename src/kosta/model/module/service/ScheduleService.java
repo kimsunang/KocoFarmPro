@@ -28,28 +28,9 @@ public class ScheduleService {
 	
 	public int insertScheduleCalender(HttpServletRequest request) throws Exception {
 		
-		ScheduleCalender scheduleCalender = new ScheduleCalender();
-	
-		String project_id = request.getParameter("projectId");
-		String category_id = request.getParameter("categoryId");
-		String write =  request.getParameter("write");
-		String color = request.getParameter("color");
-		String completion_per = request.getParameter("completionPer");
-		String y = request.getParameter("y");
-		
-		System.out.println("y:"+y+"projectid:"+project_id+"categoryId:"+category_id+"completion_per:"+completion_per);
-		int projectId = Integer.parseInt(project_id);
-		int categoryId = Integer.parseInt(category_id);
-		int completionPer = Integer.parseInt(completion_per);
-		int yPos = Integer.parseInt(y);
-		
-		scheduleCalender.setCategoryId(categoryId);
-		scheduleCalender.setTitle(write);
-		scheduleCalender.setBackgroundColor(color);
-		scheduleCalender.setCompletionPer(completionPer);
-		scheduleCalender.setStartDt("");
-		scheduleCalender.setEndDt("");
-		scheduleCalender.setyPos(yPos);
+		ScheduleCalender scheduleCalender = createCalender(request);
+		if(null == scheduleCalender)
+			throw new Exception("null == scheduleCalender");
 	
 		int re = dao.insertCelender(scheduleCalender);
 		return re;
@@ -64,5 +45,42 @@ public class ScheduleService {
 		request.setAttribute("calenderList", calenderList);
 
 		return calenderList;
+	}
+	
+	public int editCalender(HttpServletRequest request) throws Exception {
+		ScheduleCalender scheduleCalender = createCalender(request);
+		
+		if(null == scheduleCalender)
+			throw new Exception("null == scheduleCalender");
+	
+		int re = dao.editCalender(scheduleCalender);
+		return re;
+	}
+	
+	public ScheduleCalender createCalender(HttpServletRequest request) throws Exception{
+		ScheduleCalender scheduleCalender = new ScheduleCalender();
+		
+		String project_id = request.getParameter("projectId");
+		String category_id = request.getParameter("categoryId");
+		String write =  request.getParameter("write");
+		String color = request.getParameter("color");
+		String completion_per = request.getParameter("completionPer");
+		String y = request.getParameter("y");
+		
+		System.out.println("y:"+y+"projectid:"+project_id+"categoryId:"+category_id+"completion_per:"+completion_per);
+		
+		int categoryId = Integer.parseInt(category_id);
+		int completionPer = Integer.parseInt(completion_per);
+		int yPos = Integer.parseInt(y);
+		
+		scheduleCalender.setCategoryId(categoryId);
+		scheduleCalender.setTitle(write);
+		scheduleCalender.setBackgroundColor(color);
+		scheduleCalender.setCompletionPer(completionPer);
+		scheduleCalender.setStartDt("");
+		scheduleCalender.setEndDt("");
+		scheduleCalender.setyPos(yPos);
+		
+		return scheduleCalender;
 	}
 }

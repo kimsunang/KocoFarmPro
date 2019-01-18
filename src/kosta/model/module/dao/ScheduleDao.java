@@ -108,4 +108,25 @@ public class ScheduleDao {
 		return re;
 	}
 	
+	public int editCalender(ScheduleCalender scheduleCalender){
+		System.out.println("editCalender");
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFaction().openSession();
+		try{
+			re = sqlSession.getMapper(ScheduleMapper.class).editCalender(scheduleCalender);
+			if(re > 0){
+				sqlSession.commit();
+			}else{
+				sqlSession.rollback();				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+	
+		}finally{
+			sqlSession.close();
+		}
+		
+		return re;
+	}
+
 }

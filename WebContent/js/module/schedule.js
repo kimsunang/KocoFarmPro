@@ -1,7 +1,7 @@
 /* 일정 데이터 전달 */
 var add_project_id = 0;			// 프로젝트 아이디
 var add_category_id = 0;		// 카테고리 아이디
-
+var add_calender_id = 0;		// 일정 아이디
 (function($) {
 	
 	
@@ -125,8 +125,8 @@ $('.exclude').dropme({
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-// 일정 추가 버튼 '+' 눌렀을 때
-function calenderAddButtonClick(projectId, categoryId){
+// 일정 추가 버튼 '+', 수정, 삭제 눌렀을 때
+function calenderButtonClick(projectId, categoryId){
 
 	add_project_id = projectId;				
  	add_category_id = categoryId;
@@ -158,7 +158,8 @@ function addDynamicHtml(data){
       	// 캘린더 id가 0이 아니라면
       	if(0 != data[i].calenderId){
             html += '<li class="calender_text">'+data[i].title+"<br>";
-            html += '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#calenderModify">설정</button>';
+            html += '<input type="hidden" class="this_calender_id" value='+data[i].calenderId+' />';
+            html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';
             html += '시작일 :'+ data[i].startDt+"<br>";
             html += '종료일 :'+ data[i].endDt+"<br>";
 			html += '</li>';	      		
@@ -180,28 +181,34 @@ function addDynamicHtml(data){
 	    // 일정 추가 버튼 클릭
 	   $(document).on("click", ".calenderWriteBtn", function(){	
 			var par = $(this).parent();	// ul태그 선택
-			add_project_id = $(par).children().eq(1).val();
-			add_category_id = $(par).children().eq(2).val();
+			var project_id = $(par).children().eq(1).val();
+			var category_id = $(par).children().eq(2).val();
 
-			console.log('project_id:'+add_project_id);
-			console.log('category_id:'+add_category_id);
+			console.log('project_id:' + project_id);
+			console.log('category_id:' + category_id);
 			
-		   calenderAddButtonClick(add_project_id,add_category_id);
+		   calenderButtonClick(project_id, category_id, 0);
 		});
 	   
 	    // 세팅 버튼에 이벤트 추가
-	   $(document).on("click", ".calenderModify", function(){
+	   $(document).on("click", ".calenderModifyBtn", function(){
 		   console.log('캘린더 세팅');		   
 		   var par = $(this).parent().parent();
 		   var first_children = $(par).children().eq(0);
 		    
-			add_project_id = first_children.children().eq(2).val();
-			add_category_id = first_children.children().eq(3).val();
-
-			console.log('project_id:'+add_project_id);
-			console.log('category_id:'+add_category_id);
+			var project_id = first_children.children().eq(1).val();
+			var category_id = first_children.children().eq(2).val();
 			
-			calenderModifyButtonClick(add_project_id,add_category_id);
+			var two_children = $(par).children().eq(1);
+			console.log(two_children);
+			var calender_id = two_children.children().eq(1).val();
+			
+			console.log('project_id:'+project_id);
+			console.log('category_id:'+category_id);
+			console.log('calender_id:'+calender_id);
+
+			
+			calenderButtonClick(project_id, category_id, calender_id);
 		   
 	   });
     
@@ -245,7 +252,60 @@ $('#calender_add').click(function() {
 	    },
 	    error : function(error) {
 	    	console.log("state:"+error.state()+"ajax 실패:"+error.responseText+"html:"+error.result_html);
-	    },
-	  });
+	    },	// error
+	  });// ajax
 	  
-	});
+	});//click
+
+
+$('#calender_edit').click(function(){
+	console.log('일정 수정');
+	
+	 var par =  $(this).parent();
+	 console.log("par 정보");
+	 console.log(par);
+	 var write = par.children("input[name=write]").val();	 
+	 var color = par.children("input[name=color]").val();
+	 var completion_per = par.children("input[name=completion_per]").val();
+	 var tag = par.children("input[name=tag]").val();
+	 var category = par.children("input[value="+add_category_id+"]").parent();		// 선택한 카테고리 클릭
+	 var y = category.parent().children().last().index()+1;				// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함 
+	 
+	 $('#calenderModify').modal('toggle');
+	
+	 $.ajax({
+		    type:"POST",
+		    data : { projectId:add_project_id, categoryId:add_category_id,write:write,color:color, completionPer:completion_per,tag:tag,y:y  },
+		    dataType:"text",
+		    url:"editCalender.do",
+		    success: function(project_id) {
+		     console.log("ajax 수정 성공");
+		 	
+		 	
+		 	$.ajax({
+				url:'listCalender.do',
+				data: {"projectId":add_project_id},
+				dataType:'json',
+				success:function(data){
+				console.log("성공");
+				
+
+				 $(".con").empty();
+				 addDynamicHtml(data);
+				
+				}// success function
+
+			});// ajax
+		    },
+		    error : function(error) {
+		    	console.log("state:"+error.state()+"ajax 실패:"+error.responseText+"html:"+error.result_html);
+		    },	// error
+		  });// ajax
+		  
+	 
+	 //console.log(write+","+color+","+completion_per+","+y);
+});
+
+$('#calender_del').click(function(){
+	console.log('일정 삭제');
+});

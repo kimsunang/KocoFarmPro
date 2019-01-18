@@ -15,5 +15,6 @@ public interface ScheduleMapper {
 	public List<ScheduleCalender> listCalender(int projectId);
 	public int insertCelender(ScheduleCalender scheduleCalender);
 	public List<ScheduleCalenderList> listProjectCalender(int projectId);
+	public int editCalender(ScheduleCalender scheduleCalender);
 
 }

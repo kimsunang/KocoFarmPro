@@ -134,7 +134,7 @@ $(function(){
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">일정수정</h4>
         </div>
         <div class="modal-body">
             <label>새 일정 추가</label>
@@ -148,6 +148,8 @@ $(function(){
 	<input type="text" name="completion_per"></input>
 	<div><button class="btn btn-warning" name="tag">태그 선택</button></div>
 	<div><button class="btn btn-secondary" name="worker_list">작업자 선택</button></div>
+	 <button class="btn btn-primary" id="calender_add">일정 수정</Button>
+	 <button type="button" class="btn btn-danger">일정 삭제</button>
         </div>
       </div>
       

@@ -79,8 +79,8 @@ public class ScheduleService {
 		scheduleCalender.setBackgroundColor(color);
 		scheduleCalender.setCompletionPer(completionPer);
 		 
-		//scheduleCalender.setStartDt("");
-		//scheduleCalender.setEndDt("");
+		scheduleCalender.setStartDt("");
+		scheduleCalender.setEndDt("");
 		scheduleCalender.setyPos(yPos);
 		
 		if(null != calender_id){

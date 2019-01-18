@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
+import kosta.action.module.schedule.DelCalender;
 import kosta.action.module.schedule.EditCalender;
 import kosta.action.module.schedule.InsertCalenderAction;
 import kosta.action.module.schedule.ListProjectAction;
 import kosta.action.module.schedule.ListCalenderAction;
 import kosta.action.module.schedule.SendProjectIdAction;
 
-@WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do", "/editCalender.do" })
+@WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do", "/editCalender.do", "/delCalender.do" })
 public class ScheduleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	       
@@ -32,6 +33,8 @@ public class ScheduleController extends HttpServlet {
 		scheduleActionList.put("insertCalender.do", new InsertCalenderAction());
 		scheduleActionList.put("sendProjectId.do", new SendProjectIdAction());
 		scheduleActionList.put("editCalender.do", new EditCalender());
+		scheduleActionList.put("delCalender.do", new DelCalender());
+
 	}
     
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

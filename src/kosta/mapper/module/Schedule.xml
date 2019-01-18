@@ -53,6 +53,7 @@
        where calender_id = #{calenderId}
 </update>
 
-
-
+<delete id="delCalender" parameterType="int">
+	delete from calender where calender_id #{calenderId};
+</delete>
 </mapper>

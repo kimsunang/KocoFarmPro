@@ -33,9 +33,23 @@
 
 <update id = "editCalender" parameterType="ScheduleCalender">
 	update calender
-	<!-- <if test="title != null"> -->
-	 set title = #{title}
-	<!-- </if> -->
+     <trim prefix="SET" suffixOverrides=",">
+       <if test="title != null">
+        title = #{title},
+       </if>
+       <if test="startDt != null">
+        start_dt = #{startDt},
+        </if>
+       <if test="endDt != null">
+        end_dt= #{endDt},
+        </if>
+       <if test="backgroundColor != null">
+        background_color= #{backgroundColor},
+        </if>
+       <if test="completionPer != null">
+        completion_per= #{completionPer},
+        </if>
+      </trim>
 	where calender_id = #{calenderId}
 </update>
 

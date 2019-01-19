@@ -1,7 +1,8 @@
-/* 일정 데이터 전달 */
+/* 일정 추가, 수정 시 저장 데이터 */
 var add_project_id = 0;			// 프로젝트 아이디
 var add_category_id = 0;		// 카테고리 아이디
 var add_calender_id = 0;		// 일정 아이디
+var add_calender_color_value;	// color
 
 (function($) {
 	
@@ -165,7 +166,9 @@ function addDynamicHtml(data){
       	
       	// 캘린더 id가 0이 아니라면
       	if(0 != data[i].calenderId){
-            html += '<li class="calender_detail">'+data[i].title+"<br>";
+            html += '<li class="calender_detail">';
+            html += '<div style="background-color:#'+data[i].backgroundColor +'";>'+'&nbsp;'+'</div>';
+            html += data[i].title+"<br>";
             html += '<input type="hidden" class="this_calender_id" value='+data[i].calenderId+' />';
             html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';
             html += '시작일 :'+ data[i].startDt+"<br>";
@@ -221,7 +224,7 @@ function addDynamicHtml(data){
 $('#calender_add').click(function() {
 	
 	 var write 			= $("input[name=write]").val();
-	 var color 			= $("input[name=color]").val();
+	 var color 			= add_calender_color_value;
 	 var completion_per = $("input[name=completion_per]").val();
 	 var tag 			= $("input[name=tag]").val();
 	 var category		= $("input[value="+add_category_id+"]").parent();		// 선택한 카테고리 클릭
@@ -261,13 +264,13 @@ $('#calender_edit').click(function(){
 	
 	 var par 			=  $(this).parent();	// modal-body
 	 var write 			= par.children("input[name=write]").val();	 
-	 var color 			= par.children("input[name=color]").val();
+	 var color 			= add_calender_color_value;
 	 var completion_per = par.children("input[name=completion_per]").val();
 	 var startDt 		= par.children("input[name=editDatepickerStart]").val();
 	 var endDt 			= par.children("input[name=editDatepickerEnd]").val();
 	 var tag 			= par.children("input[name=tag]").val();
 	 
-	 console.log("write:"+write+"startDt:"+startDt+"endDt:"+endDt);
+	 console.log("write:"+write+"startDt:"+startDt+"endDt:"+endDt+"color:"+color);
 
 	 $('#calenderModify').modal('toggle');
 	 $.ajax({
@@ -324,4 +327,24 @@ $('#calender_del').click(function(){
 		  });// ajax
 	
 	
+});
+/* 배경 rgb값을 16진수로 convert */
+function hexc(colorval) {
+	console.log(colorval);
+    var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    delete(parts[0]);
+    for (var i = 1; i <= 3; ++i) {
+        parts[i] = parseInt(parts[i]).toString(16);
+        if (parts[i].length == 1) parts[i] = '0' + parts[i];
+    }
+   
+    color = parts.join('');
+    return color;
+}
+
+
+/* 일정 컬러색 가져오기 */
+$(document).on("click", ".tag-important, .tag-approve, .tag-quickly, .tag-request", function(){
+	var color = $(this).css('background-color');
+	add_calender_color_value = hexc(color);
 });

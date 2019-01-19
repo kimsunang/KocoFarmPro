@@ -81,17 +81,22 @@ $( function() {
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">일정추가</h4>
-				</div>
+				</div>				
 				<div class="modal-body">
 					<label>새 일정 추가</label> <input type="text" name="write"></input>
 					<div>
-						<div>시작날짜 <input type="text" name="addDatepickerStart" id="addDatepickerStart"></div>
-						<div>종료날짜 <input type="text" name="addDatepickerEnd" id="addDatepickerEnd"></div>	
+						<div>시작날짜 <input type="text" name="addDatepickerStart" id="addDatepickerStart"/></div>
+						<div>종료날짜 <input type="text" name="addDatepickerEnd" id="addDatepickerEnd"/></div>	
 					</div>
 					<div>
-						<label>칼라 입력</label>
+						<label>캘린더 칼라</label>
 					</div>
-					<input type="text" name="color"></input>
+					<div>
+					 	<input type="button" class="tag-important btn btn-xs" value="red"/>
+					  	<input type="button" class="tag-approve btn btn-xs" value="green" />
+					   	<input type="button" class="tag-quickly btn btn-xs" value="blue" />
+					   	<input type="button" class="tag-request btn btn-xs" value="yellow" />
+					</div>
 					<div>
 						<label>완료도 설정</label>
 					</div>
@@ -128,13 +133,19 @@ $( function() {
 					<label>일정 내용</label> <input type="text" name="write"></input>
 					<div></div>
 
-						시작날짜 <input type="text" name="editDatepickerStart" id="editDatepickerStart">
+						시작날짜 <input type="text" name="editDatepickerStart" id="editDatepickerStart"/>
 					<div></div>
-						종료날짜 <input type="text" name="editDatepickerEnd" id="editDatepickerEnd">	
+						종료날짜 <input type="text" name="editDatepickerEnd" id="editDatepickerEnd"/>	
 					<div>
-						<label>칼라 입력</label>
+						<label>캘린더 칼라</label>
 					</div>
-					<input type="text" name="color"></input>
+					<div>
+					 	<input type="button" class="tag-important btn btn-xs" value="red"/>
+					  	<input type="button" class="tag-approve btn btn-xs" value="green" />
+					   	<input type="button" class="tag-quickly btn btn-xs" value="blue" />
+					   	<input type="button" class="tag-request btn btn-xs" value="yellow" />
+					</div>
+					
 					<div>
 						<label>완료도 설정</label>
 					</div>

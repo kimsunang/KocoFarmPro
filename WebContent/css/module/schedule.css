@@ -711,3 +711,56 @@ margin-bottom:10px;
   cursor: pointer;
 }
 
+
+/* 일정 태그 */
+.tag-important { 
+  color: #FFFFFF; 
+  background-color: #FF3636; 
+  border-color: #FFFFFF; 
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  
+} 
+
+.tag-approve { 
+  color: #FFFFFF; 
+  background-color: #36FFC6; 
+  border-color: #FFFFFF; 
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  
+} 
+
+.tag-quickly { 
+  color: #FFFFFF; 
+  background-color: #365EFF; 
+  border-color: #FFFFFF; 
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  
+} 
+
+.tag-request { 
+  color: #FFFFFF; 
+  background-color: #FFEE36; 
+  border-color: #FFFFFF;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  
+} 

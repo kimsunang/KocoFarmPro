@@ -23,10 +23,18 @@
 <script>
 var jb = jQuery.noConflict();
 $( function() {
-	  jb( "#addDatepickerStart").datepicker();
-	  jb( "#addDatepickerEnd").datepicker();
-	  jb( "#editDatepickerStart").datepicker();
-	  jb( "#editDatepickerEnd").datepicker();
+	  jb( "#addDatepickerStart").datepicker({
+		  dateFormat: "yy-mm-dd"
+	  });
+	  jb( "#addDatepickerEnd").datepicker({
+		  dateFormat: "yy-mm-dd"
+	  });
+	  jb( "#editDatepickerStart").datepicker({
+		  dateFormat: "yy-mm-dd"
+	  });
+	  jb( "#editDatepickerEnd").datepicker({
+		  dateFormat: "yy-mm-dd"
+	  });
 });
 </script>
 
@@ -77,8 +85,8 @@ $( function() {
 				<div class="modal-body">
 					<label>새 일정 추가</label> <input type="text" name="write"></input>
 					<div>
-						<div>시작날짜 <input type="text" id="addDatepickerStart" name = "vacationStartDt"  data-date-format='yy-mm-dd' ></div>
-						<div>종료날짜 <input type="text" id="addDatepickerEnd" name = "vacationStartDt"  data-date-format='yy-mm-dd' ></div>	
+						<div>시작날짜 <input type="text" name="addDatepickerStart" id="addDatepickerStart"></div>
+						<div>종료날짜 <input type="text" name="addDatepickerEnd" id="addDatepickerEnd"></div>	
 					</div>
 					<div>
 						<label>칼라 입력</label>
@@ -118,11 +126,11 @@ $( function() {
 				</div>
 				<div class="modal-body">
 					<label>일정 내용</label> <input type="text" name="write"></input>
+					<div></div>
 
-					<div>
-						<div>시작날짜 <input type="text" id="editDatepickerStart" name = "vacationStartDt"  data-date-format='yy-mm-dd' ></div>
-						<div>종료날짜 <input type="text" id="editDatepickerEnd" name = "vacationStartDt"  data-date-format='yy-mm-dd' ></div>	
-					</div>
+						시작날짜 <input type="text" name="editDatepickerStart" id="editDatepickerStart">
+					<div></div>
+						종료날짜 <input type="text" name="editDatepickerEnd" id="editDatepickerEnd">	
 					<div>
 						<label>칼라 입력</label>
 					</div>

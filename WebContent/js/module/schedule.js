@@ -2,6 +2,7 @@
 var add_project_id = 0;			// 프로젝트 아이디
 var add_category_id = 0;		// 카테고리 아이디
 var add_calender_id = 0;		// 일정 아이디
+
 (function($) {
 	
 	
@@ -79,6 +80,7 @@ var add_calender_id = 0;		// 일정 아이디
                 return false;
             }).end().add([this, replacer]).on('dragover dragenter drop', function(event) {
                 if (!items.is(elmDrag) && options.linkTo !== $(elmDrag).parent().data('linkTo')) {
+                	console.log('이동 성공!');
                     return true;
                 }
                 if (event.type == 'drop') {
@@ -95,10 +97,13 @@ var add_calender_id = 0;		// 일정 아이디
                     elmDrag.hide();
                     $(this)[replacer.index() < $(this).index() ? 'after' : 'before'](replacer);
                     replacerSet.not(replacer).detach();
+                    console.log('성공2');
                 } else if (!replacerSet.is(this) && !$(this).children(options.items).length) {
                     replacerSet.detach();
                     $(this).append(replacer);
+                    console.log('성공');
                 }
+                console.log('실패');
                 return false;
             });
         });
@@ -215,18 +220,21 @@ function addDynamicHtml(data){
 //일정 추가 버튼 눌렀을 때
 $('#calender_add').click(function() {
 	
-	 var write = $("input[name=write]").val();
-	 var color = $("input[name=color]").val();
+	 var write 			= $("input[name=write]").val();
+	 var color 			= $("input[name=color]").val();
 	 var completion_per = $("input[name=completion_per]").val();
-	 var tag = $("input[name=tag]").val();
-	 var category = $("input[value="+add_category_id+"]").parent();		// 선택한 카테고리 클릭
-	 var y = category.parent().children().last().index()+1;				// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함 
+	 var tag 			= $("input[name=tag]").val();
+	 var category		= $("input[value="+add_category_id+"]").parent();		// 선택한 카테고리 클릭
+	 var y 				= category.parent().children().last().index()+1;				// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함 
+	 var startDt 		= $("input[name=addDatepickerStart]").val();
+	 var endDt 			= $("input[name=addDatepickerEnd]").val();
 	 
+	 console.log("startDt:"+startDt+"endDt:"+endDt);
 	 $('#calenderAddModal').modal('toggle');
 	 
 	 $.ajax({
 	    type:"POST",
-	    data : { projectId:add_project_id, categoryId:add_category_id, write:write,color:color, completionPer:completion_per,tag:tag,y:y  },
+	    data : { projectId:add_project_id, categoryId:add_category_id, write:write,color:color, completionPer:completion_per,tag:tag,y:y,startDt:startDt,endDt:endDt  },
 	    dataType:"text",
 	    url:"insertCalender.do",
 	    success: function(project_id) { 	
@@ -251,19 +259,20 @@ $('#calender_add').click(function() {
 $('#calender_edit').click(function(){
 	console.log('일정 수정');
 	
-	 var par =  $(this).parent();	// modal-body
-	 console.log(par);
-	 var write = par.children("input[name=write]").val();	 
-	 var color = par.children("input[name=color]").val();
+	 var par 			=  $(this).parent();	// modal-body
+	 var write 			= par.children("input[name=write]").val();	 
+	 var color 			= par.children("input[name=color]").val();
 	 var completion_per = par.children("input[name=completion_per]").val();
-	 var tag = par.children("input[name=tag]").val();
-	 var y = 0;					// 위치 바꾸는게 아니므로 0 넣어준다
+	 var startDt 		= par.children("input[name=editDatepickerStart]").val();
+	 var endDt 			= par.children("input[name=editDatepickerEnd]").val();
+	 var tag 			= par.children("input[name=tag]").val();
 	 
+	 console.log("write:"+write+"startDt:"+startDt+"endDt:"+endDt);
+
 	 $('#calenderModify').modal('toggle');
-	 console.log(write+",color:"+color+",completion_per:"+completion_per+",y:"+y);
 	 $.ajax({
 		    type:"POST",
-		    data : { projectId:add_project_id, categoryId:add_category_id,calenderId:add_calender_id ,write:write,color:color, completionPer:completion_per,tag:tag,y:y  },
+		    data : { projectId:add_project_id, categoryId:add_category_id,calenderId:add_calender_id ,write:write,color:color, completionPer:completion_per,tag:tag,startDt:startDt,endDt:endDt  },
 		    dataType:"text",
 		    url:"editCalender.do",
 		    success: function(project_id) {

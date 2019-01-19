@@ -19,7 +19,7 @@
 	order by cat.category_id
 </select>
 <insert id="insertCelender" parameterType="ScheduleCalender">
-	insert into Calender values(calender_id_seq.nextval, #{title}, #{startDt}, #{endDt}, #{backgroundColor}, #{completionPer}, #{yPos}, #{categoryId})
+	insert into Calender values(calender_id_seq.nextval, #{title}, TO_DATE(#{startDt}, 'yy-mm-dd') , TO_DATE(#{endDt}, 'yy-mm-dd') , #{backgroundColor}, #{completionPer}, #{yPos}, #{categoryId})
 </insert>
 
 <select id="listProjectCalender" resultType="ScheduleCalenderList">
@@ -39,10 +39,10 @@
         title = #{title},
        </if>
        <if test="startDt != null">
-        start_dt = #{startDt},
+        start_dt = TO_DATE(#{startDt}, 'yy-mm-dd'),
         </if>
        <if test="endDt != null">
-        end_dt= #{endDt},
+        end_dt= TO_DATE(#{endDt}, 'yy-mm-dd') ,
         </if>
        <if test="backgroundColor != null">
         background_color= #{backgroundColor},

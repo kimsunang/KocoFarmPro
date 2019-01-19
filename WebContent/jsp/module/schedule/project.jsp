@@ -17,7 +17,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>jQuery dropMe Plugin Examples</title>
 
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+var jb = jQuery.noConflict();
+$( function() {
+	  jb( "#addDatepickerStart").datepicker();
+	  jb( "#addDatepickerEnd").datepicker();
+	  jb( "#editDatepickerStart").datepicker();
+	  jb( "#editDatepickerEnd").datepicker();
+});
+</script>
 
 <link href="/KocoFarmPro/css/module/schedule.css" rel="stylesheet"
 	type="text/css">
@@ -31,7 +42,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	$(function() {
+	$(function() {		  
 		var projectId = "${projectId}";
 		$.ajax({
 			url : 'listCalender.do',
@@ -48,8 +59,7 @@
 	});
 </script>
 </head>
-<body>
-
+<body> 
 	<div class="con">
 		<!-- 동적으로 엘레먼트가 생성된다 -->
 	</div>
@@ -67,10 +77,8 @@
 				<div class="modal-body">
 					<label>새 일정 추가</label> <input type="text" name="write"></input>
 					<div>
-						<button type="button" class="btn btn-success">시작 날짜 선택</button>
-					</div>
-					<div>
-						<button type="button" class="btn btn-success">종료 날짜 선택</button>
+						<div>시작날짜 <input type="text" id="addDatepickerStart" name = "vacationStartDt"  data-date-format='yy-mm-dd' ></div>
+						<div>종료날짜 <input type="text" id="addDatepickerEnd" name = "vacationStartDt"  data-date-format='yy-mm-dd' ></div>	
 					</div>
 					<div>
 						<label>칼라 입력</label>
@@ -112,10 +120,8 @@
 					<label>일정 내용</label> <input type="text" name="write"></input>
 
 					<div>
-						<button type="button" class="btn btn-success">시작 날짜 선택</button>
-					</div>
-					<div>
-						<button type="button" class="btn btn-success">종료 날짜 선택</button>
+						<div>시작날짜 <input type="text" id="editDatepickerStart" name = "vacationStartDt"  data-date-format='yy-mm-dd' ></div>
+						<div>종료날짜 <input type="text" id="editDatepickerEnd" name = "vacationStartDt"  data-date-format='yy-mm-dd' ></div>	
 					</div>
 					<div>
 						<label>칼라 입력</label>

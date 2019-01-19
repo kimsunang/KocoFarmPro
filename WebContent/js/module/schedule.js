@@ -167,13 +167,13 @@ function addDynamicHtml(data){
       	// 캘린더 id가 0이 아니라면
       	if(0 != data[i].calenderId){
             html += '<li class="calender_detail">';
-            html += '<div style="background-color:#'+data[i].backgroundColor +'";>'+'&nbsp;'+'</div>';
-            html += data[i].title+"<br>";
+            html += '<div class="calender_detail_color" style="background-color:#'+data[i].backgroundColor +'";>'+'&nbsp;'+'</div>';
+            html += '<div class="calender_detail_title">'+data[i].title+'</div>';
             html += '<input type="hidden" class="this_calender_id" value='+data[i].calenderId+' />';
             html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';
-            html += '<div>시작일 :'+ data[i].startDt+"<div>";
-            html += '<div>종료일 :'+ data[i].endDt+"<div>";
-            html += '<div>완료상황 :'+ data[i].completionPer+"% <div>";
+            html += '<div class="calender_detail_startDt">시작일 :'+ data[i].startDt+"</div>";
+            html += '<div class="calender_detail_endDt">종료일 :'+ data[i].endDt+"</div>";
+            html += '<div class="calender_detail_completionPer">완료상황 :'+ data[i].completionPer+"% </div>";
 			html += '</li>';	      		
       	}
     }//for문
@@ -199,8 +199,8 @@ function addDynamicHtml(data){
 			var category_id = par.children(".this_category_id").val();
 			console.log('project_id:' + project_id);
 			console.log('category_id:' + category_id);
-
-			 calenderButtonClick(project_id, category_id, 0);
+			
+			calenderButtonClick(project_id, category_id, 0);
 		});
 	   
 	    // 세팅 버튼에 이벤트 추가
@@ -212,10 +212,38 @@ function addDynamicHtml(data){
 		   var project_id = parpar.children(".this_project_id").val();
 		   var category_id = parpar.children(".this_category_id").val();
 		   var calender_id = par.children('.this_calender_id').val();
-		
+		   
+		   console.log(par);
+		   // 정보 추출
+		   var color 		= $(par).children(".calender_detail_color").css("background-color");
+		   var title 		= $(par).children(".calender_detail_title").html();
+		   var startDt 		= $(par).children(".calender_detail_startDt").html();
+		   var endDt 		= $(par).children(".calender_detail_endDt").html();
+		   var completionPer= $(par).children(".calender_detail_completionPer").html();
+
+		   //completionPer = completionPer.replace("/[^0-9]/g");
+		   
 			console.log('project_id:'+project_id);
 			console.log('category_id:'+category_id);
 			console.log('calender_id:'+calender_id);
+			
+			console.log("color:"+color+"title:"+title+"startDt:"+startDt+"endDt:"+endDt+"completionPer:"+completionPer);
+			
+			//var parent = $("#calenderModify").children(".modal-dialog").children(".modal-body");
+			var val = $("#calenderModify").children(".modal-dialog").children(".modal-content").children(".modal-body");
+			console.log(completionPer);
+			
+			// 값 넣기
+			val.children("input[name=write]").val(title);
+			val.children("input[name=editDatepickerStart]").val(startDt);
+			val.children("input[name=editDatepickerEnd]").val(endDt);
+			val.children("input[name=editCompletionPer]").val(completionPer);
+			// <label>일정 내용</label> <input type="text" name="write"></input>
+			// 시작날짜 <input type="text" name="editDatepickerStart" id="editDatepickerStart"/>
+			// 	종료날짜 <input type="text" name="editDatepickerEnd" id="editDatepickerEnd"/>	
+			// <input type="text" name="editCompletionPer" id="editCalenderCompletionPerVal"></input>
+			//console.log($("#calenderModify"));
+			//console.log($("#calenderModify").children("input[name=write]"));
 			
 			calenderButtonClick(project_id, category_id, calender_id);
 	   });
@@ -229,7 +257,7 @@ $('#calender_add').click(function() {
 	 var completion_per = $("input[name=addCompletionPer]").val();
 	 var tag 			= $("input[name=tag]").val();
 	 var category		= $("input[value="+add_category_id+"]").parent();		// 선택한 카테고리 클릭
-	 var y 				= category.parent().children().last().index()+1;				// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함 
+	 var y 				= category.parent().children().last().index()+1;		// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함 
 	 var startDt 		= $("input[name=addDatepickerStart]").val();
 	 var endDt 			= $("input[name=addDatepickerEnd]").val();
 	 
@@ -344,6 +372,8 @@ function hexc(colorval) {
     color = parts.join('');
     return color;
 }
+
+/* 배경색에 따른 index 전달 */
 
 
 /* 일정 컬러색 가져오기 */

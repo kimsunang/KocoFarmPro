@@ -22,12 +22,13 @@
 	insert into Calender values(calender_id_seq.nextval, #{title}, TO_DATE(#{startDt}, 'yy-mm-dd') , TO_DATE(#{endDt}, 'yy-mm-dd') , #{backgroundColor}, #{completionPer}, #{yPos}, #{categoryId})
 </insert>
 
-<select id="listProjectCalender" resultType="ScheduleCalenderList">
+<select id="listProjectCalender" resultType="ScheduleCalenderList" parameterType="int">
 	select cat.x_pos, cat.category_id, cat.category_name, cat.project_id, cal.calender_id, cal.title, cal.start_dt, cal.end_dt,
 	cal.background_color, cal.completion_per, cal.y_pos
 	from calender cal
 	right outer join category cat
 	on cal.category_id = cat.category_id
+	and project_id = #{projectId}	
 	order by cat.category_id, cal.y_pos
 </select>
 

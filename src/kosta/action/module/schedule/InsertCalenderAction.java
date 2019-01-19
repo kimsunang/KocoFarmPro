@@ -27,7 +27,7 @@ public class InsertCalenderAction implements IAction{
 		if(null != service){
 			service.insertScheduleCalender(request);
 			projectId = service.getAttributeProjectId(request);
-			System.out.println("projectId:"+projectId);
+
 		}
 		
 		forward.setRedirect(false);

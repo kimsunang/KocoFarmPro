@@ -44,7 +44,7 @@ $( function() {
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -68,6 +68,7 @@ $( function() {
 </script>
 </head>
 <body> 
+
 	<div class="con">
 		<!-- 동적으로 엘레먼트가 생성된다 -->
 	</div>
@@ -98,9 +99,12 @@ $( function() {
 					   	<input type="button" class="tag-request btn btn-xs" value="yellow" />
 					</div>
 					<div>
-						<label>완료도 설정</label>
+						<label>진행상황</label>
+						<div class="add-calender-slidecontainer">
+						  <input type="range" min="1" max="100" value="50" class="add-calender-slider" id="calenderCompletionPerRang">
+  						  <input type="text" name="addCompletionPer" id="calenderCompletionPerVal"></input>
+						</div>
 					</div>
-					<input type="text" name="completion_per"></input>
 					<div>
 						<button class="btn btn-warning" name="tag">태그 선택</button>
 					</div>
@@ -132,7 +136,6 @@ $( function() {
 				<div class="modal-body">
 					<label>일정 내용</label> <input type="text" name="write"></input>
 					<div></div>
-
 						시작날짜 <input type="text" name="editDatepickerStart" id="editDatepickerStart"/>
 					<div></div>
 						종료날짜 <input type="text" name="editDatepickerEnd" id="editDatepickerEnd"/>	
@@ -145,11 +148,11 @@ $( function() {
 					   	<input type="button" class="tag-quickly btn btn-xs" value="blue" />
 					   	<input type="button" class="tag-request btn btn-xs" value="yellow" />
 					</div>
-					
-					<div>
-						<label>완료도 설정</label>
-					</div>
-					<input type="text" name="completion_per"></input>
+						<label>진행상황</label>
+						<div class="edit-calender-slidecontainer">
+						  <input type="range" min="1" max="100" value="50" class="edit-calender-slider" id="editCalenderCompletionPerRang">
+  						  <input type="text" name="editCompletionPer" id="editCalenderCompletionPerVal"></input>
+						</div>
 					<div>
 						<button class="btn btn-warning" name="tag">태그 선택</button>
 					</div>

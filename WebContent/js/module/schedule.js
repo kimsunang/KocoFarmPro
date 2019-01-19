@@ -171,8 +171,9 @@ function addDynamicHtml(data){
             html += data[i].title+"<br>";
             html += '<input type="hidden" class="this_calender_id" value='+data[i].calenderId+' />';
             html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';
-            html += '시작일 :'+ data[i].startDt+"<br>";
-            html += '종료일 :'+ data[i].endDt+"<br>";
+            html += '<div>시작일 :'+ data[i].startDt+"<div>";
+            html += '<div>종료일 :'+ data[i].endDt+"<div>";
+            html += '<div>완료상황 :'+ data[i].completionPer+"% <div>";
 			html += '</li>';	      		
       	}
     }//for문
@@ -225,7 +226,7 @@ $('#calender_add').click(function() {
 	
 	 var write 			= $("input[name=write]").val();
 	 var color 			= add_calender_color_value;
-	 var completion_per = $("input[name=completion_per]").val();
+	 var completion_per = $("input[name=addCompletionPer]").val();
 	 var tag 			= $("input[name=tag]").val();
 	 var category		= $("input[value="+add_category_id+"]").parent();		// 선택한 카테고리 클릭
 	 var y 				= category.parent().children().last().index()+1;				// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함 
@@ -233,6 +234,7 @@ $('#calender_add').click(function() {
 	 var endDt 			= $("input[name=addDatepickerEnd]").val();
 	 
 	 console.log("startDt:"+startDt+"endDt:"+endDt);
+	 console.log("completion_per:"+completion_per);
 	 $('#calenderAddModal').modal('toggle');
 	 
 	 $.ajax({
@@ -265,12 +267,13 @@ $('#calender_edit').click(function(){
 	 var par 			=  $(this).parent();	// modal-body
 	 var write 			= par.children("input[name=write]").val();	 
 	 var color 			= add_calender_color_value;
-	 var completion_per = par.children("input[name=completion_per]").val();
+	 var completion_per = $("#editCalenderCompletionPerVal").val();
 	 var startDt 		= par.children("input[name=editDatepickerStart]").val();
 	 var endDt 			= par.children("input[name=editDatepickerEnd]").val();
 	 var tag 			= par.children("input[name=tag]").val();
 	 
 	 console.log("write:"+write+"startDt:"+startDt+"endDt:"+endDt+"color:"+color);
+	 console.log("completion_per:"+completion_per);
 
 	 $('#calenderModify').modal('toggle');
 	 $.ajax({
@@ -347,4 +350,51 @@ function hexc(colorval) {
 $(document).on("click", ".tag-important, .tag-approve, .tag-quickly, .tag-request", function(){
 	var color = $(this).css('background-color');
 	add_calender_color_value = hexc(color);
+});
+
+/* 일정 추가 진행상황% 슬라이더  */
+var calenderCompletionSlider = document.getElementById("calenderCompletionPerRang");
+var calenderCompletionOutput = document.getElementById("calenderCompletionPerVal");
+
+calenderCompletionSlider.oninput = function() {
+	calenderCompletionOutput.value = this.value;
+}
+
+/* 일정 추가 진행상황% textbox */
+$('#calenderCompletionPerVal').change(function(){
+	var value = $(calenderCompletionOutput).val() ;
+	if(false == isNaN(value)){
+		if(0 > value) value = 0;
+		if(100 < value) value = 100;
+		$(calenderCompletionSlider).val($(this).val());
+		$(calenderCompletionOutput).val($(this).val());
+	}else{
+		$(calenderCompletionSlider).val(0);
+		$(calenderCompletionOutput).val(0);
+	}
+});
+
+
+/* 일정 수정 진행상황% 슬라이더  */
+var editCalenderCompletionSlider = document.getElementById("editCalenderCompletionPerRang");
+var editCalenderCompletionOutput = document.getElementById("editCalenderCompletionPerVal");
+
+editCalenderCompletionSlider.oninput = function() {
+	editCalenderCompletionOutput.value = this.value;
+}
+
+/* 일정 수정 진행상황% textbox */
+$('#editCalenderCompletionPerVal').change(function(){
+	var value = $(editCalenderCompletionOutput).val() ;
+	if(false == isNaN(value)){
+		if(0 > value) value = 0;
+		if(100 < value) value = 100;
+		
+		$(editCalenderCompletionSlider).val($(this).val());
+		$(editCalenderCompletionOutput).val($(this).val());
+		
+	}else{
+		$(editCalenderCompletionSlider).val(0);
+		$(editCalenderCompletionOutput).val(0);
+	}
 });

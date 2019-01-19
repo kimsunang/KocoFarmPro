@@ -32,6 +32,7 @@ public class ScheduleService {
 		if(null == scheduleCalender)
 			return -1;
 		
+		System.out.println(scheduleCalender);
 		int re = dao.insertCelender(scheduleCalender);
 		return re;
 	}
@@ -132,10 +133,6 @@ public class ScheduleService {
 		String completionPer= request.getParameter("completionPer");
 		String tag			= request.getParameter("tag");			// tag는 list로 뽑을 것
 		
-		
-		System.out.println("startDt:"+startDt+"endDt:"+endDt);
-
-		System.out.println("color:"+color);
 		if(true == category_id.isEmpty() || true == calender_id.isEmpty())
 			return null;
 		
@@ -144,9 +141,6 @@ public class ScheduleService {
 		
 		int categoryId = Integer.parseInt(category_id);
 		int calenderId = Integer.parseInt(calender_id);
-		
-		if(null == write)
-			System.out.println("write는  null");
 		
 		if(null == startDt|| true == startDt.isEmpty())
 			startDt = "";
@@ -157,9 +151,14 @@ public class ScheduleService {
 		if(null == color || true == color.isEmpty())
 			color = "";
 		
+		System.out.println("completionPer:"+completionPer);
 		int completion_per = 0;
-		if(null == completionPer || true == completionPer.isEmpty())
+		if(null == completionPer || true == completionPer.isEmpty()) {
+			System.out.println("여기들어온다??");
 			completionPer = "0";
+		}else {
+			completion_per = Integer.parseInt(completionPer);
+		}
 		
 		scheduleCalender = new ScheduleCalender();
 		scheduleCalender.setCategoryId(categoryId);
@@ -168,7 +167,8 @@ public class ScheduleService {
 		scheduleCalender.setStartDt(startDt);
 		scheduleCalender.setEndDt(endDt);
 		scheduleCalender.setCalenderId(calenderId);
-				
+		scheduleCalender.setCompletionPer(completion_per);	
+		
 		return scheduleCalender;
 	}
 

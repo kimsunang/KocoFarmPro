@@ -762,5 +762,77 @@ margin-bottom:10px;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  
 } 
+
+/* 일정 추가 완료도 프로그래스바 예제 */
+.add-calender-slidecontainer {
+  width: 50%;
+}
+
+.add-calender-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.add-calender-slider:hover {
+  opacity: 1;
+}
+
+.add-calender-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.add-calender-slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+
+/* 일정 수정 진행상황% 프로그래스바 예제 */
+.edit-calender-slidecontainer {
+  width: 50%;
+}
+
+.edit-calender-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.edit-calender-slider:hover {
+  opacity: 1;
+}
+
+.edit-calender-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.edit-calender-slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}

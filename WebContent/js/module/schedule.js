@@ -171,9 +171,9 @@ function addDynamicHtml(data){
             html += '<div class="calender_detail_title">'+data[i].title+'</div>';
             html += '<input type="hidden" class="this_calender_id" value='+data[i].calenderId+' />';
             html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';
-            html += '<div class="calender_detail_startDt">시작일 :'+ data[i].startDt+"</div>";
-            html += '<div class="calender_detail_endDt">종료일 :'+ data[i].endDt+"</div>";
-            html += '<div class="calender_detail_completionPer">완료상황 :'+ data[i].completionPer+"% </div>";
+            html += '<p>시작일 :</p><p class="calender_detail_startDt">'+ data[i].startDt+"</p>";
+            html += '<p>종료일 :</p><p class="calender_detail_endDt">'+ data[i].endDt+"</p>";
+            html += '완료상황:<p class="calender_detail_completionPer">'+ data[i].completionPer+"</p>";
 			html += '</li>';	      		
       	}
     }//for문
@@ -237,14 +237,8 @@ function addDynamicHtml(data){
 			val.children("input[name=write]").val(title);
 			val.children("input[name=editDatepickerStart]").val(startDt);
 			val.children("input[name=editDatepickerEnd]").val(endDt);
-			val.children("input[name=editCompletionPer]").val(completionPer);
-			// <label>일정 내용</label> <input type="text" name="write"></input>
-			// 시작날짜 <input type="text" name="editDatepickerStart" id="editDatepickerStart"/>
-			// 	종료날짜 <input type="text" name="editDatepickerEnd" id="editDatepickerEnd"/>	
-			// <input type="text" name="editCompletionPer" id="editCalenderCompletionPerVal"></input>
-			//console.log($("#calenderModify"));
-			//console.log($("#calenderModify").children("input[name=write]"));
-			
+			$("#editCalenderCompletionPerVal").val(completionPer);
+
 			calenderButtonClick(project_id, category_id, calender_id);
 	   });
 }

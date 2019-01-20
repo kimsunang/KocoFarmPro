@@ -11,7 +11,6 @@ var add_calender_color_value;	// color
     var eventStack = ['dragstart', 'dragend', 'selectstart', 'dragover', 'dragenter', 'drop'];
     
     $.fn.dropme = function(options) {
-
         var userOpt = options.toString();
 
         options = $.extend({
@@ -58,16 +57,27 @@ var add_calender_color_value;	// color
             replacerSet = replacerSet.add(replacer);
 
             if (options.linkTo) {
+            	console.log("6");
                 $(options.linkTo).add(this).data('linkTo', options.linkTo);
             }
 
             items.attr('draggable', 'true').on(eventStack[0], function(e) {
-                var dataTrnsfr = e.originalEvent.dataTransfer;
+            	console.log("7");
+            	console.log($(this).children(".calender_detail_title").html());
+            	console.log($(this).children(".this_calender_id").val());
+
+
+            	var dataTrnsfr = e.originalEvent.dataTransfer;
                 dataTrnsfr.effectAllowed = 'move';
                 dataTrnsfr.setData('Text', 'dummy');
                 elmDrag = $(this);
                 index = (elmDrag).addClass('drop-elmDrag').index();
             }).on(eventStack[1], function() {
+            	console.log("8");
+            	console.log($(this).children(".calender_detail_title").html());
+            	console.log($(this).children(".this_calender_id").val());
+
+            	//console.log(this);
                 (elmDrag = $(this)).removeClass('drop-elmDrag').show();
                 replacerSet.detach();
                 if (index != elmDrag.index()) {
@@ -77,34 +87,42 @@ var add_calender_color_value;	// color
                 }
                 elmDrag = null;
             }).not('a[href], img').on(eventStack[2], function() {
+            	console.log("1");                 
+            	console.log(this);
                 this.dragDrop && this.dragDrop();
                 return false;
             }).end().add([this, replacer]).on('dragover dragenter drop', function(event) {
                 if (!items.is(elmDrag) && options.linkTo !== $(elmDrag).parent().data('linkTo')) {
-                	console.log('이동 성공!');
+                	console.log("2");
+                	console.log(this);
                     return true;
                 }
                 if (event.type == 'drop') {
+                	
                     event.stopPropagation();
                     replacerSet.filter(':visible').after(elmDrag);
+                    console.log(this);
+                    console.log('성공');
                     return false;
                 }
                 event.preventDefault();
                 event.originalEvent.dataTransfer.dropEffect = 'move';
                 if (items.is(this)) {
+                	//console.log("4");                 
+                	//console.log(this);
                     if (options.replacerSize) {
                         replacer.height(elmDrag.outerHeight());
                     }
                     elmDrag.hide();
                     $(this)[replacer.index() < $(this).index() ? 'after' : 'before'](replacer);
                     replacerSet.not(replacer).detach();
-                    console.log('성공2');
                 } else if (!replacerSet.is(this) && !$(this).children(options.items).length) {
+                	console.log("5");
+                	console.log(this);
                     replacerSet.detach();
                     $(this).append(replacer);
-                    console.log('성공');
                 }
-                console.log('실패');
+                //console.log("8");
                 return false;
             });
         });
@@ -116,8 +134,8 @@ $('.dropme').dropme('enable');
 $('.exclude').dropme({
 				items: ':not(.disabled)'
 			});
-			$('.li_common_style').dropme({
-				linkTo: '.li_common_style'
+			$('.connected').dropme({
+				linkTo: '.connected'
 			});
 
   var _gaq = _gaq || [];
@@ -151,7 +169,7 @@ function addDynamicHtml(data){
       		if(0 != i)
 	      		html += '</ul>';
 
-      		html += '<ul class="li_common_style li1">';
+      		html += '<ul class="connected li1">';
       		html += '<li class="calender_info">';
       		html += data[i].categoryName+'<button type="button" class="btn  btn-primary calenderWriteBtn" data-toggle="modal" data-target="#calenderAddModal">+</button>';
       		//console.log(data[i].projectId);
@@ -186,7 +204,7 @@ function addDynamicHtml(data){
 	    $('.exclude').dropme({
 	    	items: ':not(.disabled)'
 	    });
-	    $('.li_common_style').dropme({
+	    $('.connected').dropme({
 	    	linkTo: '.connected'
 	    });
 
@@ -250,10 +268,17 @@ $('#calender_add').click(function() {
 	 var color 			= add_calender_color_value;
 	 var completion_per = $("input[name=addCompletionPer]").val();
 	 var tag 			= $("input[name=tag]").val();
-	 var category		= $("input[value="+add_category_id+"]").parent();		// 선택한 카테고리 클릭
-	 var y 				= category.parent().children().last().index()+1;		// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함 
+	 var category		= $("input[value="+add_category_id+"]").parent();	// 선택한 카테고리 클릭
+	 var y 				= category.parent().children().last().index()+1;	// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함
 	 var startDt 		= $("input[name=addDatepickerStart]").val();
 	 var endDt 			= $("input[name=addDatepickerEnd]").val();
+ 
+	 console.log("y:"+y);
+	 //class="this_category_id" value='+data[i].categoryId+' />';" +
+	 // var y 				= category.parent().children().last().index()+1;		// 마지막 자식 노드 인덱스, 카테고리 때문에 1더함
+	 console.log('적긔적긔');
+	 console.log($(".this_category_id").filter("input[value="+add_category_id+"]"));
+	 
 	 
 	 console.log("startDt:"+startDt+"endDt:"+endDt);
 	 console.log("completion_per:"+completion_per);

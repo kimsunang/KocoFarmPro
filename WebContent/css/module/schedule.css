@@ -21,7 +21,7 @@ h1, h2 {
 .connected, .sortable, .exclude, .handles, .dropme {
   margin: auto;
   padding: 0;
-  width: 400px;
+  width: 600px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -32,13 +32,13 @@ h1, h2 {
 
 .dropme.grid { overflow: hidden; }
 
-.connected li, .sortable li, .exclude li, .handles li, .dropme li {
+.connected li, .sortable li, .exclude li, .handles li, .dropme li, li_common_style li {
   list-style: none;
   border: 2px solid #CCC;
   color: black;
-  margin: 5px;
+  margin: 20px;
   padding: 5px;
-  height: 35px;
+/*  height: 35px;*/
 }
 
 .fl { float: left; }
@@ -85,6 +85,7 @@ li.drop-replacer {
   margin-top: 20px
 }
 }
+
 
 /* defualt.css */
 * {
@@ -647,27 +648,6 @@ list-style:none;
 float:left;
 width:300px;
 	
-}
-
-.li_common_style{
-display: inline-block;
-list-style:none;
-float:left;
-width:300px;
-}
-
-.li1 li{
-
-border: 1px #000000 solid;
-margin-top:10px;
-margin-bottom:10px;
-
-}
-
-.li2 li{
-border: 1px #000000 solid;
-margin-top:10px;
-margin-bottom:10px;
 }
 
 /* 모달창 */

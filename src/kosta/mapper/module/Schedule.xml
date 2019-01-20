@@ -29,7 +29,7 @@
 	right outer join category cat
 	on cal.category_id = cat.category_id
 	and project_id = #{projectId}	
-	order by cat.category_id, cal.y_pos
+	order by cat.category_id asc, cal.y_pos desc
 </select>
 
 

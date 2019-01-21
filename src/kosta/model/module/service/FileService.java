@@ -10,7 +10,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kosta.model.module.dao.FileDao;
 import kosta.model.module.vo.Files;
-import kosta.model.module.vo.Notice;
+
 
 public class FileService {
 	
@@ -18,7 +18,7 @@ public class FileService {
 	private static FileService fileService = new FileService();
 	
 	public static FileService getInstance(){
-			dao = dao.getInstance();
+//			dao = dao.getInstance();
 	
 		 return fileService;
 	}
@@ -29,7 +29,11 @@ public class FileService {
 		int size = 20 * 1024 * 1024; // 20MB
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "UTF-8", new DefaultFileRenamePolicy());
 		
+		
+		System.out.println("파일 서비스 ");
+		
 		Files file = new Files();
+	   	System.out.println("file_name");
 		file.setFile_name(multi.getParameter("file_name"));
 		file.setFile_path(multi.getParameter("file_path"));
 		file.setEmp_id(multi.getParameter("file_id"));
@@ -39,7 +43,7 @@ public class FileService {
 		
 		
 		// 파일 업로드
-		if(multi.getFilesystemName("file_id") != null){
+		if(multi.getFilesystemName("file_name") != null){
 			String file_id = multi.getFilesystemName("file_id");
 			file.setFile_id(file_id);
 		}else{
@@ -77,6 +81,14 @@ public class FileService {
 		
 		file.setFile_id(file_id);
 		int re = dao.upFile(file);
+		
+		return re;
+	}
+	//삭
+	public int delFile(HttpServletRequest request)throws Exception{
+		String fileId = request.getParameter("file") == null ? "" : request.getParameter("file");
+		
+		int re = dao.delFile(fileId);
 		
 		return re;
 	}

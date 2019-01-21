@@ -9,16 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
+import kosta.action.module.fileRoom.FileDeleteAction;
 import kosta.action.module.fileRoom.FileDownloadAction;
 import kosta.action.module.fileRoom.FileListAction;
 import kosta.action.module.fileRoom.FileUploadAction;
 import kosta.action.module.fileRoom.FileViewAction;
 import kosta.action.module.fileRoom.insertFileAction;
-import kosta.action.module.notice.ViewAction;
 
-@WebServlet({ "/fileList.do", "/fileUpload.do", "/fileDownload.do", "/insertFile.do" })
+
+@WebServlet({ "/fileList.do", "/fileUpload.do", "/fileDownload.do", "/insertFile.do","/deleteFile.do"})
 
 public class FileRoomController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +39,7 @@ public class FileRoomController extends HttpServlet {
 
 	public void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println(request);
 		/* 전체경로 > context경로 포함 */
 		String requestURI = request.getRequestURI();
 
@@ -45,10 +48,14 @@ public class FileRoomController extends HttpServlet {
 
 		/* 요청 URL 추출 */
 		String command = requestURI.substring(contextPath.length() + 1);
+		
+		System.out.println("# comm " + command);
 
 		IAction action = null;
 		ActionForward forward = null;
 		// 파일목록 나오도록
+		
+		
 		if (command.equals("fileList.do")) {
 			action = new FileListAction();
 
@@ -79,6 +86,7 @@ public class FileRoomController extends HttpServlet {
 			}
 
 		} else if (command.equals("insertFile.do")) {
+			System.out.println("#여기 ");
 			action = new insertFileAction();
 
 			try {
@@ -87,17 +95,16 @@ public class FileRoomController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		} else if (command.equals("fileList.do")) {
-			action = new insertFileAction();
+		}
+		else if (command.equals("deleteFile.do")) {
+			action = new FileDeleteAction();
 
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}	
-
-			/* 페이지 이동 */
-		}
+			}
+		}			/* 페이지 이동 */
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());

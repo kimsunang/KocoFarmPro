@@ -17,6 +17,8 @@
 			</div>
 		</div>
 	
+	<a href="fileList.do">파일 저장소</a>
+	
 		<!-- Contents Area -->
 		<div class="contents_wrap">
 			<!-- sch_top -->

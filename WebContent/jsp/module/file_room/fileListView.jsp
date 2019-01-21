@@ -29,10 +29,10 @@
 		<!--문서도 확장자 여러게 지정 가능  -->
 		<div class="contents_wrap">
 			<!-- view -->
-			<form action="" id="noticeForm">
+			<form action="" id="fileForm">
 				<input type="hidden" name="mode" id="mode" value="${param.mode}" />
-				<input type="hidden" name="noticeId" id="noticeId"
-					value="${notice.noticeId}" />
+				<input type="hidden" name="fileId" id="fileId"
+					value="${files.file_id}" />
 
 				<div class="contents">
 					<!-- 상세 정보 -->
@@ -42,51 +42,15 @@
 							<col width="*">
 						</colgroup>
 						<tbody>
-							<tr>
-							<th>
-							<div>파일올리기	<input type="file" name="file_id" id="file_id">
-								<input type = "submit" value="업로드"></input></div>
-							</a></th>
-							<td class="left"></td>
-							</tr>
-							<tr>
-							<th><a href="fileUpload.do">파일 업로드</a></th>
-							<td class="left"></td>
-							</tr>
-							<tr>
-							<th><a href="rent.do">파일 리스트</a></th>
-							<td class="left"></td>
-							</tr>
-							<tr>
-							<th><a href="schedule.do">동영상</a></th>
-							<td class="left"></td>
-							</tr>
-							<tr>
-							<th><a href="schedule.do">문서</a></th>
-							<td class="left"></td>
-							</tr>		
-							<%--<tr>
-								<th scope="col">파일 올리기</th>
-							<td class="left"></td>
-							</tr>
-							<tr>
-								<th scope="col">제목</th>
-								<td class="left">${notice.title}</td>
-							</tr>
-							 <tr>
-								<th scope="col">내용</th>
-								<td class="left">${notice.contents}</td>
-							</tr>
-							<tr>
-								<th scope="col">파일</th>
-								<td class="left"> --%><c:choose>
-										<c:when test="${not empty notice.fileNm}">
-											<a href="jsp/comm/download.jsp?filename=${notice.fileNm}">${notice.fileNm}</a>
-										</c:when>
-										<c:otherwise>
+							<c:choose>
+								<c:when test="${not empty files.filename}">
+									<a href="jsp/comm/download.jsp?filename=${files.fileName}">${files.fileid}</a>
+								</c:when>
+								<c:otherwise>
 											첨부 파일이 없습니다.
 										</c:otherwise>
-									</c:choose></td>
+							</c:choose>
+							</td>
 							</tr>
 						</tbody>
 					</table>
@@ -98,5 +62,5 @@
 
 
 
-			<script type="text/javascript" src="/Kocofarm/js/module/notice.js"></script>
+			<script type="text/javascript" src="/Kocofarm/js/module/fileRoom.js"></script>
 			<jsp:include page="/jsp/comm/bottom.jsp" flush="false"></jsp:include>

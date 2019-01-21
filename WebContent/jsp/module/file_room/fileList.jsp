@@ -3,9 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/jsp/comm/top.jsp" flush="false"></jsp:include>
 <link rel="stylesheet" type="text/css"
-	href="/Kocofarm/css/module/notice.css" />
+	href="/Kocofarm/css/module/file_Room.css" />
 
-<div class="cont_wrap">
+
 
 	<!-- SubTitle Area -->
 	<div class="sub_title">
@@ -22,7 +22,7 @@
 			</div>
 		</div>
 	</div>
-	<form action="noticeList.do" id="noticeForm">
+	<form action="fileList.do" id="FileForm">
 		<input type="hidden" name="mode" id="mode" value="" />
 
 		<div class="sch_wrap">
@@ -45,49 +45,20 @@
 							placeholder="검색어를 입력 해 주세요" /> <input type="button"
 							class="schBtn" id="schBtn" value="검색" />
 					</div>
+					
+					<jsp:include page="/jsp/module/file_room/fileUpload.jsp" flush="false"></jsp:include>
 				</div>
 			</div>
+			
 		</div>
 	</form>
 	<!-- 좌측 사이드 메뉴 만들고 파일 바둑판 식으로 배열되기 하고 파일 업로드 기능 부여 -->
 
 
 
-	<div class="contents">
-		<!-- 상세 정보 -->
-		<table class="contents_tb vw" id="contTb">
-			<colgroup>
-				<col width="20%">
-				<col width="*">
-			</colgroup>
-			<tbody>
-				<tr>
-					<td class="left"></td>
-				</tr>
-				<tr>
-					<th><a href="fileUpload.do">파일 업로드</a></th>
-					<td class="left"></td>
-				</tr>
-				<tr>
-					<th><a href="fileList.do">파일 리스트</a></th>
-					<td class="left"></td>
-				</tr>
-				<tr>
-					<th><a href="schedule.do">동영상</a></th>
-					<td class="left"></td>
-				</tr>
-				<tr>
-					<th><a href="schedule.do">문서</a></th>
-					<td class="left"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
 
 
 
 
-
-
-	<script type="text/javascript" src="/Kocofarm/js/module/notice.js"></script>
+	<script type="text/javascript" src="/Kocofarm/js/module/fileRoom.js"></script>
 	<jsp:include page="/jsp/comm/bottom.jsp" flush="false"></jsp:include>

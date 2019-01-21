@@ -5,7 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
-import kosta.model.module.vo.Notice;
+import kosta.model.module.service.FileService;
+
 
 public class FileViewAction implements IAction {
 
@@ -13,7 +14,7 @@ public class FileViewAction implements IAction {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		ActionForward forward = new ActionForward();
-		//FileRoomService service = FileRoomService.getInstance();
+		FileService service = FileService.getInstance();
 		// 파일 서비스 만든 다음에 넣을것
 		System.out.println("# 진입 ");
 		forward.setPath("/jsp/module/file_room/fileRoomView.jsp");

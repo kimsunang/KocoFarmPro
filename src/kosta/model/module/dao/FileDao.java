@@ -10,7 +10,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kosta.mapper.module.FileMapper;
-import kosta.mapper.module.NoticeMapper;
 import kosta.model.module.vo.Files;
 
 public class FileDao {
@@ -83,12 +82,12 @@ public class FileDao {
 	}
 
 	// 삭제
-	public int delFile(Files file) {
+	public int delFile(String file_name) {
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 
 		try {
-			re = sqlSession.getMapper(FileMapper.class).delFile(file);
+			re = sqlSession.getMapper(FileMapper.class).delFile(file_name);
 			try {
 				if (0 < re) {
 					sqlSession.commit();

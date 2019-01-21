@@ -9,9 +9,9 @@
 		<div class="sub_title">
 			<div class="sub_title_top">
 				<div class="sub_title_inner">
-					<h2>자료실 <span>공지사항을 확인할 수 있습니다.</span></h2>
+					<h2>자료실 <span>파일을 다운로드 할 수 있습니다.</span></h2>
 					<ul class="sub_nav">
-						<li>홈 > 공지사항 > </li>
+						<li>홈 > 자료실 > </li>
 						<li class="on">상세정보</li>
 					</ul>
 				</div>
@@ -23,7 +23,7 @@
 			<!-- view -->
 			<form action="" id="noticeForm">
 				<input type="hidden" name="mode" id="mode" value="${param.mode}" />
-				<input type="hidden" name="noticeId" id="noticeId" value="${notice.noticeId}" />
+				<input type="hidden" name="fileId" id="fileId" value="${file.fileId}" />
 				
 				<div class="contents">
 					<!-- 상세 정보 -->
@@ -35,18 +35,18 @@
 						<tbody>
 							<tr>
 								<th scope="col">제목</th>
-								<td class="left">${notice.title}</td>
+								<td class="left">${file.title}</td>
 							</tr>
 							<tr>
 								<th scope="col">내용</th>
-								<td class="left">${notice.contents}</td>
+								<td class="left">${file.contents}</td>
 							</tr>
 							<tr>
 								<th scope="col">파일</th>
 								<td class="left">
 									<c:choose>
 										<c:when test="${not empty notice.fileNm}">
-											<a href="jsp/comm/download.jsp?filename=${notice.fileNm}">${notice.fileNm}</a>
+											<a href="jsp/comm/download.jsp?filename=${file.fileNm}">${notice.fileNm}</a>
 										</c:when>
 										<c:otherwise>
 											첨부 파일이 없습니다.
@@ -69,5 +69,5 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript" src="/Kocofarm/js/module/notice.js"></script>
+<script type="text/javascript" src="/Kocofarm/js/module/fileRoom.js"></script>
 <jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

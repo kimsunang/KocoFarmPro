@@ -11,7 +11,7 @@ public interface FileMapper {
 	//파일등록
 	int setFile(Files file);
 	//파일삭제
-	int delFile(Files file);
+	int delFile(String file_name);
 	//파일수정
 	int upFile(Files file);
 	//파일리스트

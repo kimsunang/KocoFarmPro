@@ -27,9 +27,9 @@ public class FileDownload implements IAction {
         int idx = Integer.parseInt(request.getParameter("idx"));
  
         
-
+        Files file = new Files();
         // 파일 이름을 받아서
-        String file_name = Files.File_name;
+        String file_name = file.getFile_name();
 
         // 실제 파일이 들어있는 경로에 설정한 
         // upload폴더와 파일 이름을 붙여서

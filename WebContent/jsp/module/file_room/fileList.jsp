@@ -55,10 +55,5 @@
 	<!-- 좌측 사이드 메뉴 만들고 파일 바둑판 식으로 배열되기 하고 파일 업로드 기능 부여 -->
 
 
-
-
-
-
-
 	<script type="text/javascript" src="/Kocofarm/js/module/fileRoom.js"></script>
 	<jsp:include page="/jsp/comm/bottom.jsp" flush="false"></jsp:include>

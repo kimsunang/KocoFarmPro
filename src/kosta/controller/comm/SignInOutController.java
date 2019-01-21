@@ -21,7 +21,7 @@ private static final long serialVersionUID = 1L;
 		doProcess(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,	 HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
 	}
 	

@@ -11,4 +11,4 @@
 	</div>
 	
 <script type="text/javascript" src="/KocoFarmPro/js/module/main.js"></script>
-<jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>ㅛ
+<jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

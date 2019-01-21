@@ -43,7 +43,7 @@ public class ScheduleService {
 	
 	public List<ScheduleCalenderList> listProjectCalender(HttpServletRequest request) throws Exception {
 		String strProjectId = request.getParameter("projectId");
-		System.out.println("strProjectId:"+strProjectId);
+		System.out.println("프로젝트 id값!!!:"+strProjectId);
 		int projectId = Integer.parseInt(strProjectId);
 		
 		ScheduleDao dao = ScheduleDao.getInstance();
@@ -80,42 +80,33 @@ public class ScheduleService {
 		if(null == request)
 			return -1;
 		
-		String[] data = request.getParameter("data_parameter").split("[|]");
-		System.out.println("길이:"+data.length);
-		
+		String[] data = request.getParameter("data_parameter").split("[|]");	
 		int re = -1;
 		if(null == data)
 			return -1;
 		
-		// 일단 여기서 해보자
 		List<ScheduleCalenderMove> scheduleCalenderPosList = new ArrayList<ScheduleCalenderMove>();
 		for(int i = 0; i < data.length; ++i){
-			System.out.println(data[i]);
+			
 			String[] list = data[i].split(",");
-			if(null == list[0] || null == list[1] || null == list[2] ){
-			System.out.println("여기 들어오나?");
+			if(null == list[0] || null == list[1] || null == list[2] )
 				continue;
-			}
 						
 			int categoryId	= Integer.parseInt(list[0]);
 			int calenderId	= Integer.parseInt(list[1]);
 			int y 			= Integer.parseInt(list[2]);
 			
 			ScheduleCalenderMove calenderInfo = new ScheduleCalenderMove(categoryId, calenderId, y);
-			System.out.println(calenderInfo);
-			
+		
 			scheduleCalenderPosList.add(calenderInfo);
 		}
 		
 		int size = scheduleCalenderPosList.size();
-		System.out.println("리스트 크기:"+size);
-		for(int i = 0; i < size; ++i){			
-			dao.editCalenderMove(scheduleCalenderPosList.get(i));
-			System.out.println("i:"+i);
+		for(int i = 0; i < size; ++i) {
+			re = dao.editCalenderMove(scheduleCalenderPosList.get(i));
+			if(-1 == re)
+				return -1;
 		}
-		System.out.println("끗");
-		re = 0;
-		//System.out.println(scheduleCalenderPosList.toString());
 
 		return re;
 	}

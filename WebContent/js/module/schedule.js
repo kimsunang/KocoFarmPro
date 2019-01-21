@@ -103,13 +103,13 @@ var drag_before_calender_index;			// 이동 전 일정 index
             	drag_after_calender_category_id = $(this).parent().children(".calender_info").children(".this_category_id").val()
             	if(drag_before_calender_category_id == drag_after_calender_category_id)
             		isSameCategory = 1;
+            	var data = "";
             	if(1 == isSameCategory){
             		// 같은 카테고리 내 이동
             		// 순서대로 y값을 준다
             		var size = $(this).parent().children().length - 1; // 인덱스는 길이보다 1작다
             		var y = 0;
             		console.log('같은카테고리 이동:'+size);
-            		var data="";
             		for(var index = size; index >= 1; --index){
 	            	    var calenderId = $(this).parent().children().eq(index).children(".this_calender_id").val();
 	            	    if(undefined == calenderId)
@@ -123,27 +123,9 @@ var drag_before_calender_index;			// 이동 전 일정 index
 	            		$(this).parent().children().eq(index).children(".this_calender_yPos").val(y++);
 	            		
 	            		console.log(data);
-	            	}
-            		
-            		// 변경된 값 전달하기
-	            	 $.ajax({
-	                     url: "editCalenderPos.do",
-	                     type: "POST",
-	                     data: {data_parameter:data},
-	                     dataType: "text",
-	                     success: function(data) {
-	                    	 console.log('edit pos 성공');
-	                     },
-	                     error:function(data){
-	                    	 console.log('edit pos 실패');
-	                     }
-	                 });
-
-            		
+	            	}            		
             	}else{
-
-            		var data = "";			// 전달할 값 저장
-  	            	// y값 갱신
+            		// y값 갱신
 	            	//이동한 곳 밑에 노드가 있으면 y값 구하고 1 더해줌. 아니면 0넣어줌
                 	if(null == $(this).parent().children().eq($(this).index()+1)){
 	            		drag_after_calender_y = $(this).parent().children().eq($(this).index()+1).children(".this_calender_yPos")+1;
@@ -151,7 +133,7 @@ var drag_before_calender_index;			// 이동 전 일정 index
 	            	
 	            	// 이동한 곳 처리. y값 전체 재설정
 	            	var size = $(this).parent().children().length - 1; // 인덱스는 길이보다 1작다
-	            	console.log('이동한 카테고리의 자식개수 :'+size);
+	            	//console.log('이동한 카테고리의 자식개수 :'+size);
 	            	var otherY = 0;
 	            	for(var index = size; index >= 1; --index){
 	            	    var calenderId = $(this).parent().children().eq(index).children(".this_calender_id").val();
@@ -163,12 +145,12 @@ var drag_before_calender_index;			// 이동 전 일정 index
 	            	    data += otherY + "|";
 	            		$(this).parent().children().eq(index).children(".this_calender_yPos").val(otherY++);
 	            		
-	            		console.log(data);
+	            		//console.log(data);
 	            	}
 	            
 	            	var list =  $(".this_category_id").filter("input[value="+drag_before_calender_category_id+"]").parent().parent();	//이동하기 전 원래 있던 카테고리
 	            	var beforeSize = $(list).children().length - 1;	// 인덱스는 길이보다 1작다
-	            	console.log('이동 전 카테고리의 자식개수 :'+beforeSize);
+	            	//console.log('이동 전 카테고리의 자식개수 :'+beforeSize);
 	            	var beforeY = 0;
 	            	for(var index = beforeSize; index >= 1; --index){
 	            		var calenderId = $(".this_category_id").filter("input[value="+drag_before_calender_category_id+"]").parent().parent().children().eq(index).children(".this_calender_id").val();
@@ -179,34 +161,28 @@ var drag_before_calender_index;			// 이동 전 일정 index
 	                	data += calenderId+",";
 		            	data += beforeY+"|";            	    
 	            		$(list).parent().children().eq(index).children(".this_calender_yPos").val(beforeY++);
-	            		console.log(data);
+	            		//console.log(data);
 	            	}
-	            	
-	            	// 변경된 값 전달하기
-	            	 $.ajax({
-	                     url: "editCalenderPos.do",
-	                     type: "POST",
-	                     data: {data_parameter:data},
-	                     dataType: "text",
-	                     success: function(data) {
-	                    	 console.log('edit pos 성공');
-	                     },
-	                     error:function(data){
-	                    	 console.log('edit pos 실패');
-	                     }
-	                 });
-
             	}
-            	
-            	console.log("카테고리 id:"+$(this).parent().children(".calender_info").children(".this_category_id").val());
-            	console.log($(this).children(".calender_detail_title").html());
-            	console.log($(this).children(".this_calender_id").val());
+            		
+           		// 변경된 값 전달하기
+            	$.ajax({
+                    url: "editCalenderPos.do",
+                    type: "POST",
+                    data: {data_parameter:data},
+                    dataType: "text",
+                    success: function(data) {
+                   	 console.log('edit pos 성공');
+                    },
+                    error:function(data){
+                   	 console.log('edit pos 실패');
+                    }
+                });
 
-            	//drag_after_calender_category_id
-            	//drag_after_calender_id
-            	//drag_after_calender_y
+            	//console.log("카테고리 id:"+$(this).parent().children(".calender_info").children(".this_category_id").val());
+            	//console.log($(this).children(".calender_detail_title").html());
+            	//console.log($(this).children(".this_calender_id").val());
             	
-            	//console.log(this);
                 (elmDrag = $(this)).removeClass('drop-elmDrag').show();
                 replacerSet.detach();
                 if (index != elmDrag.index()) {
@@ -216,10 +192,9 @@ var drag_before_calender_index;			// 이동 전 일정 index
                 }
                 elmDrag = null;
                 
-                console.log('내가 확인해야할 것');
-                console.log($(".this_category_id").filter("input[value="+drag_before_calender_category_id+"]").parent());
-                      
-                console.log("이동전 size:"+$(".this_category_id").filter("input[value="+drag_before_calender_category_id+"]").parent().parent().children().length+"이동 후 size:"+$(this).parent().children().length);
+                //console.log('내가 확인해야할 것');
+                //console.log($(".this_category_id").filter("input[value="+drag_before_calender_category_id+"]").parent());
+                //console.log("이동전 size:"+$(".this_category_id").filter("input[value="+drag_before_calender_category_id+"]").parent().parent().children().length+"이동 후 size:"+$(this).parent().children().length);
             }).not('a[href], img').on(eventStack[2], function() {
             	console.log(this);
                 this.dragDrop && this.dragDrop();

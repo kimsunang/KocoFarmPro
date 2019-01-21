@@ -11,8 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.FileUpload;
+
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
+import kosta.action.module.fileRoom.FileDeleteAction;
+import kosta.action.module.fileRoom.FileDownload;
+import kosta.action.module.fileRoom.FileDownloadAction;
+import kosta.action.module.fileRoom.FileListAction;
+import kosta.action.module.fileRoom.FileUploadAction;
+import kosta.action.module.fileRoom.insertFileAction;
 import kosta.action.module.schedule.DelCalenderAction;
 import kosta.action.module.schedule.EditCalenderAction;
 import kosta.action.module.schedule.InsertCalenderAction;
@@ -20,13 +28,14 @@ import kosta.action.module.schedule.ListProjectAction;
 import kosta.action.module.schedule.ListCalenderAction;
 import kosta.action.module.schedule.SendProjectIdAction;
 
-@WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do", "/editCalender.do", "/delCalender.do" })
+@WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do", "/editCalender.do", "/delCalender.do",
+	"/fileList.do", "/fileUpload.do", "/fileDownload.do", "/insertFile.do","/deleteFile.do"})
 public class ScheduleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	       
     Map<String, IAction> scheduleActionList;
     public ScheduleController() {
-        super();
+    	super();
     	scheduleActionList = new HashMap<String, IAction>();
 		scheduleActionList.put("schedule.do", new ListProjectAction());
 		scheduleActionList.put("listCalender.do", new ListCalenderAction());
@@ -34,6 +43,11 @@ public class ScheduleController extends HttpServlet {
 		scheduleActionList.put("sendProjectId.do", new SendProjectIdAction());
 		scheduleActionList.put("editCalender.do", new EditCalenderAction());
 		scheduleActionList.put("delCalender.do", new DelCalenderAction());
+		scheduleActionList.put("fileList.do", new FileListAction());
+		scheduleActionList.put("fileUpload.do", new FileUploadAction());
+		scheduleActionList.put("fileDownload.do", new FileDownloadAction());
+		scheduleActionList.put("insertFile.do", new insertFileAction());
+		scheduleActionList.put("deleteFile.do", new FileDeleteAction());
 
 	}
     

@@ -2,22 +2,6 @@
 
 
 /* dragme.css */
-
-header, section { display: block; }
-
-body { font-family: 'Droid Serif'; }
-
-h1, h2 {
-  text-align: center;
-  font-weight: normal;
-}
-
-/*#features {
-			margin: auto;
-			width: 460px;
-			font-size: 0.9em;
-		}*/
-
 .connected, .sortable, .exclude, .handles, .dropme {
   margin: auto;
   padding: 0;
@@ -45,7 +29,7 @@ h1, h2 {
 
 .handles span { cursor: move; }
 
-li.disabled { opacity: 0.5; }
+/*li.disabled { opacity: 0.5; }*/
 
 .dropme.grid li {
   line-height: 80px;
@@ -54,8 +38,6 @@ li.disabled { opacity: 0.5; }
   height: 80px;
   text-align: center;
 }
-
-li.highlight { background: #FEE25F; }
 
 #connected {
   width: 440px;
@@ -88,18 +70,18 @@ li.drop-replacer {
 
 
 /* defualt.css */
-* {
+/* * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
+}*/
 
-body,
+/*body,
 html {
     font-size: 100%;
     padding: 0;
     margin: 0;
-}
+}*/
 
 
 /* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
@@ -114,18 +96,18 @@ html {
     clear: both;
 }
 
-body {
+/*body {
     font-family: 'Lato', Calibri, Arial, sans-serif;
     color: #47a3da;
-}
+}*/
 
-a {
+/*a {
     text-decoration: none;
 }
 
 a:hover {
     color: #000;
-}
+}*/
 
 .container {
     position: relative;
@@ -632,7 +614,7 @@ footer{margin-top: 30px; text-align: center; color: #333}
 
 .handles span { cursor: move; }
 
-li.highlight { background: #FEE25F; }
+/*li.highlight { background: #FEE25F; }*/
 
 .connected {
   float: left;

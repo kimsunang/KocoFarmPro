@@ -109,13 +109,15 @@ var drag_before_calender_index;			// 이동 전 일정 index
             		var size = $(this).parent().children().length - 1; // 인덱스는 길이보다 1작다
             		var y = 0;
             		console.log('같은카테고리 이동:'+size);
-            		var data;
+            		var data="";
             		for(var index = size; index >= 1; --index){
 	            	    var calenderId = $(this).parent().children().eq(index).children(".this_calender_id").val();
 	            	    if(undefined == calenderId)
 	            			continue;
 	            	    
-	            	    data += drag_after_calender_category_id+",";
+	            	    console.log(drag_before_calender_category_id);
+	            	    
+	            	    data += drag_before_calender_category_id+",";
 	            	    data += calenderId+",";
 	            	    data += y + "|";
 	            		$(this).parent().children().eq(index).children(".this_calender_yPos").val(y++);

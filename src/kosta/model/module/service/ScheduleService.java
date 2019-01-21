@@ -31,13 +31,41 @@ public class ScheduleService {
 	
 	
 	public int insertScheduleCalender(HttpServletRequest request) throws Exception {
-		
 		ScheduleCalender scheduleCalender = createCalender(request);
 		if(null == scheduleCalender)
 			return -1;
 		
 		System.out.println(scheduleCalender);
 		int re = dao.insertCelender(scheduleCalender);
+		return re;
+	}
+	
+	public int insertScheduleCategory(HttpServletRequest request) throws Exception {
+		if(null == request)
+			return -1;
+		
+		String categoryName = request.getParameter("categoryName");
+		String projectId	= request.getParameter("projectId");
+		String xPos 		= request.getParameter("xPos");
+		
+		if(null == categoryName || null == projectId || null == xPos)
+			return -1;
+		
+		if(true == categoryName.isEmpty() || true == projectId.isEmpty() || true == xPos.isEmpty())
+			return -1;
+		
+		ScheduleCategory scheduleCategory = new ScheduleCategory();
+		if(null == scheduleCategory)
+			return -1;
+		
+		int projectid = Integer.parseInt(projectId);
+		int xpos = Integer.parseInt(xPos);
+
+		scheduleCategory.setProjectId(projectid);
+		scheduleCategory.setCategoryName(categoryName);
+		scheduleCategory.setxPos(xpos);
+		
+		int re = dao.insertCategory(scheduleCategory);
 		return re;
 	}
 	

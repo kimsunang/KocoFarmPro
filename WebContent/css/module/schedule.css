@@ -5,7 +5,7 @@
 .connected, .sortable, .exclude, .handles, .dropme {
   margin: auto;
   padding: 0;
-  width: 600px;
+  width: 300px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -39,18 +39,6 @@
   text-align: center;
 }
 
-#connected {
-  width: 440px;
-  overflow: hidden;
-  margin: auto;
-}
-
-.connected {
-  float: left;
-  width: 200px;
-}
-
-.connected.no2 { float: right; }
 
 li.drop-replacer {
   border: 1px dashed #CCC;
@@ -618,18 +606,6 @@ footer{margin-top: 30px; text-align: center; color: #333}
 
 .connected {
   float: left;
-  width: 200px;
-}
-
-/* 일정과 관련있음 */
-.con { margin-top:20px; }
-
-.category_class{
-display: inline-block;
-list-style:none;
-float:left;
-width:300px;
-	
 }
 
 /* 모달창 */
@@ -797,4 +773,16 @@ width:300px;
   height: 25px;
   background: #4CAF50;
   cursor: pointer;
+}
+
+/* 카테고리 입력 박스 */
+
+.category-name-box input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #3ADF00;
+  color: white;
 }

@@ -25,13 +25,14 @@ import kosta.action.module.schedule.DelCalenderAction;
 import kosta.action.module.schedule.EditCalenderAction;
 import kosta.action.module.schedule.EditCalenderMoveAction;
 import kosta.action.module.schedule.InsertCalenderAction;
+import kosta.action.module.schedule.InsertCategoryAction;
 import kosta.action.module.schedule.ListProjectAction;
 import kosta.action.module.schedule.ListCalenderAction;
 import kosta.action.module.schedule.SendProjectIdAction;
 
 
 @WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do", "/editCalender.do", "/delCalender.do",
-	"/editCalenderPos.do",
+	"/editCalenderPos.do", "/insertCategory.do",
 	"/fileList.do", "/fileUpload.do", "/fileDownload.do", "/insertFile.do","/deleteFile.do"})
 
 public class ScheduleController extends HttpServlet {
@@ -41,18 +42,24 @@ public class ScheduleController extends HttpServlet {
     public ScheduleController() {
     	super();
     	scheduleActionList = new HashMap<String, IAction>();
+    	
+    	// 일정 관리
 		scheduleActionList.put("schedule.do", new ListProjectAction());
 		scheduleActionList.put("listCalender.do", new ListCalenderAction());
 		scheduleActionList.put("insertCalender.do", new InsertCalenderAction());
 		scheduleActionList.put("sendProjectId.do", new SendProjectIdAction());
 		scheduleActionList.put("editCalender.do", new EditCalenderAction());
 		scheduleActionList.put("delCalender.do", new DelCalenderAction());
+		scheduleActionList.put("editCalenderPos.do", new EditCalenderMoveAction());
+		scheduleActionList.put("insertCategory.do", new InsertCategoryAction());
+
+
+		// 파일 관리
 		scheduleActionList.put("fileList.do", new FileListAction());
 		scheduleActionList.put("fileUpload.do", new FileUploadAction());
 		scheduleActionList.put("fileDownload.do", new FileDownloadAction());
 		scheduleActionList.put("insertFile.do", new insertFileAction());
 		scheduleActionList.put("deleteFile.do", new FileDeleteAction());
-		scheduleActionList.put("editCalenderPos.do", new EditCalenderMoveAction());
 
 	}
     

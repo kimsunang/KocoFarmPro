@@ -266,20 +266,25 @@ function addDynamicHtml(data){
 	var html = "";
 	var categoryId = -1;			// 카테고리 아이디 저장
 	
+	var projectId = 0;
     for(var i=0; i<data.length; i++){		      	
       	// 카테고리 id가 다르면 새로운 카테고리생성
       	if(categoryId != data[i].categoryId){
-      		if(0 != i)
-	      		html += '</ul>';
-
+      		if(0 != i){
+      			projectId = data[i].projectId;
+      			html += '</ul>';
+      		}
+      		
       		html += '<ul class="connected li1">';
       		html += '<li class="calender_info">';
-      		html += data[i].categoryName+'<button type="button" class="btn  btn-primary calenderWriteBtn" data-toggle="modal" data-target="#calenderAddModal">+</button>';
+      		html += '<div class="category-name-box"><input class="category-name-input" type="text" readonly="true" value="'+data[i].categoryName+'"></input><div>';
+      		html += '<div><button type="button" class="btn  btn-primary calenderWriteBtn btn-block" data-toggle="modal" data-target="#calenderAddModal">새 일정 추가하기</button></div>';
       		//console.log(data[i].projectId);
       		//console.log(data[i].categoryId);
       		//console.log(data[i].calenderId);
     		html += '<input type="hidden" class="this_project_id" value='+data[i].projectId+' />';
       		html += '<input type="hidden" class="this_category_id" value='+data[i].categoryId+' />';
+      		html += '<input type="hidden" class="this_category_x" value='+data[i].xPos+' />';
       		html += '</li>';
     		categoryId = data[i].categoryId;
       		
@@ -303,7 +308,17 @@ function addDynamicHtml(data){
 
 		// 동적으로 생성된 element 이벤트 붙이기
 		html += '</ul>';
-	    $(".con").append(html); 
+	    
+    	// 새  카테고리
+		html += '<ul class="connected li1">';
+		html += '<li class="calender_info">';
+  		html += '<div><input class="add-category-name-input" type="text"></input><div>';
+        html += '<button type="button" class="btn btn-warning btn-lg btn-xs addCategoryButton">새 카테고리 추가</button>';
+		html += '<input type="hidden" class="this_project_id" value='+projectId+' />';
+		html += '</li>';
+		html += '</ul>';
+		
+		$(".con").append(html); 
 	    
 	    $('.dropme').dropme('enable');
 	    $('.exclude').dropme({
@@ -363,6 +378,53 @@ function addDynamicHtml(data){
 			$("#editCalenderCompletionPerVal").val(completionPer);
 
 			calenderButtonClick(project_id, category_id, calender_id);
+	   });
+	   
+	   /* 카테고리 값 체인지 이벤트 */
+	   $('.category-name-input').on("dblclick", function(){
+		   $(this).attr("readonly", false);
+	   });
+	   
+	   $('.category-name-input').on("change", function(){
+		   $(this).attr("readonly", true);
+		   
+		   //ajax
+		   
+	   });
+	   
+	   $('.addCategoryButton').on("click", function(){
+		  console.log('새 카테고리 추가 클릭'); 
+		  var text = $('.add-category-name-input').val(); 
+		  
+		  if("" == text){
+			  alert("카테고리 이름이 없습니다");
+			  return;
+		  }
+		  
+		  var xPos = $('.category-name-input').length+1;
+		  
+		 $.ajax({
+		    type:"POST",
+		    data : { categoryName:text, projectId:projectId, xPos:xPos  },
+		    dataType:"text",
+		    url:"insertCategory.do",
+		    success: function(project_id) { 	
+		 	
+		 	$.ajax({
+				url:'listCalender.do',
+				data: {"projectId":projectId},
+				dataType:'json',
+				success:function(data){	
+					
+				 addDynamicHtml(data);
+				}// success function
+			});// ajax
+		    },
+		    error : function(error) {
+		    	console.log("state:"+error.state()+"ajax 실패:"+error.responseText+"html:"+error.result_html);
+		    },	// error
+		  });// ajax
+		  
 	   });
 }
 

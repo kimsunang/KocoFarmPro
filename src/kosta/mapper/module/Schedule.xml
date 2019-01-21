@@ -58,4 +58,7 @@
 <delete id="delCalender" parameterType="int">
 	delete from calender where calender_id = #{calenderId}
 </delete>
+<update id="editCalenderMove" parameterType="ScheduleCalenderMove" >
+	update calender set category_id = #{categoryId} , y_pos = #{yPos} where calender_id = #{calenderId}
+</update>
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import kosta.model.module.vo.ScheduleCalender;
 import kosta.model.module.vo.ScheduleCategory;
 import kosta.model.module.vo.ScheduleCalenderList;
+import kosta.model.module.vo.ScheduleCalenderMove;
 import kosta.model.module.vo.ScheduleEmployee;
 import kosta.model.module.vo.ScheduleProject;
 
@@ -17,4 +18,5 @@ public interface ScheduleMapper {
 	public List<ScheduleCalenderList> listProjectCalender(int projectId);
 	public int editCalender(ScheduleCalender scheduleCalender);
 	public int delCalender(int calenderId);
+	public int editCalenderMove(ScheduleCalenderMove calenderMove);
 }

@@ -2,16 +2,16 @@ package kosta.model.module.vo;
 
 import java.io.Serializable;
 
-public class ScheduleCalenderPos implements Serializable{
+public class ScheduleCalenderMove implements Serializable{
 	private int 	categoryId;
 	private int 	calenderId;
 	private int 	yPos;				// 일정의 Y좌표
 	
-	public ScheduleCalenderPos(){
+	public ScheduleCalenderMove(){
 		
 	}
 	
-	public ScheduleCalenderPos(int categoryId, int calenderId, int yPos) {
+	public ScheduleCalenderMove(int categoryId, int calenderId, int yPos) {
 		super();
 		this.categoryId = categoryId;
 		this.calenderId = calenderId;
@@ -44,6 +44,6 @@ public class ScheduleCalenderPos implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ScheduleCalenderPos [categoryId=" + categoryId + ", calenderId=" + calenderId + ", yPos=" + yPos + "]";
+		return "ScheduleCalenderMove [categoryId=" + categoryId + ", calenderId=" + calenderId + ", yPos=" + yPos + "]";
 	}
 }

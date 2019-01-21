@@ -34,6 +34,7 @@
 		<typeAlias type="kosta.model.module.vo.ScheduleCalender" alias="ScheduleCalender" />
 		<typeAlias type="kosta.model.module.vo.ScheduleEmployee" alias="ScheduleEmployee" />
 		<typeAlias type="kosta.model.module.vo.ScheduleCalenderList" alias="ScheduleCalenderList" />
+		<typeAlias type="kosta.model.module.vo.ScheduleCalenderMove" alias="ScheduleCalenderMove" />
 	
 	
 	</typeAliases>

@@ -1,13 +1,17 @@
 package kosta.model.module.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import kosta.model.module.dao.ScheduleDao;
 import kosta.model.module.vo.ScheduleCalender;
 import kosta.model.module.vo.ScheduleCategory;
+import net.sf.json.JSONArray;
 import kosta.model.module.vo.ScheduleCalenderList;
+import kosta.model.module.vo.ScheduleCalenderMove;
 
 public class ScheduleService {
 	private static ScheduleDao dao;
@@ -72,6 +76,50 @@ public class ScheduleService {
 		return re;		
 	}
 	
+	public int editCalenderMove(HttpServletRequest request) throws Exception{
+		if(null == request)
+			return -1;
+		
+		String[] data = request.getParameter("data_parameter").split("[|]");
+		System.out.println("길이:"+data.length);
+		
+		int re = -1;
+		if(null == data)
+			return -1;
+		
+		// 일단 여기서 해보자
+		List<ScheduleCalenderMove> scheduleCalenderPosList = new ArrayList<ScheduleCalenderMove>();
+		for(int i = 0; i < data.length; ++i){
+			System.out.println(data[i]);
+			String[] list = data[i].split(",");
+			if(null == list[0] || null == list[1] || null == list[2] ){
+			System.out.println("여기 들어오나?");
+				continue;
+			}
+						
+			int categoryId	= Integer.parseInt(list[0]);
+			int calenderId	= Integer.parseInt(list[1]);
+			int y 			= Integer.parseInt(list[2]);
+			
+			ScheduleCalenderMove calenderInfo = new ScheduleCalenderMove(categoryId, calenderId, y);
+			System.out.println(calenderInfo);
+			
+			scheduleCalenderPosList.add(calenderInfo);
+		}
+		
+		int size = scheduleCalenderPosList.size();
+		System.out.println("리스트 크기:"+size);
+		for(int i = 0; i < size; ++i){			
+			dao.editCalenderMove(scheduleCalenderPosList.get(i));
+			System.out.println("i:"+i);
+		}
+		System.out.println("끗");
+		re = 0;
+		//System.out.println(scheduleCalenderPosList.toString());
+
+		return re;
+	}
+	
 	public ScheduleCalender createCalender(HttpServletRequest request) throws Exception{
 		ScheduleCalender scheduleCalender = null;
 		
@@ -132,14 +180,16 @@ public class ScheduleService {
 		String endDt 		= request.getParameter("endDt");
 		String completionPer= request.getParameter("completionPer");
 		String tag			= request.getParameter("tag");			// tag는 list로 뽑을 것
-		
+				
 		if(true == category_id.isEmpty() || true == calender_id.isEmpty())
 			return null;
 		
 		if(null == write|| true == write.isEmpty())
 			return null;
 		
+		//System.out.println("category_id:"+category_id);
 		int categoryId = Integer.parseInt(category_id);
+		//System.out.println("calender_id:"+calender_id);
 		int calenderId = Integer.parseInt(calender_id);
 		
 		if(null == startDt|| true == startDt.isEmpty())
@@ -151,14 +201,14 @@ public class ScheduleService {
 		if(null == color || true == color.isEmpty())
 			color = "";
 		
-		System.out.println("completionPer:"+completionPer);
+		//System.out.println("completionPer :"+completionPer);
 		int completion_per = 0;
 		if(null == completionPer || true == completionPer.isEmpty()) {
-			System.out.println("여기들어온다??");
 			completionPer = "0";
 		}else {
 			completion_per = Integer.parseInt(completionPer);
 		}
+		
 		
 		scheduleCalender = new ScheduleCalender();
 		scheduleCalender.setCategoryId(categoryId);
@@ -169,6 +219,7 @@ public class ScheduleService {
 		scheduleCalender.setCalenderId(calenderId);
 		scheduleCalender.setCompletionPer(completion_per);	
 		
+		System.out.println(scheduleCalender);
 		return scheduleCalender;
 	}
 

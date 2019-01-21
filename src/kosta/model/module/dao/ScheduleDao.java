@@ -11,6 +11,7 @@ import kosta.mapper.module.ScheduleMapper;
 import kosta.model.module.vo.ScheduleCalender;
 import kosta.model.module.vo.ScheduleCategory;
 import kosta.model.module.vo.ScheduleCalenderList;
+import kosta.model.module.vo.ScheduleCalenderMove;
 import kosta.model.module.vo.ScheduleEmployee;
 import kosta.model.module.vo.ScheduleProject;
 
@@ -147,6 +148,33 @@ public class ScheduleDao {
 			sqlSession.close();
 		}
 		
+		return re;
+	}
+	
+	public int editCalenderMove(ScheduleCalenderMove calenderMove){
+		System.out.println("들어왔다!!"+calenderMove);
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFaction().openSession();
+		try{
+			System.out.println("호출 전");
+			re = sqlSession.getMapper(ScheduleMapper.class).editCalenderMove(calenderMove);
+			if(re > 0){
+				System.out.println("성공");
+				sqlSession.commit();
+			}else{
+				System.out.println("실패");
+				sqlSession.rollback();				
+			}
+		}catch (Exception e) {
+			System.out.println("에러에러");
+			e.printStackTrace();
+	
+		}finally{
+			System.out.println("CLOSE");
+
+			sqlSession.close();
+		}
+		System.out.println("re:"+re);
 		return re;
 	}
 

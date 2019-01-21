@@ -1,21 +1,36 @@
 package kosta.action.module.schedule;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javafx.beans.property.IntegerProperty;
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
+import kosta.model.module.dao.ScheduleDao;
 import kosta.model.module.service.ScheduleService;
+import kosta.model.module.vo.ScheduleCalenderMove;
 
-public class EditCalenderPosAction implements IAction {
-	public EditCalenderPosAction(){}
+public class EditCalenderMoveAction implements IAction {
+	public EditCalenderMoveAction(){}
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String data = request.getParameter("data_parameter");
-		System.out.println(data);
+		String[] data = request.getParameter("data_parameter").split("[|]");
+		if(null == data)
+			return null;
 		
-		ScheduleService service =  ScheduleService.getInstance();
+		ScheduleService service = ScheduleService.getInstance();
+		service.editCalenderMove(request);
+		
+		
+		
+		
+		
+		
+		
 		int re = -1;
 		//if(null == service){
 		//	re = service.editCalenderPos(request);

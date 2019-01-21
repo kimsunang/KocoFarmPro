@@ -23,13 +23,17 @@ import kosta.action.module.fileRoom.FileUploadAction;
 import kosta.action.module.fileRoom.insertFileAction;
 import kosta.action.module.schedule.DelCalenderAction;
 import kosta.action.module.schedule.EditCalenderAction;
+import kosta.action.module.schedule.EditCalenderMoveAction;
 import kosta.action.module.schedule.InsertCalenderAction;
 import kosta.action.module.schedule.ListProjectAction;
 import kosta.action.module.schedule.ListCalenderAction;
 import kosta.action.module.schedule.SendProjectIdAction;
 
+
 @WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do", "/editCalender.do", "/delCalender.do",
+	"/editCalenderPos.do",
 	"/fileList.do", "/fileUpload.do", "/fileDownload.do", "/insertFile.do","/deleteFile.do"})
+
 public class ScheduleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	       
@@ -48,6 +52,7 @@ public class ScheduleController extends HttpServlet {
 		scheduleActionList.put("fileDownload.do", new FileDownloadAction());
 		scheduleActionList.put("insertFile.do", new insertFileAction());
 		scheduleActionList.put("deleteFile.do", new FileDeleteAction());
+		scheduleActionList.put("editCalenderPos.do", new EditCalenderMoveAction());
 
 	}
     
@@ -56,7 +61,7 @@ public class ScheduleController extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length()+1);
-		System.out.println("command:"+requestURI);
+		System.out.println("command32122:"+requestURI);
 		System.out.println("command:"+contextPath);
 		System.out.println("command:"+command);
 

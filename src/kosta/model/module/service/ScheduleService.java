@@ -105,7 +105,7 @@ public class ScheduleService {
 		if(null == endDt || true == endDt.isEmpty())
 			endDt = "";
 
-		if(null == y || true == y.isEmpty())
+		if(null != y || true != y.isEmpty())
 			yPos = Integer.parseInt(y);
 
 		scheduleCalender.setCalenderId(calenderId);

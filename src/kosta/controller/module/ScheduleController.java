@@ -70,9 +70,6 @@ public class ScheduleController extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length()+1);
-		System.out.println("command32122:"+requestURI);
-		System.out.println("command:"+contextPath);
-		System.out.println("command:"+command);
 
 		IAction action = null;
 		ActionForward forward = null;

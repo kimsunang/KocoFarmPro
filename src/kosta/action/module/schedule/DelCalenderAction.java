@@ -10,8 +10,6 @@ import kosta.model.module.service.ScheduleService;
 public class DelCalenderAction implements IAction{
 	public DelCalenderAction(){}
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("DelCalender 12312312");
-		
 		ScheduleService service =  ScheduleService.getInstance();			
 		if(null != service){
 			service.delCalender(request);

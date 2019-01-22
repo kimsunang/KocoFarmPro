@@ -29,11 +29,7 @@ public class FileService {
 		int size = 20 * 1024 * 1024; // 20MB
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "UTF-8", new DefaultFileRenamePolicy());
 		
-		
-		System.out.println("파일 서비스 ");
-		
 		Files file = new Files();
-	   	System.out.println("file_name");
 		file.setFile_name(multi.getParameter("file_name"));
 		file.setFile_path(multi.getParameter("file_path"));
 		file.setEmp_id(multi.getParameter("file_id"));

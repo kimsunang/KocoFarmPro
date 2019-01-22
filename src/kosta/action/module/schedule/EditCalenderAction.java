@@ -10,7 +10,6 @@ import kosta.model.module.service.ScheduleService;
 public class EditCalenderAction  implements IAction{
 	public EditCalenderAction(){}
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("EditCalender");
 		ScheduleService service =  ScheduleService.getInstance();
 		int re = -1;
 		if(null != service){

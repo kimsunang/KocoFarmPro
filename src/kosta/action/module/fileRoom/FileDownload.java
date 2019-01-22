@@ -79,11 +79,9 @@ Files file = new Files();
                 outs.close();
                 fin.close();
             } catch (Exception e) {
-                System.out.println("Download Exception : " + e.getMessage());
+            	e.printStackTrace();
             }
         } else {
-            System.out.println("Download Error : downFile Error [" + downFile
-                    + "]");
         }
         return forward;
         // 여기서 뭘 리턴해야 원래 리스트로 돌아가지?

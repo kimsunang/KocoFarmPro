@@ -11,6 +11,5 @@
 %>
 <% 
 	category_list = (List<ScheduleCalenderList>)request.getAttribute("calenderList");
-	System.out.println("jsonParser:"+JSONArray.fromObject(category_list).toString());
 	out.println(JSONArray.fromObject(category_list).toString());
 %>

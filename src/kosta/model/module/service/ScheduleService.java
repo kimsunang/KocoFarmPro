@@ -34,8 +34,7 @@ public class ScheduleService {
 		ScheduleCalender scheduleCalender = createCalender(request);
 		if(null == scheduleCalender)
 			return -1;
-		
-		System.out.println(scheduleCalender);
+	
 		int re = dao.insertCelender(scheduleCalender);
 		return re;
 	}
@@ -47,8 +46,6 @@ public class ScheduleService {
 		String categoryName = request.getParameter("categoryName");
 		String projectId	= request.getParameter("projectId");
 		String xPos 		= request.getParameter("xPos");
-		
-		System.out.println("categoryName:"+categoryName+"projectId:"+projectId+"xPos:"+xPos);
 		
 		if(null == categoryName || null == projectId || null == xPos)
 			return -1;
@@ -67,14 +64,12 @@ public class ScheduleService {
 		scheduleCategory.setCategoryName(categoryName);
 		scheduleCategory.setxPos(xpos);
 		
-		System.out.println("카테고리 추가");
 		int re = dao.insertCategory(scheduleCategory);
 		return re;
 	}
 	
 	public List<ScheduleCalenderList> listProjectCalender(HttpServletRequest request) throws Exception {
 		String strProjectId = request.getParameter("projectId");
-		System.out.println("프로젝트 id값!!!:"+strProjectId);
 		int projectId = Integer.parseInt(strProjectId);
 		
 		ScheduleDao dao = ScheduleDao.getInstance();
@@ -99,29 +94,23 @@ public class ScheduleService {
 	public int editCategoryName(HttpServletRequest request) throws Exception{
 		if(null == request)
 			return -1;
-		
-		System.out.println("들어옴???");
+
 		
 		String categoryId = request.getParameter("categoryId");
 		String categoryName = request.getParameter("categoryName");
 		if(null == categoryId || null == categoryName){
-			System.out.println("null이다");
 			return -1;
 		}
 		
 		if(true == categoryId.isEmpty() || true == categoryName.isEmpty()){
-			System.out.println("isEmpty이다");
 			return -1;
 		}
 
-		System.out.println("들어옴222222???");
-		
 	 	int categoryid = Integer.parseInt(categoryId);
 
 		ScheduleCategory category = new ScheduleCategory();	
 		category.setCategoryId(categoryid);
 		category.setCategoryName(categoryName);
-		System.out.println(category);
 		
 		int re = dao.editCategoryName(category);
 		return re;
@@ -164,7 +153,6 @@ public class ScheduleService {
 		}
 		
 		int size = scheduleCalenderPosList.size();
-		System.out.println(scheduleCalenderPosList);
 		re = dao.editCalenderMove(scheduleCalenderPosList);
 
 		return re;
@@ -172,7 +160,6 @@ public class ScheduleService {
 	
 	public ScheduleCalender createCalender(HttpServletRequest request) throws Exception{
 		ScheduleCalender scheduleCalender = null;
-		System.out.println("에러에러에러");
 		
 		String project_id 	= request.getParameter("projectId");
 		String category_id 	= request.getParameter("categoryId");
@@ -185,14 +172,12 @@ public class ScheduleService {
 		String y 			= request.getParameter("y");
 				
 		scheduleCalender = new ScheduleCalender();
-		System.out.println("category_id:"+category_id);
 		int categoryId = Integer.parseInt(category_id);
 		int calenderId = 0;										// calender id는 아직 생성되지 않았으므로
 		int yPos = 0;
 		
 		int completionPer = 0;
 		if(true != completion_per.isEmpty()) {
-			System.out.println("completion_per:"+completion_per);
 			completionPer = Integer.parseInt(completion_per);
 		}
 			
@@ -206,7 +191,6 @@ public class ScheduleService {
 			endDt = "";
 
 		if(null != y || true != y.isEmpty()){
-			System.out.println("y:"+y);
 			yPos = Integer.parseInt(y);
 		}
 
@@ -241,9 +225,7 @@ public class ScheduleService {
 		if(null == write|| true == write.isEmpty())
 			return null;
 		
-		//System.out.println("category_id:"+category_id);
 		int categoryId = Integer.parseInt(category_id);
-		//System.out.println("calender_id:"+calender_id);
 		int calenderId = Integer.parseInt(calender_id);
 		
 		if(null == startDt|| true == startDt.isEmpty())
@@ -255,7 +237,6 @@ public class ScheduleService {
 		if(null == color || true == color.isEmpty())
 			color = "";
 		
-		//System.out.println("completionPer :"+completionPer);
 		int completion_per = 0;
 		if(null == completionPer || true == completionPer.isEmpty()) {
 			completionPer = "0";
@@ -273,7 +254,6 @@ public class ScheduleService {
 		scheduleCalender.setCalenderId(calenderId);
 		scheduleCalender.setCompletionPer(completion_per);	
 		
-		System.out.println(scheduleCalender);
 		return scheduleCalender;
 	}
 

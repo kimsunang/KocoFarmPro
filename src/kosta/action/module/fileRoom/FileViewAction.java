@@ -16,7 +16,6 @@ public class FileViewAction implements IAction {
 		ActionForward forward = new ActionForward();
 		FileService service = FileService.getInstance();
 		// 파일 서비스 만든 다음에 넣을것
-		System.out.println("# 진입 ");
 		forward.setPath("/jsp/module/file_room/fileRoomView.jsp");
 		forward.setRedirect(false);
 		

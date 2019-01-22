@@ -36,11 +36,6 @@ $( function() {
 	        yearSuffix: '년'
 	    });
 	 
-	 jb( ".addDatepickerStart" ).datepicker( "option", "dateFormat", 'yy-mm-dd' );
-	 jb( ".addDatepickerEnd" ).datepicker( "option", "dateFormat", 'yy-mm-dd' );
-	 jb( ".editDatepickerStart" ).datepicker( "option", "dateFormat", 'yy-mm-dd' );
-	 jb( ".editDatepickerEnd" ).datepicker( "option", "dateFormat", 'yy-mm-dd' );
-
 	  jb( "#addDatepickerStart").datepicker({
 		  dateFormat: "yy-mm-dd"
 	  });

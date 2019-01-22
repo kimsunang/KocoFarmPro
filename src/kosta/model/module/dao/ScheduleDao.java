@@ -12,7 +12,6 @@ import kosta.model.module.vo.ScheduleCalender;
 import kosta.model.module.vo.ScheduleCategory;
 import kosta.model.module.vo.ScheduleCalenderList;
 import kosta.model.module.vo.ScheduleCalenderMove;
-import kosta.model.module.vo.ScheduleEmployee;
 import kosta.model.module.vo.ScheduleProject;
 
 import org.apache.ibatis.io.Resources;
@@ -39,16 +38,6 @@ public class ScheduleDao {
 		return new SqlSessionFactoryBuilder().build(in);
 	}
 	
-	public List<ScheduleEmployee> listEmployee() {
-		SqlSession sqlSession = getSqlSessionFaction().openSession();
-		if(null == sqlSession)
-			return null;
-		
-		List<ScheduleEmployee> list = sqlSession.getMapper(ScheduleMapper.class).listEmployee();
-		sqlSession.close();
-		return list;
-	}
-
 	public List<ScheduleProject> listProject() {
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		if(null == sqlSession)

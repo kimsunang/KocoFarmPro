@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosta.mapper.module.ScheduleMapper">
-<select id="listEmployee" resultType="ScheduleEmployee">
-	select * from Emp
-</select>
 <select id="listProject" resultType="ScheduleProject">
 	select * from Project
 </select>

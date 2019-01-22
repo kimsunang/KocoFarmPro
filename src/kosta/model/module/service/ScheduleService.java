@@ -67,6 +67,7 @@ public class ScheduleService {
 		scheduleCategory.setCategoryName(categoryName);
 		scheduleCategory.setxPos(xpos);
 		
+		System.out.println("카테고리 추가");
 		int re = dao.insertCategory(scheduleCategory);
 		return re;
 	}
@@ -92,6 +93,37 @@ public class ScheduleService {
 			return -1;
 		
 		int re = dao.editCalender(scheduleCalender);
+		return re;
+	}
+	
+	public int editCategoryName(HttpServletRequest request) throws Exception{
+		if(null == request)
+			return -1;
+		
+		System.out.println("들어옴???");
+		
+		String categoryId = request.getParameter("categoryId");
+		String categoryName = request.getParameter("categoryName");
+		if(null == categoryId || null == categoryName){
+			System.out.println("null이다");
+			return -1;
+		}
+		
+		if(true == categoryId.isEmpty() || true == categoryName.isEmpty()){
+			System.out.println("isEmpty이다");
+			return -1;
+		}
+
+		System.out.println("들어옴222222???");
+		
+	 	int categoryid = Integer.parseInt(categoryId);
+
+		ScheduleCategory category = new ScheduleCategory();	
+		category.setCategoryId(categoryid);
+		category.setCategoryName(categoryName);
+		System.out.println(category);
+		
+		int re = dao.editCategoryName(category);
 		return re;
 	}
 	
@@ -140,6 +172,7 @@ public class ScheduleService {
 	
 	public ScheduleCalender createCalender(HttpServletRequest request) throws Exception{
 		ScheduleCalender scheduleCalender = null;
+		System.out.println("에러에러에러");
 		
 		String project_id 	= request.getParameter("projectId");
 		String category_id 	= request.getParameter("categoryId");
@@ -152,13 +185,14 @@ public class ScheduleService {
 		String y 			= request.getParameter("y");
 				
 		scheduleCalender = new ScheduleCalender();
-		
+		System.out.println("category_id:"+category_id);
 		int categoryId = Integer.parseInt(category_id);
 		int calenderId = 0;										// calender id는 아직 생성되지 않았으므로
 		int yPos = 0;
 		
 		int completionPer = 0;
 		if(true != completion_per.isEmpty()) {
+			System.out.println("completion_per:"+completion_per);
 			completionPer = Integer.parseInt(completion_per);
 		}
 			
@@ -171,8 +205,10 @@ public class ScheduleService {
 		if(null == endDt || true == endDt.isEmpty())
 			endDt = "";
 
-		if(null != y || true != y.isEmpty())
+		if(null != y || true != y.isEmpty()){
+			System.out.println("y:"+y);
 			yPos = Integer.parseInt(y);
+		}
 
 		scheduleCalender.setCalenderId(calenderId);
 		scheduleCalender.setCategoryId(categoryId);

@@ -115,8 +115,10 @@ public class ScheduleDao {
 		try{
 			re = sqlSession.getMapper(ScheduleMapper.class).insertCategory(category);
 			if(re > 0){
+				System.out.println("성공");
 				sqlSession.commit();
 			}else{
+				System.out.println("실패");
 				sqlSession.rollback();				
 			}
 		}catch (Exception e) {
@@ -136,6 +138,27 @@ public class ScheduleDao {
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
 			re = sqlSession.getMapper(ScheduleMapper.class).editCalender(scheduleCalender);
+			if(re > 0){
+				sqlSession.commit();
+			}else{
+				sqlSession.rollback();				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+	
+		}finally{
+			sqlSession.close();
+		}
+		
+		return re;
+	}
+	
+	public int editCategoryName(ScheduleCategory category){
+		System.out.println("카테고리 이름 수정"+category);
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFaction().openSession();
+		try{
+			re = sqlSession.getMapper(ScheduleMapper.class).editCategoryName(category);
 			if(re > 0){
 				sqlSession.commit();
 			}else{

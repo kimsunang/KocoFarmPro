@@ -777,7 +777,7 @@ footer{margin-top: 30px; text-align: center; color: #333}
 
 /* 카테고리 입력 박스 */
 
-.category-name-box input[type=text] {
+.category-name-input{
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;

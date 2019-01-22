@@ -280,8 +280,8 @@ function addDynamicHtml(data){
       		
       		html += '<ul class="connected li1">';
       		html += '<li class="calender_info">';
-      		html += '<div class="category-name-box"><input class="category-name-input" type="text" readonly="true" value="'+data[i].categoryName+'"></input></div>';
-      		html += '<button type="button" class="btn  btn-primary calenderWriteBtn btn-block" data-toggle="modal" data-target="#calenderAddModal">새 일정 추가하기</button>';
+      		html += '<input class="category-name-input" type="text" readonly="true" value="'+data[i].categoryName+'"></input>';
+			html += '<button type="button" class="btn  btn-primary calenderWriteBtn btn-block" data-toggle="modal" data-target="#calenderAddModal">새 일정 추가하기</button>';
       		console.log(data[i].projectId);
       		console.log(data[i].categoryId);
       		console.log(data[i].calenderId);
@@ -315,7 +315,7 @@ function addDynamicHtml(data){
     	// 새  카테고리
 		html += '<ul class="connected li1">';
 		html += '<li class="calender_info">';
-  		html += '<div><input class="add-category-name-input" type="text"></input><div>';
+  		html += '<div><input class="category-name-input add-category-name-input" type="text"></input><div>';
         html += '<button type="button" class="btn btn-warning btn-lg btn-xs addCategoryButton">새 카테고리 추가</button>';
 		html += '<input type="hidden" class="this_project_id" value='+projectId+' />';
 		html += '</li>';
@@ -393,7 +393,28 @@ function addDynamicHtml(data){
 	   $('.category-name-input').on("change", function(){
 		   $(this).attr("readonly", true);
 		   
-		   //ajax
+		   var par = $(this).parent();
+		   console.log("papapapap");
+		   console.log(par.children('.this_category_id'));
+		   console.log(par.children('.add-category-name-input'));
+		   var categoryId = par.children('.this_category_id').val();
+		   var categoryName = par.children('.category-name-input').val();
+		   
+		   console.log('categoryId:'+categoryId+'categoryName:'+categoryName);
+		   
+			  $.ajax({
+				    type:"POST",
+				    data : { "categoryId":categoryId, "categoryName":categoryName },
+				    dataType:"text",
+				    url:"editCategoryName.do",
+				    success: function() { 	
+				 	 console.log('카테고리 이름 변경 성공');
+				 	
+				    },
+				    error : function(error) {
+				    	console.log("state:"+error.state()+"ajax 실패:"+error.responseText+"html:"+error.result_html);
+				    },	// error
+				  });// ajax
 		   
 	   });
 	   
@@ -401,6 +422,7 @@ function addDynamicHtml(data){
 	   $('.addCategoryButton').on("click", function(){
 		   console.log("projectId:"+projectId);
 
+		   console.log($(this).parent().parent());
 		   var text = $('.add-category-name-input').val(); 
 		  if("" == text){
 			  alert("카테고리 이름이 없습니다");

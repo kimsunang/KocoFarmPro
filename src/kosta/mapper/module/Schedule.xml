@@ -64,4 +64,7 @@
 <insert id="insertCategory" parameterType="ScheduleCategory">
 	insert into Category values(category_id_seq.nextval , #{categoryName}, #{projectId}, #{xPos})
 </insert>
+<update id="editCategoryName" parameterType="ScheduleCategory">
+	update Category set category_name = #{categoryName} where category_id = #{categoryId}
+</update>
 </mapper>

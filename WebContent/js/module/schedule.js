@@ -261,8 +261,10 @@ function addDynamicHtml(data){
             html += '<input type="hidden" class="this_calender_id" value='+data[i].calenderId+' />';
             html += '<input type="hidden" class="this_calender_yPos" value='+data[i].yPos+' />';            
             html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';
-            html += '<p>시작일 :</p><p class="calender_detail_startDt">'+ data[i].startDt+"</p>";
-            html += '<p>종료일 :</p><p class="calender_detail_endDt">'+ data[i].endDt+"</p>";
+            var startDt = data[i].startDt;
+            html += '<p>시작일 :</p><p class="calender_detail_startDt">'+ startDt.substring(0,10)+'</p>';
+            var endDt = data[i].endDt;
+            html += '<p>종료일 :</p><p class="calender_detail_endDt">'+endDt.substring(0,10)+"</p>";
             html += '완료상황:<p class="calender_detail_completionPer">'+ data[i].completionPer+"</p>";
 			html += '</li>';	      		
       	}

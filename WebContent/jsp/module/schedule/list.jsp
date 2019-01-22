@@ -72,9 +72,8 @@
 						<tr>
 							<td>${project.projectId}</td>
 							<td>
-								<form id="responeProjectId" action="sendProjectId.do" method="POST">
-							 	<button type="submit" form="responeProjectId" value="Submit"> ${project.title}</button>
-								<input type="hidden" name="projectId" value="${project.projectId}" />
+							<form id="responeProjectId" action="sendProjectId.do" method="POST">
+							 	<button type="submit" name="projectId" form="responeProjectId" value="${project.projectId}"> ${project.title}</button>		
 							</form>
 							</td>
 							<td>${project.projectLeader}</td>

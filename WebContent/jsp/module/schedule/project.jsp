@@ -63,7 +63,53 @@ $( function() {
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	$(function() {		  
+	$(function() {		
+		/* 일정 추가 진행상황% 슬라이더  */
+		var calenderCompletionSlider = document.getElementById("calenderCompletionPerRang");
+		var calenderCompletionOutput = document.getElementById("calenderCompletionPerVal");
+
+		calenderCompletionSlider.oninput = function() {
+			calenderCompletionOutput.value = this.value;
+		}
+		/* 일정 추가 진행상황% textbox */
+		$('#calenderCompletionPerVal').change(function(){
+			var value = $(calenderCompletionOutput).val() ;
+			if(false == isNaN(value)){
+				if(0 > value) value = 0;
+				if(100 < value) value = 100;
+				$(calenderCompletionSlider).val($(this).val());
+				$(calenderCompletionOutput).val($(this).val());
+			}else{
+				$(calenderCompletionSlider).val(0);
+				$(calenderCompletionOutput).val(0);
+			}
+		});
+
+
+		/* 일정 수정 진행상황% 슬라이더  */
+		var editCalenderCompletionSlider = document.getElementById("editCalenderCompletionPerRang");
+		var editCalenderCompletionOutput = document.getElementById("editCalenderCompletionPerVal");
+
+		editCalenderCompletionSlider.oninput = function() {
+			editCalenderCompletionOutput.value = this.value;
+		}
+
+		/* 일정 수정 진행상황% textbox */
+		$('#editCalenderCompletionPerVal').change(function(){
+			var value = $(editCalenderCompletionOutput).val() ;
+			if(false == isNaN(value)){
+				if(0 > value) value = 0;
+				if(100 < value) value = 100;
+				
+				$(editCalenderCompletionSlider).val($(this).val());
+				$(editCalenderCompletionOutput).val($(this).val());
+				
+			}else{
+				$(editCalenderCompletionSlider).val(0);
+				$(editCalenderCompletionOutput).val(0);
+			}
+		});
+			
 		var projectId = "${projectId}";
 		$.ajax({
 			url : 'listCalender.do',

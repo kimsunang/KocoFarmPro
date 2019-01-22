@@ -74,7 +74,10 @@ var drag_before_calender_index;			// 이동 전 일정 index
             	console.log("category_id:"+$(this).parent().children(".calender_info").children(".this_category_id").val());
             	console.log("category_id"+"선택한 일정 타이틀:"+$(this).children(".calender_detail_title").html() +"calender_id:"+$(this).children(".this_calender_id").val() +"yPos:"+ $(this).children(".this_calender_yPos").val());
 
+            	console.log($(this).parent());
+            	console.log($(this).parent().children(".calender_info"));
             	drag_before_calender_category_id = $(this).parent().children(".calender_info").children(".this_category_id").val();
+            	console.log('drag_before_calender_category_id:'+drag_before_calender_category_id);
             	drag_before_calender_id = $(this).children(".this_calender_id").val();
             	
             	drag_before_calender_y = $(this).children(".this_calender_yPos").val();
@@ -201,7 +204,6 @@ var drag_before_calender_index;			// 이동 전 일정 index
                 return false;
             }).end().add([this, replacer]).on('dragover dragenter drop', function(event) {
                 if (!items.is(elmDrag) && options.linkTo !== $(elmDrag).parent().data('linkTo')) {
-                	console.log(this);
                     return true;
                 }
                 if (event.type == 'drop') {
@@ -277,7 +279,7 @@ function addDynamicHtml(data){
       		
       		html += '<ul class="connected li1">';
       		html += '<li class="calender_info">';
-      		html += '<div class="category-name-box"><input class="category-name-input" type="text" readonly="true" value="'+data[i].categoryName+'"></input><div>';
+      		html += '<div class="category-name-box"><input class="category-name-input" type="text" readonly="true" value="'+data[i].categoryName+'"></input></div>';
       		html += '<div><button type="button" class="btn  btn-primary calenderWriteBtn btn-block" data-toggle="modal" data-target="#calenderAddModal">새 일정 추가하기</button></div>';
       		//console.log(data[i].projectId);
       		//console.log(data[i].categoryId);
@@ -393,9 +395,7 @@ function addDynamicHtml(data){
 	   });
 	   
 	   $('.addCategoryButton').on("click", function(){
-		  console.log('새 카테고리 추가 클릭'); 
 		  var text = $('.add-category-name-input').val(); 
-		  
 		  if("" == text){
 			  alert("카테고리 이름이 없습니다");
 			  return;
@@ -412,7 +412,7 @@ function addDynamicHtml(data){
 		 	
 		 	$.ajax({
 				url:'listCalender.do',
-				data: {"projectId":projectId},
+				data: {"projectId":project_id},
 				dataType:'json',
 				success:function(data){	
 					

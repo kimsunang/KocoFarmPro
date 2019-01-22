@@ -172,16 +172,25 @@ public class ScheduleDao {
 		return re;
 	}
 	
-	public int editCalenderMove(ScheduleCalenderMove calenderMove){
+	public int editCalenderMove(List<ScheduleCalenderMove> list){
+		if(null == list)
+			return -1;
+		
+		int size = list.size();
+		if(0 >= size)
+			return -1;
 		
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
-			re = sqlSession.getMapper(ScheduleMapper.class).editCalenderMove(calenderMove);
+			for(int i = 0; i < size; ++i){
+			
+			re = sqlSession.getMapper(ScheduleMapper.class).editCalenderMove(list.get(i));
 			if(re > 0){
 				sqlSession.commit();
 			}else{
 				sqlSession.rollback();				
+			}
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

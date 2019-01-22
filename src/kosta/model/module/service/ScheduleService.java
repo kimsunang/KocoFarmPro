@@ -48,6 +48,8 @@ public class ScheduleService {
 		String projectId	= request.getParameter("projectId");
 		String xPos 		= request.getParameter("xPos");
 		
+		System.out.println("categoryName:"+categoryName+"projectId:"+projectId+"xPos:"+xPos);
+		
 		if(null == categoryName || null == projectId || null == xPos)
 			return -1;
 		
@@ -130,11 +132,8 @@ public class ScheduleService {
 		}
 		
 		int size = scheduleCalenderPosList.size();
-		for(int i = 0; i < size; ++i) {
-			re = dao.editCalenderMove(scheduleCalenderPosList.get(i));
-			if(-1 == re)
-				return -1;
-		}
+		System.out.println(scheduleCalenderPosList);
+		re = dao.editCalenderMove(scheduleCalenderPosList);
 
 		return re;
 	}

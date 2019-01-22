@@ -12,16 +12,19 @@ public class EditCalenderAction  implements IAction{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ScheduleService service =  ScheduleService.getInstance();
 		int re = -1;
-		if(null != service){
-			re = service.editCalender(request);
-		}
+		if(null == service)
+			return null;
+		
+		re = service.editCalender(request);
 		
 		ActionForward forward = null;
-		if(-1 != re) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("/jsp/module/schedule/project.jsp");
-		}
+		if(-1 == re)
+			return null;
+
+		forward = new ActionForward();
+		forward.setRedirect(false);
+		forward.setPath("/jsp/module/schedule/project.jsp");
+		
 		return forward;	
 	}
 }

@@ -62,6 +62,6 @@
 	update calender set category_id = #{categoryId} , y_pos = #{yPos} where calender_id = #{calenderId}
 </update>
 <insert id="insertCategory" parameterType="ScheduleCategory">
-	insert into Category values(#{categoryId}, #{categoryName}, #{projectId}, #{xPos})
+	insert into Category values(category_id_seq.nextval , #{categoryName}, #{projectId}, #{xPos})
 </insert>
 </mapper>

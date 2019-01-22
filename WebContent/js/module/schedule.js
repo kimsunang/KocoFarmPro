@@ -273,6 +273,7 @@ function addDynamicHtml(data){
       	// 카테고리 id가 다르면 새로운 카테고리생성
       	if(categoryId != data[i].categoryId){
       		if(0 != i){
+      			add_project_id = data[i].projectId;
       			projectId = data[i].projectId;
       			html += '</ul>';
       		}
@@ -394,36 +395,39 @@ function addDynamicHtml(data){
 		   
 	   });
 	   
+	   console.log("projectId:"+projectId);
 	   $('.addCategoryButton').on("click", function(){
-		  var text = $('.add-category-name-input').val(); 
+		   console.log("projectId:"+projectId);
+
+		   var text = $('.add-category-name-input').val(); 
 		  if("" == text){
 			  alert("카테고리 이름이 없습니다");
 			  return;
 		  }
 		  
 		  var xPos = $('.category-name-input').length+1;
-		  
-		 $.ajax({
-		    type:"POST",
-		    data : { categoryName:text, projectId:projectId, xPos:xPos  },
-		    dataType:"text",
-		    url:"insertCategory.do",
-		    success: function(project_id) { 	
-		 	
-		 	$.ajax({
-				url:'listCalender.do',
-				data: {"projectId":project_id},
-				dataType:'json',
-				success:function(data){	
-					
-				 addDynamicHtml(data);
-				}// success function
-			});// ajax
-		    },
-		    error : function(error) {
-		    	console.log("state:"+error.state()+"ajax 실패:"+error.responseText+"html:"+error.result_html);
-		    },	// error
-		  });// ajax
+		  $.ajax({
+			    type:"POST",
+			    data : { "projectId":projectId, "xPos":xPos, "categoryName":text },
+			    dataType:"text",
+			    url:"insertCategory.do",
+			    success: function() { 	
+			 	
+			 	$.ajax({
+					url:'listCalender.do',
+					data: {"projectId":add_project_id},
+					dataType:'json',
+					success:function(data){	
+						
+					 addDynamicHtml(data);
+					}// success function
+				});// ajax
+			    },
+			    error : function(error) {
+			    	console.log("state:"+error.state()+"ajax 실패:"+error.responseText+"html:"+error.result_html);
+			    },	// error
+			  });// ajax
+	
 		  
 	   });
 }

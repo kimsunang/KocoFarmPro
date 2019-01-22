@@ -281,10 +281,10 @@ function addDynamicHtml(data){
       		html += '<ul class="connected li1">';
       		html += '<li class="calender_info">';
       		html += '<div class="category-name-box"><input class="category-name-input" type="text" readonly="true" value="'+data[i].categoryName+'"></input></div>';
-      		html += '<div><button type="button" class="btn  btn-primary calenderWriteBtn btn-block" data-toggle="modal" data-target="#calenderAddModal">새 일정 추가하기</button></div>';
-      		//console.log(data[i].projectId);
-      		//console.log(data[i].categoryId);
-      		//console.log(data[i].calenderId);
+      		html += '<button type="button" class="btn  btn-primary calenderWriteBtn btn-block" data-toggle="modal" data-target="#calenderAddModal">새 일정 추가하기</button>';
+      		console.log(data[i].projectId);
+      		console.log(data[i].categoryId);
+      		console.log(data[i].calenderId);
     		html += '<input type="hidden" class="this_project_id" value='+data[i].projectId+' />';
       		html += '<input type="hidden" class="this_category_id" value='+data[i].categoryId+' />';
       		html += '<input type="hidden" class="this_category_x" value='+data[i].xPos+' />';
@@ -335,6 +335,8 @@ function addDynamicHtml(data){
 	   $(document).on("click", ".calenderWriteBtn", function(){	
 		   // eq로 찾는거 자꾸 위치가 바뀌므로 좋지 않다
 			var par = $(this).parent();	// calender_info
+			console.log("일정 추가");			
+			console.log(this);
 	
 			var project_id = par.children(".this_project_id").val();
 			var category_id = par.children(".this_category_id").val();

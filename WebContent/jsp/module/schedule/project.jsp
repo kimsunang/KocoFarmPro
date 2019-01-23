@@ -9,14 +9,6 @@
 <jsp:include page="/jsp/comm/top.jsp" flush="false"></jsp:include>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.lang.Integer"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>jQuery dropMe Plugin Examples</title>
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -125,13 +117,10 @@ $( function() {
 		});// ajax
 	});
 </script>
-</head>
-<body> 
 
 	<div class="con">
-		<!-- 동적으로 엘레먼트가 생성된다 -->
 	</div>
-
+	
 	<!-- 일정 추가 -->
 	<div class="modal fade" id="calenderAddModal" role="dialog">
 		<div class="modal-dialog">
@@ -227,5 +216,4 @@ $( function() {
 		</div><!-- modal-dialog -->
 	</div>
 	<script src="/KocoFarmPro/js/module/schedule.js"></script>
-</body>
 </html>

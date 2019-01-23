@@ -9,9 +9,9 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kosta.model.module.dao.NoticeDao;
-import kosta.model.module.vo.Notice;
-import kosta.model.module.vo.NoticeListModel;
-import kosta.model.module.vo.NoticeSearch;
+import kosta.model.module.vo.NoticeVO;
+import kosta.model.module.vo.NoticeListModelVO;
+import kosta.model.module.vo.SearchVO;
 
 public class NoticeService {
 	private static NoticeDao dao;
@@ -25,21 +25,21 @@ public class NoticeService {
 	}
 	
 	/* 목록 */
-	public NoticeListModel getNoticeList(int requestPage, HttpServletRequest request)throws Exception{
-		/* 검색 */
+	public NoticeListModelVO getNoticeList(int requestPage, HttpServletRequest request)throws Exception{
+		// 검색
 		String schType = request.getParameter("schType");
 		String schWord = request.getParameter("schWord");
 		
 		HttpSession session = request.getSession();
-		NoticeSearch search = new NoticeSearch();
+		SearchVO search = new SearchVO();
 		
 		if(schType != null && schWord != null){
 			session.removeAttribute("search");
 			search.setSchType(schType);
 			search.setSchWord(schWord);
 			session.setAttribute("search", search);
-		}else if(null != (NoticeSearch)session.getAttribute("search")){
-			search = (NoticeSearch)session.getAttribute("search");
+		}else if(null != (SearchVO)session.getAttribute("search")){
+			search = (SearchVO)session.getAttribute("search");
 		}
 		
 		/* 페이지 네이션 */
@@ -65,24 +65,24 @@ public class NoticeService {
 		// 시작 행 구하기 : (현재페이지 -1) * 페이지 당 글 개 수
 		int startRow = (requestPage-1)*PAGE_SIZE;
 
-		List<Notice> list = dao.getNoticeList(search, startRow);
-		NoticeListModel listModel = new NoticeListModel(list, requestPage, totalPageCount, startPage, endPage, totalCount, PAGE_SIZE);
+		List<NoticeVO> list = dao.getNoticeList(search, startRow);
+		NoticeListModelVO listModel = new NoticeListModelVO(list, requestPage, totalPageCount, startPage, endPage, totalCount, PAGE_SIZE);
 		
 		return listModel;
 	}
 	
 	/* 상세정보 */
-	public Notice getNotice(HttpServletRequest request)throws Exception{
+	public NoticeVO getNotice(HttpServletRequest request)throws Exception{
 		String noticeId = request.getParameter("noticeId") == null ? "" : request.getParameter("noticeId");
-		Notice notice = dao.getNotice(noticeId);
+		NoticeVO notice = dao.getNotice(noticeId);
 		
 		if("view".equals(request.getParameter("mode"))){
-			/* 조회 수 증가 */
+			// 조회 수 증가
 			int hitCnt = notice.getHitCnt()+1;
 			notice.setHitCnt(hitCnt);
 			dao.setUpHitCnt(notice);
 			
-			/* 치환 */
+			// 치환
 			String contentsVw = notice.getContents().replaceAll("\r\n", "<br/>");
 			notice.setContents(contentsVw);
 		}
@@ -92,12 +92,12 @@ public class NoticeService {
 	
 	/* 등록 */
 	public int setNotice(HttpServletRequest request)throws Exception{
-		/* 파일 업로드(경로, 파일크기, 인코딩, 파일 이름 중첩 정책) */
+		// 파일 업로드(경로, 파일크기, 인코딩, 파일 이름 중첩 정책)
 		String uploadPath = request.getRealPath("upload");
 		int size = 20 * 1024 * 1024; // 20MB
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "UTF-8", new DefaultFileRenamePolicy());
 		
-		Notice notice = new Notice();
+		NoticeVO notice = new NoticeVO();
 		notice.setTitle(multi.getParameter("title"));
 		notice.setContents(multi.getParameter("contents"));
 		
@@ -116,12 +116,12 @@ public class NoticeService {
 	
 	/* 수정 */
 	public int setUpNotice(HttpServletRequest request)throws Exception{
-		/* 파일 업로드(경로, 파일크기, 인코딩, 파일 이름 중첩 정책) */
+		// 파일 업로드(경로, 파일크기, 인코딩, 파일 이름 중첩 정책)
 		String uploadPath = request.getRealPath("upload");
 		int size = 20 * 1024 * 1024; // 20MB
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "UTF-8", new DefaultFileRenamePolicy());
 		
-		Notice notice = new Notice();
+		NoticeVO notice = new NoticeVO();
 		notice.setTitle(multi.getParameter("title"));
 		notice.setContents(multi.getParameter("contents"));
 		notice.setNoticeId(multi.getParameter("noticeId"));
@@ -129,7 +129,7 @@ public class NoticeService {
 		String fileNm = null;
 		
 		// 파일 업로드
-		if(multi.getFilesystemName("fileNm") != null){
+		if(null != multi.getFilesystemName("fileNm")){
 			fileNm = multi.getFilesystemName("fileNm");
 		}else{
 			fileNm = multi.getParameter("fileYn");

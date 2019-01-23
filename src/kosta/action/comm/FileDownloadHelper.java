@@ -13,6 +13,7 @@ public class FileDownloadHelper {
 				os.write(data, 0, len);
 			}
 		}catch(Exception ae){
+			System.out.println("Exception 발생");
 		}		
 		finally {
 			if (is != null)

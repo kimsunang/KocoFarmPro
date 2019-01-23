@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration
-  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-<settings>
-  <!-- 자동으로 카멜케이스 규칙으로 변환 -->
-    <setting name="mapUnderscoreToCamelCase" value="true"/>
- </settings> 
+	<!-- 컬럼명 카멜 표기법 자동 변환 설정 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
 	<typeAliases>
 		<!-- 줄여서 지칭 -->
-		<!-- 로그인 S -->
+		<!-- 로그인 -->
 		<typeAlias type="kosta.model.comm.vo.LoginVO" alias="LoginVO" />
-		
-		<!-- 공지사항 S -->
-		<typeAlias type="kosta.model.module.vo.Notice" alias="Notice" />
-		<typeAlias type="kosta.model.module.vo.NoticeSearch" alias="NoticeSearch" />
-		<!-- 공지사항 E -->
-
+		<!-- 부서 / 직업 / 직책 -->
+		<typeAlias type="kosta.model.comm.vo.EmpCategoryVO" alias="EmpCateVO" />
+		<!-- 검색 -->
+		<typeAlias type="kosta.model.module.vo.SearchVO" alias="SearchVO" />
+		<!-- 공지사항 -->
+		<typeAlias type="kosta.model.module.vo.NoticeVO" alias="NoticeVO" />
+		<!-- 인사관리 -->
+		<typeAlias type="kosta.model.module.vo.EmpVO" alias="EmpVO" />
 		<!-- 전자 결재 S-->
 		<typeAlias type="kosta.model.module.vo.ApprovalDraft" alias="ApprovalDraft" />
-		<typeAlias type="kosta.model.module.vo.ApprovalFormSearch" alias="ApprovalFormSearch" />
+<!-- 		<typeAlias type="kosta.model.module.vo.ApprovalFormSearch" alias="ApprovalFormSearch" /> -->
 		<typeAlias type="kosta.model.module.vo.ApprovalVacation" alias="ApprovalVacation" />
 		<typeAlias type="kosta.model.module.vo.ApprovalForm" alias="ApprovalForm" />
-		<typeAlias type="kosta.model.module.vo.Employee" alias="Employee" />
 		<typeAlias type="kosta.model.module.vo.ApprovalExpence" alias="ApprovalExpence" />
-		
+		<typeAlias type="kosta.model.module.vo.ApprovalExpenceCont" alias="ApprovalExpenceCont" />
+		<!-- 전자 결재 > 댓글 -->
+		<typeAlias type="kosta.model.module.vo.DraftComment" alias="DraftComment" />
 		<!-- 전자 결재 E-->
 		
 		<!-- 스케쥴 -->
@@ -34,8 +36,19 @@
 		<typeAlias type="kosta.model.module.vo.ScheduleCalender" alias="ScheduleCalender" />
 		<typeAlias type="kosta.model.module.vo.ScheduleCalenderList" alias="ScheduleCalenderList" />
 		<typeAlias type="kosta.model.module.vo.ScheduleCalenderMove" alias="ScheduleCalenderMove" />
-	
-	
+		
+		<!-- 회의실 -->
+		<typeAlias alias="MeetingRoom" type="kosta.model.module.vo.MeetingRoom"/>
+		<typeAlias alias="MeetingRoomSearch" type="kosta.model.module.vo.MeetingRoomSearch"/>
+		<typeAlias alias="Reservation" type="kosta.model.module.vo.Reservation"/>
+		<typeAlias alias="ReservationSearch" type="kosta.model.module.vo.ReservationSearch"/>
+		<typeAlias alias="Departments" type="kosta.model.module.vo.Departments"/>
+		
+		<typeAlias alias="EMP" type="kosta.model.module.vo.Emp"/>
+		
+		<!-- 차량등록 -->
+		<typeAlias alias="RentCarDetail" type="kosta.model.module.vo.RentCarDetail"/>
+		<typeAlias alias="RentCarDetailSearch" type="kosta.model.module.vo.RentCarDetailSearch"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -53,13 +66,20 @@
 		<!-- 매퍼 매핑 -->
 		<!-- 공통 -->
 		<mapper resource="kosta/mapper/comm/Comm.xml" />
-		
 		<!-- 공지사항 -->
 		<mapper resource="kosta/mapper/module/Notice.xml" />
+		<!-- 인사 관리 -->
+		<mapper resource="kosta/mapper/module/Emp.xml" />
 		<!-- 전자 결재 -->
 		<mapper resource="kosta/mapper/module/Approval.xml"/>
-		<!-- 일정 -->
+		<!-- 스케쥴 -->
 		<mapper resource="kosta/mapper/module/Schedule.xml" />
+		<!-- 회의실 -->
+		<mapper resource="kosta/mapper/module/MeetingRoom.xml"/>
+		<mapper resource="kosta/mapper/module/Reservation.xml"/>
+		
+		<!-- 차량등록 -->
+		<mapper resource="kosta/mapper/module/RentCarDetail.xml"/>
 	</mappers>
 	
 </configuration>

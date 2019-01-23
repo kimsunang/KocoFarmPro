@@ -20,7 +20,7 @@ public class DetailDraftFormAction implements IAction {
 
 		
 		int formId = form.getFormId();
-		
+		request.setAttribute("form",form);
 		forward.setRedirect(false);
 		if(formId == 2){
 			forward.setPath("jsp/module/approval/expenceDraft.jsp");

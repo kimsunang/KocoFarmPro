@@ -6,17 +6,16 @@ import javax.servlet.http.HttpServletResponse;
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.service.NoticeService;
-import kosta.model.module.vo.Notice;
+import kosta.model.module.vo.NoticeVO;
 
 public class ViewAction implements IAction{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		ActionForward forward = new ActionForward();
 		NoticeService service = NoticeService.getInstance();
 		
-		Notice notice = service.getNotice(request);
+		NoticeVO notice = service.getNotice(request);
 		request.setAttribute("notice", notice);
 		
 		forward.setRedirect(false);

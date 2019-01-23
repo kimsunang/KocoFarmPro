@@ -42,24 +42,114 @@
 		
 			<!-- list -->
 			<div class="contents">
+				 <div class = "tab_menu">
+				 	<input id = "tab1" type = "radio" name = "tabs" checked>
+				 	<label for  = "tab1"> 전체 보기</label>
+				 	
+				 	<input id = "tab2" type = "radio" name = "tabs">
+				 	<label for  = "tab2"> 기안 중</label>
+				 	
+				 	<input id = "tab3" type = "radio" name = "tabs" >
+				 	<label for  = "tab3"> 결재 중</label>
+				 	
+				 	<input id = "tab4" type = "radio" name = "tabs" >
+				 	<label for  = "tab4"> 반려 </label>
+				 	
+				 	<input id = "tab5" type = "radio" name = "tabs" >
+				 	<label for  = "tab5"> 결재 완료</label>
+				 
+				 	<br><br>
+				 	<table class="contents_tb" id="contTb">
+							<tr>
+								<th width = 10%>기안서 번호 </th>
+								<th width = 40%>기안서 제목</th>
+								<th width = 10%>기안서 양식 번호</th>
+								<th width = 20%>등록 날짜</th>
+								<th width = 10%>결재 상태 </th>
+							</tr>
+					</table>
+				 	<section id = "content1">
+				 		<table class="contents_tb" id="contTb">
+							<c:forEach var="ApprovalDraft" items="${list }">
+								<tr>
+									<td width = 10%>${ApprovalDraft.draftId }</td>
+									<td width = 40%><a href = "DetailDraft.do?draftId=${ApprovalDraft.draftId }" >${ApprovalDraft.draftName}</a></td>
+									<td width = 10%>${ApprovalDraft.formId}</td>
+									<td width = 20%>${ApprovalDraft.draftDt }</td>
+									<td width = 10%>${ApprovalDraft.approveState }</td>
+								</tr>
+							</c:forEach>
+						</table>
+				 	</section>
+				 
+				 	<section id = "content2">
+				 		<table class="contents_tb" id="contTb">
+							<c:forEach var="ApprovalDraft" items="${list }">
+								<c:if test = "${ApprovalDraft.approveState eq '기안중' }">
+								<tr>
+									<td width = 10%>${ApprovalDraft.draftId }</td>
+									<td width = 40%><a href = "DetailiDraft.do?draftId=${ApprovalDraft.draftId }" >${ApprovalDraft.draftName}</a></td>
+									<td width = 10%>${ApprovalDraft.formId}</td>
+									<td width = 20%>${ApprovalDraft.draftDt }</td>
+									<td width = 10%>${ApprovalDraft.approveState }</td>
+								</tr>
+								</c:if>
+							</c:forEach>
+						</table>
+				 	</section>
+				 	
+				 	<section id = "content3">
+				 		<table class="contents_tb" id="contTb">
+							<c:forEach var="ApprovalDraft" items="${list }">
+								<c:if test = "${ApprovalDraft.approveState eq '결재중' }">
+								<tr>
+									<td width = 10%>${ApprovalDraft.draftId }</td>
+									<td width = 40%><a href = "DetailDraft.do?draftId=${ApprovalDraft.draftId }" >${ApprovalDraft.draftName}</a></td>
+									<td width = 10%>${ApprovalDraft.formId}</td>
+									<td width = 20%>${ApprovalDraft.draftDt }</td>
+									<td width = 10%>${ApprovalDraft.approveState }</td>
+								</tr>
+								</c:if>
+							</c:forEach>
+						</table>
+				 	</section>	
+				 	
+				 	<section id = "content4">
+				 		<table class="contents_tb" id="contTb">
+							<c:forEach var="ApprovalDraft" items="${list }">
+								<c:if test = "${ApprovalDraft.approveState eq '반려' }">
+								<tr>
+									<td width = 10%>${ApprovalDraft.draftId }</td>
+									<td width = 40%><a href = "DetailDraft.do?draftId=${ApprovalDraft.draftId }" >${ApprovalDraft.draftName}</a></td>
+									<td width = 10%>${ApprovalDraft.formId}</td>
+									<td width = 20%>${ApprovalDraft.draftDt }</td>
+									<td width = 10%>${ApprovalDraft.approveState }</td>
+								</tr>
+								</c:if>
+							</c:forEach>
+						</table>
+				 	</section>
+				 	
+				 	<section id = "content5">
+				 		<table class="contents_tb" id="contTb">
+							<c:forEach var="ApprovalDraft" items="${list }">
+								<c:if test = "${ApprovalDraft.approveState eq '결재완료' }">
+								<tr>
+									<td width = 10%>${ApprovalDraft.draftId }</td>
+									<td width = 40%><a href = "DetailDraft.do?draftId=${ApprovalDraft.draftId }" >${ApprovalDraft.draftName}</a></td>
+									<td width = 10%>${ApprovalDraft.formId}</td>
+									<td width = 20%>${ApprovalDraft.draftDt }</td>
+									<td width = 10%>${ApprovalDraft.approveState }</td>
+								</tr>
+								</c:if>
+							</c:forEach>
+						</table>
+				 	</section>
+				
+				 </div>
+
 				<!-- 목록 보기 -->
-				<table class="contents_tb" id="contTb">
-					<tr>
-						<th>기안서 번호 </th>
-						<th>기안서 제목</th>
-						<th>기안서 양식 번호</th>
-						<th>등록 날짜</th>
-					</tr>
-					
-					<c:forEach var="ApprovalDraft" items="${list }">
-						<tr>
-							<td>${ApprovalDraft.draftId }</td>
-							<td><a href = "DetailDraft.do?draftId=${ApprovalDraft.draftId }" >${ApprovalDraft.draftName}</a></td>
-							<td>${ApprovalDraft.formId}</td>
-							<td>${ApprovalDraft.draftDt }</td>
-						</tr>
-					</c:forEach>
-				</table>
+			
 			</div>
 		
 		</div>

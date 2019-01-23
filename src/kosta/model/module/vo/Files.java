@@ -3,7 +3,6 @@ package kosta.model.module.vo;
 import java.io.Serializable;
 
 public class Files implements Serializable{
-	
 	private String file_id;
 	private int file_size;
 	private String file_name;
@@ -13,14 +12,10 @@ public class Files implements Serializable{
 	private String file_extention;
 	private String emp_id;
 
-	public Files(){
-		super();
-}
-	
+	public Files(){}
 	
 	public Files(String file_id, int file_size, String file_name, String file_path, String file_date,
 			String file_icon_image, String file_extention, String emp_id) {
-		super();
 		this.file_id = file_id;
 		this.file_name = file_name;
 		this.file_size = file_size;

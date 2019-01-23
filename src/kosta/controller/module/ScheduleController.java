@@ -82,6 +82,8 @@ public class ScheduleController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		request.setAttribute("moduleNm", "schedule");
+		
 		if(forward != null){
 			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());

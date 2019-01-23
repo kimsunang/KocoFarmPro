@@ -4,37 +4,80 @@
 <mapper namespace="kosta.mapper.module.ApprovalMapper">
 	<cache/>
 	
-	<!-- 기안서 입력  -->
+	<!-- 기본 기안서 정보 입력  -->
 	<insert id = "insertDraft" parameterType = "ApprovalDraft">
-		insert into Draft values(seq_draft.nextval,'예시',SYSDATE,#{draftTitle},1,#{draftYear},4,'기안중')
+		insert into Draft values(seq_draft.nextval,'예시',SYSDATE,#{draftTitle},'EMP_001',#{draftYear},${formId},'결재완료')
 	</insert>
 	
-	<!-- 휴가 명령서 입력  -->
+	<!-- 휴가 신청서 입력  -->
  	<insert id = "insertVacation" parameterType = "ApprovalVacation">
-		insert into Vacation_Form values(${draftId},1,#{vacationStartDt},#{vacationEndDt},1,#{vacationDays},
+		insert into Vacation_Form values(seq_vacation.nextval,${draftId},${formId},#{vacationStartDt},#{vacationEndDt},#{vacationType},#{vacationDays},
 		#{vacationReason},#{replacementId})
 	</insert> 
+	
+	<!-- 지출 결의서 입력  -->
+ 	<insert id = "insertExpence" parameterType = "ApprovalExpence">
 
+		insert into EXPENCE_FORM values(seq_expence.nextval,${draftId},${formId},#{expenceDt},#{expenceType},#{sumPrice})
+	</insert> 
+	 
+	 <!-- 지출 내역 입력  --> 
+ 	<insert id= "insertExpenceCont" parameterType = "ApprovalExpenceCont">
+		insert into EXPENCE_CONT values(${expenceId},#{contSeq},#{customerName},#{expencePrice},#{commissionOption},#{commissionPrice} )
+	</insert>
+	
+	
+	<!-- 기본 기안서 정보 수정  -->
+	<update id = "updateDraft" parameterType = "ApprovalDraft">
+		update draft set draft_title = #{draftTitle} , 
+						 draft_year  = #{draftYear}
+		where draft_id = #{draftId}
+	</update>
+
+	<!-- 휴가 신청서 정보 수정  -->
+	<update id = "updateVacation" parameterType = "ApprovalVacation">
+		update vacation_form set vacation_type = #{vacationType} , 
+								 vacation_start_dt = #{vacationStartDt} , 
+								 vacation_end_dt = #{vacationEndDt} ,
+								 vacation_days = #{vacationDays} , 
+								 replacement_id = #{replacementId}
+		where draft_id = #{draftId}
+	</update>
+	
+	
+	<!-- 지출 결의서 정보 수정  -->
+	<!-- <update id = "updateExpence" parameterType = "ApprovalExpence">
+		update expence_form set draft_title = #{draftType} , vacation_start_dt = #{vacationStartDt} 
+		where draft_id = #{draftId}
+	</update>  -->
+	
+	<!-- 기본 기안서 정보 삭제  -->
+	<delete id = "deleteDraft" parameterType = "int">
+		delete from draft where draft_id = #{draftId}
+	</delete>
+	
+	<!-- 휴가신청서 정보 삭제 -->
+	<delete id = "deleteVacation" parameterType = "int">
+		delete from vacation_form where draft_id = #{draftId}
+	</delete>
+	
+	<!-- 지출 결의서 정보 삭제 -->
+	<delete id = "deleteExpence" parameterType = "int">
+		delete from Expence_form where draft_id = #{draftId}
+	</delete>
+	
+	
 	<!-- 기안서 양식 list -->
-	 <select id = "listForm" resultType = "ApprovalForm" parameterType = "ApprovalFormSearch">
+	<select id = "listForm" resultType = "ApprovalForm">
 	 	select * from form
-			<if test="null != schType and '' != schType and null != schWord and '' != schWord">
-			<where>
-				<if test="'title' == schType">
-					TITLE LIKE '%'||#{schWord}||'%'
-				</if>
-				<if test="'contents' == schType">
-					CONTENTS LIKE '%'||#{schWord}||'%'
-				</if>
-			</where>
-		</if>
+	 	order by form_id
 	 </select>
 	 
 	 <!-- 등록된 기안서 불러오기 -->
 	 <select id = "listDraft" resultType = "ApprovalDraft">
 		 select * from draft
 	 </select>
-	 
+
 	 
 	 <!-- 양식 폼 id 불러오기 -->
 	 <select id="getDetailForm" resultType = "ApprovalForm" parameterType = "int">	
@@ -46,22 +89,61 @@
 		SELECT draft_id as draftId from draft
 		where ROWNUM = 1
 		order by draft_id DESC
-		
+	</select>
+	
+	<!-- 지출 결의서 번호 불러오기 -->
+	<select id="getExpenceId" resultType="java.lang.Integer">     
+		SELECT expence_id  from expence_Form
+		where ROWNUM = 1
+		order by expence_id DESC
 	</select>
 	
 	 <!-- 기본 draft 불러오기 -->
-	 <select id="getDraft" parameterType="int" resultType = "ApprovalDraft">
-	 	SELECT * FROM DRAFT WHERE draft_id = #{draftId}
+	 <select id="getDraft" parameterType="java.lang.Integer" resultType="ApprovalDraft">
+	 	SELECT * FROM DRAFT WHERE DRAFT_ID = #{draftId}
 	 </select>
 	 
 	 <!-- Vacation 정보 불러오기  -->
 	 <select id="getVacation" parameterType="int" resultType = "ApprovalVacation">
 	 	Select * From Vacation_form WHERE draft_id = #{draftId}
 	 </select>
-	 <!-- 회원 정보 불러오기  -->
-	 <select id = "" resultType = "Employee" parameterType = "int">
-	 	select * from employee where emp_id = #{empId}
+	 
+	 <!-- Expence 정보 불러오기  -->
+	 <select id="getExpence" parameterType = "int" resultType = "ApprovalExpence">
+	 	Select * from Expence_form where draft_id = #{draftId}
 	 </select>
+ 
+ 	 <!-- Expence Contents 내용 불러오기 -->
+ 	 <select id="getExpenceCont" parameterType="int" resultType = "ApprovalExpenceCont">
+ 	 	Select * from Expence_cont where expence_id = #{expenceId} order by cont_Seq
+ 	 </select>
+ 	 
+ 	 <!-- 댓글 등록 입력 -->
+	<insert id="insertComment" parameterType="DraftComment">
+		insert into DRAFT_COMMENT values(comment_seq.nextval, #{draftId}, 'EMP_001',
+		#{commentContents}, SYSDATE)
+	</insert>
+	<!-- 댓글 목록 -->
+	<select id="listComment"  parameterType="map" resultType="DraftComment">
+		select * from DRAFT_COMMENT where DRAFT_ID=#{draftId} 
+	</select>
+	<select id="getCommentCount" parameterType="map" resultType="java.lang.Integer">
+		select count(*) from DRAFT_COMMENT where DRAFT_ID = #{draftId}
+	</select>
+	<select id="getDraftCommentList"  parameterType="map" resultType="DraftComment">
+		select  * from
+		(select comment_id, draft_id, emp_id, comment_contents, comment_dt 
+			from DRAFT_COMMENT where DRAFT_ID=#{draftId} order by COMMENT_ID DESC) 
+		 order by COMMENT_ID ASC
+	</select>
+	
+	 <!-- 회원 정보 불러오기  -->
+<!-- 	 <select id = "getEmployee" resultType = "Employee" parameterType = "int">
+	 	select * from employee where emp_id = #{empId}
+	 </select> -->
+	
+	
+	
 	 
 	<!-- 결재 폼 입력 -->
 	<!-- <insert id = "insertExpence" parameterType = "ApprovalExpence">

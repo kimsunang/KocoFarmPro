@@ -15,7 +15,7 @@ import kosta.action.comm.SignInOutAction;
 
 @WebServlet("/signIn.do")
 public class SignInOutController extends HttpServlet {
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);

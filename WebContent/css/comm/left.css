@@ -1,0 +1,7 @@
+.left_wrap{background-color:#2C2A29;position:fixed;height:100%;width:12%;top:78px;left:0;overflow-x:hidden}
+
+.left_bar{padding:13px}
+.menu_t nav ul{margin:0;padding:0}
+.menu_t nav ul li{padding:20px 10px}
+.menu_t nav ul li a{color:#fff}
+.menu_t nav ul li a:hover{border-bottom:1px solid #fff;font-weight:600;cursor:pointer}

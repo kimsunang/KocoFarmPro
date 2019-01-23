@@ -21,7 +21,7 @@
 		<!-- Contents Area -->
 		<div class="contents_wrap">
 			<!-- view -->
-			<form action="" id="noticeForm">
+			<form action="noticeView.do" id="noticeForm">
 				<input type="hidden" name="mode" id="mode" value="${param.mode}" />
 				<input type="hidden" name="noticeId" id="noticeId" value="${notice.noticeId}" />
 				
@@ -63,12 +63,10 @@
 			<div class="btn_wrap">
 				<div class="flt_r">
 					<input type="button" class="list_btn" id="listBtn" value="목록" />
-					<c:choose>
-						<c:when test="${loginVO.authority == 99}">
+						<c:if test="${loginVO.authority == 99}">
 							<input type="button" class="edit_btn" id="editBtn" value="수정" />
 							<input type="button" class="del_btn" id="delProCBtn" value="삭제" />
-						</c:when>
-					</c:choose>
+						</c:if>
 				</div>
 			</div>
 		</div>

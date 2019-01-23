@@ -12,7 +12,6 @@ public class MainAction implements IAction{
 			
 		forward.setRedirect(false);
 		forward.setPath("main.jsp");
-	
 		
 		return forward;
 	}

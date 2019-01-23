@@ -22,15 +22,14 @@ public class SignInOutService {
 		String userId = request.getParameter("userId");
 		
 		// 비밀 번호 암호화
-		String salt = SHA256Util.generateSalt();
-		String inputPw = SHA256Util.getEncrypt(request.getParameter("userPw"), salt);
-		
 		LoginVO loginVO = dao.getLoginUserInfo(userId);
 		
-		if(null != loginVO){
-			String userPw = SHA256Util.getEncrypt(loginVO.getPw(), salt);
+		String inputPw = SHA256Util.getEncrypt(request.getParameter("userPw"), loginVO.getSalt());
 		
-			// 비밀 번호 일치 여부 -1:불 일치 / 1: 일치
+		if(null != loginVO){
+			String userPw = loginVO.getPw();
+			
+			// 비밀 번호 일치 여부 re > -1: 불 일치 / 1: 일치
 			if(!inputPw.equals(userPw)){
 				loginVO.setRe(-1);
 			}else{

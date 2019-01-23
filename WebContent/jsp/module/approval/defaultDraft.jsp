@@ -66,16 +66,10 @@
 			</div>
 		
 			<!-- list -->
-			<style>
-			
-				h1 {
-					text-align: center;
-				}
-			</style>
 			<div class="contents">
-					<h1> 기안서 양식 없음</h1>
+					<h1 class="txt_c">해당하는 기안서 양식이 존재하지 않습니다.</h1>
 					</div>
-				</form>
+<!-- 				</form> -->
 			</div>
 		
 		</div>

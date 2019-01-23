@@ -4,15 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.dao.ApprovalDao;
 import kosta.model.module.vo.ApprovalDraft;
-import kosta.model.module.vo.ApprovalForm;
-import kosta.model.module.vo.ApprovalFormSearch;
-import kosta.model.module.vo.NoticeSearch;
 
 public class ListDraftAction implements IAction {
 
@@ -23,7 +19,6 @@ public class ListDraftAction implements IAction {
 		
 		List<ApprovalDraft> list = dao.listDraft();
 		request.setAttribute("list", list);
-		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/jsp/module/approval/draftList.jsp");

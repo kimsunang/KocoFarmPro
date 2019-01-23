@@ -1,0 +1,5 @@
+input:not(.fileInput){width:250px;height:36px;line-height:36px;border:1px solid #ddd;border-radius:3px;text-indent:10px;color:#666}
+select{width:120px;height:36px;line-height:36px;border:1px solid #ddd;border-radius:3px;text-indent:10px;color:#666}
+.emp_img{width:137.488189px;height:124.385827px}
+.scrollTb{height:300px;overflow-x:hidden}
+.resetPwBtn{width:150px!important;height:40px!important;line-height:40px!important;text-indent:0!important;background-color:#ffce0b;color:#fff!important;font-weight:600;cursor:pointer}

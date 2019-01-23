@@ -11,7 +11,7 @@ public class DownloadAction implements IAction{
 		ActionForward forward = new ActionForward();
 			
 		forward.setRedirect(false);
-		forward.setPath("/jsp/module/file_room/fileRoomView.jsp");
+		forward.setPath("/jsp/comm/download.jsp");
 		
 		return forward;
 	}

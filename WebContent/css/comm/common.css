@@ -1,16 +1,17 @@
 body{margin:0!important}
 a{text-decoration:none;curosr:pointer;color:#666666}
-
+input:read-only{cursor:pointer;background-color:#efefef}
 ul li{list-style:none}
-.txt_c{text-align:center}
-.txt_b{font-weight:600}
+.txt_c{text-align:center!important}
+.txt_600{font-weight:600}
 .dp_in_b{display:inline-block}
-.wth_100_p{width:100%}
+.wth100p{width:100%!important}
 .dp_none{display:none}
 .flt_l{float:left}
 .flt_r{float:right}
 
-span#fileTit{cursor:pointer}
+.cursorP{cursor:pointer}
+span.req{color:red!important}
 
 #wrap{width:100%;position:relative}
 
@@ -69,6 +70,12 @@ table.contents_tb.wr td{border-bottom:none}
 .btn_wrap input.edit_btn{width:80px;height:40px;line-height:40px;background:#ffce0b;border-radius:3px;font-size:14px;font-weight:bold;color:#fff;cursor:pointer;text-indent:0;border:1px solid #ddd}
 .btn_wrap input.del_btn{width:80px;height:40px;line-height:40px;background:#ED1B00;border-radius:3px;font-size:14px;font-weight:bold;color:#fff;cursor:pointer;text-indent:0;border:1px solid #ddd}
 .btn_wrap input.view_btn{width:80px;height:40px;line-height:40px;background:#2ca52a;border-radius:3px;font-size:14px;font-weight:bold;color:#fff;cursor:pointer;text-indent:0;border:1px solid #ddd}
+
+input.auto_wth_btn_g{padding:0 10px;height:40px;line-height:40px;background:#777;border-radius:3px;font-size:14px;font-weight:bold;color:#fff;cursor:pointer;text-indent:0;border:1px solid #ddd}
+input.auto_wth_btn_b{padding:0 10px;height:40px;line-height:40px;background:#010372;border-radius:3px;font-size:14px;font-weight:bold;color:#fff!important;cursor:pointer;text-indent:0;border:1px solid #ddd}
+input.auto_wth_btn_y{padding:0 10px;height:40px;line-height:40px;background:#ffce0b;border-radius:3px;font-size:14px;font-weight:bold;color:#fff!important;cursor:pointer;text-indent:0;border:1px solid #ddd}
+input.auto_wth_btn_r{padding:0 10px;height:40px;line-height:40px;background:#ED1B00;border-radius:3px;font-size:14px;font-weight:bold;color:#fff!important;cursor:pointer;text-indent:0;border:1px solid #ddd}
+input.auto_wth_btn_g{padding:0 10px;height:40px;line-height:40px;background:#2ca52a;border-radius:3px;font-size:14px;font-weight:bold;color:#fff!important;cursor:pointer;text-indent:0;border:1px solid #ddd}
 
 /* 페이징 */
 div.paging_div{height:40px;padding:10px;text-align:center}

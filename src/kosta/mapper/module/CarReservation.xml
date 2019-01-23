@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.CarReservationMapper">
+	
+	<!-- 예약등록 -->
+	<insert id="setCarReservation" parameterType="CarReservation">
+		insert into CAR_RES
+			(RES_ID, WRITER, RES_USER, PURPOSE, ST_ADDR, DE_ADDR, 
+				REG_DT, UP_DT, ST_TIME, EN_TIME, CAR_ID, REG_DT)
+		values
+			(CAR_RES_SEQ.NEXTVAL, #{WRITER}, #{RES_USER}, #{PURPOSE}, #{ST_ADDR}, #{DE_ADDR},
+				#{regDt}, #{UP_DT}, #{ST_TIME}, #{EN_TIME}, #{CAR_ID}, SYSDATE)
+	
+	</insert>
+	
+	<!-- 차량번호 불러오기-->
+	<select id="getCarList" resultType="RentCarDetail">
+		select C.CAR_ID AS CAR_ID, C.MODELNAME AS MODELNAME, C.CARMODEL AS CARMODEL
+		FROM RENTCAR_DETAIL C LEFT JOIN CAR_REP P ON C.CAR_ID = P.CAR_ID
+		WHERE C.CAR_ID = #{CAR_ID}
+	
+	</select>
+	
+	
+	
+	<!-- 사원이름 불러오기 -->
+	<select id="getEmpName" resultType="EMP">
+		select kor_nm
+		FROM EMP
+	
+	</select>
+
+
+
+</mapper>

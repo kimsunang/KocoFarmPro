@@ -1,4 +1,4 @@
-S<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <jsp:include page="/jsp/comm/top.jsp" flush="false" ></jsp:include>
 <link rel="stylesheet" type="text/css" href="/KocoFarmPro/css/module/approval.css" />
@@ -44,6 +44,11 @@ S<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="U
 			<div class="contents">
 				<!-- 목록 보기 -->
 				<table class="contents_tb" id="contTb">
+					<colgroup>
+						<col width="10%" />
+						<col width="60%" />
+						<col width="*%" />
+					</colgroup>
 					<tr>
 						<th>양식 번호 </th>
 						<th>양식 이름 </th>

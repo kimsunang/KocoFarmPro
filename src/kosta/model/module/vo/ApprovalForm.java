@@ -9,7 +9,6 @@ public class ApprovalForm  implements Serializable {
 	private String sortName;
 	private String modeName;
 	public ApprovalForm(int formId, int sortId, int modeId, String sortName, String modeName) {
-		super();
 		this.formId = formId;
 		this.sortId = sortId;
 		this.modeId = modeId;

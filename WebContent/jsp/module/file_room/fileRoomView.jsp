@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/jsp/comm/top.jsp" flush="false" ></jsp:include>
-<link rel="stylesheet" type="text/css" href="/Kocofarm/css/module/notice.css" />
+<link rel="stylesheet" type="text/css" href="/KocoFarmPro/css/module/fileRoom.css" />
 
 	<div class="cont_wrap">
 		<!-- SubTitle Area -->
@@ -69,5 +69,5 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript" src="/Kocofarm/js/module/fileRoom.js"></script>
+<script type="text/javascript" src="/KocoFarmPro/js/module/fileRoom.js"></script>
 <jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

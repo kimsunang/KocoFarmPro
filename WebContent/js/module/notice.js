@@ -31,16 +31,16 @@ $(function(){
 		var schTypeVal = $("#schType").val();
 		var schWordVal = $("#schWord").val();
 		
-		/* 검색 필수 값 체크 */
-		if((schTypeVal == "" && schWordVal != "")){
+		/* 검색 필수 카테고리 체크 */
+		if(("" == schTypeVal && "" != schWordVal)){
 			alert("검색 타입을 선택 해 주세요.");
 			$("#schType").focus();
 			return false;
-		}else if(schWordVal == "" && schTypeVal != ""){
+		}else if("" == schWordVal && "" != schTypeVal){
 			alert("검색어를 입력 해 주세요.");
 			$("#schWord").focus();
 			return false;
-		}else if((schWordVal != "" && schTypeVal != "") || (schTypeVal == "" && schWordVal == "")){
+		}else if(("" != schWordVal && "" != schTypeVal) || ("" == schTypeVal && "" == schWordVal)){
 			$("#noticeForm").submit();
 			return false;
 		}
@@ -116,7 +116,6 @@ $(function(){
 			
 			$("#fileTit").html(orgFile.substring(orgPath.length));
 		});
-		
 	}else{
 		$("#fileTit").hide();
 	}
@@ -127,13 +126,13 @@ $(function(){
 function chkReq(){
 	var mode = $("#mode").val();
 
-	if($("#title").val() == null || $("#title").val() == ""){
+	if(null == $("#title").val() || "" == $("#title").val()){
 		alert("제목을 입력 해 주세요.");
 		$("#title").focus();
 		return false;
 	}
 	
-	if($("#contents").val() == null || $("#contents").val() == ""){
+	if(null == $("#contents").val() || "" == $("#contents").val()){
 		alert("내용을 입력 해 주세요.");
 		$("#contents").focus();
 		return false;

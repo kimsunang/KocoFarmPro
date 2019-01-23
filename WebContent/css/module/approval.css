@@ -9,3 +9,32 @@ div.inf_wrap_box{padding:20px 30px;height:180px;background:#f4f4f2;border-radius
 p.last_msg{text-align:center;}
 p.sysdate{text-align:right; padding-right:200px;}
 p.sign{text-align:right;padding-right:200px;}
+
+.btn_wrap input.modifyBtn{width:80px;height:40px;line-height:40px;background:#14576F;border-radius:3px;font-size:14px;font-weight:bold;color:#fff;cursor:pointer;text-indent:0;border:1px solid #ddd}
+.btn_wrap input.deleteBtn{width:80px;height:40px;line-height:40px;background:#861E3F;border-radius:3px;font-size:14px;font-weight:bold;color:#fff;cursor:pointer;text-indent:0;border:1px solid #ddd}
+
+div.tab_menu section {display: none;padding:0px 0 0;}
+/*¶óµð¿À¹öÆ° ¼û±è*/
+div.tab_menu input{display: none;}
+div.tab_menu label { isplay: inline-block; margin: 0 0 -1px;padding: 16px 78px; font-weight: 600;text-align: center;color: #bbb;border: 1px solid transparent;}
+div.tab_menu label:hover {color: #2e9cdf; cursor: pointer;}
+/*input Å¬¸¯½Ã, label ½ºÅ¸ÀÏ*/
+div.tab_menu input:checked + label {color: #555; border: 1px solid #ddd;border-top: 2px solid #2e9cdf;border-bottom: 1px solid #ffffff;}
+div.tab_menu #tab1:checked ~ #content1,
+div.tab_menu #tab2:checked ~ #content2,
+div.tab_menu #tab3:checked ~ #content3,
+div.tab_menu #tab4:checked ~ #content4,
+div.tab_menu #tab5:checked ~ #content5 {display: block;margin-top:30px}
+
+
+div .inputText{padding:10px 5px;background:#f4f4f2;border-radius:3px;position:relative;}
+div .draft{width:1100px;padding:10px 10px 10px 10px;border:1px solid #ddd;position:relative;border-radius:5px;margin-bottom:40px;align:center;}
+
+div .input_wrap{position:relative;}
+
+span.sub_txt{font-size:12px;font-weight:600}
+textarea{resize:none}
+select{width:100%;height:39px;line-height:39px;border:1px solid #ddd;border-radius:3px}
+input:not([type=radio]){width:100%;height:39px;border:1px solid #ddd;border-radius:3px}
+input.date{width:100%;height:39px;text-indent:10px;border:1px solid #ddd;border-radius:3px;text-align:center}
+.submitBtn{height:40px!important;line-height:40px;min-width:120px;padding:0 10px;background-color:#010372;color:#fff;cursor:pointer}

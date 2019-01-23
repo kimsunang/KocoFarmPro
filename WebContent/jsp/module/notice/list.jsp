@@ -71,7 +71,7 @@
 										<td>
 											${(noticeList.totalCount-status.index)-((noticeList.requestPage-1)*noticeList.pageSize)}
 										</td>
-										<td><a href="noticeView.do?mode=view&noticeId=${list.noticeId}">${list.title}</a></td>
+										<td class="cursorP"><a href="noticeView.do?mode=view&noticeId=${list.noticeId}">${list.title}</a></td>
 										<td>${list.regDt}</td>
 										<td>${list.hitCnt}</td>
 									</tr>
@@ -108,11 +108,9 @@
 			<!-- btn -->
 			<div class="btn_wrap">
 				<div class="flt_r">
-					<c:choose>
-						<c:when test="${loginVO.authority == 99}">
-							<input type="button" class="write_btn" id="writeBtn" value="등록" />
-						</c:when>
-					</c:choose>
+					<c:if test="${loginVO.authority == 99}">
+						<input type="button" class="write_btn" id="writeBtn" value="등록" />
+					</c:if>
 				</div>
 			</div>
 		</div>

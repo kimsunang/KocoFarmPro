@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.RentCarDetailMapper">
+	
+	<!-- 등록 -->
+	<insert id="setRentCarDetail" parameterType="RentCarDetail">
+		insert into RENTCAR_DETAIL
+				(CAR_ID,MODELNAME, CARMODEL, CONDITION, PRICE, YEAR, OIL_TYPE, REG_DT)
+		values
+				(#{carId}, #{modelName}, #{carModel},#{condition, jdbcType=VARCHAR},
+				 #{price}, #{year}, #{oilType, jdbcType=VARCHAR},sysdate)	
+	</insert>
+	
+	<!-- 목록보기 -->
+	<select id="getRentCarDetailList" resultType="RentCarDetail" parameterType="RentCarDetailSearch">
+		select * from RENTCAR_DETAIL
+			<if test="area">
+				<where>
+					<foreach collection="area" item="item" separator="OR"
+						open="(" close=")">
+						${item} LIKE #{searchKey} 
+					</foreach>
+				</where>
+			</if>	
+			ORDER BY car_id ASC 				
+	</select>
+	
+	<!-- 상세보기 -->
+	<select id="getRentCarDetail" parameterType="java.lang.String" resultType="RentCarDetail">
+		select *
+		from RENTCAR_DETAIL
+		where car_id = #{carId}
+	</select>
+	
+
+	<!--  목록 총개수 --> <!-- resultType="java.lang.Integer" -->
+	<select id="getRentCarDetailListCnt" parameterType="RentCarDetailSearch" resultType="java.lang.Integer">
+	 select count(*) from RENTCAR_DETAIL
+		<if test="area">
+		<where>
+			<foreach collection="area" item = "item" separator="OR" 
+				open="(" close=")">		
+				${item} LIKE #{searchKey}	
+			</foreach>	
+			</where>	
+		</if>
+	</select>
+	
+	<!-- 수정 -->
+	<update id="setUpRentCarDetail" parameterType="RentCarDetail">
+		update RENTCAR_DETAIL
+		set 
+			modelName = #{modelName, jdbcType=VARCHAR},
+			carModel = #{carModel, jdbcType=VARCHAR},
+			condition = #{condition, jdbcType=VARCHAR},
+			price = #{price},
+			year = #{year},
+			oil_Type = #{oilType, jdbcType=VARCHAR},
+			UP_DT = sysdate
+		where car_id = #{carId, jdbcType=VARCHAR}
+		
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="delRentCarDetail" parameterType="java.lang.String">
+	DELETE FROM RENTCAR_DETAIL
+	WHERE car_id = #{carId , jdbcType=VARCHAR }	
+	</delete>
+	
+	<!-- 등록번호chk ////////////////////////추가해준부분-->
+	<!-- 
+	<select id="checkCar_id" parameterType="java.lang.String" resultType="java.lang.Integer">
+	select count(*)
+	from RENTCAR_DETAIL
+	where car_id = #{car_id}
+	</select>
+	 -->
+	 
+	 
+	 <!-- 차량번호 목록  -->
+	 <select id="getCar_idList" resultType="RentCarDetail">
+	 select car_id
+	 FROM RENTCAR_DETAIL 	 
+	 </select> 
+	 
+	 
+	
+	
+</mapper>

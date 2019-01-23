@@ -10,7 +10,6 @@ public class WriteAction implements IAction{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		ActionForward forward = new ActionForward();
 		
 		forward.setRedirect(false);

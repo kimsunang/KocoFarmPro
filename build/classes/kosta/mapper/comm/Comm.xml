@@ -7,11 +7,12 @@
 		SELECT
 				EMP_ID	AS	empId
 			,	PW		AS	pw
+			,	SALT	AS	salt
 			,	KOR_NM	AS	korNm
 			,	ENG_NM	AS	engNm
 			,	EMAIL	AS	email
 			,	CELLPHONE	AS	cellPhone
-			,	HIRE_DT	AS	hireDt
+			,	HIRE_DT		AS	hireDt
 			,	RETIREMENT_DT	AS	retirementDt
 			,	STATE	AS	state
 			,	ANNUAL	AS	annual

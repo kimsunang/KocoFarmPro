@@ -10,8 +10,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kosta.mapper.module.NoticeMapper;
-import kosta.model.module.vo.Notice;
-import kosta.model.module.vo.NoticeSearch;
+import kosta.model.module.vo.NoticeVO;
+import kosta.model.module.vo.SearchVO;
 
 public class NoticeDao {
 	
@@ -36,7 +36,7 @@ public class NoticeDao {
 	}
 
 	/* 목록 총 개 수 */
-	public int getNoticeListCnt(NoticeSearch search){
+	public int getNoticeListCnt(SearchVO search){
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		int re = 0;
 		
@@ -52,9 +52,9 @@ public class NoticeDao {
 	}
 		
 	/* 목록 */
-	public List<Notice> getNoticeList(NoticeSearch search, int startRow){
+	public List<NoticeVO> getNoticeList(SearchVO search, int startRow){
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		List<Notice> list = null;
+		List<NoticeVO> list = null;
 		
 		try {
 			list = sqlSession.getMapper(NoticeMapper.class).getNoticeList(new RowBounds(startRow, 10), search);
@@ -68,9 +68,9 @@ public class NoticeDao {
 	}
 	
 	/* 상세 정보 */
-	public Notice getNotice(String noticeId){
+	public NoticeVO getNotice(String noticeId){
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
-		Notice notice = null;
+		NoticeVO notice = null;
 		
 		try{
 			notice = sqlSession.getMapper(NoticeMapper.class).getNotice(noticeId);
@@ -84,7 +84,7 @@ public class NoticeDao {
 	}
 	
 	/* 조회 수 증가 */
-	public int setUpHitCnt(Notice notice){
+	public int setUpHitCnt(NoticeVO notice){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 
@@ -106,7 +106,7 @@ public class NoticeDao {
 	}
 	
 	/* 등록 */
-	public int setNotice(Notice notice){
+	public int setNotice(NoticeVO notice){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 
@@ -128,7 +128,7 @@ public class NoticeDao {
 	}
 	
 	/* 수정 */
-	public int setUpNotice(Notice notice){
+	public int setUpNotice(NoticeVO notice){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		

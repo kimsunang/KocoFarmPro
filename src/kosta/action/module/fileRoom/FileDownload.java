@@ -4,7 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
- 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +12,6 @@ import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.service.FileService;
 import kosta.model.module.vo.Files;
- 
  
 public class FileDownload implements IAction {
  
@@ -27,7 +26,7 @@ public class FileDownload implements IAction {
         int idx = Integer.parseInt(request.getParameter("idx"));
  
         
-Files file = new Files();
+        Files file = new Files();
         // 파일 이름을 받아서
         String file_name = file.getFile_name();
 
@@ -79,9 +78,11 @@ Files file = new Files();
                 outs.close();
                 fin.close();
             } catch (Exception e) {
-            	e.printStackTrace();
+                System.out.println("Download Exception : " + e.getMessage());
             }
         } else {
+            System.out.println("Download Error : downFile Error [" + downFile
+                    + "]");
         }
         return forward;
         // 여기서 뭘 리턴해야 원래 리스트로 돌아가지?

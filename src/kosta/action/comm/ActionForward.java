@@ -1,7 +1,9 @@
 package kosta.action.comm;
 
 public class ActionForward {
+	/* 리다이렉트 여부 */
 	private boolean isRedirect;
+	/* 경로 */
 	private String path;
 	
 	public boolean isRedirect() {

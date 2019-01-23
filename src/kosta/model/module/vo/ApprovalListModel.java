@@ -15,7 +15,6 @@ public class ApprovalListModel {
 
 	public ApprovalListModel(List<ApprovalForm> list, int requestPage, int totalPageCount, int startPage, int endPage,
 			int totalCount, int pageSize) {
-		super();
 		this.list = list;
 		this.requestPage = requestPage;
 		this.totalPageCount = totalPageCount;

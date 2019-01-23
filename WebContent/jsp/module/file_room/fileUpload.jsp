@@ -3,10 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/jsp/comm/top.jsp" flush="false"></jsp:include>
-<link rel="stylesheet" type="text/css"
-	href="/KocoFarmPro/css/module/notice.css" />
+<link rel="stylesheet" type="text/css" href="/KocoFarmPro/css/module/fileRoom.css" />
 	<!-- SubTitle Area -->
-<%-- 	<% System.out.println("forward"); %>  --%>
 	<div class="sub_title">
 		<div class="sub_title_top">
 			<div class="sub_title_inner">
@@ -24,8 +22,10 @@
 		<!-- write -->
 		<form action="insertFile.do" id="fileForm" method="post" enctype="multipart/form-data">
 			파일22 : <input type="file" name="file_name"> <br> 
+			<input type="submit" value="업로드" />
 		</form>
-		<input type="button" id="writeProCBtn" value="등록">
+		
+		
 		<!-- btn -->
 <!-- 		<div class="btn_wrap"> -->
 <!-- 			<div class="flt_r"> -->

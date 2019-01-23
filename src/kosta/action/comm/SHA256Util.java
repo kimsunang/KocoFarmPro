@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class SHA256Util {
 	
+	/* 암호화 */
 	public static String getEncrypt(String source, String salt) {
         return getEncrypt(source, salt.getBytes());
     }
@@ -38,6 +39,7 @@ public class SHA256Util {
         return result;
     }
     
+    /* 랜덤 Salt */
     public static String generateSalt() {
         Random random = new Random();
         
@@ -46,7 +48,7 @@ public class SHA256Util {
         
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < salt.length; i++) {
-            // byte 값을 Hex 값으로 바꾸기.
+            // byte 값 > Hex 값
             sb.append(String.format("%02x",salt[i]));
         }
         

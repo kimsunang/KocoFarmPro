@@ -3,6 +3,7 @@ package kosta.model.module.vo;
 import java.io.Serializable;
 
 public class ApprovalVacation implements Serializable {
+	private int vacationId;
 	private int draftId;
 	private int formId;
 	private String vacationStartDt;
@@ -10,13 +11,10 @@ public class ApprovalVacation implements Serializable {
 	private String vacationType;
 	private int vacationDays;
 	private String vacationReason;
-	private int replacementId;
-	
-	
-	public ApprovalVacation() {}
-	public ApprovalVacation(int draftId, int formId, String vacationStartDt, String vacationEndDt, String vacationType,
-			int vacationDays, String vacationReason, int replacementId) {
-		super();
+	private String replacementId;
+	public ApprovalVacation(int vacationId, int draftId, int formId, String vacationStartDt, String vacationEndDt,
+			String vacationType, int vacationDays, String vacationReason, String replacementId) {
+		this.vacationId = vacationId;
 		this.draftId = draftId;
 		this.formId = formId;
 		this.vacationStartDt = vacationStartDt;
@@ -25,6 +23,14 @@ public class ApprovalVacation implements Serializable {
 		this.vacationDays = vacationDays;
 		this.vacationReason = vacationReason;
 		this.replacementId = replacementId;
+	}
+	public ApprovalVacation() {
+	}
+	public int getVacationId() {
+		return vacationId;
+	}
+	public void setVacationId(int vacationId) {
+		this.vacationId = vacationId;
 	}
 	public int getDraftId() {
 		return draftId;
@@ -68,12 +74,13 @@ public class ApprovalVacation implements Serializable {
 	public void setVacationReason(String vacationReason) {
 		this.vacationReason = vacationReason;
 	}
-	public int getReplacementId() {
+	public String getReplacementId() {
 		return replacementId;
 	}
-	public void setReplacementId(int replacementId) {
+	public void setReplacementId(String replacementId) {
 		this.replacementId = replacementId;
 	}
+	
 	
 	
 	

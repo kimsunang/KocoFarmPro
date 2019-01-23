@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.EmpMapper">
+	<!-- Basic -->
+	<sql id="basicCol">
+      		A.EMP_ID	AS	empId
+		,	A.KOR_NM	AS	korNm
+		,	A.ENG_NM	AS	engNm
+		,	A.EMAIL		AS	email
+		,	A.CELLPHONE	AS	cellPhone
+		,	TO_CHAR(A.HIRE_DT, 'yyyy-MM-dd')		AS hireDt
+		,	TO_CHAR(A.RETIREMENT_DT, 'yyyy-MM-dd')	AS retirementDt
+		,	A.STATE		AS	state
+		,	CASE
+				WHEN A.STATE = 'stay'		THEN '재직'
+				WHEN A.STATE = 'loa'		THEN '휴직'
+				WHEN A.STATE = 'retirement' THEN '퇴직'
+				ELSE ''
+			END				AS 	stateNm
+		,	A.ANNUAL		AS	annual
+		,	A.DEPT_ID		AS	deptId
+		,	A.JOB_ID		AS	jobId
+		,	A.POSITION_ID	AS	positionId
+		,	A.MANAGER_ID	AS	managerId
+		,	(SELECT KOR_NM FROM EMP WHERE EMP_ID = MANAGER_ID)	AS managerNm
+		,	A.AUTHORITY		AS	authority
+		,	A.SALARY		AS	salary
+		,	TO_CHAR(A.START_DT, 'yyyy-MM-dd')	AS startDt
+		,	TO_CHAR(A.END_DT, 'yyyy-MM-dd')		AS endDt
+		,	TO_CHAR(A.REG_DT, 'yyyy-MM-dd')		AS regDt
+		,	TO_CHAR(A.UP_DT, 'yyyy-MM-dd')		AS upDt
+		,	A.EMP_IMG		AS	empImg
+		,	B.DEPT_NM		AS	deptNm
+		,	C.JOB_NM		AS	jobNm
+		,	D.POSITION_NM	AS	positionNm
+	</sql>
+
+	<!-- 목록 총 개 수 -->
+	<select id="getEmpListCnt" parameterType="SearchVO" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM EMP A
+	    LEFT JOIN DEPARTMENTS B ON A.DEPT_ID = B.DEPT_ID
+	    LEFT JOIN JOBS C ON A.JOB_ID = C.JOB_ID
+	    LEFT JOIN POSITION D ON A.POSITION_ID = D.POSITION_ID
+		<if test="null != schType and '' != schType and null != schWord and '' != schWord">
+			<where>
+				<if test="'empId' == schType">
+					A.EMP_ID = #{schWord}
+				</if>
+				<if test="'korNm' == schType">
+					A.KOR_NM LIKE '%'||#{schWord}||'%'
+				</if>
+				<if test="'cellphone' == schType">
+					A.CELLPHONE = #{schWord}
+				</if>
+				<if test="'state' == schType">
+					A.STATE = #{schWord}
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<!-- 목록 -->
+	<select id="getEmpList" parameterType="SearchVO" resultType="EmpVO">
+		SELECT
+			<include refid="basicCol" />
+		FROM EMP A
+	    LEFT JOIN DEPARTMENTS B ON A.DEPT_ID = B.DEPT_ID
+	    LEFT JOIN JOBS C ON A.JOB_ID = C.JOB_ID
+	    LEFT JOIN POSITION D ON A.POSITION_ID = D.POSITION_ID
+		<if test="null != schType and '' != schType and null != schWord and '' != schWord">
+			<where>
+				<if test="'empId' == schType">
+					A.EMP_ID = #{schWord}
+				</if>
+				<if test="'korNm' == schType">
+					A.KOR_NM LIKE '%'||#{schWord}||'%'
+				</if>
+				<if test="'cellphone' == schType">
+					A.CELLPHONE = #{schWord}
+				</if>
+				<if test="'state' == schType">
+					A.STATE = #{schWord}
+				</if>
+			</where>
+		</if>
+		ORDER BY A.REG_DT DESC
+	</select>
+	
+	<!-- 상세정보 -->
+	<select id="getEmp" resultType="EmpVO">
+		SELECT
+			<include refid="basicCol" />
+		FROM EMP A
+	    LEFT JOIN DEPARTMENTS B ON A.DEPT_ID = B.DEPT_ID
+	    LEFT JOIN JOBS C ON A.JOB_ID = C.JOB_ID
+	    LEFT JOIN POSITION D ON A.POSITION_ID = D.POSITION_ID
+		WHERE A.EMP_ID = #{empId}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="setEmp" parameterType="EmpVO">
+		INSERT INTO EMP
+			(
+					EMP_ID
+				,	PW
+				,	SALT
+				,	KOR_NM
+				,	ENG_NM
+				,	EMAIL
+				,	CELLPHONE
+				,	HIRE_DT
+				,	STATE
+				,	ANNUAL
+				,	DEPT_ID
+				,	JOB_ID
+				,	POSITION_ID
+				,	MANAGER_ID
+				,	AUTHORITY
+				,	SALARY
+				,	REG_DT
+				,	EMP_IMG
+			)
+		VALUES
+			(
+					'EMP_00'||EMP_SEQ.NEXTVAL
+				,	#{pw}
+				,	#{salt}
+				,	#{korNm}
+				,	#{engNm}
+				,	#{email}
+				,	#{cellPhone}
+				,	#{hireDt}
+				,	#{state}
+				,	#{annual}
+				,	#{deptId}
+				,	#{jobId}
+				,	#{positionId}
+				,	#{managerId}
+				,	#{authority}
+				,	#{salary}
+				,	SYSDATE
+				,	#{fileNm}
+			)
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="setUpEmp" parameterType="EmpVO">
+		UPDATE EMP
+		SET
+				KOR_NM	= #{korNm}
+			,	ENG_NM	= #{engNm}
+			,	EMAIL	= #{email}
+			,	CELLPHONE	= #{cellPhone}
+			,	HIRE_DT		= #{hireDt}
+			,	RETIREMENT_DT	= #{retirementDt}
+			,	STATE		= #{state}
+			,	DEPT_ID		= #{deptId}
+			,	JOB_ID		= #{jobId}
+			,	POSITION_ID	= #{positionId}
+			,	MANAGER_ID	= #{managerId}
+			,	AUTHORITY	= #{authority}
+			,	SALARY		= #{salary}
+			,	EMP_IMG		= #{fileNm}
+			,	UP_DT		= SYSDATE
+			,	START_DT	= #{startDt, jdbcType=VARCHAR}
+			,	END_DT		= #{endDt, jdbcType=VARCHAR}
+		WHERE EMP_ID = #{empId}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="delEmp" parameterType="java.lang.String">
+		DELETE FROM EMP
+		WHERE EMP_ID = #{empId}
+	</delete>
+	
+	<!-- 부서 목록 -->
+	<select id="getDeptList" resultType="EmpCateVO">
+		SELECT
+				DEPT_ID	AS deptId
+			,	DEPT_NM	AS deptNm
+			,	MANAGER_ID	AS managerId
+		FROM DEPARTMENTS
+	</select>
+	
+	<!-- 직업 목록 -->
+	<select id="getJobList" resultType="EmpCateVO">
+		SELECT
+				JOB_ID	AS jobId
+			,	JOB_NM	AS jobNm
+			,	DEPT_ID	AS deptId
+			,	(SELECT MANAGER_ID FROM DEPARTMENTS WHERE DEPT_ID = #{deptId}) AS managerId
+		FROM JOBS
+		WHERE DEPT_ID = #{deptId}
+	</select>
+	
+	<!-- 직책 목록 -->
+	<select id="getPositionList" resultType="EmpCateVO">
+		SELECT
+				POSITION_ID	AS positionId
+			,	POSITION_NM	AS positionNm
+		FROM POSITION
+	</select>
+	
+	<!-- JOB_HISTORY List -->
+	<select id="getJobHistory" resultType="EmpVO">
+		SELECT
+				A.DEPT_ID		AS deptId
+			,	A.JOB_ID		AS jobId
+			,	A.POSITION_ID	AS positionId
+			,	A.STATE			AS state
+			,	TO_CHAR(A.REG_DT, 'yyyy-MM-dd')		AS regDt
+			,	TO_CHAR(A.START_DT, 'yyyy-MM-dd')	AS startDt
+			,	TO_CHAR(A.END_DT, 'yyyy-MM-dd')		AS endDt
+			,	B.DEPT_NM		AS deptNm
+			,	C.JOB_NM		AS jobNm
+			,	D.POSITION_NM	AS positionNm
+			,	CASE
+				WHEN A.STATE = 'stay'		THEN '재직'
+				WHEN A.STATE = 'loa'		THEN '휴직'
+				WHEN A.STATE = 'retirement' THEN '퇴직'
+				ELSE ''
+				END				AS 	stateNm
+		FROM JOB_HISTORY A
+	    LEFT JOIN DEPARTMENTS B ON A.DEPT_ID = B.DEPT_ID
+	    LEFT JOIN JOBS C ON A.JOB_ID = C.JOB_ID
+	    LEFT JOIN POSITION D ON A.POSITION_ID = D.POSITION_ID
+		WHERE A.EMP_ID = #{empId}
+		ORDER BY A.REG_DT DESC
+	</select>
+	
+	<!-- JOB_HISTORY -->
+	<insert id="setJobHistory" parameterType="EmpVO">
+		INSERT INTO JOB_HISTORY
+			(
+					JOB_HIS_ID
+				,	EMP_ID
+				,	DEPT_ID
+				,	JOB_ID
+				,	POSITION_ID
+				,	STATE
+				,	REG_DT
+				,	START_DT
+				,	END_DT
+			)
+		VALUES
+			(
+					'JOB_HIS_00'||JOB_HIS_SEQ.NEXTVAL
+				,	#{empId}
+				,	#{deptId}
+				,	#{jobId}
+				,	#{positionId}
+				,	#{state}
+				,	SYSDATE
+				,	#{startDt, jdbcType=VARCHAR}
+				,	#{endDt, jdbcType=VARCHAR}
+			)
+	</insert>
+	
+	<!-- 비밀번호 초기화 -->
+	<update id="resetPw" parameterType="EmpVO">
+		UPDATE EMP
+		SET
+				PW	= #{pw}
+			,	SALT = #{salt}
+		WHERE EMP_ID = #{empId}
+	</update>
+	
+</mapper>

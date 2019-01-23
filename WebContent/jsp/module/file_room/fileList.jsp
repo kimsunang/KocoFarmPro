@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/jsp/comm/top.jsp" flush="false"></jsp:include>
-<link rel="stylesheet" type="text/css"
-	href="/Kocofarm/css/module/file_Room.css" />
+<link rel="stylesheet" type="text/css" href="/KocoFarmPro/css/module/fileRoom.css" />
 
 
 
@@ -13,7 +12,7 @@
 		<div class="sub_title_top">
 			<div class="sub_title_inner">
 				<h2>
-					자료실 <span>파일을 올릴수 있습니다.</span>
+					자료실 <span>파일을 등록 할 수 있습니다.</span>
 				</h2>
 				<ul class="sub_nav">
 					<li>홈 > 자료실 ></li>
@@ -22,10 +21,15 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="cont_wrap">
+	
+	<div class="contents_wrap">
+	
 	<form action="fileList.do" id="FileForm">
 		<input type="hidden" name="mode" id="mode" value="" />
 
-		<div class="sch_wrap">
+		<%-- <div class="sch_wrap">
 			<p class="tit">검색</p>
 			<div class="sch_slide_btn">
 				<img id="slideBtnImg" class="upBtn"
@@ -44,21 +48,31 @@
 							value="${param.schWord != null ? param.schWord : ''}"
 							placeholder="검색어를 입력 해 주세요" /> <input type="button"
 							class="schBtn" id="schBtn" value="검색" />
+							
+							<a href="fileUpload.do">파일 업로드</a>
 					</div>
 					
-					<jsp:include page="/jsp/module/file_room/fileUpload.jsp" flush="false"></jsp:include>
+				
 				</div>
 			</div>
 			
+		</div> --%>
+		
+		</form>
+		<div class="btn_wrap">
+			<div class="flt_r">
+					<a href="fileUpload.do">
+						<input type="button" class="auto_wth_btn_b" value="파일 업로드" />
+					</a>
+			</div>
 		</div>
-	</form>
 	<!-- 좌측 사이드 메뉴 만들고 파일 바둑판 식으로 배열되기 하고 파일 업로드 기능 부여 -->
 
 
 
+	</div>
+</div>
 
 
-
-
-	<script type="text/javascript" src="/Kocofarm/js/module/fileRoom.js"></script>
+	<script type="text/javascript" src="/KocoFarmPro/js/module/fileRoom.js"></script>
 	<jsp:include page="/jsp/comm/bottom.jsp" flush="false"></jsp:include>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.MeetingRoomMapper">
+	<cache />
+	<insert id="setMroom" parameterType="MeetingRoom">
+		INSERT INTO meetingroom VALUES(#{mId},
+			#{mName},#{pNum}, sysdate, null)
+	</insert>
+	
+	<select id="getMroomList" resultType="MeetingRoom" parameterType="MeetingRoomSearch">
+		SELECT 
+			 m_id	AS mId
+			,m_name	AS mName
+			,p_num	AS pNum
+			,reg_dt	AS regDt
+			,up_dt	AS upDt
+		FROM meetingroom 
+			<if test="area">
+				<where>
+					<!-- title LIKE %aa% OR writer LIKE %aa% -->
+					<foreach collection="area" item="item" separator="OR" open="(" close=")">
+					${item} LIKE #{searchKey}
+					</foreach>
+				</where>
+			</if>	
+		ORDER BY reg_dt DESC
+	</select>
+	
+	<select id="getMroom" parameterType="int" resultType="MeetingRoom">
+		SELECT 
+			 m_id	AS mId
+			,m_name	AS mName
+			,p_num	AS pNum
+			,reg_dt	AS regDt
+			,up_dt	AS upDt
+		FROM meetingroom
+		WHERE m_id = #{mId}
+	</select>
+	
+	<update id="setUpMroom" parameterType="MeetingRoom">
+		UPDATE meetingroom SET m_name = #{mName}, p_num = #{pNum}, up_dt = sysdate WHERE m_id = #{mId}
+	</update>
+	
+	<delete id="delMroom" parameterType="int">
+		DELETE FROM meetingroom WHERE m_id = #{mId}
+	</delete>
+
+</mapper>

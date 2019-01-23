@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.module.ReservationMapper">
+	<cache />
+
+	<insert id="setReserv" parameterType="Reservation">
+		INSERT INTO reservation 
+		(rv_id, m_title, dept, start_dt, end_dt, rv_user, rv_writer,reg_dt, m_id) 
+		VALUES
+		(reserv_seq.nextval, #{mTitle}, #{dept}, #{startDt},
+		#{endDt}, #{rvUser}, #{rvWriter}, sysdate, #{mId})
+	</insert>
+
+	<select id="getResList" resultType="MeetingRoom">
+		SELECT DISTINCT
+			m.m_id AS mId, 
+			m.m_name AS mName, 
+			r.m_id AS rmId
+		FROM meetingroom m 
+			LEFT JOIN reservation r 
+			ON m.m_id = r.m_id
+        	WHERE m.m_id = #{mId}
+	</select>
+	
+	<select id="getDeptList" resultType="Departments" >
+		SELECT dept_nm, dept_id FROM DEPARTMENTS
+	</select>
+	
+	<select id="getEmpName" resultType="EmpVO">
+		SELECT kor_nm, emp_id FROM emp
+	</select>
+	
+	<select id="getReservList" resultType="Reservation" parameterType="ReservationSearch">
+		SELECT 
+			 a.rv_id AS rvId
+			,a.m_title AS mTitle
+			,a.start_dt AS startDt
+			,a.end_dt AS endDt
+			,a.dept
+			,a.rv_user AS rvUser
+			,a.rv_writer AS rvWriter
+			,a.m_id AS mId
+			,a.reg_dt AS regDt
+			,a.up_dt AS upDT
+			,b.kor_nm as rvUserNm
+      		,c.kor_nm as rvWriterNm
+      		,d.dept_nm as deptNm
+		FROM reservation a
+		left join emp b on a.rv_user = b.emp_id
+  	  	left join emp c on a.RV_WRITER = b.emp_id
+    	left join departments d on a.dept = d.dept_id
+			<if test="area">
+				<where>
+					<!-- title LIKE %aa% OR writer LIKE %aa% -->
+					<foreach collection="area" item="item" separator="OR" open="(" close=")">
+					${item} LIKE #{searchKey}
+					</foreach>
+				</where>
+			</if>	
+		ORDER BY a.reg_dt DESC
+	</select>
+	
+</mapper>

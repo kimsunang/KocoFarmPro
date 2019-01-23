@@ -6,13 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.service.NoticeService;
-import kosta.model.module.vo.NoticeListModel;
+import kosta.model.module.vo.NoticeListModelVO;
 
 public class ListAction implements IAction{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		ActionForward forward = new ActionForward();
 		NoticeService service = NoticeService.getInstance();
 		
@@ -23,7 +22,7 @@ public class ListAction implements IAction{
 		}
 		int requestPage = Integer.parseInt(pageNum);
 		
-		NoticeListModel listModel = service.getNoticeList(requestPage, request);
+		NoticeListModelVO listModel = service.getNoticeList(requestPage, request);
 		request.setAttribute("noticeList", listModel);
 		
 		forward.setRedirect(false);

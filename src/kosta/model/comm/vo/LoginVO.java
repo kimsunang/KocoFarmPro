@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class LoginVO implements Serializable{
 	private String empId;
 	private transient String pw;
+	private transient String salt;
 	private String korNm;
 	private String engNm;
 	private String email;
@@ -25,13 +26,14 @@ public class LoginVO implements Serializable{
 	private int re;
 	
 	public LoginVO(){}
-	
-	public LoginVO(String empId, String pw, String korNm, String engNm, String email, String cellPhone, String hireDt,
-			String retirementDt, String state, int annual, String deptId, String jobId, String positionId,
-			String mangerId, int authority, int salary, String regDt, String upDt, String emgImg, int re) {
-		super();
+
+	public LoginVO(String empId, String pw, String salt, String korNm, String engNm, String email, String cellPhone,
+			String hireDt, String retirementDt, String state, int annual, String deptId, String jobId,
+			String positionId, String mangerId, int authority, int salary, String regDt, String upDt, String emgImg,
+			int re) {
 		this.empId = empId;
 		this.pw = pw;
+		this.salt = salt;
 		this.korNm = korNm;
 		this.engNm = engNm;
 		this.email = email;
@@ -66,6 +68,14 @@ public class LoginVO implements Serializable{
 
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public String getKorNm() {
@@ -211,14 +221,4 @@ public class LoginVO implements Serializable{
 	public void setRe(int re) {
 		this.re = re;
 	}
-
-	@Override
-	public String toString() {
-		return "LoginVO [empId=" + empId + ", pw=" + pw + ", korNm=" + korNm + ", engNm=" + engNm + ", email=" + email
-				+ ", cellPhone=" + cellPhone + ", hireDt=" + hireDt + ", retirementDt=" + retirementDt + ", state="
-				+ state + ", annual=" + annual + ", deptId=" + deptId + ", jobId=" + jobId + ", positionId="
-				+ positionId + ", mangerId=" + mangerId + ", authority=" + authority + ", salary=" + salary + ", regDt="
-				+ regDt + ", upDt=" + upDt + ", emgImg=" + emgImg + ", re=" + re + "]";
-	}
-	
 }

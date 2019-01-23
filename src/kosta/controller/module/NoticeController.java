@@ -22,7 +22,7 @@ import kosta.action.module.notice.WriteProCAction;
 @WebServlet({"/noticeList.do", "/noticeView.do", "/noticeWrite.do", 
 	"/noticeWriteProC.do", "/noticeEdit.do", "/noticeEditProC.do", "/noticeDelProC.do"})
 public class NoticeController extends HttpServlet {
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);

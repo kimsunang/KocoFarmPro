@@ -4,14 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.dao.ApprovalDao;
 import kosta.model.module.vo.ApprovalForm;
-import kosta.model.module.vo.ApprovalFormSearch;
-import kosta.model.module.vo.NoticeSearch;
 
 public class ListDraftFormAction implements IAction {
 
@@ -20,7 +17,7 @@ public class ListDraftFormAction implements IAction {
 		ApprovalDao dao = ApprovalDao.getInstance();
 		request.setCharacterEncoding("utf-8");
 		
-		String schType = request.getParameter("schType");
+		/*String schType = request.getParameter("schType");
 		String schWord = request.getParameter("schWord");
 		
 		HttpSession session = request.getSession();
@@ -31,12 +28,12 @@ public class ListDraftFormAction implements IAction {
 			search.setSchType(schType);
 			search.setSchWord(schWord);
 			session.setAttribute("search", search);
-		}else if(null != (NoticeSearch)session.getAttribute("search")){
+		}else if(null != (ApprovalFormSearch)session.getAttribute("search")){
 			search = (ApprovalFormSearch)session.getAttribute("search");
-		}
+		}*/
 		
-		List<ApprovalForm> list = dao.listForm(search);
-		System.out.println(list);
+//		List<ApprovalForm> list = dao.listForm(search);
+		List<ApprovalForm> list = dao.listForm();
 		request.setAttribute("list", list);
 		
 		ActionForward forward = new ActionForward();

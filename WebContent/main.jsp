@@ -19,7 +19,7 @@
 		<div class="contents_wrap">
 			<div class="main_box">
 				<div class="main_contents">
-					<%-- <!-- 날씨 영역 -->
+					<!-- 날씨 영역 -->
 					<c:import var="xmlWeather" url="http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1154551000" />
 					<x:parse var="weather" xml="${xmlWeather}"/>
 					
@@ -79,7 +79,7 @@
 								</x:forEach>
 							</tbody>
 						</table>
-					</div> --%>
+					</div>
 					
 				</div><!-- main_contents E -->
 			</div><!-- main_box E -->

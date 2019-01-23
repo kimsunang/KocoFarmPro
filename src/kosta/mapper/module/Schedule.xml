@@ -20,13 +20,14 @@
 </insert>
 
 <select id="listProjectCalender" resultType="ScheduleCalenderList" parameterType="int">
-	select cat.x_pos, cat.category_id, cat.category_name, cat.project_id, cal.calender_id, cal.title, cal.start_dt, cal.end_dt,
+	select *
+	from (select cat.x_pos, cat.category_id, cat.category_name, cat.project_id,  cal.calender_id, cal.title, cal.start_dt, cal.end_dt,
 	cal.background_color, cal.completion_per, cal.y_pos
 	from calender cal
 	right outer join category cat
-	on cal.category_id = cat.category_id
-	and project_id = #{projectId}	
-	order by cat.category_id asc, cal.y_pos desc
+	on cal.category_id = cat.category_id) c
+	where c.project_id = #{projectId}
+	order by c.category_id asc, c.y_pos desc       
 </select>
 
 

@@ -783,6 +783,13 @@ footer{margin-top: 30px; text-align: center; color: #333}
   margin: 8px 0;
   box-sizing: border-box;
   border: none;
-  background-color: #3ADF00;
+  background-color: #BEF781;
   color: white;
 }
+
+input:read-only{
+	cursor: pointer;
+    background-color: #3ADF00;
+}
+
+.con {margin:0 auto;position:absolute; top: 80px; left: 200px; }

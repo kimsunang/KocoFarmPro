@@ -333,7 +333,7 @@ function addDynamicHtml(data){
 		   $(this).attr("readonly", false);
 	   });
 	   
-	   $('.category-name-input').on("change", function(){
+	   $('.category-name-input').on("focusout", function(){
 		   $(this).attr("readonly", true);
 		   
 		   var par = $(this).parent();

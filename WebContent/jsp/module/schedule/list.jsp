@@ -73,7 +73,7 @@
 				</div>
 				</c:forEach>
 				<div class="project-info-style">
-					<button type="button" class="new-project-button">create project..</button>		
+					<button type="button" id="new-project-button">create project..</button>		
 				</div>
 			</div>
 <%-- 				<table class="contents_tb" id="contTb">
@@ -122,12 +122,74 @@
 					<input type="button" class="del_btn" value="삭제" />
 				</div>
 			</div>
+
+		<!-- 추가 프로젝트 버튼 -->
+		<div id="createProject" class="project-modal">
+			<div class="project-modal-content">
+				<span class="project-close">&times;</span>
+				<p>1 프로젝트 이름</p>
+				<input type="text"></input>
+				<button type="button">생성</button>
+			</div>
+		</div>
+
+		<!-- 삭제 프로젝트 버튼 -->
+		<div id="deleteProject" class="project-modal">
+			<div class="project-modal-content">
+				<span class="project-close">&times;</span>
+				<p>2 프로젝트 이름</p>
+				<input type="text"></input>
+				<button type="button">생성</button>
+			</div>
 		</div>
 	</div>
+	</div>
 <script>
-$('.new-project-button').on('click', function(){
-	console.log('newproject button');
+
+$(function(){
+	$('.new-project-button').on('click', function(){
+		console.log('newproject button');
+	});
+
+
+	/* 프로젝트 생성 모달 */
+	var createProjectModal = document.getElementById('createProject');
+	var newProjectButton = document.getElementById("new-project-button");
+	var newProjectCloseSpan = document.getElementsByClassName("project-close")[0];
+	newProjectButton.onclick = function() {
+	  createProjectModal.style.display = "block";
+	}
+
+	newProjectCloseSpan.onclick = function() {
+	  createProjectModal.style.display = "none";
+	}
+
+	window.onclick = function(event) {
+	  if (event.target == createProjectModal) {
+	    createProjectModal.style.display = "none";
+	  }
+	}
+
+	/* 프로젝트 삭제 모달*/
+	/*var deleteProjectModal = document.getElementById('deleteProject');
+	var deleteProjectButton = document.getElementById('delete-project-button');
+	var deleteProjectSpan = document.getElementsByClassName("project-close")[1];
+
+	deleteProjectButton.onclick = function() {
+	  deleteProjectModal.style.display = "block";
+	}
+	deleteProjectSpan.onclick = function() {
+	  deleteProjectModal.style.display = "none";
+	}
+	window2.onclick = function(event) {
+	  if (event.target == deleteProjectModal) {
+	    deleteProjectModal.style.display = "none";
+	  }
+	}*/
+	
+
 });
+
 </script>
 <script type="text/javascript" src="/KocoFarmPro/js/module/schedule.js"></script>
 <jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

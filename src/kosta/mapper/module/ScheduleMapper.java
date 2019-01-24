@@ -19,4 +19,6 @@ public interface ScheduleMapper {
 	public int editCalenderMove(ScheduleCalenderMove calenderMove);
 	public int insertCategory(ScheduleCategory category);
 	public int editCategoryName(ScheduleCategory category);
+	public int insertProject(ScheduleProject project);
+	public int deleteProject(int projectId);
 }

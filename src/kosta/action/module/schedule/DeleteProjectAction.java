@@ -7,8 +7,11 @@ import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.service.ScheduleService;
 
-public class InsertProjectAction implements IAction{
-	public InsertProjectAction(){}
+public class DeleteProjectAction implements IAction{
+
+	public DeleteProjectAction() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -17,7 +20,7 @@ public class InsertProjectAction implements IAction{
 			return null;
 		}
 
-		int re = service.insertScheduleCategory(request);
+		int re = service.deleteProject(request);
 		if(-1 == re) {
 			return null;
 		}

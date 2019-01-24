@@ -31,7 +31,32 @@ public class ScheduleService {
 	}
 	
 	
+	public int insertScheduleProject(HttpServletRequest request) throws Exception {
+		if(null == request)
+			return -1;
+		
+		String projectName = request.getParameter("projectName");
+		if(null == projectName)
+			return -1;
+		
+		
+		ScheduleProject project = new ScheduleProject();
+		project.setTitle(projectName);
+		// 이하 임의의 값 날짜, 팀장 지정 기능이 생기면 수정할 것
+		//project.setProjectLeader(projectLeader);
+		project.setProjectStartDt("");
+		project.setProjectEndDt("");
+		project.setProjectRegDt(0);
+		project.setProjectCompletion(0);
+		project.setPublicProject(false);
+		
+		return dao.insertProject(project);
+	}
+	
 	public int insertScheduleCalender(HttpServletRequest request) throws Exception {
+		if(null == request)
+			return -1;
+		
 		ScheduleCalender scheduleCalender = createCalender(request);
 		if(null == scheduleCalender)
 			return -1;
@@ -69,6 +94,7 @@ public class ScheduleService {
 		return re;
 	}
 	
+
 	public List<ScheduleCalenderList> listProjectCalender(HttpServletRequest request) throws Exception {
 		String strProjectId = request.getParameter("projectId");
 		int projectId = Integer.parseInt(strProjectId);
@@ -130,6 +156,7 @@ public class ScheduleService {
 		return re;		
 	}
 	
+
 	public int editCalenderMove(HttpServletRequest request) throws Exception{
 		if(null == request)
 			return -1;
@@ -159,6 +186,17 @@ public class ScheduleService {
 		re = dao.editCalenderMove(scheduleCalenderPosList);
 
 		return re;
+	}
+	
+	public int deleteProject(HttpServletRequest request) throws Exception{
+		if(null == request)
+			return -1;
+		
+		String projectId = request.getParameter("projectId");
+		int projectid = Integer.parseInt(projectId);
+	
+		int re = dao.deleteProject(projectid);
+		return re;			
 	}
 	
 	public ScheduleCalender createCalender(HttpServletRequest request) throws Exception{

@@ -27,13 +27,14 @@ import kosta.action.module.schedule.EditCalenderMoveAction;
 import kosta.action.module.schedule.EditCategoryName;
 import kosta.action.module.schedule.InsertCalenderAction;
 import kosta.action.module.schedule.InsertCategoryAction;
+import kosta.action.module.schedule.InsertProjectAction;
 import kosta.action.module.schedule.ListProjectAction;
 import kosta.action.module.schedule.ListCalenderAction;
 import kosta.action.module.schedule.SendProjectIdAction;
 
 
 @WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do", "/editCalender.do", "/delCalender.do",
-	"/editCalenderPos.do", "/insertCategory.do", "/editCategoryName.do",
+	"/editCalenderPos.do", "/insertCategory.do", "/editCategoryName.do","/insertProject.do",
 	"/fileList.do", "/fileUpload.do", "/fileDownload.do", "/insertFile.do","/deleteFile.do"})
 
 public class ScheduleController extends HttpServlet {
@@ -54,7 +55,8 @@ public class ScheduleController extends HttpServlet {
 		scheduleActionList.put("editCalenderPos.do", new EditCalenderMoveAction());
 		scheduleActionList.put("insertCategory.do", new InsertCategoryAction());
 		scheduleActionList.put("editCategoryName.do", new EditCategoryName());
-
+		scheduleActionList.put("insertProject.do", new InsertProjectAction());
+		
 
 		// 파일 관리
 		scheduleActionList.put("fileList.do", new FileListAction());

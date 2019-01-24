@@ -53,7 +53,30 @@
 			<!-- list -->
 			<div class="contents">
 				<!-- 목록 보기 -->
-				<table class="contents_tb" id="contTb">
+				<c:forEach var="project" items="${projectList}">
+				<div class="project-info-style">
+					<div>${project.projectId}</div>
+					<div>
+					<form id="responeProjectId" action="sendProjectId.do" method="POST">
+					 	<button type="submit" name="projectId" form="responeProjectId" value="${project.projectId}"> ${project.title}</button>		
+					</form>
+					</div>
+					<div>projectLeader:${project.projectLeader}</div>
+					<div>empId:${project.empId}</div>
+					<div>projectStartDt:${project.projectStartDt}</div>
+					<div>projectEndDt:${project.projectEndDt}</div>
+					<div>projectRegDt:${project.projectRegDt}</div>
+					<div>projectCompletion:${project.projectCompletion}</div>
+					<div>publicProject:${project.publicProject}</div>
+					<div>수정</div>
+					<div>삭제</div>
+				</div>
+				</c:forEach>
+				<div class="project-info-style">
+					<button type="button" class="new-project-button">create project..</button>		
+				</div>
+			</div>
+<%-- 				<table class="contents_tb" id="contTb">
 						<tr>
 							<td>project_id</td>
 							<td>title</td>
@@ -87,8 +110,8 @@
 					</c:forEach>
 				
 				</table>
-			</div>
-						
+
+ --%>						
 			<!-- btn -->
 			<div class="btn_wrap">
 				<div class="flt_r">
@@ -101,5 +124,10 @@
 			</div>
 		</div>
 	</div>
+<script>
+$('.new-project-button').on('click', function(){
+	console.log('newproject button');
+});
+</script>
 <script type="text/javascript" src="/KocoFarmPro/js/module/schedule.js"></script>
 <jsp:include page="/jsp/comm/bottom.jsp" flush="false" ></jsp:include>

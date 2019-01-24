@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import kosta.model.module.dao.ScheduleDao;
 import kosta.model.module.vo.ScheduleCalender;
 import kosta.model.module.vo.ScheduleCategory;
+import kosta.model.module.vo.ScheduleProject;
 import net.sf.json.JSONArray;
 import kosta.model.module.vo.ScheduleCalenderList;
 import kosta.model.module.vo.ScheduleCalenderMove;
@@ -78,6 +79,8 @@ public class ScheduleService {
 
 		return calenderList;
 	}
+	
+	
 	
 	public int editCalender(HttpServletRequest request) throws Exception {
 		if(null == request)

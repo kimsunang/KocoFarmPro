@@ -8,7 +8,6 @@ public class ScheduleProject implements Serializable{
 	private long projectId;
 	private String title;
 	private long projectLeader;
-	private long empId;
 	private String projectStartDt;
 	private String projectEndDt;
 	private int projectRegDt;
@@ -19,13 +18,12 @@ public class ScheduleProject implements Serializable{
 	
 	}
 
-	public ScheduleProject(long projectId, String title, long projectLeader, long empId, String projectStartDt,
+	public ScheduleProject(long projectId, String title, long projectLeader, String projectStartDt,
 			String projectEndDt, int projectRegDt, int projectCompletion, boolean publicProject) {
 		super();
 		this.projectId = projectId;
 		this.title = title;
 		this.projectLeader = projectLeader;
-		this.empId = empId;
 		this.projectStartDt = projectStartDt;
 		this.projectEndDt = projectEndDt;
 		this.projectRegDt = projectRegDt;
@@ -56,15 +54,7 @@ public class ScheduleProject implements Serializable{
 	public void setProjectLeader(long projectLeader) {
 		this.projectLeader = projectLeader;
 	}
-
-	public long getEmpId() {
-		return empId;
-	}
-
-	public void setEmpId(long empId) {
-		this.empId = empId;
-	}
-
+	
 	public String getProjectStartDt() {
 		return projectStartDt;
 	}
@@ -108,7 +98,7 @@ public class ScheduleProject implements Serializable{
 	@Override
 	public String toString() {
 		return "ScheduleProject [projectId=" + projectId + ", title=" + title + ", projectLeader=" + projectLeader
-				+ ", empId=" + empId + ", projectStartDt=" + projectStartDt + ", projectEndDt=" + projectEndDt
+				+", projectStartDt=" + projectStartDt + ", projectEndDt=" + projectEndDt
 				+ ", projectRegDt=" + projectRegDt + ", projectCompletion=" + projectCompletion + ", publicProject="
 				+ publicProject + "]";
 	}

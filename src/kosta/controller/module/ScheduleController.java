@@ -35,7 +35,7 @@ import kosta.action.module.schedule.SendProjectIdAction;
 
 
 @WebServlet({"/schedule.do", "/listCalender.do", "/insertCalender.do","/sendProjectId.do", "/editCalender.do", "/delCalender.do",
-	"/editCalenderPos.do", "/insertCategory.do", "/editCategoryName.do","/insertProject.do", "/deleteProject.do"
+	"/editCalenderPos.do", "/insertCategory.do", "/editCategoryName.do","/insertProject.do", "/deleteProject.do",
 	"/fileList.do", "/fileUpload.do", "/fileDownload.do", "/insertFile.do","/deleteFile.do"})
 
 public class ScheduleController extends HttpServlet {

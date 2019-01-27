@@ -7,7 +7,7 @@ public class ScheduleProject implements Serializable{
 
 	private long projectId;
 	private String title;
-	private long projectLeader;
+	private String projectLeader;
 	private String projectStartDt;
 	private String projectEndDt;
 	private int projectRegDt;
@@ -18,7 +18,7 @@ public class ScheduleProject implements Serializable{
 	
 	}
 
-	public ScheduleProject(long projectId, String title, long projectLeader, String projectStartDt,
+	public ScheduleProject(long projectId, String title, String projectLeader, String projectStartDt,
 			String projectEndDt, int projectRegDt, int projectCompletion, boolean publicProject) {
 		super();
 		this.projectId = projectId;
@@ -47,11 +47,11 @@ public class ScheduleProject implements Serializable{
 		this.title = title;
 	}
 
-	public long getProjectLeader() {
+	public String getProjectLeader() {
 		return projectLeader;
 	}
 
-	public void setProjectLeader(long projectLeader) {
+	public void setProjectLeader(String projectLeader) {
 		this.projectLeader = projectLeader;
 	}
 	

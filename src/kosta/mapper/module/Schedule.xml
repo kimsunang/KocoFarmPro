@@ -66,7 +66,7 @@
 	update Category set category_name = #{categoryName} where category_id = #{categoryId}
 </update>
 <insert id="insertProject" parameterType="ScheduleProject">
-	insert into project values(project_id_seq.nextval , #{title}, #{projectLeader}, #{projectStartDt}, #{projectEndDt}, #{projectRegDt}, #{projectCompletion}, #{publicProject})
+	insert into project values(project_id_seq.nextval , #{title}, #{projectLeader}, TO_DATE(#{projectStartDt}, 'yy-mm-dd') , TO_DATE(#{projectEndDt}, 'yy-mm-dd'), #{projectRegDt}, #{projectCompletion}, #{publicProject})
 </insert>
 <delete id="deleteProject" parameterType="ScheduleProject">
 	delete from project where project_id = #{projectId}

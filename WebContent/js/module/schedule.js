@@ -512,9 +512,6 @@ function hexc(colorval) {
     return color;
 }
 
-/* 배경색에 따른 index 전달 */
-
-
 /* 일정 컬러색 가져오기 */
 $(document).on("click", ".tag-important, .tag-approve, .tag-quickly, .tag-request", function(){
 	var color = $(this).css('background-color');

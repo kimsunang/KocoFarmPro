@@ -12,12 +12,13 @@ public class InsertProjectAction implements IAction{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("InsertProjectAction");
 		ScheduleService service =  ScheduleService.getInstance();			
 		if(null == service) {
 			return null;
 		}
 
-		int re = service.insertScheduleCategory(request);
+		int re = service.insertScheduleProject(request);
 		if(-1 == re) {
 			return null;
 		}

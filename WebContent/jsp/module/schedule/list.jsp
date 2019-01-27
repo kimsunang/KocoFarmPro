@@ -118,10 +118,10 @@
 					</div>
 					<div class="modal-body">
 						<p>프로젝트 이름</p>
-						<input type="text"></input>
+						<input type="text" id="create-project-input"></input>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">생성</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="create-project-button">생성</button>
 					</div>
 				</div>
 
@@ -142,7 +142,7 @@
 						<p>정말 삭제하시겠습니까?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="delete-project-button">삭제</button>
 					</div>
 				</div>
 
@@ -153,10 +153,39 @@
 </div>
 <!-- cont_wrap -->
 <script>
-
-$(function(){
-	
+$("#create-project-button").on("click", function(){
+	console.log('프로젝트 생성');
+	var sendData = {projectName:$('#create-project-input').val()};
+	ajaxRequest("insertProject.do",sendData);
 });
+
+$("#delete-project-button").on("click", function(){
+	console.log('프로젝트 삭제');
+});
+
+function ajaxRequest(sendUrl, sendData){
+	console.log(sendUrl + ", "+ sendData);
+	$.ajax({
+	    type:"POST",
+	    data : sendData,
+	    dataType:"text",
+	    url:sendUrl,
+	    success: function() {
+	    
+	 	$.ajax({
+			url:'schedule.do',
+			data: {},
+			dataType:'json',
+			success:function(data){			
+				console.log('성공');
+			}// success function
+
+		});// ajax
+	    },
+	    error : function(error) {
+	    },	// error
+	  });// ajax
+}
 
 </script>
 <script type="text/javascript" src="/KocoFarmPro/js/module/schedule.js"></script>

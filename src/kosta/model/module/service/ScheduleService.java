@@ -42,8 +42,7 @@ public class ScheduleService {
 		
 		ScheduleProject project = new ScheduleProject();
 		project.setTitle(projectName);
-		// 이하 임의의 값 날짜, 팀장 지정 기능이 생기면 수정할 것
-		//project.setProjectLeader(projectLeader);
+		project.setProjectLeader("1");// 임의로 emp 1번을 넣는다
 		project.setProjectStartDt("");
 		project.setProjectEndDt("");
 		project.setProjectRegDt(0);

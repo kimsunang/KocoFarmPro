@@ -49,7 +49,10 @@ public class ScheduleService {
 		project.setProjectCompletion(0);
 		project.setPublicProject(false);
 		
-		return dao.insertProject(project);
+		int re = dao.insertProject(project);
+		
+	
+		return re;
 	}
 	
 	public int insertScheduleCalender(HttpServletRequest request) throws Exception {

@@ -27,6 +27,6 @@ public class InsertProjectAction implements IAction{
 		forward.setRedirect(false);
 		forward.setPath("/jsp/module/schedule/project.jsp");
 		
-		return null;
+		return forward;
 	}
 }

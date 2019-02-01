@@ -164,28 +164,56 @@ $("#delete-project-button").on("click", function(){
 });
 
 function ajaxRequest(sendUrl, sendData){
-	console.log(sendUrl + ", "+ sendData);
 	$.ajax({
 	    type:"POST",
 	    data : sendData,
 	    dataType:"text",
 	    url:sendUrl,
-	    success: function() {
-	    
-	 	$.ajax({
-			url:'schedule.do',
-			data: {},
-			dataType:'json',
-			success:function(data){			
-				console.log('성공');
-			}// success function
-
-		});// ajax
+	    success: function(data) {
+	    	projectListAjaxRequest();
 	    },
 	    error : function(error) {
 	    },	// error
 	  });// ajax
 }
+
+function projectListAjaxRequest(){
+	$.ajax({
+	    type:"POST",
+	    data : {},
+	    dataType:"json",
+	    url:"listProjectAjax.do",
+	    success: function(data) {
+   		    $('.contents').empty();
+            $.each(data, function(index, project){
+                $('.contents').append(
+                	'<div class="project-info-style">'+
+    				'<div>'+project.projectId+'</div>'+
+    				'<div> <form id="responeProjectId" action="sendProjectId.do" method="POST">'+
+ 					'<button type="submit" name="projectId" form="responeProjectId" value="'+ project.projectId +'">'+project.title+'</button>'+
+    				'</form>'+
+    				'</div>'+
+    				'<div>projectLeader:'+project.projectLeader+'</div>'+
+    				'<div>projectStartDt:'+project.projectStartDt+'</div>'+
+    				'<div>projectEndDt:'+project.projectEndDt+'</div>'+
+    				'<div>projectRegDt:'+project.projectRegDt+'</div>'+
+    				'<div>projectCompletion:'+project.projectCompletion+'</div>'+
+    				'<div>publicProject:'+project.publicProject+'</div>'+
+    				'<div>'+
+  					'<button type="button">수정</button>'+
+    				'</div>'+
+    				'<div>'+
+    				'<button type="button" class="btn btn-info btn-lg data-toggle="modal" data-target="#delete-project-modal">삭제</button>'+
+					'</div>'+
+    				'</div>'
+                );
+            });
+	    },
+	    error : function(error) {
+	    },	// error
+	  });// ajax
+}
+
 
 </script>
 <script type="text/javascript" src="/KocoFarmPro/js/module/schedule.js"></script>

@@ -1,34 +1,34 @@
 package kosta.action.module.schedule;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.dao.ScheduleDao;
 import kosta.model.module.vo.ScheduleProject;
+import net.sf.json.JSONArray;
 
-public class ListProjectAction implements IAction{
+public class ListProjectAjaxAction implements IAction{
 
-	public ListProjectAction() {}
-	
+	public ListProjectAjaxAction() {
+	}
+
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
-		
 		ScheduleDao dao = ScheduleDao.getInstance();
+		JSONArray jsonArr = new JSONArray();
 		
 		List<ScheduleProject> projectList = dao.listProject();
-		request.setAttribute("projectList", projectList);
+		
+		jsonArr = JSONArray.fromObject(projectList);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		response.getWriter().print(jsonArr);
 	
-		forward.setRedirect(false);
-		forward.setPath("/jsp/module/schedule/list.jsp");
-		return forward;
+		return null;
 	}
 }

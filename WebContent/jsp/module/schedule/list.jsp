@@ -154,13 +154,12 @@
 <!-- cont_wrap -->
 <script>
 $("#create-project-button").on("click", function(){
-	console.log('프로젝트 생성');
 	var sendData = {projectName:$('#create-project-input').val()};
 	ajaxRequest("insertProject.do",sendData);
+	$("#create-project-input").val("");
 });
 
 $("#delete-project-button").on("click", function(){
-	console.log('프로젝트 삭제');
 });
 
 function ajaxRequest(sendUrl, sendData){
@@ -208,6 +207,11 @@ function projectListAjaxRequest(){
     				'</div>'
                 );
             });
+            
+            $('.contents').append('<div class="project-info-style">'+
+            	'<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create-project-modal">create'+
+    			'project..</button>'+
+    			'</div>');
 	    },
 	    error : function(error) {
 	    },	// error

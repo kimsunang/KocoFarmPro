@@ -68,7 +68,7 @@
 <insert id="insertProject" parameterType="ScheduleProject">
 	insert into project values(project_id_seq.nextval , #{title}, TO_DATE(#{projectStartDt}, 'yy-mm-dd') , TO_DATE(#{projectEndDt}, 'yy-mm-dd'), #{projectRegDt}, #{projectCompletion}, #{publicProject}, #{projectLeader})
 </insert>
-<delete id="deleteProject" parameterType="ScheduleProject">
+<delete id="deleteProject" parameterType="int">
 	delete from project where project_id = #{projectId}
 </delete>
 </mapper>

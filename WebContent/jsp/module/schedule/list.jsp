@@ -61,39 +61,9 @@
 			</ul>
 		</div>
 
-		<!-- list -->
+		<!-- project list -->
 		<div class="contents">
-			<!-- 목록 보기 -->
-			<c:forEach var="project" items="${projectList}">
-				<div class="project-info-style">
-					<div>${project.projectId}</div>
-					<div>
-						<form id="responeProjectId" action="sendProjectId.do"
-							method="POST">
-							<button type="submit" name="projectId" form="responeProjectId"
-								value="${project.projectId}">${project.title}</button>
-						</form>
-					</div>
-					<div>projectLeader:${project.projectLeader}</div>
-					<div>projectStartDt:${project.projectStartDt}</div>
-					<div>projectEndDt:${project.projectEndDt}</div>
-					<div>projectRegDt:${project.projectRegDt}</div>
-					<div>projectCompletion:${project.projectCompletion}</div>
-					<div>publicProject:${project.publicProject}</div>
-					<div>
-						<button type="button">수정</button>
-					</div>
-					<div>
-						<button type="button" class="btn btn-info btn-lg"
-					data-toggle="modal" data-target="#delete-project-modal">삭제</button>
-					</div>
-				</div>
-			</c:forEach>
-			<div class="project-info-style">
-				<button type="button" class="btn btn-info btn-lg"
-					data-toggle="modal" data-target="#create-project-modal">create
-					project..</button>
-			</div>
+				
 		</div>
 		<!-- btn -->
 		<div class="btn_wrap">
@@ -142,7 +112,7 @@
 						<p>정말 삭제하시겠습니까?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" id="delete-project-button">삭제</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="delete-project-button">delete</button>
 					</div>
 				</div>
 
@@ -153,14 +123,28 @@
 </div>
 <!-- cont_wrap -->
 <script>
+// 변수 모음
+var selectProjectId = 0;
+
+// modal 창의 create 버튼
 $("#create-project-button").on("click", function(){
 	var sendData = {projectName:$('#create-project-input').val()};
 	ajaxRequest("insertProject.do",sendData);
 	$("#create-project-input").val("");
 });
 
-$("#delete-project-button").on("click", function(){
+//modal 창의 delete 버튼
+$("#delete-project-button").on("click", function(){	
+	var sendUrl = "deleteProject.do";
+	var sendData = {projectId:selectProjectId};
+	ajaxRequest(sendUrl, sendData);
 });
+
+$(function(){
+	projectListAjaxRequest();
+});
+
+
 
 function ajaxRequest(sendUrl, sendData){
 	$.ajax({
@@ -183,41 +167,54 @@ function projectListAjaxRequest(){
 	    dataType:"json",
 	    url:"listProjectAjax.do",
 	    success: function(data) {
-   		    $('.contents').empty();
-            $.each(data, function(index, project){
-                $('.contents').append(
-                	'<div class="project-info-style">'+
-    				'<div>'+project.projectId+'</div>'+
-    				'<div> <form id="responeProjectId" action="sendProjectId.do" method="POST">'+
- 					'<button type="submit" name="projectId" form="responeProjectId" value="'+ project.projectId +'">'+project.title+'</button>'+
-    				'</form>'+
-    				'</div>'+
-    				'<div>projectLeader:'+project.projectLeader+'</div>'+
-    				'<div>projectStartDt:'+project.projectStartDt+'</div>'+
-    				'<div>projectEndDt:'+project.projectEndDt+'</div>'+
-    				'<div>projectRegDt:'+project.projectRegDt+'</div>'+
-    				'<div>projectCompletion:'+project.projectCompletion+'</div>'+
-    				'<div>publicProject:'+project.publicProject+'</div>'+
-    				'<div>'+
-  					'<button type="button">수정</button>'+
-    				'</div>'+
-    				'<div>'+
-    				'<button type="button" class="btn btn-info btn-lg data-toggle="modal" data-target="#delete-project-modal">삭제</button>'+
-					'</div>'+
-    				'</div>'
-                );
-            });
-            
-            $('.contents').append('<div class="project-info-style">'+
-            	'<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create-project-modal">create'+
-    			'project..</button>'+
-    			'</div>');
+	    	projectList(data);
 	    },
 	    error : function(error) {
 	    },	// error
 	  });// ajax
 }
 
+function projectList(data){
+	 $('.contents').empty();
+     $.each(data, function(index, project){
+    	 
+         $('.contents').append(
+         	'<div class="project-info-style">'+
+				'<div>'+project.projectId+'</div>'+
+				'<div class="project-form-info"> <form id="responeProjectId" action="sendProjectId.do" method="POST">'+
+				'<button type="submit" name="projectId" form="responeProjectId" value="'+ project.projectId +'">'+project.title+'</button>'+
+				'</form>'+
+				'</div>'+
+				'<div>projectLeader:'+project.projectLeader+'</div>'+
+				'<div>projectStartDt:'+project.projectStartDt+'</div>'+
+				'<div>projectEndDt:'+project.projectEndDt+'</div>'+
+				'<div>projectRegDt:'+project.projectRegDt+'</div>'+
+				'<div>projectCompletion:'+project.projectCompletion+'</div>'+
+				'<div>publicProject:'+project.publicProject+'</div>'+
+				'<div>'+
+				'<button type="button" id="project-modify-modal-button">수정</button>'+
+				'</div>'+
+				'<div>'+
+				'<button type="button" id="project-delete-modal-button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delete-project-modal">delete</button>'+
+				'</div>'+
+				'</div>'
+         );
+     });
+     
+     $('.contents').append('<div class="project-info-style">'+
+     	'<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create-project-modal">create'+
+			'project..</button>'+
+			'</div>');
+     
+      $(document).on("click", "#project-delete-modal-button", function(){     	
+     	var parent = $(this).parent().parent().children('.project-form-info').children('#responeProjectId');     	
+     	var projectId = parent.children("button[name=projectId]").val();
+     	selectProjectId = projectId;
+      });
+     
+     $(document).on("click", "#project-modify-modal-button", function(){
+     });
+}
 
 </script>
 <script type="text/javascript" src="/KocoFarmPro/js/module/schedule.js"></script>

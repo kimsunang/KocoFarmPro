@@ -181,6 +181,29 @@ public class ScheduleService {
 		return re;
 	}
 	
+	public int delCategory(HttpServletRequest request) throws Exception {
+
+		if(null == request)
+			return -1;
+		
+		String projectId = request.getParameter("projectId");
+		String categoryId = request.getParameter("categoryId");
+		if(null == projectId || null == categoryId) {
+			return -1;
+		}
+		
+		int projectid = Integer.parseInt(projectId);
+		int categoryid = Integer.parseInt(categoryId);
+		ScheduleCategory category = new ScheduleCategory();
+		category.setProjectId(projectid);
+		category.setCategoryId(categoryid);
+		
+		int re = dao.delCalenderWithCategory(category);
+		re = dao.delCategory(categoryid);
+		
+		return re;
+	}
+	
 	public int delCalender(HttpServletRequest request) throws Exception {
 		if(null == request)
 			return -1;

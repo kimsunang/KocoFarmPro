@@ -22,4 +22,6 @@ public interface ScheduleMapper {
 	public int insertProject(ScheduleProject project);
 	public int deleteProject(int projectId);
 	public int editProject(ScheduleProject project);
+	public int delCategory(int categoryId);
+	public int delCalenderWithCategory(ScheduleCategory category);		// 카테고리 삭제 시 하위 일정 삭제
 }

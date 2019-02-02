@@ -215,5 +215,25 @@ $( function() {
 			</div><!-- modal-content -->
 		</div><!-- modal-dialog -->
 	</div>
+	
+	<!-- 카테고리 삭제. 하위 일정도 같이 삭제됨 -->
+	<div class="modal fade" id="categoryDeleteModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">카테고리 삭제</h4>
+				</div>
+				<div class="modal-body">
+					<p>카테고리 하위 일정이 전부 삭제됩니다.</p>
+					<p>정말 삭제하시겠습니까?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal" id="delete-project-button">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script src="/KocoFarmPro/js/module/schedule.js"></script>
 </html>

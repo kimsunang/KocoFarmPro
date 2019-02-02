@@ -243,8 +243,9 @@ function addDynamicHtml(data){
       		html += '<ul class="connected li1">';
       		html += '<li class="calender_info">';
       		html += '<input class="category-name-input" type="text" readonly="true" value="'+data[i].categoryName+'"></input>';
-			html += '<button type="button" class="btn  btn-primary calenderWriteBtn btn-block" data-toggle="modal" data-target="#calenderAddModal">새 일정 추가하기</button>';
-    		html += '<input type="hidden" class="this_project_id" value='+data[i].projectId+' />';
+      		html += '<button type="button" class="btn  btn-danger categoryDeleteBtn" data-toggle="modal" data-target="#categoryDeleteModal">X</button>';
+			html += '<button type="button" class="btn  btn-primary calenderWriteBtn btn-block" data-toggle="modal" data-target="#calenderAddModal">새 일정 추가</button>';
+			html += '<input type="hidden" class="this_project_id" value='+data[i].projectId+' />';
       		html += '<input type="hidden" class="this_category_id" value='+data[i].categoryId+' />';
       		html += '<input type="hidden" class="this_category_x" value='+data[i].xPos+' />';
       		html += '</li>';
@@ -339,18 +340,10 @@ function addDynamicHtml(data){
 		   var par = $(this).parent();
 		   var categoryId = par.children('.this_category_id').val();
 		   var categoryName = par.children('.category-name-input').val();
-		   		   
-			  $.ajax({
-				    type:"POST",
-				    data : { "categoryId":categoryId, "categoryName":categoryName },
-				    dataType:"text",
-				    url:"editCategoryName.do",
-				    success: function() {				 	
-				    },
-				    error : function(error) {
-				    },	// error
-				  });// ajax
 		   
+		   var data =  { "categoryId":categoryId, "categoryName":categoryName };
+		   var url = "editCategoryName.do";
+		   ajaxRequest(url, data);		   
 	   });
 	   
 	   $('.addCategoryButton').on("click", function(){
@@ -361,30 +354,59 @@ function addDynamicHtml(data){
 		  }
 		  
 		  var xPos = $('.category-name-input').length+1;
-		  $.ajax({
-			    type:"POST",
-			    data : { "projectId":projectId, "xPos":xPos, "categoryName":text },
-			    dataType:"text",
-			    url:"insertCategory.do",
-			    success: function() { 	
-			 	
-			 	$.ajax({
-					url:'listCalender.do',
-					data: {"projectId":add_project_id},
-					dataType:'json',
-					success:function(data){	
-						
-					 addDynamicHtml(data);
-					}// success function
-				});// ajax
-			    },
-			    error : function(error) {
-			    },	// error
-			  });// ajax
-	
-		  
+		  var data = { "projectId":add_project_id, "xPos":xPos, "categoryName":text };
+		  var url = "insertCategory.do";
+		  		   
+		  ajaxRequest(url, data);
+	   });
+	   
+	   // 카테고리 삭제 버튼
+	   $('.categoryDeleteBtn').on("click", function(){
+		   var parent = $(this).parent();
+		   add_category_id = parent.children(".this_category_id").val();
+		   add_project_id = parent.children(".this_project_id").val();
+		   console.log("categoryid:"+add_category_id);
+		   console.log("projectid:"+add_project_id);
 	   });
 }
+
+function ajaxRequest(sendUrl, sendData){
+	$.ajax({
+	    type:"POST",
+	    data : sendData,
+	    dataType:"text",
+	    url:sendUrl,
+	    success: function(data) {
+	    	calenderList();
+	    },
+	    error : function(error) {
+	    },	// error
+	  });// ajax
+}
+
+function calenderList(){
+	$.ajax({
+	    type:"POST",
+	    data : {"projectId":add_project_id},
+	    dataType:"json",
+	    url:"listCalender.do",
+	    success: function(data) {
+	    	addDynamicHtml(data);
+	    },
+	    error : function(error) {
+	    },	// error
+	  });// ajax
+}
+
+// 카테고리 삭제 모달 버튼
+$('#delete-project-button').click(function(){
+	console.log('카테고리 삭제');
+	var url = "delCategory.do";
+	var data = {projectId:add_project_id, categoryId:add_category_id};
+
+    ajaxRequest(url, data);
+
+});
 
 //일정 추가 버튼 눌렀을 때
 $('#calender_add').click(function() {
@@ -406,28 +428,12 @@ $('#calender_add').click(function() {
 	 $('#calenderAddModal').modal('toggle');
 	 clearAddDlg($(this).parent());
 	 
-	 $.ajax({
-	    type:"POST",
-	    data : { projectId:add_project_id, categoryId:add_category_id, write:write,color:color, completionPer:completion_per,tag:tag,y:y,startDt:startDt,endDt:endDt  },
-	    dataType:"text",
-	    url:"insertCalender.do",
-	    success: function(project_id) { 	
-	 	
-	 	$.ajax({
-			url:'listCalender.do',
-			data: {"projectId":add_project_id},
-			dataType:'json',
-			success:function(data){	
-				
-			 addDynamicHtml(data);
-			}// success function
-		});// ajax
-	    },
-	    error : function(error) {
-	    },	// error
-	  });// ajax
-	  
-	});//click
+	 var data = { projectId:add_project_id, categoryId:add_category_id, write:write,color:color, completionPer:completion_per,tag:tag,y:y,startDt:startDt,endDt:endDt  };
+	 var url = "insertCalender.do";
+	 
+	 ajaxRequest(url, data);
+  
+});//click
 
 
 $('#calender_edit').click(function(){
@@ -439,54 +445,22 @@ $('#calender_edit').click(function(){
 	 var endDt 			= par.children("input[name=editDatepickerEnd]").val();
 	 var tag 			= par.children("input[name=tag]").val();
 
+	 var data = { projectId:add_project_id, categoryId:add_category_id,calenderId:add_calender_id ,write:write,color:color, completionPer:completion_per,tag:tag,startDt:startDt,endDt:endDt  };
+	 var url = "editCalender.do";
+	  
 	 $('#calenderModify').modal('toggle');
-	 $.ajax({
-		    type:"POST",
-		    data : { projectId:add_project_id, categoryId:add_category_id,calenderId:add_calender_id ,write:write,color:color, completionPer:completion_per,tag:tag,startDt:startDt,endDt:endDt  },
-		    dataType:"text",
-		    url:"editCalender.do",
-		    success: function(project_id) {
-		 
-		 	$.ajax({
-				url:'listCalender.do',
-				data: {"projectId":add_project_id},
-				dataType:'json',
-				success:function(data){			
-				 addDynamicHtml(data);
-				}// success function
-			});// ajax
-		    },
-		    error : function(error) {
-		     },	// error
-		  });// ajax
+	  
+	 ajaxRequest(url, data);
 });
 
+// 일정 삭제
 $('#calender_del').click(function(){
 	
 	$('#calenderModify').modal('toggle');
+	var data = { calenderId:add_calender_id };
+	var url = "delCalender.do";
 	
-	$.ajax({
-		    type:"POST",
-		    data : { calenderId:add_calender_id  },
-		    dataType:"text",
-		    url:"delCalender.do",
-		    success: function(project_id) {
-		    
-		 	$.ajax({
-				url:'listCalender.do',
-				data: {"projectId":add_project_id},
-				dataType:'json',
-				success:function(data){			
-					addDynamicHtml(data);	
-				}// success function
-
-			});// ajax
-		    },
-		    error : function(error) {
-		    },	// error
-		  });// ajax
-	
-	
+	 ajaxRequest(url, data);	
 });
 
 /* 일정 추가 후 데이터 초기화 */

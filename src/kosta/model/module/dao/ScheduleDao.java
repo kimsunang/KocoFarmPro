@@ -237,6 +237,48 @@ public class ScheduleDao {
 		return re;
 	}
 	
+	public int delCategory(int categoryId) {
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFaction().openSession();
+		try{
+			re = sqlSession.getMapper(ScheduleMapper.class).delCategory(categoryId);
+			if(re > 0){
+				sqlSession.commit();
+			}else{
+				sqlSession.rollback();				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+	
+		}finally{
+			sqlSession.close();
+		}
+		
+		return re;
+	}
+	
+	// 카테고리 삭제 시 하위 일정 삭제
+	public int delCalenderWithCategory(ScheduleCategory category) {
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFaction().openSession();
+		try{
+			re = sqlSession.getMapper(ScheduleMapper.class).delCalenderWithCategory(category);
+			if(re > 0){
+				sqlSession.commit();
+			}else{
+				sqlSession.rollback();				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+	
+		}finally{
+			sqlSession.close();
+		}
+		
+		return re;
+	}
+	
+	
 	public int editCalenderMove(List<ScheduleCalenderMove> list){
 		if(null == list)
 			return -1;

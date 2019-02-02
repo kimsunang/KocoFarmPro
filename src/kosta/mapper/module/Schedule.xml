@@ -74,4 +74,15 @@
 <update id="editProject" parameterType="ScheduleProject">
 	update project set title = #{title} where project_id = #{projectId}
 </update>
+<delete id="delCategory" parameterType="int">
+	delete from category where category_id = #{categoryId}
+</delete>
+<delete id="delCalenderWithCategory" parameterType="ScheduleCategory">
+	delete calender where calender_id IN(select cal.calender_id from
+	category cat, calender cal
+	where cat.category_id = cal.category_id and
+	cat.project_id = #{projectId} and cal.category_id = #{categoryId})
+</delete>
+
+
 </mapper>

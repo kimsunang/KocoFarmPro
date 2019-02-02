@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import kosta.model.module.dao.ScheduleDao;
 import kosta.model.module.vo.ScheduleCalender;
@@ -53,6 +54,18 @@ public class ScheduleService {
 		
 	
 		return re;
+	}
+	
+	public JSONArray getProjectList(HttpServletRequest request) throws Exception{
+		
+		ScheduleDao dao = ScheduleDao.getInstance();
+		JSONArray jsonArr = new JSONArray();
+		
+		List<ScheduleProject> projectList = dao.listProject();
+		
+		jsonArr = JSONArray.fromObject(projectList);
+				
+		return jsonArr;
 	}
 	
 	public int insertScheduleCalender(HttpServletRequest request) throws Exception {

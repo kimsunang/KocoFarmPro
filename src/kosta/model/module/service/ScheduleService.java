@@ -135,6 +135,27 @@ public class ScheduleService {
 		return re;
 	}
 	
+	public int editProject(HttpServletRequest request) throws Exception{
+		if(null == request) {
+			return -1;
+		}
+		
+		String projectId = request.getParameter("projectId");
+		String projectTitle = request.getParameter("title");
+		if(null == projectId || null == projectTitle) {
+			return -1;
+		}
+		
+		int projectid = Integer.parseInt(projectId);
+		ScheduleProject project = new ScheduleProject();
+		project.setProjectId(projectid);
+		project.setTitle(projectTitle);
+		
+		int re = dao.editProject(project);
+		return re;
+	}
+		
+	
 	public int editCategoryName(HttpServletRequest request) throws Exception{
 		if(null == request)
 			return -1;

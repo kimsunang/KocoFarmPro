@@ -71,4 +71,7 @@
 <delete id="deleteProject" parameterType="int">
 	delete from project where project_id = #{projectId}
 </delete>
+<update id="editProject" parameterType="ScheduleProject">
+	update project set title = #{title} where project_id = #{projectId}
+</update>
 </mapper>

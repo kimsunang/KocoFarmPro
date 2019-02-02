@@ -117,7 +117,29 @@
 				</div>
 
 			</div>
-		</div> <!-- create-project-modal -->
+		</div> <!-- delete-project-modal -->
+		
+		<!-- 수정 -->
+		<div class="modal fade" id="modify-project-modal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">프로젝트 수정</h4>
+					</div>
+					<div class="modal-body">
+						<p>프로젝트 이름 수정</p>
+						<input type="text" id="modify-project-input"></input>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="modify-project-button">수정</button>
+					</div>
+				</div>
+
+			</div>
+		</div> <!-- modify-project-modal -->
 
 	</div>	<!-- contents_wrap -->
 </div>
@@ -125,6 +147,10 @@
 <script>
 // 변수 모음
 var selectProjectId = 0;
+
+$(function(){
+	projectListAjaxRequest();
+});
 
 // modal 창의 create 버튼
 $("#create-project-button").on("click", function(){
@@ -140,13 +166,22 @@ $("#delete-project-button").on("click", function(){
 	ajaxRequest(sendUrl, sendData);
 });
 
-$(function(){
-	projectListAjaxRequest();
+// modal 창의 modify 버튼
+$("#modify-project-button").on("click", function(){	
+	console.log('들오았다');
+	var title = $("#modify-project-input").val();
+	var sendUrl = "editProject.do";	
+	var sendData = {projectId:selectProjectId, title:title};
+	
+	ajaxRequest(sendUrl, sendData);
 });
 
 
-
 function ajaxRequest(sendUrl, sendData){
+	console.log('들오았다222');
+	console.log(sendUrl);
+	console.log(sendData);
+
 	$.ajax({
 	    type:"POST",
 	    data : sendData,
@@ -192,7 +227,7 @@ function projectList(data){
 				'<div>projectCompletion:'+project.projectCompletion+'</div>'+
 				'<div>publicProject:'+project.publicProject+'</div>'+
 				'<div>'+
-				'<button type="button" id="project-modify-modal-button">수정</button>'+
+				'<button type="button" id="project-modify-modal-button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modify-project-modal">수정</button>'+
 				'</div>'+
 				'<div>'+
 				'<button type="button" id="project-delete-modal-button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delete-project-modal">delete</button>'+
@@ -213,6 +248,10 @@ function projectList(data){
       });
      
      $(document).on("click", "#project-modify-modal-button", function(){
+    	 var parent = $(this).parent().parent().children('.project-form-info').children('#responeProjectId');     	
+      	 var projectId = parent.children("button[name=projectId]").val();
+      	 selectProjectId = projectId;
+      	 console.log('selectProjectId:'+projectId);
      });
 }
 

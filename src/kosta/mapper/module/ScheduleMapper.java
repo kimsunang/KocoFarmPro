@@ -21,4 +21,5 @@ public interface ScheduleMapper {
 	public int editCategoryName(ScheduleCategory category);
 	public int insertProject(ScheduleProject project);
 	public int deleteProject(int projectId);
+	public int editProject(ScheduleProject project);
 }

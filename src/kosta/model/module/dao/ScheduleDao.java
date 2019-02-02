@@ -157,6 +157,26 @@ public class ScheduleDao {
 		return re;
 	}
 	
+	public int editProject(ScheduleProject project){
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFaction().openSession();
+		try{
+			re = sqlSession.getMapper(ScheduleMapper.class).editProject(project);
+			if(re > 0){
+				sqlSession.commit();
+			}else{
+				sqlSession.rollback();				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+	
+		}finally{
+			sqlSession.close();
+		}
+		
+		return re;
+	}
+	
 	public int editCategoryName(ScheduleCategory category){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();

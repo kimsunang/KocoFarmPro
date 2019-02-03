@@ -258,16 +258,22 @@ function addDynamicHtml(data){
             html += '<li class="calender_detail">';
             html += '<div class="calender_detail_color" style="background-color:#'+data[i].backgroundColor +'";>'+'&nbsp;'+'</div>';
             html += '<div class="calender_detail_title">'+data[i].title+'</div>';
-            html += '<div>calender:id'+data[i].calenderId+'</div>';
+            /*html += '<div>calender:id'+data[i].calenderId+'</div>';*/
             html += '<input type="hidden" class="this_calender_id" value='+data[i].calenderId+' />';
             html += '<input type="hidden" class="this_calender_yPos" value='+data[i].yPos+' />';            
-            html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';
             var startDt = data[i].startDt;
-            html += '<p>시작일 :</p><p class="calender_detail_startDt">'+ startDt.substring(0,10)+'</p>';
             var endDt = data[i].endDt;
-            html += '<p>종료일 :</p><p class="calender_detail_endDt">'+endDt.substring(0,10)+"</p>";
-            html += '완료상황:<p class="calender_detail_completionPer">'+ data[i].completionPer+"</p>";
-			html += '</li>';	      		
+            if("" != startDt || "" != endDt ){
+	            html += '<span class="calender_detail_startDt">'+ startDt.substring(0,10)+'</span><span> - </span>';
+	            html += '<span class="calender_detail_endDt">'+endDt.substring(0,10)+'</span>';
+            }
+            html += '<input type="hidden" class="calender_detail_completionPer" value="'+ data[i].completionPer+'"></input>';
+            html += '<div class="calender-progress-bar">';
+            html += '<div style=" height: 20px; background-color: #4CAF50; border-radius:10px; width:'+data[i].completionPer+'%" >'+data[i].completionPer+'</div>'
+            html += '</div>';
+            html += '<img src="/KocoFarmPro/img/schedule/settings.png" class="calenderModifyBtn" data-toggle="modal" data-target="#calenderModify"></img>';
+            /*html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';*/
+            html += '</li>';	      		
       	}
     }//for문
 
@@ -278,7 +284,7 @@ function addDynamicHtml(data){
 		html += '<ul class="connected li1">';
 		html += '<li class="calender_info">';
   		html += '<div><input class="category-name-input add-category-name-input" type="text"></input><div>';
-        html += '<button type="button" class="btn btn-warning btn-lg btn-xs addCategoryButton">새 카테고리 추가</button>';
+        html += '<button type="button" class="btn btn-warning btn-lg btn-xs btn-block addCategoryButton">새 카테고리 추가</button>';
 		html += '<input type="hidden" class="this_project_id" value='+projectId+' />';
 		html += '</li>';
 		html += '</ul>';
@@ -316,7 +322,8 @@ function addDynamicHtml(data){
 		   var title 		= $(par).children(".calender_detail_title").html();
 		   var startDt 		= $(par).children(".calender_detail_startDt").html();
 		   var endDt 		= $(par).children(".calender_detail_endDt").html();
-		   var completionPer= $(par).children(".calender_detail_completionPer").html();
+		   var completionPer= $(par).children(".calender_detail_completionPer").val();
+		   
 
 		 	var val = $("#calenderModify").children(".modal-dialog").children(".modal-content").children(".modal-body");
 			

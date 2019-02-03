@@ -777,7 +777,6 @@ footer{margin-top: 30px; text-align: center; color: #333}
 }
 
 /* 카테고리 입력 박스 */
-
 .category-name-input{
   width: 80%;
   padding: 12px 20px;
@@ -789,7 +788,19 @@ footer{margin-top: 30px; text-align: center; color: #333}
   display:inline-block;
   float:left;
 }
- 
+ /* 새 카테고리 입력 박스 */
+ .add-category-name-input{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #BEF781;
+  color: white;
+  display:inline-block;
+  float:left;
+}
+
 /* 카테고리 삭제 버튼 */
 .calenderDeleteBtn{
 	width:10%;
@@ -811,13 +822,14 @@ input:read-only{
     display:inline;
     float:left;
     background-color:#2ECCFA;
-     margin: 20px;
+     margin: 10px;
      padding: 5px;
      width:250px;
-     height:150px;
+     height:130px;
      border-radius: 20px;
      cursor:pointer
 }
+
 
 /* 프로젝트 리스트 박스 안의 title 스타일*/
 .project-title{
@@ -832,4 +844,30 @@ input:read-only{
     cursor:pointer
 }
 
+/* 진행률 프로그래스 바 */
+.calender-progress-bar {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 10px;
+}
 
+/* 일정 설정 버튼*/
+.calenderModifyBtn{
+	cursor:pointer;
+	margin: 5px;
+    padding: 5px;
+    display:block;
+    /*float:right;*/
+}
+
+/* 진행률 */
+.calender-percent {
+  height: 20px;
+  background-color: #4CAF50;
+}
+
+/* 일정 칼라 */
+.calender_detail_color{
+	
+	height:20px;
+}

@@ -9,7 +9,7 @@ import kosta.action.comm.IAction;
 public class SendProjectIdAction implements IAction{
 	public SendProjectIdAction() {}
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String projectId = request.getParameter("projectId");
+		String projectId = request.getParameter("project_id");
 		int project_id = Integer.parseInt(projectId);
 
 		request.setAttribute("projectId", project_id);

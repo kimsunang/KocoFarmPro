@@ -178,10 +178,6 @@ $("#modify-project-button").on("click", function(){
 
 
 function ajaxListRequest(sendUrl, sendData){
-	console.log('들오았다222');
-	console.log(sendUrl);
-	console.log(sendData);
-
 	$.ajax({
 	    type:"POST",
 	    data : sendData,
@@ -196,7 +192,6 @@ function ajaxListRequest(sendUrl, sendData){
 }
 
 function projectListAjaxRequest(){
-	console.log('projectListAjaxRequest');
 	$.ajax({
 	    type:"POST",
 	    data : {},
@@ -214,26 +209,29 @@ function projectList(data){
 	 $('.contents').empty();
      $.each(data, function(index, project){
     	 
-         $('.contents').append(
+         $('.contents').append(        	
          	'<div class="project-info-style">'+
-				'<div>'+project.projectId+'</div>'+
-				'<div class="project-form-info"> <form id="responeProjectId" action="sendProjectId.do" method="POST">'+
-				'<button type="submit" name="projectId" form="responeProjectId" value="'+ project.projectId +'">'+project.title+'</button>'+
-				'</form>'+
-				'</div>'+
-				'<div>projectLeader:'+project.projectLeader+'</div>'+
-				'<div>projectStartDt:'+project.projectStartDt+'</div>'+
-				'<div>projectEndDt:'+project.projectEndDt+'</div>'+
-				'<div>projectRegDt:'+project.projectRegDt+'</div>'+
-				'<div>projectCompletion:'+project.projectCompletion+'</div>'+
-				'<div>publicProject:'+project.publicProject+'</div>'+
-				'<div>'+
-				'<button type="button" id="project-modify-modal-button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modify-project-modal">수정</button>'+
-				'</div>'+
-				'<div>'+
-				'<button type="button" id="project-delete-modal-button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delete-project-modal">delete</button>'+
-				'</div>'+
-				'</div>'
+         	'<form name="enterProject" method="post" action="sendProjectId.do">'+	
+	         	'<input type="hidden" name ="project_id" value='+project.projectId+' />'+
+				'<div name="projectId" class="sub_title_inner h4 responeProjectId">'+project.title+'</div>'+				
+					/*'<button type="submit" name="projectId" form="responeProjectId" class="sub_title_inner h2" value="'+ project.projectId +'">'+project.title+'</button>'+*/
+				/* 	'</form>'+ */
+					/* '</div>'+ */
+					/* '<div>projectLeader:'+project.projectLeader+'</div>'+
+					'<div>projectStartDt:'+project.projectStartDt+'</div>'+
+					'<div>projectEndDt:'+project.projectEndDt+'</div>'+
+					'<div>projectRegDt:'+project.projectRegDt+'</div>'+
+					'<div>projectCompletion:'+project.projectCompletion+'</div>'+
+					'<div>publicProject:'+project.publicProject+'</div>'+
+					 */
+			'</form>'+
+			'<div>'+
+			'<img src ="/KocoFarmPro/img/schedule/settings.png" class="project-setting" id="project-modify-modal-button" data-toggle="modal" data-target="#modify-project-modal" />'+
+			'</div>'+	
+			'<div>'+
+			'<img src = "/KocoFarmPro/img/schedule/dustbin.png" id="project-delete-modal-button" class="project-setting" data-toggle="modal" data-target="#delete-project-modal" />'+	
+			'</div>'+
+			'</div>'
          );
      });
      
@@ -242,17 +240,21 @@ function projectList(data){
 			'project..</button>'+
 			'</div>');
      
-      $(document).on("click", "#project-delete-modal-button", function(){     	
-     	var parent = $(this).parent().parent().children('.project-form-info').children('#responeProjectId');     	
-     	var projectId = parent.children("button[name=projectId]").val();
+      $(document).on("click", "#project-delete-modal-button", function(){    	
+     	var parent = $(this).parent().parent().children('form[name=enterProject]');
+     	var projectId = parent.children("input[name=project_id]").val();
      	selectProjectId = projectId;
       });
      
      $(document).on("click", "#project-modify-modal-button", function(){
-    	 var parent = $(this).parent().parent().children('.project-form-info').children('#responeProjectId');     	
-      	 var projectId = parent.children("button[name=projectId]").val();
+    	 var parent = $(this).parent().parent().children('form[name=enterProject]');
+      	 var projectId = parent.children("input[name=project_id]").val();
       	 selectProjectId = projectId;
       	 console.log('selectProjectId:'+projectId);
+     });
+     
+     $(document).on("click", ".project-info-style", function(){
+       	 $(this).children("form").submit();
      });
 }
 

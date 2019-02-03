@@ -806,12 +806,30 @@ input:read-only{
 
 .con {margin:0 auto;position:absolute; top: 80px; left: 200px; max-width: none !important; width: 150%;}
 
+/* 프로젝트 리스트 박스 스타일 */
 .project-info-style{
     display:inline;
     float:left;
     background-color:#2ECCFA;
      margin: 20px;
      padding: 5px;
-     width:300px;
-     height:300px;         
+     width:250px;
+     height:150px;
+     border-radius: 20px;
+     cursor:pointer
 }
+
+/* 프로젝트 리스트 박스 안의 title 스타일*/
+.project-title{
+    display:inline-block;
+      float:left;
+      
+}
+/* 프로젝트 버튼 안의 setting, delete 스타일*/
+.project-setting{
+    display:inline-block;
+    float:right;
+    cursor:pointer
+}
+
+

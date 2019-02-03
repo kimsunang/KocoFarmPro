@@ -155,7 +155,7 @@ $(function(){
 // modal 창의 create 버튼
 $("#create-project-button").on("click", function(){
 	var sendData = {projectName:$('#create-project-input').val()};
-	ajaxRequest("insertProject.do",sendData);
+	ajaxListRequest("insertProject.do",sendData);
 	$("#create-project-input").val("");
 });
 
@@ -163,7 +163,7 @@ $("#create-project-button").on("click", function(){
 $("#delete-project-button").on("click", function(){	
 	var sendUrl = "deleteProject.do";
 	var sendData = {projectId:selectProjectId};
-	ajaxRequest(sendUrl, sendData);
+	ajaxListRequest(sendUrl, sendData);
 });
 
 // modal 창의 modify 버튼
@@ -173,11 +173,11 @@ $("#modify-project-button").on("click", function(){
 	var sendUrl = "editProject.do";	
 	var sendData = {projectId:selectProjectId, title:title};
 	
-	ajaxRequest(sendUrl, sendData);
+	ajaxListRequest(sendUrl, sendData);
 });
 
 
-function ajaxRequest(sendUrl, sendData){
+function ajaxListRequest(sendUrl, sendData){
 	console.log('들오았다222');
 	console.log(sendUrl);
 	console.log(sendData);
@@ -196,11 +196,12 @@ function ajaxRequest(sendUrl, sendData){
 }
 
 function projectListAjaxRequest(){
+	console.log('projectListAjaxRequest');
 	$.ajax({
 	    type:"POST",
 	    data : {},
 	    dataType:"json",
-	    url:"listProjectAjax.do",
+	    url: "listProjectAjax.do",
 	    success: function(data) {
 	    	projectList(data);
 	    },

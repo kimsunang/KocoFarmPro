@@ -864,6 +864,10 @@ footer{margin-top: 30px; text-align: center; color: #333}
   width: 100%;
   background-color: #ddd;
   border-radius: 10px;
+  
+  margin-top:10px;
+  margin-bottom:10px;
+  
 }
 
 /* 일정 설정 버튼*/
@@ -882,6 +886,9 @@ footer{margin-top: 30px; text-align: center; color: #333}
 .calender-percent {
   height: 20px;
   background-color:#0049A3;
+  margin-top:10px;
+  margin-bottom:10px;
+  
 }
 
 /* 일정 칼라 */

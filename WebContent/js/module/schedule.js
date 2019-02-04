@@ -243,7 +243,8 @@ function addDynamicHtml(data){
       		html += '<ul class="connected li1">';
       		html += '<li class="calender_info">';
       		html += '<input class="category-name-input" type="text" readonly="true" value="'+data[i].categoryName+'"></input>';
-      		html += '<button type="button" class="btn  btn-danger categoryDeleteBtn" data-toggle="modal" data-target="#categoryDeleteModal">X</button>';
+      		html += '<img src="/KocoFarmPro/img/schedule/dustbin.png" class="category-delete-btn" data-toggle="modal" data-target="#categoryDeleteModal"/>';
+      		/*html += '<button type="button" class="btn  btn-danger categoryDeleteBtn" data-toggle="modal" data-target="#categoryDeleteModal">X</button>';*/
 			html += '<button type="button" class="btn  btn-primary calenderWriteBtn btn-block" data-toggle="modal" data-target="#calenderAddModal">새 일정 추가</button>';
 			html += '<input type="hidden" class="this_project_id" value='+data[i].projectId+' />';
       		html += '<input type="hidden" class="this_category_id" value='+data[i].categoryId+' />';
@@ -256,8 +257,13 @@ function addDynamicHtml(data){
       	// 캘린더 id가 0이 아니라면
       	if(0 != data[i].calenderId){
             html += '<li class="calender_detail">';
-            html += '<div class="calender_detail_color" style="background-color:#'+data[i].backgroundColor +'";>'+'&nbsp;'+'</div>';
-            html += '<div class="calender_detail_title">'+data[i].title+'</div>';
+            
+            if("" != data[i].backgroundColor ){
+            	html += '<div class="calender-detail-color" style="background-color:#'+data[i].backgroundColor +'";>'+'&nbsp;'+'</div>';
+            }
+            
+            html += '<div><img src="/KocoFarmPro/img/schedule/settings.png" class="calender-modify-btn" data-toggle="modal" data-target="#calenderModify"/></div>';
+            html += '<div class="calender_detail_title ">'+data[i].title+'</div>';
             /*html += '<div>calender:id'+data[i].calenderId+'</div>';*/
             html += '<input type="hidden" class="this_calender_id" value='+data[i].calenderId+' />';
             html += '<input type="hidden" class="this_calender_yPos" value='+data[i].yPos+' />';            
@@ -271,8 +277,7 @@ function addDynamicHtml(data){
             html += '<div class="calender-progress-bar">';
             html += '<div style=" height: 20px; background-color: #4CAF50; border-radius:10px; width:'+data[i].completionPer+'%" >'+data[i].completionPer+'</div>'
             html += '</div>';
-            html += '<img src="/KocoFarmPro/img/schedule/settings.png" class="calenderModifyBtn" data-toggle="modal" data-target="#calenderModify"></img>';
-            /*html += '<button type="button" class="btn btn-info btn-lg calenderModifyBtn" data-toggle="modal" data-target="#calenderModify">설정</button>';*/
+            
             html += '</li>';	      		
       	}
     }//for문
@@ -284,7 +289,7 @@ function addDynamicHtml(data){
 		html += '<ul class="connected li1">';
 		html += '<li class="calender_info">';
   		html += '<div><input class="category-name-input add-category-name-input" type="text"></input><div>';
-        html += '<button type="button" class="btn btn-warning btn-lg btn-xs btn-block addCategoryButton">새 카테고리 추가</button>';
+        html += '<button type="button" class="btn btn-light btn-block add-category-button">새 카테고리 추가</button>';
 		html += '<input type="hidden" class="this_project_id" value='+projectId+' />';
 		html += '</li>';
 		html += '</ul>';
@@ -309,8 +314,8 @@ function addDynamicHtml(data){
 		});
 	   
 	    // 세팅 버튼에 이벤트 추가
-	   $(document).on("click", ".calenderModifyBtn", function(){	   
-		   var par = $(this).parent(); //calender_detail
+	   $(document).on("click", ".calender-modify-btn", function(){	   
+		   var par = $(this).parent().parent(); //calender_detail
 		   var parpar = par.parent().children('.calender_info'); 
 		   
 		   var project_id = parpar.children(".this_project_id").val();
@@ -318,7 +323,7 @@ function addDynamicHtml(data){
 		   var calender_id = par.children('.this_calender_id').val();
 		   
 		   // 정보 추출
-		   var color 		= $(par).children(".calender_detail_color").css("background-color");
+		   var color 		= $(par).children(".calender-detail-color").css("background-color");
 		   var title 		= $(par).children(".calender_detail_title").html();
 		   var startDt 		= $(par).children(".calender_detail_startDt").html();
 		   var endDt 		= $(par).children(".calender_detail_endDt").html();
@@ -353,7 +358,7 @@ function addDynamicHtml(data){
 		   ajaxRequest(url, data);		   
 	   });
 	   
-	   $('.addCategoryButton').on("click", function(){
+	   $('.add-category-button').on("click", function(){
 		   var text = $('.add-category-name-input').val(); 
 		  if("" == text){
 			  alert("카테고리 이름이 없습니다");
@@ -368,7 +373,7 @@ function addDynamicHtml(data){
 	   });
 	   
 	   // 카테고리 삭제 버튼
-	   $('.categoryDeleteBtn').on("click", function(){
+	   $('.category-delete-btn').on("click", function(){
 		   var parent = $(this).parent();
 		   add_category_id = parent.children(".this_category_id").val();
 		   add_project_id = parent.children(".this_project_id").val();

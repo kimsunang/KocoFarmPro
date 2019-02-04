@@ -4,6 +4,7 @@ import java.util.List;
 
 import kosta.model.module.vo.ScheduleCalender;
 import kosta.model.module.vo.ScheduleCategory;
+import kosta.model.module.vo.ScheduleCategoryMove;
 import kosta.model.module.vo.ScheduleCalenderList;
 import kosta.model.module.vo.ScheduleCalenderMove;
 import kosta.model.module.vo.ScheduleProject;
@@ -24,4 +25,7 @@ public interface ScheduleMapper {
 	public int editProject(ScheduleProject project);
 	public int delCategory(int categoryId);
 	public int delCalenderWithCategory(ScheduleCategory category);		// 카테고리 삭제 시 하위 일정 삭제
+	public int setMoveCategoryPosX(ScheduleCategoryMove category);
+	public int setOriCategoryPosX(ScheduleCategoryMove category);
+	
 }

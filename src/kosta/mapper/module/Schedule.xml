@@ -27,7 +27,7 @@
 	right outer join category cat
 	on cal.category_id = cat.category_id) c
 	where c.project_id = #{projectId}
-	order by c.category_id asc, c.y_pos desc       
+	order by c.x_pos asc, c.y_pos desc       
 </select>
 
 
@@ -83,6 +83,12 @@
 	where cat.category_id = cal.category_id and
 	cat.project_id = #{projectId} and cal.category_id = #{categoryId})
 </delete>
+<update id="setMoveCategoryPosX" parameterType="ScheduleCategoryMove">
+	update category set  x_pos = #{oriCategoryX} where category_id = #{moveCategoryId} and project_id = #{projectId}
+</update>
 
+<update id="setOriCategoryPosX" parameterType="ScheduleCategoryMove">
+	update category set  x_pos = #{moveCategoryX} where category_id = #{oriCategoryId} and project_id = #{projectId}
+</update>
 
 </mapper>

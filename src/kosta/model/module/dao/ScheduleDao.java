@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import kosta.mapper.module.ScheduleMapper;
 import kosta.model.module.vo.ScheduleCalender;
 import kosta.model.module.vo.ScheduleCategory;
+import kosta.model.module.vo.ScheduleCategoryMove;
 import kosta.model.module.vo.ScheduleCalenderList;
 import kosta.model.module.vo.ScheduleCalenderMove;
 import kosta.model.module.vo.ScheduleProject;
@@ -263,6 +264,47 @@ public class ScheduleDao {
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
 			re = sqlSession.getMapper(ScheduleMapper.class).delCalenderWithCategory(category);
+			if(re > 0){
+				sqlSession.commit();
+			}else{
+				sqlSession.rollback();				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+	
+		}finally{
+			sqlSession.close();
+		}
+		
+		return re;
+	}
+	
+	
+	public int setMoveCategoryPosX(ScheduleCategoryMove categoryMove){
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFaction().openSession();
+		try{
+			re = sqlSession.getMapper(ScheduleMapper.class).setMoveCategoryPosX(categoryMove);
+			if(re > 0){
+				sqlSession.commit();
+			}else{
+				sqlSession.rollback();				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+	
+		}finally{
+			sqlSession.close();
+		}
+		
+		return re;
+	}
+	
+	public int setOriCategoryPosX(ScheduleCategoryMove categoryMove){
+		int re = -1;
+		SqlSession sqlSession = getSqlSessionFaction().openSession();
+		try{
+			re = sqlSession.getMapper(ScheduleMapper.class).setOriCategoryPosX(categoryMove);
 			if(re > 0){
 				sqlSession.commit();
 			}else{

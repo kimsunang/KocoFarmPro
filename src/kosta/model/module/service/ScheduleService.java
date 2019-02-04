@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import kosta.model.module.dao.ScheduleDao;
 import kosta.model.module.vo.ScheduleCalender;
 import kosta.model.module.vo.ScheduleCategory;
+import kosta.model.module.vo.ScheduleCategoryMove;
 import kosta.model.module.vo.ScheduleProject;
 import net.sf.json.JSONArray;
 import kosta.model.module.vo.ScheduleCalenderList;
@@ -178,6 +179,35 @@ public class ScheduleService {
 		category.setCategoryName(categoryName);
 		
 		int re = dao.editCategoryName(category);
+		return re;
+	}
+	
+	public int setMoveCategoryPosX(HttpServletRequest request) throws Exception {
+		
+		String projectId 		= request.getParameter("projectId");
+		String moveCategoryId 	= request.getParameter("moveCategoryId");
+		String moveCategoryX 	= request.getParameter("moveCategoryX");
+		String oriCategoryId 	= request.getParameter("oriCategoryId");
+		String oriCategoryX 	= request.getParameter("oriCategoryX");
+		
+		if(true == projectId.equals("") || true == moveCategoryId.equals("") ||
+			true == moveCategoryX.equals("") || true == oriCategoryId.equals("") ||
+			true == oriCategoryX.equals("")) {
+			return -1;
+		}
+		
+		int projectid 		= Integer.parseInt(projectId);
+		int movecategoryid 	= Integer.parseInt(moveCategoryId);
+		int movecategoryx 	= Integer.parseInt(moveCategoryX);
+		int oricategoryid 	= Integer.parseInt(oriCategoryId);
+		int oricategoryx	= Integer.parseInt(oriCategoryX);
+		
+		ScheduleCategoryMove categoryMove = new ScheduleCategoryMove(projectid, oricategoryid, oricategoryx, movecategoryid, movecategoryx);
+		
+		
+		int re = dao.setMoveCategoryPosX(categoryMove);
+		re = dao.setOriCategoryPosX(categoryMove);
+		
 		return re;
 	}
 	

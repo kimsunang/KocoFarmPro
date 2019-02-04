@@ -12,7 +12,6 @@ public class InsertProjectAction implements IAction{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("InsertProjectAction");
 		ScheduleService service =  ScheduleService.getInstance();			
 		if(null == service) {
 			return null;
@@ -25,7 +24,7 @@ public class InsertProjectAction implements IAction{
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("/jsp/module/schedule/project.jsp");
+		forward.setPath("/jsp/module/schedule/list.jsp");
 		
 		return forward;
 	}

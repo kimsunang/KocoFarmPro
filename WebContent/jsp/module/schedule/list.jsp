@@ -168,7 +168,6 @@ $("#delete-project-button").on("click", function(){
 
 // modal 창의 modify 버튼
 $("#modify-project-button").on("click", function(){	
-	console.log('들오았다');
 	var title = $("#modify-project-input").val();
 	var sendUrl = "editProject.do";	
 	var sendData = {projectId:selectProjectId, title:title};
@@ -235,22 +234,26 @@ function projectList(data){
          );
      });
      
-     $('.contents').append('<div class="project-info-style">'+
-     	'<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create-project-modal">create'+
+     $('.contents').append('<div>'+
+     	'<button type="button" class="btn project-info-style h3" data-toggle="modal" data-target="#create-project-modal">create'+
 			'project..</button>'+
 			'</div>');
      
-      $(document).on("click", "#project-delete-modal-button", function(){    	
+      $(document).on("click", "#project-delete-modal-button", function(event){    	
      	var parent = $(this).parent().parent().children('form[name=enterProject]');
      	var projectId = parent.children("input[name=project_id]").val();
      	selectProjectId = projectId;
+     	
+     	event.stopPropagation();
       });
      
-     $(document).on("click", "#project-modify-modal-button", function(){
+     $(document).on("click", "#project-modify-modal-button", function(event){
     	 var parent = $(this).parent().parent().children('form[name=enterProject]');
       	 var projectId = parent.children("input[name=project_id]").val();
       	 selectProjectId = projectId;
-      	 console.log('selectProjectId:'+projectId);
+      	 
+      	event.stopPropagation();
+
      });
      
      $(document).on("click", ".project-info-style", function(){

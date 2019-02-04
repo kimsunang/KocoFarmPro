@@ -69,6 +69,9 @@ var drag_before_calender_index;			// 이동 전 일정 index
             }
 
             items.attr('draggable', 'true').on(eventStack[0], function(e) {
+            	var h = $(this).css("height");
+				$(replacerSet).css("height", h);	// 이동시킬 때 그림자 높이
+				
             	drag_before_calender_category_id = $(this).parent().children(".calender_info").children(".this_category_id").val();
             	drag_before_calender_id = $(this).children(".this_calender_id").val();
             	

@@ -50,8 +50,8 @@
 
 
 li.drop-replacer {
-  border: 1px dashed #CCC;
-  background: none;
+  border:none;
+  background: #ddd;
 }
 
 .dragIcon {

@@ -7,8 +7,8 @@ import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.service.ScheduleService;
 
-public class EditCategoryName implements IAction{
-	public EditCategoryName(){}
+public class EditCategory implements IAction{
+	public EditCategory(){}
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

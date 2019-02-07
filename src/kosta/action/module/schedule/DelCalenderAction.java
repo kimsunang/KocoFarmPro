@@ -11,12 +11,9 @@ public class DelCalenderAction implements IAction{
 	public DelCalenderAction(){}
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ScheduleService service =  ScheduleService.getInstance();			
-		if(null == service)
-			return null;
-
-		int re = service.delCalender(request);
-		if(-1 == re)
-			return null;
+		if(null != service){
+			service.delCalender(request);
+		}
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

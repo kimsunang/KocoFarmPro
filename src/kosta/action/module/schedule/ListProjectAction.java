@@ -24,8 +24,7 @@ public class ListProjectAction implements IAction{
 		
 		ScheduleDao dao = ScheduleDao.getInstance();
 		
-		// ListProjectAction과 ListProjectAjaxAction이 하나로 합쳐야할듯
-		List<ScheduleProject> projectList = dao.getProjectList();
+		List<ScheduleProject> projectList = dao.listProject();
 		request.setAttribute("projectList", projectList);
 	
 		forward.setRedirect(false);

@@ -33,7 +33,7 @@ public class ScheduleService {
 	}
 	
 	
-	public int setProject(HttpServletRequest request) throws Exception {
+	public int insertScheduleProject(HttpServletRequest request) throws Exception {
 		if(null == request)
 			return -1;
 		
@@ -51,7 +51,7 @@ public class ScheduleService {
 		project.setProjectCompletion(0);
 		project.setPublicProject(false);
 		
-		int re = dao.setProject(project);
+		int re = dao.insertProject(project);
 		
 	
 		return re;
@@ -62,14 +62,14 @@ public class ScheduleService {
 		ScheduleDao dao = ScheduleDao.getInstance();
 		JSONArray jsonArr = new JSONArray();
 		
-		List<ScheduleProject> projectList = dao.getProjectList();
+		List<ScheduleProject> projectList = dao.listProject();
 		
 		jsonArr = JSONArray.fromObject(projectList);
 				
 		return jsonArr;
 	}
 	
-	public int setCalender(HttpServletRequest request) throws Exception {
+	public int insertScheduleCalender(HttpServletRequest request) throws Exception {
 		if(null == request)
 			return -1;
 		
@@ -77,11 +77,11 @@ public class ScheduleService {
 		if(null == scheduleCalender)
 			return -1;
 	
-		int re = dao.setCalender(scheduleCalender);
+		int re = dao.insertCelender(scheduleCalender);
 		return re;
 	}
 	
-	public int setCategory(HttpServletRequest request) throws Exception {
+	public int insertScheduleCategory(HttpServletRequest request) throws Exception {
 		if(null == request)
 			return -1;
 		
@@ -106,23 +106,25 @@ public class ScheduleService {
 		scheduleCategory.setCategoryName(categoryName);
 		scheduleCategory.setxPos(xpos);
 		
-		int re = dao.setCategory(scheduleCategory);
+		int re = dao.insertCategory(scheduleCategory);
 		return re;
 	}
 	
 
-	public List<ScheduleCalenderList> getProjectCalenderList(HttpServletRequest request) throws Exception {
+	public List<ScheduleCalenderList> listProjectCalender(HttpServletRequest request) throws Exception {
 		String strProjectId = request.getParameter("projectId");
 		int projectId = Integer.parseInt(strProjectId);
 		
 		ScheduleDao dao = ScheduleDao.getInstance();
-		List<ScheduleCalenderList> calenderList = dao.getProjectCalenderList(projectId);
+		List<ScheduleCalenderList> calenderList = dao.listProjectCalender(projectId);
+		request.setAttribute("calenderList", calenderList);
+
 		return calenderList;
 	}
 	
 	
 	
-	public int setUpCalender(HttpServletRequest request) throws Exception {
+	public int editCalender(HttpServletRequest request) throws Exception {
 		if(null == request)
 			return -1;
 		
@@ -130,11 +132,11 @@ public class ScheduleService {
 		if(null == scheduleCalender)
 			return -1;
 		
-		int re = dao.setUpCalender(scheduleCalender);
+		int re = dao.editCalender(scheduleCalender);
 		return re;
 	}
 	
-	public int setUpProject(HttpServletRequest request) throws Exception{
+	public int editProject(HttpServletRequest request) throws Exception{
 		if(null == request) {
 			return -1;
 		}
@@ -150,12 +152,12 @@ public class ScheduleService {
 		project.setProjectId(projectid);
 		project.setTitle(projectTitle);
 		
-		int re = dao.setUpProject(project);
+		int re = dao.editProject(project);
 		return re;
 	}
 		
 	
-	public int setUpCategory(HttpServletRequest request) throws Exception{
+	public int editCategoryName(HttpServletRequest request) throws Exception{
 		if(null == request)
 			return -1;
 
@@ -176,11 +178,11 @@ public class ScheduleService {
 		category.setCategoryId(categoryid);
 		category.setCategoryName(categoryName);
 		
-		int re = dao.setUpCategory(category);
+		int re = dao.editCategoryName(category);
 		return re;
 	}
 	
-	public int setUpCategoryPos(HttpServletRequest request) throws Exception {
+	public int setMoveCategoryPosX(HttpServletRequest request) throws Exception {
 		
 		String projectId 		= request.getParameter("projectId");
 		String moveCategoryId 	= request.getParameter("moveCategoryId");
@@ -203,7 +205,9 @@ public class ScheduleService {
 		ScheduleCategoryMove categoryMove = new ScheduleCategoryMove(projectid, oricategoryid, oricategoryx, movecategoryid, movecategoryx);
 		
 		
-		int re = dao.setUpCategoryPos(categoryMove);		
+		int re = dao.setMoveCategoryPosX(categoryMove);
+		re = dao.setOriCategoryPosX(categoryMove);
+		
 		return re;
 	}
 	
@@ -224,8 +228,8 @@ public class ScheduleService {
 		category.setProjectId(projectid);
 		category.setCategoryId(categoryid);
 		
-		// 트랜젝션 처리해야함
 		int re = dao.delCalenderWithCategory(category);
+		re = dao.delCategory(categoryid);
 		
 		return re;
 	}
@@ -242,7 +246,7 @@ public class ScheduleService {
 	}
 	
 
-	public int setUpCalenderPos(HttpServletRequest request) throws Exception{
+	public int editCalenderMove(HttpServletRequest request) throws Exception{
 		if(null == request)
 			return -1;
 		
@@ -255,7 +259,6 @@ public class ScheduleService {
 		for(int i = 0; i < data.length; ++i){
 			
 			String[] list = data[i].split(",");
-			System.out.println(list.toString());
 			if(null == list[0] || null == list[1] || null == list[2] )
 				continue;
 						
@@ -269,19 +272,19 @@ public class ScheduleService {
 		}
 		
 		int size = scheduleCalenderPosList.size();
-		re = dao.setUpCalenderPos(scheduleCalenderPosList);
+		re = dao.editCalenderMove(scheduleCalenderPosList);
 
 		return re;
 	}
 	
-	public int delProject(HttpServletRequest request) throws Exception{
+	public int deleteProject(HttpServletRequest request) throws Exception{
 		if(null == request)
 			return -1;
 		
 		String projectId = request.getParameter("projectId");
 		int projectid = Integer.parseInt(projectId);
 	
-		int re = dao.delProject(projectid);
+		int re = dao.deleteProject(projectid);
 		return re;			
 	}
 	

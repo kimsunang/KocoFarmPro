@@ -16,7 +16,7 @@ public class EditCategoryName implements IAction{
 		if(null == service)
 			return null;		
 		
-		int re = service.setUpCategory(request);
+		int re = service.editCategoryName(request);
 		if(-1 == re)
 			return null;
 		

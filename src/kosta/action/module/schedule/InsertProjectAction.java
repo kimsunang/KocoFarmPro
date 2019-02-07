@@ -17,7 +17,7 @@ public class InsertProjectAction implements IAction{
 			return null;
 		}
 
-		int re = service.setProject(request);
+		int re = service.insertScheduleProject(request);
 		if(-1 == re) {
 			return null;
 		}

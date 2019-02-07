@@ -15,7 +15,6 @@ import kosta.action.comm.IAction;
 import kosta.model.module.dao.ScheduleDao;
 import kosta.model.module.service.ScheduleService;
 import kosta.model.module.vo.ScheduleCalender;
-import kosta.model.module.vo.ScheduleCalenderList;
 import kosta.model.module.vo.ScheduleCategory;
 
 public class ListCalenderAction implements IAction{
@@ -25,15 +24,10 @@ public class ListCalenderAction implements IAction{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ScheduleService service = ScheduleService.getInstance();
-		if(null == service)
-			return null;
+		if(null != service) {
+			service.listProjectCalender(request);
+		}
 		
-		List<ScheduleCalenderList> list = service.getProjectCalenderList(request);
-		if(null == list)
-			return null;
-		
-		request.setAttribute("calenderList", list);
-
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/jsp/module/schedule/calenderListJsonParse.jsp");

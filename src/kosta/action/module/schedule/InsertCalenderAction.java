@@ -20,11 +20,11 @@ public class InsertCalenderAction implements IAction{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {		
 		ScheduleService service =  ScheduleService.getInstance();		
 		
-	
-		if(null == service)
-			return null;
-		
-		service.setCalender(request);
+		int projectId = 0;
+		if(null != service){
+			service.insertScheduleCalender(request);
+			projectId = service.getAttributeProjectId(request);
+		}
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

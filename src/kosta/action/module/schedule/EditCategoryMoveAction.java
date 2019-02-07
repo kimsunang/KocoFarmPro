@@ -17,7 +17,7 @@ public class EditCategoryMoveAction implements IAction {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		ScheduleService service = ScheduleService.getInstance();
-		service.setUpCategoryPos(request);
+		service.setMoveCategoryPosX(request);
 		
 		return null;
 	}

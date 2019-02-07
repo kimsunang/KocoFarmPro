@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosta.mapper.module.ScheduleMapper">
-<select id="getProjectList" resultType="ScheduleProject">
+<select id="listProject" resultType="ScheduleProject">
 	select * from Project
 </select>
 <select id="listCategory" resultType="ScheduleCategory" parameterType="int">
@@ -15,11 +15,11 @@
 	ON cal.category_id = cat.category_id
 	order by cat.category_id
 </select>
-<insert id="setCalender" parameterType="ScheduleCalender">
+<insert id="insertCelender" parameterType="ScheduleCalender">
 	insert into Calender values(calender_id_seq.nextval, #{title}, TO_DATE(#{startDt}, 'yy-mm-dd') , TO_DATE(#{endDt}, 'yy-mm-dd') , #{backgroundColor}, #{completionPer}, #{yPos}, #{categoryId})
 </insert>
 
-<select id="getProjectCalenderList" resultType="ScheduleCalenderList" parameterType="int">
+<select id="listProjectCalender" resultType="ScheduleCalenderList" parameterType="int">
 	select *
 	from (select cat.x_pos, cat.category_id, cat.category_name, cat.project_id,  cal.calender_id, cal.title, cal.start_dt, cal.end_dt,
 	cal.background_color, cal.completion_per, cal.y_pos
@@ -31,7 +31,7 @@
 </select>
 
 
-<update id = "setUpCalender" parameterType="ScheduleCalender">
+<update id = "editCalender" parameterType="ScheduleCalender">
 	 update calender
      <trim prefix="SET" suffixOverrides=",">
        <if test="title != null">
@@ -56,22 +56,22 @@
 <delete id="delCalender" parameterType="int">
 	delete from calender where calender_id = #{calenderId}
 </delete>
-<update id="setUpCalenderPos" parameterType="ScheduleCalenderMove" >
+<update id="editCalenderMove" parameterType="ScheduleCalenderMove" >
 	update calender set category_id = #{categoryId} , y_pos = #{yPos} where calender_id = #{calenderId}
 </update>
-<insert id="setCategory" parameterType="ScheduleCategory">
+<insert id="insertCategory" parameterType="ScheduleCategory">
 	insert into Category values(category_id_seq.nextval , #{categoryName}, #{projectId}, #{xPos})
 </insert>
-<update id="setUpCategory" parameterType="ScheduleCategory">
+<update id="editCategoryName" parameterType="ScheduleCategory">
 	update Category set category_name = #{categoryName} where category_id = #{categoryId}
 </update>
-<insert id="setProject" parameterType="ScheduleProject">
+<insert id="insertProject" parameterType="ScheduleProject">
 	insert into project values(project_id_seq.nextval , #{title}, TO_DATE(#{projectStartDt}, 'yy-mm-dd') , TO_DATE(#{projectEndDt}, 'yy-mm-dd'), #{projectRegDt}, #{projectCompletion}, #{publicProject}, #{projectLeader})
 </insert>
-<delete id="delProject" parameterType="int">
+<delete id="deleteProject" parameterType="int">
 	delete from project where project_id = #{projectId}
 </delete>
-<update id="setUpProject" parameterType="ScheduleProject">
+<update id="editProject" parameterType="ScheduleProject">
 	update project set title = #{title} where project_id = #{projectId}
 </update>
 <delete id="delCategory" parameterType="int">

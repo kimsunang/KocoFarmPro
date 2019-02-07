@@ -14,6 +14,7 @@ public class EditProjectAction implements IAction{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("editProject");
 		ScheduleService service = ScheduleService.getInstance();
 		
 		int re = service.editProject(request);		

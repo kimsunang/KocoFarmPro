@@ -15,6 +15,7 @@ public class DelCategoryAction implements IAction{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("DelCategoryAction ");
 		ScheduleService service = ScheduleService.getInstance();
 		if(null == service) {
 			return null;
@@ -25,6 +26,11 @@ public class DelCategoryAction implements IAction{
 			return null;
 		}
 		
+		//ActionForward forward = new ActionForward();
+		//forward.setRedirect(false);
+		//forward.setPath("/jsp/module/schedule/project.jsp");
+		
+		//return forward;
 		return null;
 	}
 

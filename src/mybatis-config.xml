@@ -36,8 +36,7 @@
 		<typeAlias type="kosta.model.module.vo.ScheduleCalender" alias="ScheduleCalender" />
 		<typeAlias type="kosta.model.module.vo.ScheduleCalenderList" alias="ScheduleCalenderList" />
 		<typeAlias type="kosta.model.module.vo.ScheduleCalenderMove" alias="ScheduleCalenderMove" />
-		<typeAlias type="kosta.model.module.vo.ScheduleCategoryMove" alias="ScheduleCategoryMove" />
-				
+		
 		<!-- 회의실 -->
 		<typeAlias alias="MeetingRoom" type="kosta.model.module.vo.MeetingRoom"/>
 		<typeAlias alias="MeetingRoomSearch" type="kosta.model.module.vo.MeetingRoomSearch"/>

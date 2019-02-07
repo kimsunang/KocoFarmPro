@@ -27,8 +27,8 @@ public class DeleteProjectAction implements IAction{
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("/jsp/module/schedule/list.jsp");
+		forward.setPath("/jsp/module/schedule/project.jsp");
 		
-		return forward;
+		return null;
 	}
 }

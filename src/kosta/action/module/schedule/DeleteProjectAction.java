@@ -7,9 +7,9 @@ import kosta.action.comm.ActionForward;
 import kosta.action.comm.IAction;
 import kosta.model.module.service.ScheduleService;
 
-public class DelProjectAction implements IAction{
+public class DeleteProjectAction implements IAction{
 
-	public DelProjectAction() {
+	public DeleteProjectAction() {
 		// TODO Auto-generated constructor stub
 	}
 

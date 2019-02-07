@@ -15,7 +15,7 @@ public class EditCalenderAction  implements IAction{
 		if(null == service)
 			return null;
 		
-		re = service.editCalender(request);
+		re = service.setUpCalender(request);
 		
 		ActionForward forward = null;
 		if(-1 == re)

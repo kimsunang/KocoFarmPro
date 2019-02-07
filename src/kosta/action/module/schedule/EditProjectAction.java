@@ -16,7 +16,7 @@ public class EditProjectAction implements IAction{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ScheduleService service = ScheduleService.getInstance();
 		
-		int re = service.editProject(request);		
+		int re = service.setUpProject(request);		
 		if(-1 == re) {
 			return null;
 		}

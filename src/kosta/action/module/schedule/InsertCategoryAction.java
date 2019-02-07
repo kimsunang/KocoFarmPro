@@ -20,7 +20,7 @@ public class InsertCategoryAction implements IAction {
 		if(null == service)
 			return null;
 		
-		int re = service.insertScheduleCategory(request);
+		int re = service.setCategory(request);
 		if(-1 == re)
 			return null;	
 		

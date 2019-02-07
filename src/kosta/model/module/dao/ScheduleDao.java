@@ -39,12 +39,12 @@ public class ScheduleDao {
 		return new SqlSessionFactoryBuilder().build(in);
 	}
 	
-	public List<ScheduleProject> listProject() {
+	public List<ScheduleProject> getProjectList() {
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		if(null == sqlSession)
 			return null;
 		
-		List<ScheduleProject> list = sqlSession.getMapper(ScheduleMapper.class).listProject();
+		List<ScheduleProject> list = sqlSession.getMapper(ScheduleMapper.class).getProjectList();
 		sqlSession.close();
 		return list;	
 	}
@@ -69,21 +69,21 @@ public class ScheduleDao {
 		return list;
 	}
 	
-	public List<ScheduleCalenderList> listProjectCalender(int projectId){
+	public List<ScheduleCalenderList> getProjectCalenderList(int projectId){
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		if(null == sqlSession)
 			return null;
 		
-		List<ScheduleCalenderList> list = sqlSession.getMapper(ScheduleMapper.class).listProjectCalender(projectId);
+		List<ScheduleCalenderList> list = sqlSession.getMapper(ScheduleMapper.class).getProjectCalenderList(projectId);
 		sqlSession.close();
 		return list;
 	}
 	
-	public int insertProject(ScheduleProject project) {
+	public int setProject(ScheduleProject project) {
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try {
-			re = sqlSession.getMapper(ScheduleMapper.class).insertProject(project);
+			re = sqlSession.getMapper(ScheduleMapper.class).setProject(project);
 			if(re > 0) {
 				sqlSession.commit();
 			}else {
@@ -97,11 +97,11 @@ public class ScheduleDao {
 		return re;
 	}
 	
-	public int insertCelender(ScheduleCalender scheduleCalender){
+	public int setCalender(ScheduleCalender scheduleCalender){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
-			re = sqlSession.getMapper(ScheduleMapper.class).insertCelender(scheduleCalender);
+			re = sqlSession.getMapper(ScheduleMapper.class).setCalender(scheduleCalender);
 			if(re > 0){
 				sqlSession.commit();
 			}else{
@@ -117,11 +117,11 @@ public class ScheduleDao {
 		return re;
 	}
 	
-	public int insertCategory(ScheduleCategory category){
+	public int setCategory(ScheduleCategory category){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
-			re = sqlSession.getMapper(ScheduleMapper.class).insertCategory(category);
+			re = sqlSession.getMapper(ScheduleMapper.class).setCategory(category);
 			if(re > 0){
 				sqlSession.commit();
 			}else{
@@ -138,11 +138,11 @@ public class ScheduleDao {
 	}
 	
 	
-	public int editCalender(ScheduleCalender scheduleCalender){
+	public int setUpCalender(ScheduleCalender scheduleCalender){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
-			re = sqlSession.getMapper(ScheduleMapper.class).editCalender(scheduleCalender);
+			re = sqlSession.getMapper(ScheduleMapper.class).setUpCalender(scheduleCalender);
 			if(re > 0){
 				sqlSession.commit();
 			}else{
@@ -158,11 +158,11 @@ public class ScheduleDao {
 		return re;
 	}
 	
-	public int editProject(ScheduleProject project){
+	public int setUpProject(ScheduleProject project){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
-			re = sqlSession.getMapper(ScheduleMapper.class).editProject(project);
+			re = sqlSession.getMapper(ScheduleMapper.class).setUpProject(project);
 			if(re > 0){
 				sqlSession.commit();
 			}else{
@@ -178,11 +178,11 @@ public class ScheduleDao {
 		return re;
 	}
 	
-	public int editCategoryName(ScheduleCategory category){
+	public int setUpCategory(ScheduleCategory category){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
-			re = sqlSession.getMapper(ScheduleMapper.class).editCategoryName(category);
+			re = sqlSession.getMapper(ScheduleMapper.class).setUpCategory(category);
 			if(re > 0){
 				sqlSession.commit();
 			}else{
@@ -198,11 +198,11 @@ public class ScheduleDao {
 		return re;
 	}
 
-	public int deleteProject(int projectId){
+	public int delProject(int projectId){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
-			re = sqlSession.getMapper(ScheduleMapper.class).deleteProject(projectId);
+			re = sqlSession.getMapper(ScheduleMapper.class).delProject(projectId);
 			if(re > 0){
 				sqlSession.commit();
 			}else{
@@ -238,32 +238,13 @@ public class ScheduleDao {
 		return re;
 	}
 	
-	public int delCategory(int categoryId) {
-		int re = -1;
-		SqlSession sqlSession = getSqlSessionFaction().openSession();
-		try{
-			re = sqlSession.getMapper(ScheduleMapper.class).delCategory(categoryId);
-			if(re > 0){
-				sqlSession.commit();
-			}else{
-				sqlSession.rollback();				
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-	
-		}finally{
-			sqlSession.close();
-		}
-		
-		return re;
-	}
-	
 	// 카테고리 삭제 시 하위 일정 삭제
 	public int delCalenderWithCategory(ScheduleCategory category) {
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
 			re = sqlSession.getMapper(ScheduleMapper.class).delCalenderWithCategory(category);
+			re = sqlSession.getMapper(ScheduleMapper.class).delCategory(category.getCategoryId());
 			if(re > 0){
 				sqlSession.commit();
 			}else{
@@ -280,30 +261,11 @@ public class ScheduleDao {
 	}
 	
 	
-	public int setMoveCategoryPosX(ScheduleCategoryMove categoryMove){
+	public int setUpCategoryPos(ScheduleCategoryMove categoryMove){
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
 			re = sqlSession.getMapper(ScheduleMapper.class).setMoveCategoryPosX(categoryMove);
-			if(re > 0){
-				sqlSession.commit();
-			}else{
-				sqlSession.rollback();				
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-	
-		}finally{
-			sqlSession.close();
-		}
-		
-		return re;
-	}
-	
-	public int setOriCategoryPosX(ScheduleCategoryMove categoryMove){
-		int re = -1;
-		SqlSession sqlSession = getSqlSessionFaction().openSession();
-		try{
 			re = sqlSession.getMapper(ScheduleMapper.class).setOriCategoryPosX(categoryMove);
 			if(re > 0){
 				sqlSession.commit();
@@ -319,9 +281,8 @@ public class ScheduleDao {
 		
 		return re;
 	}
-	
-	
-	public int editCalenderMove(List<ScheduleCalenderMove> list){
+		
+	public int setUpCalenderPos(List<ScheduleCalenderMove> list){
 		if(null == list)
 			return -1;
 		
@@ -334,7 +295,7 @@ public class ScheduleDao {
 		try{
 			for(int i = 0; i < size; ++i){
 			
-			re = sqlSession.getMapper(ScheduleMapper.class).editCalenderMove(list.get(i));
+			re = sqlSession.getMapper(ScheduleMapper.class).setUpCalenderPos(list.get(i));
 			if(re > 0){
 				sqlSession.commit();
 			}else{

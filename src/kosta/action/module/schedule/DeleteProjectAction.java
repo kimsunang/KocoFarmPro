@@ -20,7 +20,7 @@ public class DeleteProjectAction implements IAction{
 			return null;
 		}
 
-		int re = service.deleteProject(request);
+		int re = service.delProject(request);
 		if(-1 == re) {
 			return null;
 		}

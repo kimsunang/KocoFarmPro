@@ -23,7 +23,7 @@ public class EditCalenderMoveAction implements IAction {
 			return null;
 		
 		ScheduleService service = ScheduleService.getInstance();
-		int re = service.editCalenderMove(request);
+		int re = service.setUpCalenderPos(request);
 		if(-1 == re)
 			return null;
 			

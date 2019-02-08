@@ -105,9 +105,9 @@ var drag_category_categoryId;			// 이동하는 카테고리의 id
             	
             	// 일정 이동 시
             	if("" == drag_category_class){
-            		calenderMoveAjax();
+            		calenderMoveAjax(this);
             	}else{
-            		categoryMoveAjax();
+            		categoryMoveAjax(this);
             	}
    	
                 (elmDrag = $(this)).removeClass('drop-elmDrag').show();
@@ -152,10 +152,10 @@ var drag_category_categoryId;			// 이동하는 카테고리의 id
     };
 })(jQuery);
 
-function categoryMoveAjax(){
+function categoryMoveAjax(moveCategory){
 	// 카테고리 이동 시
-    var categoryList = $(this).parent().children('.calender_info');
-    var size = $(this).parent().children('.calender_info').length;
+    var categoryList = $(moveCategory).parent().children('.calender_info');
+    var size = $(moveCategory).parent().children('.calender_info').length;
     var x = 0;
     var categoryId = 0;
     
@@ -175,7 +175,8 @@ function categoryMoveAjax(){
     ajaxRequest(url, data);
 }
 
-function calenderMoveAjax(){
+// this를 moveCategory로 받음
+function calenderMoveAjax(moveCalender){
 	var drag_after_calender_category_id = 0;// 이동 후 일정의 카테고리 id
 	var drag_after_calender_id = 0;			// 이동 후 일정 id
 	var drag_after_calender_y = 0;			// 이동 후 일정 y
@@ -183,45 +184,45 @@ function calenderMoveAjax(){
 	var isSameCategory = 0;					// 이동전 후 비교해서 같은 카테고리인지
 	
 	
-	$(this).children(".this_category_id").val(drag_after_calender_category_id);
-	drag_after_calender_index = $(this).index();
+	$(moveCalender).children(".this_category_id").val(drag_after_calender_category_id);
+	drag_after_calender_index = $(moveCalender).index();
 	// 카테고리 id 갱신
-	drag_after_calender_category_id = $(this).parent().children(".calender_info").children(".this_category_id").val()
+	drag_after_calender_category_id = $(moveCalender).parent().children(".calender_info").children(".this_category_id").val()
 	if(drag_before_calender_category_id == drag_after_calender_category_id)
 		isSameCategory = 1;
 	var data = "";
 	if(1 == isSameCategory){
-		var size = $(this).parent().children().length - 1; // 인덱스는 길이보다 1작다
+		var size = $(moveCalender).parent().children().length - 1; // 인덱스는 길이보다 1작다
 		var y = 0;
 		for(var index = size; index >= 1; --index){
-    	    var calenderId = $(this).parent().children().eq(index).children(".this_calender_id").val();
+    	    var calenderId = $(moveCalender).parent().children().eq(index).children(".this_calender_id").val();
     	    if(undefined == calenderId)
     			continue;
     	    	            	    
     	    data += drag_before_calender_category_id+",";
     	    data += calenderId+",";
     	    data += y + "|";
-    		$(this).parent().children().eq(index).children(".this_calender_yPos").val(y++);
+    		$(moveCalender).parent().children().eq(index).children(".this_calender_yPos").val(y++);
     	}            		
 	}else{
 		// y값 갱신
     	//이동한 곳 밑에 노드가 있으면 y값 구하고 1 더해줌. 아니면 0넣어줌
-    	if(null == $(this).parent().children().eq($(this).index()+1)){
-    		drag_after_calender_y = $(this).parent().children().eq($(this).index()+1).children(".this_calender_yPos")+1;
+    	if(null == $(moveCalender).parent().children().eq($(moveCalender).index()+1)){
+    		drag_after_calender_y = $(moveCalender).parent().children().eq($(moveCalender).index()+1).children(".this_calender_yPos")+1;
     	}
     	
     	// 이동한 곳 처리. y값 전체 재설정
-    	var size = $(this).parent().children().length - 1; // 인덱스는 길이보다 1작다
+    	var size = $(moveCalender).parent().children().length - 1; // 인덱스는 길이보다 1작다
     	var otherY = 0;
     	for(var index = size; index >= 1; --index){
-    	    var calenderId = $(this).parent().children().eq(index).children(".this_calender_id").val();
+    	    var calenderId = $(moveCalender).parent().children().eq(index).children(".this_calender_id").val();
     	    if(undefined == calenderId)
     			continue;
     	    
     	    data += drag_after_calender_category_id+",";
     	    data += calenderId+",";
     	    data += otherY + "|";
-    		$(this).parent().children().eq(index).children(".this_calender_yPos").val(otherY++);	            		
+    		$(moveCalender).parent().children().eq(index).children(".this_calender_yPos").val(otherY++);	            		
     	}
     
     	var list =  $(".this_category_id").filter("input[value="+drag_before_calender_category_id+"]").parent().parent();	//이동하기 전 원래 있던 카테고리

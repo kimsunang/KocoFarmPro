@@ -239,18 +239,10 @@ function calenderMoveAjax(moveCalender){
     		$(list).parent().children().eq(index).children(".this_calender_yPos").val(beforeY++);
     	}
 	}
-		
-		// 변경된 값 전달하기
-	$.ajax({
-        url: "editCalenderPos.do",
-        type: "POST",
-        data: {data_parameter:data},
-        dataType: "text",
-        success: function(data) {
-        },
-        error:function(data){
-        }
-    });
+	
+	var textData = {data_parameter:data};
+	var url = "editCalenderPos.do";
+	ajaxRequest(url, textData);
 }
 
 /* 드래그 창 */

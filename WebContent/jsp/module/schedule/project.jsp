@@ -103,6 +103,7 @@ $( function() {
 		});
 			
 		var projectId = "${projectId}";
+		add_project_id = projectId;
 		$.ajax({
 			url : 'listCalender.do',
 			data : {

@@ -68,9 +68,6 @@
 <insert id="setProject" parameterType="ScheduleProject">
 	insert into project values(project_id_seq.nextval , #{title}, TO_DATE(#{projectStartDt}, 'yy-mm-dd') , TO_DATE(#{projectEndDt}, 'yy-mm-dd'), #{projectRegDt}, #{projectCompletion}, #{publicProject}, #{projectLeader})
 </insert>
-<delete id="delProject" parameterType="int">
-	delete from project where project_id = #{projectId}
-</delete>
 <update id="setUpProject" parameterType="ScheduleProject">
 	update project set title = #{title} where project_id = #{projectId}
 </update>
@@ -90,5 +87,21 @@
 <update id="setOriCategoryPosX" parameterType="ScheduleCategoryMove">
 	update category set  x_pos = #{moveCategoryX} where category_id = #{oriCategoryId} and project_id = #{projectId}
 </update>
+<!-- 프로젝트 삭제 시 하위 카테고리, 일정이 같이 삭제되어야 함 -->
+<!-- delProject, delCaltegoryWithProject, delCalenderWithProject 3개는 원자성을 지님  -->
+<delete id="delCalenderWithProject" parameterType="int">
+delete calender where calender_id IN(select cal.calender_id from
+category cat, calender cal
+where  cat.category_id = cal.category_id and cat.project_id = #{projectId})
+</delete>
+<delete id="delCaltegoryWithProject" parameterType="int">
+delete from category where project_id = #{projectId}
+</delete>
+
+<delete id="delProject" parameterType="int">
+	delete from project where project_id = #{projectId}
+</delete>
+
+
 
 </mapper>

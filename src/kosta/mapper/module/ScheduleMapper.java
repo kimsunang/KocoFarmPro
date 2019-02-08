@@ -21,11 +21,12 @@ public interface ScheduleMapper {
 	public int setCategory(ScheduleCategory category);
 	public int setUpCategory(ScheduleCategory category);
 	public int setProject(ScheduleProject project);
-	public int delProject(int projectId);
 	public int setUpProject(ScheduleProject project);
 	public int delCategory(int categoryId);
 	public int delCalenderWithCategory(ScheduleCategory category);		// 카테고리 삭제 시 하위 일정 삭제
 	public int setMoveCategoryPosX(ScheduleCategoryMove category);
 	public int setOriCategoryPosX(ScheduleCategoryMove category);
-	
+	public int delCalenderWithProject(int projectId);
+	public int delCaltegoryWithProject(int projectId);
+	public int delProject(int projectId);
 }

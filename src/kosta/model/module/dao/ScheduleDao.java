@@ -202,6 +202,8 @@ public class ScheduleDao {
 		int re = -1;
 		SqlSession sqlSession = getSqlSessionFaction().openSession();
 		try{
+			re = sqlSession.getMapper(ScheduleMapper.class).delCalenderWithProject(projectId);
+			re = sqlSession.getMapper(ScheduleMapper.class).delCaltegoryWithProject(projectId);
 			re = sqlSession.getMapper(ScheduleMapper.class).delProject(projectId);
 			if(re > 0){
 				sqlSession.commit();
